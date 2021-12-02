@@ -1,4 +1,3 @@
-\page
 # Example Using Intel HEXL for FPGA in An External Application
 
 After installing Intel HEXL for FPGA, you can use Intel HEXL for FPGA in an external application in the following way.
