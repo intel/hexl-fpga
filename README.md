@@ -257,7 +257,7 @@ To cite Intel HEXL for FPGA, please use the following BibTeX entry.
 ```tex 
     @misc{IntelHEXLFPGA, 
         author={Meng,Yan and de Souza, Fillipe and Butt, Shahzad and de Lassus, Hubert and Gonzales Aragon, Tomas and Zhou, Yongfa and Wang, Yong and others}, 
-        title = {{I}ntel {Homomorphic Encryption Acceleration Library for FPGAs for FPGA} (release 1.0)},   
+        title = {{I}ntel {Homomorphic Encryption Acceleration Library for FPGAs} (release 1.0)},
         howpublished = {\url{https://github.com/intel/hexl-fpga}},  
         month = December, 
         year = 2021,  
