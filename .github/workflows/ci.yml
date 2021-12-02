@@ -4,10 +4,12 @@ on:
   pull_request:
     branches:
       - main
-  # TODO: Remove branches before moving to public repo
+      - development
+  # TODO: Remove on push and protect the branches.
   push:
     branches:
-      - opensource-prerelease
+      - main
+      - development
   workflow_dispatch:
 
 defaults:
