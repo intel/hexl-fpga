@@ -1,0 +1,41 @@
+# Copyright (C) 2020-2021 Intel Corporation
+# SPDX-License-Identifier: Apache-2.0
+
+cmake_minimum_required(VERSION 3.5.1)
+
+function(bench_function kernel)
+    set (KERNEL ${kernel})
+    set (SRC
+        ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/bench_${KERNEL}.cpp
+    )
+
+    add_executable(bench_${KERNEL} ${SRC})
+
+    target_compile_options(bench_${KERNEL} PRIVATE -fPIE -fPIC -fstack-protector -Wformat -Wformat-security)
+    target_compile_options(bench_${KERNEL} PRIVATE -z noexecstack -Wl,-z,relro,-z,now -Wl,-Bsymbolic)
+    target_include_directories(bench_${KERNEL} PRIVATE $<BUILD_INTERFACE:${CMAKE_INSTALL_PREFIX}/inc>)
+    target_link_directories(bench_${KERNEL} PUBLIC ${CMAKE_INSTALL_PREFIX}/lib)
+    target_link_directories(bench_${KERNEL} PUBLIC ${CMAKE_BINARY_DIR}/hexl-install/lib)
+    target_link_libraries(bench_${KERNEL} PUBLIC hexl-fpga)
+    target_link_libraries(bench_${KERNEL} PRIVATE benchmark::benchmark)
+
+    add_custom_command(
+        TARGET bench_${KERNEL} POST_BUILD
+        COMMAND rm -f ${KERNEL}.aocx
+        COMMAND ln -s ${CMAKE_INSTALL_PREFIX}/fpga/${KERNEL}.aocx .
+        VERBATIM
+    )
+    file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/micro_${KERNEL}.sh
+         DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+endfunction()
+
+bench_function(dyadic_multiply)
+bench_function(fwd_ntt)
+bench_function(inv_ntt)
+
+add_custom_target(bench
+    COMMAND ./micro_dyadic_multiply.sh DEPENDS bench_dyadic_multiply
+    COMMAND ./micro_fwd_ntt.sh DEPENDS bench_fwd_ntt
+    COMMAND ./micro_inv_ntt.sh DEPENDS bench_inv_ntt
+)
