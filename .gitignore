@@ -1,6 +1,5 @@
 *.aoclib
 *.aocx
-*.pdf
 build/
 build-examples/
 hexl-fpga-install/
