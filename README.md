@@ -1,4 +1,5 @@
-\mainpage
+[![Build and Test](https://github.com/intel/hexl-fpga/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/intel/hexl-fpga/actions/workflows/ci.yml)
+
 # Intel Homomorphic Encryption Acceleration Library for FPGAs <br>(Intel HEXL for FPGA)
 Intel:registered: HEXL for FPGA is an open-source library that provides an implementation of homomorphic encryption primitives on Intel FPGAs. Intel HEXL for FPGA targets integer arithmetic with word-sized primes, typically 40-60 bits. Intel HEXL for FPGA provides an API for 64-bit unsigned integers and targets Intel FPGAs.
 
@@ -255,7 +256,7 @@ To cite Intel HEXL for FPGA, please use the following BibTeX entry.
 ```tex 
     @misc{IntelHEXLFPGA, 
         author={Meng,Yan and de Souza, Fillipe and Butt, Shahzad and de Lassus, Hubert and Gonzales Aragon, Tomas and Zhou, Yongfa and Wang, Yong and others}, 
-        title = {{I}ntel {Homomorphic Encryption Acceleration Library for FPGAs for FPGA} (release 1.0)},   
+        title = {{I}ntel {Homomorphic Encryption Acceleration Library for FPGAs} (release 1.0)},
         howpublished = {\url{https://github.com/intel/hexl-fpga}},  
         month = December, 
         year = 2021,  
