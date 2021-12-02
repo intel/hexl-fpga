@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classhetest_1_1utils_1_1MultiplyFactor" kind="class" prot="public">
+    <compoundname>hetest::utils::MultiplyFactor</compoundname>
+    <includes refid="ntt_8hpp" local="no">ntt.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhetest_1_1utils_1_1MultiplyFactor_1a77b8d1f8793d0335630340a45c807a6c" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t hetest::utils::MultiplyFactor::m_operand</definition>
+        <argsstring></argsstring>
+        <name>m_operand</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" line="42" column="1" bodyfile="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhetest_1_1utils_1_1MultiplyFactor_1a20c6dc512a635e410ff4ca67d509f284" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t hetest::utils::MultiplyFactor::m_barrett_factor</definition>
+        <argsstring></argsstring>
+        <name>m_barrett_factor</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" line="43" column="1" bodyfile="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhetest_1_1utils_1_1MultiplyFactor_1a86c6f365d618c90d08e52855190be15c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>hetest::utils::MultiplyFactor::MultiplyFactor</definition>
+        <argsstring>()=default</argsstring>
+        <name>MultiplyFactor</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" line="15" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classhetest_1_1utils_1_1MultiplyFactor_1aaf6b00666ac003d44f1f71d98fc3c9a1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>hetest::utils::MultiplyFactor::MultiplyFactor</definition>
+        <argsstring>(uint64_t operand, uint64_t bit_shift, uint64_t modulus)</argsstring>
+        <name>MultiplyFactor</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>operand</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>bit_shift</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>modulus</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" line="18" column="1" bodyfile="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" bodystart="18" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classhetest_1_1utils_1_1MultiplyFactor_1ae39a0ca3d2b8f97db8e28ed3f1cf9957" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t hetest::utils::MultiplyFactor::BarrettFactor</definition>
+        <argsstring>() const </argsstring>
+        <name>BarrettFactor</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" line="38" column="1" bodyfile="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classhetest_1_1utils_1_1MultiplyFactor_1adb9a6acac4142a551ad70cf9bbb56389" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t hetest::utils::MultiplyFactor::Operand</definition>
+        <argsstring>() const </argsstring>
+        <name>Operand</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" line="39" column="1" bodyfile="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" bodystart="39" bodyend="39"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" line="13" column="1" bodyfile="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" bodystart="13" bodyend="44"/>
+    <listofallmembers>
+      <member refid="classhetest_1_1utils_1_1MultiplyFactor_1ae39a0ca3d2b8f97db8e28ed3f1cf9957" prot="public" virt="non-virtual"><scope>hetest::utils::MultiplyFactor</scope><name>BarrettFactor</name></member>
+      <member refid="classhetest_1_1utils_1_1MultiplyFactor_1a20c6dc512a635e410ff4ca67d509f284" prot="private" virt="non-virtual"><scope>hetest::utils::MultiplyFactor</scope><name>m_barrett_factor</name></member>
+      <member refid="classhetest_1_1utils_1_1MultiplyFactor_1a77b8d1f8793d0335630340a45c807a6c" prot="private" virt="non-virtual"><scope>hetest::utils::MultiplyFactor</scope><name>m_operand</name></member>
+      <member refid="classhetest_1_1utils_1_1MultiplyFactor_1a86c6f365d618c90d08e52855190be15c" prot="public" virt="non-virtual"><scope>hetest::utils::MultiplyFactor</scope><name>MultiplyFactor</name></member>
+      <member refid="classhetest_1_1utils_1_1MultiplyFactor_1aaf6b00666ac003d44f1f71d98fc3c9a1" prot="public" virt="non-virtual"><scope>hetest::utils::MultiplyFactor</scope><name>MultiplyFactor</name></member>
+      <member refid="classhetest_1_1utils_1_1MultiplyFactor_1adb9a6acac4142a551ad70cf9bbb56389" prot="public" virt="non-virtual"><scope>hetest::utils::MultiplyFactor</scope><name>Operand</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

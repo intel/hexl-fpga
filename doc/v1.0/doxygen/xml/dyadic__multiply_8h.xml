@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="dyadic__multiply_8h" kind="file">
+    <compoundname>dyadic_multiply.h</compoundname>
+    <includes local="no">cstdint</includes>
+    <incdepgraph>
+      <node id="23">
+        <label>cstdint</label>
+      </node>
+      <node id="22">
+        <label>dyadic_multiply.h</label>
+        <link refid="dyadic_multiply.h"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespaceintel">intel</innernamespace>
+    <innernamespace refid="namespaceintel_1_1hexl">intel::hexl</innernamespace>
+    <innernamespace refid="namespaceintel_1_1hexl_1_1fpga">intel::hexl::fpga</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>Copyright<sp/>(C)<sp/>2020-2021<sp/>Intel<sp/>Corporation</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>Apache-2.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>__DYADIC_MULTIPLY_H__</highlight></codeline>
+<codeline lineno="5"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>__DYADIC_MULTIPLY_H__</highlight></codeline>
+<codeline lineno="6"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdint&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9" refid="namespaceintel" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">intel<sp/>{</highlight></codeline>
+<codeline lineno="10" refid="namespaceintel_1_1hexl" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">hexl<sp/>{</highlight></codeline>
+<codeline lineno="11" refid="namespaceintel_1_1hexl_1_1fpga" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">fpga<sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="namespaceintel_1_1hexl_1_1fpga_1ac793304e5a77cc4fb89d4d5c1c734e3d" kindref="member">set_worksize_DyadicMultiply</ref>(uint64_t<sp/>ws);</highlight></codeline>
+<codeline lineno="27"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="namespaceintel_1_1hexl_1_1fpga_1a5f78490650fba97fc6837d2fee8554d8" kindref="member">DyadicMultiply</ref>(uint64_t*<sp/>results,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t*<sp/>operand1,</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t*<sp/>operand2,<sp/>uint64_t<sp/>n,</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t*<sp/>moduli,<sp/>uint64_t<sp/>n_moduli);</highlight></codeline>
+<codeline lineno="34"><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="namespaceintel_1_1hexl_1_1fpga_1a69e806b0006ab56a1c24a47ee0585952" kindref="member">DyadicMultiplyCompleted</ref>();</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>fpga</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>hexl</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>intel</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/home/ymeng12/he-fpga-github/host/inc/dyadic_multiply.h"/>
+  </compounddef>
+</doxygen>

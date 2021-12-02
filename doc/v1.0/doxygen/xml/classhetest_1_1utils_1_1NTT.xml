@@ -1,0 +1,373 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classhetest_1_1utils_1_1NTT" kind="class" prot="public">
+    <compoundname>hetest::utils::NTT</compoundname>
+    <includes refid="ntt_8hpp" local="no">ntt.hpp</includes>
+    <innerclass refid="structhetest_1_1utils_1_1NTT_1_1AllocatorAdapter" prot="public">hetest::utils::NTT::AllocatorAdapter</innerclass>
+    <innerclass refid="classhetest_1_1utils_1_1NTT_1_1NTTImpl" prot="public">hetest::utils::NTT::NTTImpl</innerclass>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classhetest_1_1utils_1_1NTT_1ae2d7985d8380a7c30cb0ca745aa900f5" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classhetest_1_1utils_1_1NTT_1_1NTTImpl" kindref="compound">NTTImpl</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;NTTImpl&gt; hetest::utils::NTT::m_impl</definition>
+        <argsstring></argsstring>
+        <name>m_impl</name>
+        <briefdescription>
+<para>Class implementing the <ref refid="classhetest_1_1utils_1_1NTT" kindref="compound">NTT</ref>. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" line="303" column="1" bodyfile="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" bodystart="300" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhetest_1_1utils_1_1NTT_1a3babb9b273fca5c7a7b8c782341e57c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>hetest::utils::NTT::NTT</definition>
+        <argsstring>()</argsstring>
+        <name>NTT</name>
+        <briefdescription>
+<para>Initializes an empty <ref refid="classhetest_1_1utils_1_1NTT" kindref="compound">NTT</ref> object. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" line="232" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classhetest_1_1utils_1_1NTT_1af1677329c3f6051d20cf6ce6b28e6c94" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>hetest::utils::NTT::~NTT</definition>
+        <argsstring>()</argsstring>
+        <name>~NTT</name>
+        <briefdescription>
+<para>Destructs the <ref refid="classhetest_1_1utils_1_1NTT" kindref="compound">NTT</ref> object. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" line="235" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classhetest_1_1utils_1_1NTT_1a5a974237b1ea73b6e08b33e99356293f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>hetest::utils::NTT::NTT</definition>
+        <argsstring>(uint64_t degree, uint64_t q, std::shared_ptr&lt; AllocatorBase &gt; alloc_ptr={})</argsstring>
+        <name>NTT</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>degree</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>q</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="structhetest_1_1utils_1_1AllocatorBase" kindref="compound">AllocatorBase</ref> &gt;</type>
+          <declname>alloc_ptr</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+<para>Performs pre-computation necessary for forward and inverse transforms. </para>        </briefdescription>
+        <detaileddescription>
+<para>Initializes an <ref refid="classhetest_1_1utils_1_1NTT" kindref="compound">NTT</ref> object with degree <computeroutput>degree</computeroutput> and modulus <computeroutput>q</computeroutput>. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">degree</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>also known as N. Size of the <ref refid="classhetest_1_1utils_1_1NTT" kindref="compound">NTT</ref> transform. Must be a power of 2 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">q</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Prime modulus. Must satisfy <formula id="1">$ q == 1 \mod 2N $</formula> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">alloc_ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Custom memory allocator used for intermediate calculations </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" line="246" column="1" bodyfile="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.cpp" bodystart="432" bodyend="434"/>
+      </memberdef>
+      <memberdef kind="function" id="classhetest_1_1utils_1_1NTT_1a4735b3c9e5f15f9ec0d474a0342b046d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Allocator</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>AllocatorArgs</declname>
+            <defname>AllocatorArgs</defname>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>hetest::utils::NTT::NTT</definition>
+        <argsstring>(uint64_t degree, uint64_t q, Allocator &amp;&amp;a, AllocatorArgs &amp;&amp;...args)</argsstring>
+        <name>NTT</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>degree</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>q</declname>
+        </param>
+        <param>
+          <type>Allocator &amp;&amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>AllocatorArgs &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" line="250" column="1" bodyfile="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" bodystart="250" bodyend="255"/>
+      </memberdef>
+      <memberdef kind="function" id="classhetest_1_1utils_1_1NTT_1a4f41af61203de2aa28e0d380b5b04ae4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>hetest::utils::NTT::NTT</definition>
+        <argsstring>(uint64_t degree, uint64_t q, uint64_t root_of_unity, std::shared_ptr&lt; AllocatorBase &gt; alloc_ptr={})</argsstring>
+        <name>NTT</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>degree</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>q</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>root_of_unity</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="structhetest_1_1utils_1_1AllocatorBase" kindref="compound">AllocatorBase</ref> &gt;</type>
+          <declname>alloc_ptr</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+<para>Initializes an <ref refid="classhetest_1_1utils_1_1NTT" kindref="compound">NTT</ref> object with degree <computeroutput>degree</computeroutput> and modulus <computeroutput>q</computeroutput>. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">degree</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>also known as N. Size of the <ref refid="classhetest_1_1utils_1_1NTT" kindref="compound">NTT</ref> transform. Must be a power of 2 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">q</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Prime modulus. Must satisfy <formula id="1">$ q == 1 \mod 2N $</formula> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">root_of_unity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>2N&apos;th root of unity in <formula id="2">$ \mathbb{Z_q} $</formula>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">alloc_ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Custom memory allocator used for intermediate calculations</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Performs pre-computation necessary for forward and inverse transforms </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" line="268" column="1" bodyfile="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.cpp" bodystart="436" bodyend="439"/>
+      </memberdef>
+      <memberdef kind="function" id="classhetest_1_1utils_1_1NTT_1a9877fee08ac585be045a20d8b561d8d1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Allocator</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>AllocatorArgs</declname>
+            <defname>AllocatorArgs</defname>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>hetest::utils::NTT::NTT</definition>
+        <argsstring>(uint64_t degree, uint64_t q, uint64_t root_of_unity, Allocator &amp;&amp;a, AllocatorArgs &amp;&amp;...args)</argsstring>
+        <name>NTT</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>degree</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>q</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>root_of_unity</declname>
+        </param>
+        <param>
+          <type>Allocator &amp;&amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>AllocatorArgs &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" line="272" column="1" bodyfile="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" bodystart="272" bodyend="278"/>
+      </memberdef>
+      <memberdef kind="function" id="classhetest_1_1utils_1_1NTT_1af23d2bdd9a1a5ca7fa8d5b7333776ad4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void hetest::utils::NTT::ComputeForward</definition>
+        <argsstring>(uint64_t *result, const uint64_t *operand, uint64_t input_mod_factor, uint64_t output_mod_factor)</argsstring>
+        <name>ComputeForward</name>
+        <param>
+          <type>uint64_t *</type>
+          <declname>result</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>operand</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>input_mod_factor</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>output_mod_factor</declname>
+        </param>
+        <briefdescription>
+<para>Compute forward <ref refid="classhetest_1_1utils_1_1NTT" kindref="compound">NTT</ref>. Results are bit-reversed. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stores the result </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">operand</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data on which to compute the <ref refid="classhetest_1_1utils_1_1NTT" kindref="compound">NTT</ref> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">input_mod_factor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Assume input <computeroutput>operand</computeroutput> are in [0, input_mod_factor * q). Must be 1, 2 or 4. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">output_mod_factor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Returns output <computeroutput>operand</computeroutput> in [0, output_mod_factor * q). Must be 1 or 4. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" line="287" column="1" bodyfile="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.cpp" bodystart="443" bodyend="456"/>
+      </memberdef>
+      <memberdef kind="function" id="classhetest_1_1utils_1_1NTT_1a0452a339ac9025c750decbb6e011148b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void hetest::utils::NTT::ComputeInverse</definition>
+        <argsstring>(uint64_t *result, const uint64_t *operand, uint64_t input_mod_factor, uint64_t output_mod_factor)</argsstring>
+        <name>ComputeInverse</name>
+        <param>
+          <type>uint64_t *</type>
+          <declname>result</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>operand</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>input_mod_factor</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>output_mod_factor</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Compute inverse <ref refid="classhetest_1_1utils_1_1NTT" kindref="compound">NTT</ref>. Results are bit-reversed. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stores the result </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">operand</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data on which to compute the <ref refid="classhetest_1_1utils_1_1NTT" kindref="compound">NTT</ref> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">input_mod_factor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Assume input <computeroutput>operand</computeroutput> are in [0, input_mod_factor * q). Must be 1 or 2. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">output_mod_factor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Returns output <computeroutput>operand</computeroutput> in [0, output_mod_factor * q). Must be 1 or 2. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" line="297" column="1" bodyfile="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.cpp" bodystart="458" bodyend="470"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Performs negacyclic forward and inverse number-theoretic transform (<ref refid="classhetest_1_1utils_1_1NTT" kindref="compound">NTT</ref>), commonly used in RLWE cryptography. </para>    </briefdescription>
+    <detaileddescription>
+<para>The number-theoretic transform (<ref refid="classhetest_1_1utils_1_1NTT" kindref="compound">NTT</ref>) specializes the discrete Fourier transform (DFT) to the finite field <formula id="0">$ \mathbb{Z}_q[X] / (X^N + 1) $</formula>. </para>    </detaileddescription>
+    <location file="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" line="215" column="1" bodyfile="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" bodystart="215" bodyend="304"/>
+    <listofallmembers>
+      <member refid="classhetest_1_1utils_1_1NTT_1af23d2bdd9a1a5ca7fa8d5b7333776ad4" prot="public" virt="non-virtual"><scope>hetest::utils::NTT</scope><name>ComputeForward</name></member>
+      <member refid="classhetest_1_1utils_1_1NTT_1a0452a339ac9025c750decbb6e011148b" prot="public" virt="non-virtual"><scope>hetest::utils::NTT</scope><name>ComputeInverse</name></member>
+      <member refid="classhetest_1_1utils_1_1NTT_1ae2d7985d8380a7c30cb0ca745aa900f5" prot="public" virt="non-virtual"><scope>hetest::utils::NTT</scope><name>m_impl</name></member>
+      <member refid="classhetest_1_1utils_1_1NTT_1a3babb9b273fca5c7a7b8c782341e57c0" prot="public" virt="non-virtual"><scope>hetest::utils::NTT</scope><name>NTT</name></member>
+      <member refid="classhetest_1_1utils_1_1NTT_1a5a974237b1ea73b6e08b33e99356293f" prot="public" virt="non-virtual"><scope>hetest::utils::NTT</scope><name>NTT</name></member>
+      <member refid="classhetest_1_1utils_1_1NTT_1a4735b3c9e5f15f9ec0d474a0342b046d" prot="public" virt="non-virtual"><scope>hetest::utils::NTT</scope><name>NTT</name></member>
+      <member refid="classhetest_1_1utils_1_1NTT_1a4f41af61203de2aa28e0d380b5b04ae4" prot="public" virt="non-virtual"><scope>hetest::utils::NTT</scope><name>NTT</name></member>
+      <member refid="classhetest_1_1utils_1_1NTT_1a9877fee08ac585be045a20d8b561d8d1" prot="public" virt="non-virtual"><scope>hetest::utils::NTT</scope><name>NTT</name></member>
+      <member refid="classhetest_1_1utils_1_1NTT_1af1677329c3f6051d20cf6ce6b28e6c94" prot="public" virt="non-virtual"><scope>hetest::utils::NTT</scope><name>~NTT</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

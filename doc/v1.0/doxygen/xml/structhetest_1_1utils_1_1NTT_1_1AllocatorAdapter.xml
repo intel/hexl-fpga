@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="structhetest_1_1utils_1_1NTT_1_1AllocatorAdapter" kind="struct" prot="public">
+    <compoundname>hetest::utils::NTT::AllocatorAdapter</compoundname>
+    <basecompoundref refid="structhetest_1_1utils_1_1AllocatorInterface" prot="public" virt="non-virtual">hetest::utils::AllocatorInterface&lt; AllocatorAdapter&lt; Adaptee, Args...&gt; &gt;</basecompoundref>
+    <includes refid="ntt_8hpp" local="no">ntt.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class Adaptee</type>
+      </param>
+      <param>
+        <type>class...</type>
+        <declname>Args</declname>
+        <defname>Args</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structhetest_1_1utils_1_1NTT_1_1AllocatorAdapter_1adfabf986b64252394f833dddb8338d50" prot="private" static="no" mutable="no">
+        <type>Adaptee</type>
+        <definition>Adaptee hetest::utils::NTT::AllocatorAdapter&lt; Adaptee, Args &gt;::alloc</definition>
+        <argsstring></argsstring>
+        <name>alloc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" line="228" column="1" bodyfile="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" bodystart="228" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structhetest_1_1utils_1_1NTT_1_1AllocatorAdapter_1acfe475e3767d7de45ae655e54d0846f0" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>hetest::utils::NTT::AllocatorAdapter&lt; Adaptee, Args &gt;::AllocatorAdapter</definition>
+        <argsstring>(Adaptee &amp;&amp;_a, Args &amp;&amp;...args)</argsstring>
+        <name>AllocatorAdapter</name>
+        <param>
+          <type>Adaptee &amp;&amp;</type>
+          <declname>_a</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" line="220" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structhetest_1_1utils_1_1NTT_1_1AllocatorAdapter_1a55c62e85f11443da9e79a0718a18ee2f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>hetest::utils::NTT::AllocatorAdapter&lt; Adaptee, Args &gt;::AllocatorAdapter</definition>
+        <argsstring>(const Adaptee &amp;_a, Args &amp;...args)</argsstring>
+        <name>AllocatorAdapter</name>
+        <param>
+          <type>const Adaptee &amp;</type>
+          <declname>_a</declname>
+        </param>
+        <param>
+          <type>Args &amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" line="221" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structhetest_1_1utils_1_1NTT_1_1AllocatorAdapter_1ac6b6542850337717e478d78477d89e6e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void* hetest::utils::NTT::AllocatorAdapter&lt; Adaptee, Args &gt;::allocate_impl</definition>
+        <argsstring>(size_t bytes_count)</argsstring>
+        <name>allocate_impl</name>
+        <param>
+          <type>size_t</type>
+          <declname>bytes_count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" line="224" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structhetest_1_1utils_1_1NTT_1_1AllocatorAdapter_1af3dc9adfd717dc77aaa973e37642c4a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void hetest::utils::NTT::AllocatorAdapter&lt; Adaptee, Args &gt;::deallocate_impl</definition>
+        <argsstring>(void *p, size_t n)</argsstring>
+        <name>deallocate_impl</name>
+        <param>
+          <type>void *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" line="225" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>hetest::utils::NTT::AllocatorAdapter&lt; Adaptee, Args &gt;</label>
+        <link refid="structhetest_1_1utils_1_1NTT_1_1AllocatorAdapter"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>hetest::utils::AllocatorBase</label>
+        <link refid="structhetest_1_1utils_1_1AllocatorBase"/>
+      </node>
+      <node id="3">
+        <label>hetest::utils::AllocatorInterface&lt; AllocatorAdapter&lt; Adaptee, Args...&gt; &gt;</label>
+        <link refid="structhetest_1_1utils_1_1AllocatorInterface"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="5">
+        <label>hetest::utils::NTT::AllocatorAdapter&lt; Adaptee, Args &gt;</label>
+        <link refid="structhetest_1_1utils_1_1NTT_1_1AllocatorAdapter"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>hetest::utils::AllocatorBase</label>
+        <link refid="structhetest_1_1utils_1_1AllocatorBase"/>
+      </node>
+      <node id="6">
+        <label>hetest::utils::AllocatorInterface&lt; AllocatorAdapter&lt; Adaptee, Args...&gt; &gt;</label>
+        <link refid="structhetest_1_1utils_1_1AllocatorInterface"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" line="219" column="1" bodyfile="/home/ymeng12/he-fpga-github/tests/test_utils/ntt.hpp" bodystart="218" bodyend="229"/>
+    <listofallmembers>
+      <member refid="structhetest_1_1utils_1_1NTT_1_1AllocatorAdapter_1adfabf986b64252394f833dddb8338d50" prot="private" virt="non-virtual"><scope>hetest::utils::NTT::AllocatorAdapter</scope><name>alloc</name></member>
+      <member refid="structhetest_1_1utils_1_1AllocatorInterface_1aa155e501b1e16984f8da9b1837597e66" prot="public" virt="virtual"><scope>hetest::utils::NTT::AllocatorAdapter</scope><name>allocate</name></member>
+      <member refid="structhetest_1_1utils_1_1NTT_1_1AllocatorAdapter_1ac6b6542850337717e478d78477d89e6e" prot="public" virt="non-virtual"><scope>hetest::utils::NTT::AllocatorAdapter</scope><name>allocate_impl</name></member>
+      <member refid="structhetest_1_1utils_1_1NTT_1_1AllocatorAdapter_1acfe475e3767d7de45ae655e54d0846f0" prot="public" virt="non-virtual"><scope>hetest::utils::NTT::AllocatorAdapter</scope><name>AllocatorAdapter</name></member>
+      <member refid="structhetest_1_1utils_1_1NTT_1_1AllocatorAdapter_1a55c62e85f11443da9e79a0718a18ee2f" prot="public" virt="non-virtual"><scope>hetest::utils::NTT::AllocatorAdapter</scope><name>AllocatorAdapter</name></member>
+      <member refid="structhetest_1_1utils_1_1AllocatorInterface_1a2d76269d7edd0d9cb65e6bfeffc24432" prot="public" virt="virtual"><scope>hetest::utils::NTT::AllocatorAdapter</scope><name>deallocate</name></member>
+      <member refid="structhetest_1_1utils_1_1NTT_1_1AllocatorAdapter_1af3dc9adfd717dc77aaa973e37642c4a6" prot="public" virt="non-virtual"><scope>hetest::utils::NTT::AllocatorAdapter</scope><name>deallocate_impl</name></member>
+      <member refid="structhetest_1_1utils_1_1AllocatorBase_1a8b16ff8d74578e0162706b8bbfa3751a" prot="public" virt="virtual"><scope>hetest::utils::NTT::AllocatorAdapter</scope><name>~AllocatorBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

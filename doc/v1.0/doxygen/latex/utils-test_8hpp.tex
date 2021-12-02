@@ -1,0 +1,125 @@
+\hypertarget{utils-test_8hpp}{\section{utils-\/test.hpp File Reference}
+\label{utils-test_8hpp}\index{utils-\/test.\-hpp@{utils-\/test.\-hpp}}
+}
+{\ttfamily \#include $<$cmath$>$}\\*
+{\ttfamily \#include $<$cstddef$>$}\\*
+{\ttfamily \#include $<$cstdint$>$}\\*
+{\ttfamily \#include $<$cstdlib$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$limits$>$}\\*
+{\ttfamily \#include $<$memory$>$}\\*
+{\ttfamily \#include $<$utility$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structhetest_1_1utils_1_1AllocatorBase}{hetest\-::utils\-::\-Allocator\-Base}
+\item 
+struct \hyperlink{structhetest_1_1utils_1_1AllocatorInterface}{hetest\-::utils\-::\-Allocator\-Interface$<$ Allocator\-Impl $>$}
+\item 
+struct \hyperlink{structhetest_1_1utils_1_1details_1_1MallocStrategy}{hetest\-::utils\-::details\-::\-Malloc\-Strategy}
+\item 
+struct \hyperlink{structhetest_1_1utils_1_1details_1_1CustomAllocStrategy}{hetest\-::utils\-::details\-::\-Custom\-Alloc\-Strategy}
+\item 
+class \hyperlink{classhetest_1_1utils_1_1AlignedAllocator}{hetest\-::utils\-::\-Aligned\-Allocator$<$ T, Alignment $>$}
+\item 
+struct \hyperlink{structhetest_1_1utils_1_1AlignedAllocator_1_1rebind}{hetest\-::utils\-::\-Aligned\-Allocator$<$ T, Alignment $>$\-::rebind$<$ U $>$}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespacehetest}{hetest}
+\item 
+\hyperlink{namespacehetest_1_1utils}{hetest\-::utils}
+\item 
+\hyperlink{namespacehetest_1_1utils_1_1details}{hetest\-::utils\-::details}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{utils-test_8hpp_a89535bd3a3a7e4e8d10037287f44b363}{U\-T\-I\-L\-S\-\_\-\-C\-H\-E\-C\-K}(cond, expr)~\{\}
+\item 
+\#define \hyperlink{utils-test_8hpp_a211847bac88927d6b3426fc78dc052be}{U\-T\-I\-L\-S\-\_\-\-C\-H\-E\-C\-K\-\_\-\-B\-O\-U\-N\-D\-S}(...)~\{\}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \hyperlink{namespacehetest_1_1utils_a3f7f347b9f62a88014bdcc45f7987846}{hetest\-::utils\-::\-Allocator\-Strategy\-Ptr} = std\-::shared\-\_\-ptr$<$ Allocator\-Base $>$
+\item 
+{\footnotesize template$<$typename T $>$ }\\using \hyperlink{namespacehetest_1_1utils_ad5b6a78d49dc8f6790f7fd2b10bf3db0}{hetest\-::utils\-::\-Aligned\-Vector64} = std\-::vector$<$ T, Aligned\-Allocator$<$ T, 64 $>$ $>$
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{namespacehetest_1_1utils_ac7fa0c35a418955522dc45b10864fdc8}{hetest\-::utils\-::\-C\-M\-P\-I\-N\-T} \{ \\*
+\hyperlink{namespacehetest_1_1utils_ac7fa0c35a418955522dc45b10864fdc8a2dcbad7477fd40561e8b8198f173bd47}{hetest\-::utils\-::\-C\-M\-P\-I\-N\-T\-::\-E\-Q} = 0, 
+\hyperlink{namespacehetest_1_1utils_ac7fa0c35a418955522dc45b10864fdc8ac562607189d77eb9dfb707464c1e7b0b}{hetest\-::utils\-::\-C\-M\-P\-I\-N\-T\-::\-L\-T} = 1, 
+\hyperlink{namespacehetest_1_1utils_ac7fa0c35a418955522dc45b10864fdc8acfe6055d2e0503be378bb63449ec7ba6}{hetest\-::utils\-::\-C\-M\-P\-I\-N\-T\-::\-L\-E} = 2, 
+\hyperlink{namespacehetest_1_1utils_ac7fa0c35a418955522dc45b10864fdc8a946003f97ccc52d5d3b54ac0ec31bbfc}{hetest\-::utils\-::\-C\-M\-P\-I\-N\-T\-::\-F\-A\-L\-S\-E} = 3, 
+\\*
+\hyperlink{namespacehetest_1_1utils_ac7fa0c35a418955522dc45b10864fdc8adc33066c3993e0d50896e533fd692ce0}{hetest\-::utils\-::\-C\-M\-P\-I\-N\-T\-::\-N\-E} = 4, 
+\hyperlink{namespacehetest_1_1utils_ac7fa0c35a418955522dc45b10864fdc8ad7d6a13c7b311ec8a3c9fcfb1919a2f8}{hetest\-::utils\-::\-C\-M\-P\-I\-N\-T\-::\-N\-L\-T} = 5, 
+\hyperlink{namespacehetest_1_1utils_ac7fa0c35a418955522dc45b10864fdc8aacd748f300c5d189c47807e2a9d6ea57}{hetest\-::utils\-::\-C\-M\-P\-I\-N\-T\-::\-N\-L\-E} = 6, 
+\hyperlink{namespacehetest_1_1utils_ac7fa0c35a418955522dc45b10864fdc8ac0d83f0b82a6b30de8811e69e6d95c61}{hetest\-::utils\-::\-C\-M\-P\-I\-N\-T\-::\-T\-R\-U\-E} = 7
+ \}
+\begin{DoxyCompactList}\small\item\em Represents binary operations between two boolean values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+C\-M\-P\-I\-N\-T \hyperlink{namespacehetest_1_1utils_aab7d7acb16b2a22388513ae84818214c}{hetest\-::utils\-::\-Not} (C\-M\-P\-I\-N\-T cmp)
+\begin{DoxyCompactList}\small\item\em Returns the logical negation of a binary operation. \end{DoxyCompactList}\item 
+\hyperlink{utils-test_8hpp_ab76ef99db23830c7fec1e3019737cab4}{uint128\-\_\-t} \hyperlink{namespacehetest_1_1utils_af38bb2ec0ec65a229877d4a3bdbe787f}{hetest\-::utils\-::\-Multiply\-U\-Int64} (uint64\-\_\-t x, uint64\-\_\-t y)
+\item 
+uint64\-\_\-t \hyperlink{namespacehetest_1_1utils_a842729d820bda62d95f80ebdde202ac6}{hetest\-::utils\-::\-Barrett\-Reduce128} (uint64\-\_\-t input\-\_\-hi, uint64\-\_\-t input\-\_\-lo, uint64\-\_\-t modulus)
+\item 
+uint64\-\_\-t \hyperlink{namespacehetest_1_1utils_a8c18008a708b9e3146f8c5bb95317415}{hetest\-::utils\-::\-Divide\-U\-Int128\-U\-Int64\-Lo} (uint64\-\_\-t x1, uint64\-\_\-t x0, uint64\-\_\-t y)
+\item 
+void \hyperlink{namespacehetest_1_1utils_a8329306e8a458a7ce160ef870e59a9a3}{hetest\-::utils\-::\-Multiply\-U\-Int64} (uint64\-\_\-t x, uint64\-\_\-t y, uint64\-\_\-t $\ast$prod\-\_\-hi, uint64\-\_\-t $\ast$prod\-\_\-lo)
+\item 
+{\footnotesize template$<$int Bit\-Shift$>$ }\\uint64\-\_\-t \hyperlink{namespacehetest_1_1utils_a625cc618050dc0a7fe3fc1720224018b}{hetest\-::utils\-::\-Multiply\-U\-Int64\-Hi} (uint64\-\_\-t x, uint64\-\_\-t y)
+\item 
+uint64\-\_\-t \hyperlink{namespacehetest_1_1utils_a5f70a68d72b65afc296c5d38def31235}{hetest\-::utils\-::\-M\-S\-B} (uint64\-\_\-t input)
+\item 
+bool \hyperlink{namespacehetest_1_1utils_abde8eb855b18fb857dbbd7b06d96fd66}{hetest\-::utils\-::\-Compare} (C\-M\-P\-I\-N\-T cmp, uint64\-\_\-t lhs, uint64\-\_\-t rhs)
+\item 
+bool \hyperlink{namespacehetest_1_1utils_a968364009ecc6add3849c161d7a1088f}{hetest\-::utils\-::\-Is\-Power\-Of\-Two} (uint64\-\_\-t num)
+\item 
+uint64\-\_\-t \hyperlink{namespacehetest_1_1utils_acb4bd5dad64e6c1db0f2b4e1afaa63db}{hetest\-::utils\-::\-Log2} (uint64\-\_\-t x)
+\item 
+uint64\-\_\-t \hyperlink{namespacehetest_1_1utils_a959fdf1d396b9b4f4362486106e7f655}{hetest\-::utils\-::\-Maximum\-Value} (uint64\-\_\-t bits)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\-\_\-\-\_\-extension\-\_\-\-\_\- typedef \-\_\-\-\_\-int128 \hyperlink{utils-test_8hpp_ab6c6bc8799eef1e3d4adc2bd1972e88b}{int128\-\_\-t}
+\item 
+\-\_\-\-\_\-extension\-\_\-\-\_\- typedef unsigned \\*
+\-\_\-\-\_\-int128 \hyperlink{utils-test_8hpp_ab76ef99db23830c7fec1e3019737cab4}{uint128\-\_\-t}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{utils-test_8hpp_a89535bd3a3a7e4e8d10037287f44b363}{\index{utils-\/test.\-hpp@{utils-\/test.\-hpp}!U\-T\-I\-L\-S\-\_\-\-C\-H\-E\-C\-K@{U\-T\-I\-L\-S\-\_\-\-C\-H\-E\-C\-K}}
+\index{U\-T\-I\-L\-S\-\_\-\-C\-H\-E\-C\-K@{U\-T\-I\-L\-S\-\_\-\-C\-H\-E\-C\-K}!utils-test.hpp@{utils-\/test.\-hpp}}
+\subsubsection[{U\-T\-I\-L\-S\-\_\-\-C\-H\-E\-C\-K}]{\setlength{\rightskip}{0pt plus 5cm}\#define U\-T\-I\-L\-S\-\_\-\-C\-H\-E\-C\-K(
+\begin{DoxyParamCaption}
+\item[{}]{cond, }
+\item[{}]{expr}
+\end{DoxyParamCaption}
+)~\{\}}}\label{utils-test_8hpp_a89535bd3a3a7e4e8d10037287f44b363}
+\hypertarget{utils-test_8hpp_a211847bac88927d6b3426fc78dc052be}{\index{utils-\/test.\-hpp@{utils-\/test.\-hpp}!U\-T\-I\-L\-S\-\_\-\-C\-H\-E\-C\-K\-\_\-\-B\-O\-U\-N\-D\-S@{U\-T\-I\-L\-S\-\_\-\-C\-H\-E\-C\-K\-\_\-\-B\-O\-U\-N\-D\-S}}
+\index{U\-T\-I\-L\-S\-\_\-\-C\-H\-E\-C\-K\-\_\-\-B\-O\-U\-N\-D\-S@{U\-T\-I\-L\-S\-\_\-\-C\-H\-E\-C\-K\-\_\-\-B\-O\-U\-N\-D\-S}!utils-test.hpp@{utils-\/test.\-hpp}}
+\subsubsection[{U\-T\-I\-L\-S\-\_\-\-C\-H\-E\-C\-K\-\_\-\-B\-O\-U\-N\-D\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define U\-T\-I\-L\-S\-\_\-\-C\-H\-E\-C\-K\-\_\-\-B\-O\-U\-N\-D\-S(
+\begin{DoxyParamCaption}
+\item[{}]{...}
+\end{DoxyParamCaption}
+)~\{\}}}\label{utils-test_8hpp_a211847bac88927d6b3426fc78dc052be}
+
+
+\subsection{Variable Documentation}
+\hypertarget{utils-test_8hpp_ab6c6bc8799eef1e3d4adc2bd1972e88b}{\index{utils-\/test.\-hpp@{utils-\/test.\-hpp}!int128\-\_\-t@{int128\-\_\-t}}
+\index{int128\-\_\-t@{int128\-\_\-t}!utils-test.hpp@{utils-\/test.\-hpp}}
+\subsubsection[{int128\-\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}\-\_\-\-\_\-extension\-\_\-\-\_\- typedef \-\_\-\-\_\-int128 int128\-\_\-t}}\label{utils-test_8hpp_ab6c6bc8799eef1e3d4adc2bd1972e88b}
+\hypertarget{utils-test_8hpp_ab76ef99db23830c7fec1e3019737cab4}{\index{utils-\/test.\-hpp@{utils-\/test.\-hpp}!uint128\-\_\-t@{uint128\-\_\-t}}
+\index{uint128\-\_\-t@{uint128\-\_\-t}!utils-test.hpp@{utils-\/test.\-hpp}}
+\subsubsection[{uint128\-\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}\-\_\-\-\_\-extension\-\_\-\-\_\- typedef unsigned \-\_\-\-\_\-int128 uint128\-\_\-t}}\label{utils-test_8hpp_ab76ef99db23830c7fec1e3019737cab4}

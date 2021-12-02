@@ -1,0 +1,214 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT" kind="struct" prot="public">
+    <compoundname>intel::hexl::fpga::FPGAObject_NTT</compoundname>
+    <basecompoundref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject" prot="public" virt="non-virtual">intel::hexl::fpga::FPGAObject</basecompoundref>
+    <includes refid="fpga_8h" local="no">fpga.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1a899dea2730faece216ae48d60bb14b07" prot="public" static="no" mutable="no">
+        <type>uint64_t *</type>
+        <definition>uint64_t* intel::hexl::fpga::FPGAObject_NTT::coeff_poly_in_svm_</definition>
+        <argsstring></argsstring>
+        <name>coeff_poly_in_svm_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/fpga.h" line="289" column="1" bodyfile="/home/ymeng12/he-fpga-github/host/inc/fpga.h" bodystart="289" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1a1263c41528af5e32878a535d5422b33d" prot="public" static="no" mutable="no">
+        <type>uint64_t *</type>
+        <definition>uint64_t* intel::hexl::fpga::FPGAObject_NTT::root_of_unity_powers_in_svm_</definition>
+        <argsstring></argsstring>
+        <name>root_of_unity_powers_in_svm_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/fpga.h" line="290" column="1" bodyfile="/home/ymeng12/he-fpga-github/host/inc/fpga.h" bodystart="290" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1a7ac4c0e1180cf9b29998f1e2ae1c074c" prot="public" static="no" mutable="no">
+        <type>uint64_t *</type>
+        <definition>uint64_t* intel::hexl::fpga::FPGAObject_NTT::precon_root_of_unity_powers_in_svm_</definition>
+        <argsstring></argsstring>
+        <name>precon_root_of_unity_powers_in_svm_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/fpga.h" line="291" column="1" bodyfile="/home/ymeng12/he-fpga-github/host/inc/fpga.h" bodystart="291" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1aef6ec35bf5733224ffd5d1be64de4ab1" prot="public" static="no" mutable="no">
+        <type>uint64_t *</type>
+        <definition>uint64_t* intel::hexl::fpga::FPGAObject_NTT::coeff_modulus_in_svm_</definition>
+        <argsstring></argsstring>
+        <name>coeff_modulus_in_svm_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/fpga.h" line="292" column="1" bodyfile="/home/ymeng12/he-fpga-github/host/inc/fpga.h" bodystart="292" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1aa7b2933a6ad042a0ec97aa5b7eff3c5e" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::FPGAObject_NTT::n_</definition>
+        <argsstring></argsstring>
+        <name>n_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/fpga.h" line="293" column="1" bodyfile="/home/ymeng12/he-fpga-github/host/inc/fpga.h" bodystart="293" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1a0ea057e0cc2e3a1b13917ac8f1bd1af3" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>intel::hexl::fpga::FPGAObject_NTT::FPGAObject_NTT</definition>
+        <argsstring>(const cl_context &amp;context, uint64_t coeff_count, uint64_t batch_size)</argsstring>
+        <name>FPGAObject_NTT</name>
+        <param>
+          <type>const cl_context &amp;</type>
+          <declname>context</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>coeff_count</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>batch_size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/fpga.h" line="283" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1abae77f82236fa240111b32bd1b665a21" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>intel::hexl::fpga::FPGAObject_NTT::~FPGAObject_NTT</definition>
+        <argsstring>()</argsstring>
+        <name>~FPGAObject_NTT</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/fpga.h" line="285" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1a3aa5e6c85ae154bcf98ba99205feda16" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::FPGAObject_NTT::fill_in_data</definition>
+        <argsstring>(const std::vector&lt; Object * &gt; &amp;objs) override</argsstring>
+        <name>fill_in_data</name>
+        <reimplements refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1abd665113bfb3b0e7a33e09078f01ae43">fill_in_data</reimplements>
+        <param>
+          <type>const std::vector&lt; <ref refid="structintel_1_1hexl_1_1fpga_1_1Object" kindref="compound">Object</ref> * &gt; &amp;</type>
+          <declname>objs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/fpga.h" line="286" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1a4f31676fdaf820560f625d2f468da397" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::FPGAObject_NTT::fill_out_data</definition>
+        <argsstring>(uint64_t *coeff_poly) override</argsstring>
+        <name>fill_out_data</name>
+        <reimplements refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a954c4c75077a7c406f6c81517ea7bb04">fill_out_data</reimplements>
+        <param>
+          <type>uint64_t *</type>
+          <declname>coeff_poly</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/fpga.h" line="287" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Struct <ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT" kindref="compound">FPGAObject_NTT</ref> stores the NTT blob of objects to be transfered to the FPGA. </para>    </briefdescription>
+    <detaileddescription>
+<para>fill_in_data <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">vector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>of objects  fill_out_data </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">vector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>of polynomial coefficients</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+coeff_poly_in_svm vector of polynomial coefficients root_of_unity_powers_in_svm twiddle factors precon_root_of_unity_powers_in_svm inverse twiddle factors coeff_modulus_in_svm_ polynomial coefficients modulus n polynomial size </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="54">
+        <label>intel::hexl::fpga::FPGAObject_NTT</label>
+        <link refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT"/>
+        <childnode refid="55" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="55">
+        <label>intel::hexl::fpga::FPGAObject</label>
+        <link refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="56">
+        <label>intel::hexl::fpga::FPGAObject_NTT</label>
+        <link refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT"/>
+        <childnode refid="57" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="57">
+        <label>intel::hexl::fpga::FPGAObject</label>
+        <link refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/ymeng12/he-fpga-github/host/inc/fpga.h" line="282" column="1" bodyfile="/home/ymeng12/he-fpga-github/host/inc/fpga.h" bodystart="282" bodyend="294"/>
+    <listofallmembers>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1aef6ec35bf5733224ffd5d1be64de4ab1" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_NTT</scope><name>coeff_modulus_in_svm_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1a899dea2730faece216ae48d60bb14b07" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_NTT</scope><name>coeff_poly_in_svm_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a87af81d73a95ab1c31c8cd9ebf4b1bba" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_NTT</scope><name>context_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1a3aa5e6c85ae154bcf98ba99205feda16" prot="public" virt="virtual"><scope>intel::hexl::fpga::FPGAObject_NTT</scope><name>fill_in_data</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1a4f31676fdaf820560f625d2f468da397" prot="public" virt="virtual"><scope>intel::hexl::fpga::FPGAObject_NTT</scope><name>fill_out_data</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a1b07c859e7c9205ac12cdb7cd0ba61f7" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_NTT</scope><name>FPGAObject</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1a0ea057e0cc2e3a1b13917ac8f1bd1af3" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_NTT</scope><name>FPGAObject_NTT</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a99733056751a8574c4573210bb03d5a3" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_NTT</scope><name>g_tag_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a51ecca2b08e9e9d67036d8419acca68b" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_NTT</scope><name>in_objs_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1aa7b2933a6ad042a0ec97aa5b7eff3c5e" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_NTT</scope><name>n_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a350704607558ab455334aebe055fc2d4" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_NTT</scope><name>n_batch_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1a7ac4c0e1180cf9b29998f1e2ae1c074c" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_NTT</scope><name>precon_root_of_unity_powers_in_svm_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a0131d230161e662b63af86099177beb7" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_NTT</scope><name>recycle</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1a1263c41528af5e32878a535d5422b33d" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_NTT</scope><name>root_of_unity_powers_in_svm_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a246901212706cfac8299f3b47419f33f" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_NTT</scope><name>tag_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1adecdea2bd81579b973e9292045c8d400" prot="public" virt="virtual"><scope>intel::hexl::fpga::FPGAObject_NTT</scope><name>~FPGAObject</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1abae77f82236fa240111b32bd1b665a21" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_NTT</scope><name>~FPGAObject_NTT</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
