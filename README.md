@@ -188,7 +188,7 @@ cmake --build build --target bench
 The benchmark executables are located in `build/benchmark/` directory <br>
 
 ## Using Intel HEXL for FPGA
-The `examples` folder contains an example showing how to use Intel HEXL for FPGA library in a third-party project. See  [examples/README.md](examples/README.md) for details.  <br>
+The `examples` folder contains an example showing how to use Intel HEXL for FPGA library in a third-party project. <br>
 
 ## Debugging
 For optimal performance, Intel HEXL for FPGA does not perform input validation. In many cases the time required for the validation would be longer than the execution of the function itself. To debug Intel HEXL for FPGA, configure and build Intel HEXL for FPGA with the option <br>
