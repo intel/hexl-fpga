@@ -1,4 +1,4 @@
-main: [![Build and Test](https://github.com/intel/hexl-fpga/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/intel/hexl-fpga/actions/workflows/ci.yml)
+main: [![Build and Test](https://github.com/intel/hexl-fpga/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/intel/hexl-fpga/actions/workflows/ci.yml)
 development: [![Build and Test](https://github.com/intel/hexl-fpga/actions/workflows/ci.yml/badge.svg?branch=development)](https://github.com/intel/hexl-fpga/actions/workflows/ci.yml)
 
 # Intel Homomorphic Encryption Acceleration Library for FPGAs <br>(Intel HEXL for FPGA)
