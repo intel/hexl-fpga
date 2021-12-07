@@ -1,0 +1,227 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="bench__dyadic__multiply_8cpp" kind="file">
+    <compoundname>bench_dyadic_multiply.cpp</compoundname>
+    <includes local="no">benchmark/benchmark.h</includes>
+    <includes local="no">vector</includes>
+    <includes refid="hexl-fpga_8h" local="yes">hexl-fpga.h</includes>
+    <incdepgraph>
+      <node id="4">
+        <label>cstdint</label>
+      </node>
+      <node id="0">
+        <label>bench_dyadic_multiply.cpp</label>
+        <link refid="bench_dyadic_multiply.cpp"/>
+        <childnode refid="1" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>hexl-fpga.h</label>
+        <link refid="hexl-fpga_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>benchmark/benchmark.h</label>
+      </node>
+      <node id="2">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classdyadic__multiply" prot="public">dyadic_multiply</innerclass>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="bench__dyadic__multiply_8cpp_1af63a1df0d582366f7a03c46143e3ae0e" prot="public" static="no" mutable="no">
+        <type>benchmark::State &amp;</type>
+        <definition>benchmark::State&amp; state</definition>
+        <argsstring></argsstring>
+        <name>state</name>
+        <initializer>{
+    uint64_t coeff_count = 16384 / 2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/benchmark/bench_dyadic_multiply.cpp" line="65" column="1" bodyfile="/home/ymeng12/he-fpga-github/benchmark/bench_dyadic_multiply.cpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="bench__dyadic__multiply_8cpp_1a94cbf59cad79634589387a30784ed78d" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t num_moduli</definition>
+        <argsstring></argsstring>
+        <name>num_moduli</name>
+        <initializer>= 7</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/benchmark/bench_dyadic_multiply.cpp" line="67" column="1" bodyfile="/home/ymeng12/he-fpga-github/benchmark/bench_dyadic_multiply.cpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="bench__dyadic__multiply_8cpp_1a1249f7c009d650067cdc1e2254fcb63c" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t n_dyadic_multiply</definition>
+        <argsstring></argsstring>
+        <name>n_dyadic_multiply</name>
+        <initializer>= 4096</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/benchmark/bench_dyadic_multiply.cpp" line="68" column="1" bodyfile="/home/ymeng12/he-fpga-github/benchmark/bench_dyadic_multiply.cpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="bench__dyadic__multiply_8cpp_1abd4bb93f312bd5d1e97bdfe63621bf9c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>setup_dyadic_multiply_io</definition>
+        <argsstring>(n_dyadic_multiply, num_moduli, coeff_count)</argsstring>
+        <name>setup_dyadic_multiply_io</name>
+        <param>
+          <type><ref refid="bench__dyadic__multiply_8cpp_1a1249f7c009d650067cdc1e2254fcb63c" kindref="member">n_dyadic_multiply</ref></type>
+        </param>
+        <param>
+          <type><ref refid="bench__dyadic__multiply_8cpp_1a94cbf59cad79634589387a30784ed78d" kindref="member">num_moduli</ref></type>
+        </param>
+        <param>
+          <type>coeff_count</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/benchmark/bench_dyadic_multiply.cpp" line="70" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="bench__dyadic__multiply_8cpp_1a9df79bfc3d20b59bcaf8d6721d1b8b82" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; uint64_t &gt;</type>
+        <definition>std::vector&lt;uint64_t&gt; out</definition>
+        <argsstring>(n_dyadic_multiply *3 *num_moduli *coeff_count, 0)</argsstring>
+        <name>out</name>
+        <param>
+          <type><ref refid="bench__dyadic__multiply_8cpp_1a1249f7c009d650067cdc1e2254fcb63c" kindref="member">n_dyadic_multiply</ref> *3 *<ref refid="bench__dyadic__multiply_8cpp_1a94cbf59cad79634589387a30784ed78d" kindref="member">num_moduli</ref> *</type>
+          <declname>coeff_count</declname>
+        </param>
+        <param>
+          <type>0</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/benchmark/bench_dyadic_multiply.cpp" line="72" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="bench__dyadic__multiply_8cpp_1a1b1f1299aac0fc44e1de1d990ddea174" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>for</definition>
+        <argsstring>(auto st:state)</argsstring>
+        <name>for</name>
+        <param>
+          <type>auto st:state</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/benchmark/bench_dyadic_multiply.cpp" line="75" column="1" bodyfile="/home/ymeng12/he-fpga-github/benchmark/bench_dyadic_multiply.cpp" bodystart="75" bodyend="77"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>Copyright<sp/>(C)<sp/>2020-2021<sp/>Intel<sp/>Corporation</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>Apache-2.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;benchmark/benchmark.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="hexl-fpga_8h" kindref="compound">hexl-fpga.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10" refid="classdyadic__multiply" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classdyadic__multiply" kindref="compound">dyadic_multiply</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>benchmark::Fixture<sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classdyadic__multiply_1ae7e70c56054e97f2e7422865401a1d18" kindref="member">setup_dyadic_multiply_io</ref>(uint64_t<sp/><ref refid="bench__dyadic__multiply_8cpp_1a1249f7c009d650067cdc1e2254fcb63c" kindref="member">n_dyadic_multiply</ref>,</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="bench__dyadic__multiply_8cpp_1a94cbf59cad79634589387a30784ed78d" kindref="member">num_moduli</ref>,<sp/>uint64_t<sp/>coeff_count);</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classdyadic__multiply_1a7104e784aa094e223ab692ab3cd1a663" kindref="member">bench_dyadic_multiply</ref>(std::vector&lt;uint64_t&gt;&amp;<sp/><ref refid="bench__dyadic__multiply_8cpp_1a9df79bfc3d20b59bcaf8d6721d1b8b82" kindref="member">out</ref>,</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>n_dyadic_multiply,<sp/>uint64_t<sp/>num_moduli,</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>coeff_count);</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;uint64_t&gt;<sp/>moduli;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;uint64_t&gt;<sp/>op1;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;uint64_t&gt;<sp/>op2;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classdyadic__multiply_1ae7e70c56054e97f2e7422865401a1d18" kindref="member">dyadic_multiply::setup_dyadic_multiply_io</ref>(uint64_t<sp/><ref refid="bench__dyadic__multiply_8cpp_1a1249f7c009d650067cdc1e2254fcb63c" kindref="member">n_dyadic_multiply</ref>,</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="bench__dyadic__multiply_8cpp_1a94cbf59cad79634589387a30784ed78d" kindref="member">num_moduli</ref>,</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>coeff_count)<sp/>{</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(uint64_t<sp/>b<sp/>=<sp/>0;<sp/>b<sp/>&lt;<sp/><ref refid="bench__dyadic__multiply_8cpp_1a1249f7c009d650067cdc1e2254fcb63c" kindref="member">n_dyadic_multiply</ref>;<sp/>b++)<sp/>{</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(uint64_t<sp/>m<sp/>=<sp/>0;<sp/>m<sp/>&lt;<sp/><ref refid="bench__dyadic__multiply_8cpp_1a94cbf59cad79634589387a30784ed78d" kindref="member">num_moduli</ref>;<sp/>m++)<sp/>{</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>moduli.push_back((b<sp/>+<sp/>m<sp/>+<sp/>1)<sp/>*<sp/>10);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(uint64_t<sp/>m<sp/>=<sp/>0;<sp/>m<sp/>&lt;<sp/><ref refid="bench__dyadic__multiply_8cpp_1a94cbf59cad79634589387a30784ed78d" kindref="member">num_moduli</ref>;<sp/>m++)<sp/>{</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(uint64_t<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>coeff_count;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>op1.push_back(b<sp/>+<sp/>i<sp/>+<sp/>1<sp/>+<sp/>m<sp/>*<sp/>coeff_count);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>op2.push_back(b<sp/>+<sp/>i<sp/>+<sp/>2<sp/>+<sp/>m<sp/>*<sp/>coeff_count);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(uint64_t<sp/>m<sp/>=<sp/>0;<sp/>m<sp/>&lt;<sp/><ref refid="bench__dyadic__multiply_8cpp_1a94cbf59cad79634589387a30784ed78d" kindref="member">num_moduli</ref>;<sp/>m++)<sp/>{</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(uint64_t<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>coeff_count;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>op1.push_back(b<sp/>+<sp/>i<sp/>+<sp/>11<sp/>+<sp/>m<sp/>*<sp/>coeff_count);</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>op2.push_back(b<sp/>+<sp/>i<sp/>+<sp/>22<sp/>+<sp/>m<sp/>*<sp/>coeff_count);</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="46"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classdyadic__multiply_1a7104e784aa094e223ab692ab3cd1a663" kindref="member">dyadic_multiply::bench_dyadic_multiply</ref>(std::vector&lt;uint64_t&gt;&amp;<sp/><ref refid="bench__dyadic__multiply_8cpp_1a9df79bfc3d20b59bcaf8d6721d1b8b82" kindref="member">out</ref>,</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>n_dyadic_multiply,</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>num_moduli,</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>coeff_count)<sp/>{</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespaceintel_1_1hexl_1a0721fea3151425a86da2201107e3ddcc" kindref="member">intel::hexl::set_worksize_DyadicMultiply</ref>(n_dyadic_multiply);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(uint64_t<sp/>b<sp/>=<sp/>0;<sp/>b<sp/>&lt;<sp/><ref refid="bench__dyadic__multiply_8cpp_1a1249f7c009d650067cdc1e2254fcb63c" kindref="member">n_dyadic_multiply</ref>;<sp/>b++)<sp/>{</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t*<sp/>pout<sp/>=<sp/>&amp;out[0]<sp/>+<sp/>b<sp/>*<sp/>num_moduli<sp/>*<sp/>coeff_count<sp/>*<sp/>3;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t*<sp/>pop1<sp/>=<sp/>&amp;op1[0]<sp/>+<sp/>b<sp/>*<sp/>num_moduli<sp/>*<sp/>coeff_count<sp/>*<sp/>2;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t*<sp/>pop2<sp/>=<sp/>&amp;op2[0]<sp/>+<sp/>b<sp/>*<sp/>num_moduli<sp/>*<sp/>coeff_count<sp/>*<sp/>2;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t*<sp/>pmoduli<sp/>=<sp/>&amp;moduli[0]<sp/>+<sp/>b<sp/>*<sp/><ref refid="bench__dyadic__multiply_8cpp_1a94cbf59cad79634589387a30784ed78d" kindref="member">num_moduli</ref>;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespaceintel_1_1hexl_1ae4e26f2cb97a43a2b81fe8643b6edf17" kindref="member">intel::hexl::DyadicMultiply</ref>(pout,<sp/>pop1,<sp/>pop2,<sp/>coeff_count,<sp/>pmoduli,</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>num_moduli);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespaceintel_1_1hexl_1a638ef00009ae573955d1138b9fb03363" kindref="member">intel::hexl::DyadicMultiplyCompleted</ref>();</highlight></codeline>
+<codeline lineno="62"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><ref refid="bench__fwd__ntt_8cpp_1a7bb592ab74bab16b2f95b4c4926e1ed9" kindref="member">BENCHMARK_F</ref>(<ref refid="classdyadic__multiply" kindref="compound">dyadic_multiply</ref>,<sp/>dyadic_multiply_p16384_m7_b1_4096)</highlight></codeline>
+<codeline lineno="65"><highlight class="normal">(benchmark::State&amp;<sp/><ref refid="bench__dyadic__multiply_8cpp_1af63a1df0d582366f7a03c46143e3ae0e" kindref="member">state</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>coeff_count<sp/>=<sp/>16384<sp/>/<sp/>2;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>num_moduli<sp/>=<sp/>7;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>n_dyadic_multiply<sp/>=<sp/>4096;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="bench__dyadic__multiply_8cpp_1abd4bb93f312bd5d1e97bdfe63621bf9c" kindref="member">setup_dyadic_multiply_io</ref>(n_dyadic_multiply,<sp/>num_moduli,<sp/>coeff_count);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;uint64_t&gt;<sp/><ref refid="bench__dyadic__multiply_8cpp_1a9df79bfc3d20b59bcaf8d6721d1b8b82" kindref="member">out</ref>(n_dyadic_multiply<sp/>*<sp/>3<sp/>*<sp/>num_moduli<sp/>*<sp/>coeff_count,</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>st<sp/>:<sp/><ref refid="bench__dyadic__multiply_8cpp_1af63a1df0d582366f7a03c46143e3ae0e" kindref="member">state</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bench_dyadic_multiply(out,<sp/>n_dyadic_multiply,<sp/>num_moduli,<sp/>coeff_count);</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="78"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/home/ymeng12/he-fpga-github/benchmark/bench_dyadic_multiply.cpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,408 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="namespaceintel_1_1hexl" kind="namespace">
+    <compoundname>intel::hexl</compoundname>
+    <innernamespace refid="namespaceintel_1_1hexl_1_1fpga">intel::hexl::fpga</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1a6236e14eaac1602475c5f4e0a42754fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::acquire_FPGA_resources</definition>
+        <argsstring>()</argsstring>
+        <name>acquire_FPGA_resources</name>
+        <briefdescription>
+<para>Function acquire_FPGA_resources Called without any parameter, reserves the FPGA hardware resources. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/hexl-fpga.h" line="15" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1a717589c6dbfa6429b61e42c620d72d89" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::release_FPGA_resources</definition>
+        <argsstring>()</argsstring>
+        <name>release_FPGA_resources</name>
+        <briefdescription>
+<para>Function release_FPGA_resources Called without any parameter, releases the FPGA hardware resources once we are done. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/hexl-fpga.h" line="21" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1a0721fea3151425a86da2201107e3ddcc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::set_worksize_DyadicMultiply</definition>
+        <argsstring>(uint64_t ws)</argsstring>
+        <name>set_worksize_DyadicMultiply</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>ws</declname>
+        </param>
+        <briefdescription>
+<para>Function set_worksize_DyadicMultiply Reserves software resources for the multiplication. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ws</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>integer storing the worksize </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/hexl-fpga.h" line="29" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1ae4e26f2cb97a43a2b81fe8643b6edf17" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::DyadicMultiply</definition>
+        <argsstring>(uint64_t *results, const uint64_t *operand1, const uint64_t *operand2, uint64_t n, const uint64_t *moduli, uint64_t n_moduli)</argsstring>
+        <name>DyadicMultiply</name>
+        <param>
+          <type>uint64_t *</type>
+          <declname>results</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>operand1</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>operand2</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>moduli</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>n_moduli</declname>
+        </param>
+        <briefdescription>
+<para>Function DyadicMultiply Executes ciphertext ciphertext multiplication. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">results</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the multiplication results </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">operand1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the input ciphertext 1 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">operand2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the input ciphertext 2 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores polynomial size </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">moduli</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores modulus size </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">n_moduli</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the number of moduli </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/hexl-fpga.h" line="41" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1a638ef00009ae573955d1138b9fb03363" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool intel::hexl::DyadicMultiplyCompleted</definition>
+        <argsstring>()</argsstring>
+        <name>DyadicMultiplyCompleted</name>
+        <briefdescription>
+<para>Function DyadicMultiplyCompleted Executed after ciphertext ciphertext multiplication to wrap up the task. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/hexl-fpga.h" line="50" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1af64feb2684e5467b69273aeb64d73b32" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::set_worksize_NTT</definition>
+        <argsstring>(uint64_t ws)</argsstring>
+        <name>set_worksize_NTT</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>ws</declname>
+        </param>
+        <briefdescription>
+<para>Function set_worksize_NTT Reserves software resources for the Number Theoretic Transform. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ws</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>integer storing the worksize </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/hexl-fpga.h" line="59" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1aba58174859e0cfb87d493606a9e8a530" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::NTT</definition>
+        <argsstring>(uint64_t *operand, const uint64_t *root_of_unity_powers, const uint64_t *precon_root_of_unity_powers, uint64_t coeff_modulus, uint64_t n)</argsstring>
+        <name>NTT</name>
+        <param>
+          <type>uint64_t *</type>
+          <declname>operand</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>root_of_unity_powers</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>precon_root_of_unity_powers</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>coeff_modulus</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>Function NTT Executes in place the Number Theoretic Transform. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">operand</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>input ciphertext. This is also the output result since the transform is in place. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">operand</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output ciphertext. This is also the input result since the transform is in place. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">root_of_unity_powers</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of twiddle factors </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">precon_root_of_unity_powers</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of precomputed inverse twiddle factors </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coeff_modulus</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the modulus </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the size of the Number Theoretic Transform </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/hexl-fpga.h" line="73" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1abeacc492f814f3fdf8659bd8067dc732" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool intel::hexl::NTTCompleted</definition>
+        <argsstring>()</argsstring>
+        <name>NTTCompleted</name>
+        <briefdescription>
+<para>Function NTTCompleted Executed after the NTT to wrap up the computation No parameters. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/hexl-fpga.h" line="81" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1a5fd09ace83ab47ba6d55eb4fde0973d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::set_worksize_INTT</definition>
+        <argsstring>(uint64_t ws)</argsstring>
+        <name>set_worksize_INTT</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>ws</declname>
+        </param>
+        <briefdescription>
+<para>Function set_worksize_INTT Reserves software resources for the inverse Number Theoretic Transform. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ws</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>integer storing the worksize </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/hexl-fpga.h" line="89" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1add1b2b65fe1dc30cfd2683dfb6f4dde6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::INTT</definition>
+        <argsstring>(uint64_t *operand, const uint64_t *inv_root_of_unity_powers, const uint64_t *precon_inv_root_of_unity_powers, uint64_t coeff_modulus, uint64_t inv_n, uint64_t inv_n_w, uint64_t n)</argsstring>
+        <name>INTT</name>
+        <param>
+          <type>uint64_t *</type>
+          <declname>operand</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>inv_root_of_unity_powers</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>precon_inv_root_of_unity_powers</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>coeff_modulus</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>inv_n</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>inv_n_w</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>Function INTT Executes in place the inverse Number Theoretic Transform. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">operand</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>input ciphertext. This is also the output result since the transform is in place. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">operand</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output ciphertext. This is also the input result since the transform is in place. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">inv_root_of_unity_powers</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of twiddle factors </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">precon_inv_root_of_unity_powers</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of precomputed inverse twiddle factors </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coeff_modulus</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the modulus </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">inv_n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the normalization factor for the inverse transform. Inverse of the polynomial size ( 1/n) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">inv_n_w</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the normalization factor for the constant. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the size of the Number Theoretic Transform </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/hexl-fpga.h" line="107" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1a87e4fb9429d04f09bbb0de8497aab0f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool intel::hexl::INTTCompleted</definition>
+        <argsstring>()</argsstring>
+        <name>INTTCompleted</name>
+        <briefdescription>
+<para>Function INTTCompleted Executed after the INTT to wrap up the computation No parameters. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/hexl-fpga.h" line="116" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/ymeng12/he-fpga-github/host/inc/dyadic_multiply.h" line="10" column="1"/>
+  </compounddef>
+</doxygen>

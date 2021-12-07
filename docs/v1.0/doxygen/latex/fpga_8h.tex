@@ -1,0 +1,70 @@
+\hypertarget{fpga_8h}{\section{fpga.\-h File Reference}
+\label{fpga_8h}\index{fpga.\-h@{fpga.\-h}}
+}
+{\ttfamily \#include $<$atomic$>$}\\*
+{\ttfamily \#include $<$condition\-\_\-variable$>$}\\*
+{\ttfamily \#include $<$deque$>$}\\*
+{\ttfamily \#include $<$future$>$}\\*
+{\ttfamily \#include $<$memory$>$}\\*
+{\ttfamily \#include $<$mutex$>$}\\*
+{\ttfamily \#include $<$thread$>$}\\*
+{\ttfamily \#include $<$unordered\-\_\-map$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include \char`\"{}C\-L/opencl.\-h\char`\"{}}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1moduli__info__t}{intel\-::hexl\-::fpga\-::moduli\-\_\-info\-\_\-t}
+\begin{DoxyCompactList}\small\item\em Struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1moduli__info__t}{moduli\-\_\-info\-\_\-t}. \end{DoxyCompactList}\item 
+struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object}{intel\-::hexl\-::fpga\-::\-Object}
+\begin{DoxyCompactList}\small\item\em Struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object}{Object}. \end{DoxyCompactList}\item 
+struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object__NTT}{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-N\-T\-T}
+\begin{DoxyCompactList}\small\item\em Struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object}{Object} N\-T\-T Stores the Number Theoretic Transform parameters. \end{DoxyCompactList}\item 
+struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object__INTT}{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-I\-N\-T\-T}
+\begin{DoxyCompactList}\small\item\em Struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object}{Object} I\-N\-T\-T Stores the Inverse Number Theoretic Transform parameters. \end{DoxyCompactList}\item 
+struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object__DyadicMultiply}{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Dyadic\-Multiply}
+\begin{DoxyCompactList}\small\item\em struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object__DyadicMultiply}{Object\-\_\-\-Dyadic\-Multiply} Stores the parameters for the multiplication \end{DoxyCompactList}\item 
+class \hyperlink{classintel_1_1hexl_1_1fpga_1_1Buffer}{intel\-::hexl\-::fpga\-::\-Buffer}
+\begin{DoxyCompactList}\small\item\em Struct \hyperlink{classintel_1_1hexl_1_1fpga_1_1Buffer}{Buffer} Structure containing information for the polynomial operations. \end{DoxyCompactList}\item 
+struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject}{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object}
+\begin{DoxyCompactList}\small\item\em Parent Struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject}{F\-P\-G\-A\-Object} stores the blob of objects to be transfered to the F\-P\-G\-A. \end{DoxyCompactList}\item 
+struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT}{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-N\-T\-T}
+\begin{DoxyCompactList}\small\item\em Struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT}{F\-P\-G\-A\-Object\-\_\-\-N\-T\-T} stores the N\-T\-T blob of objects to be transfered to the F\-P\-G\-A. \end{DoxyCompactList}\item 
+struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT}{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}
+\begin{DoxyCompactList}\small\item\em Struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT}{F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T} stores the I\-N\-T\-T blob of objects to be transfered to the F\-P\-G\-A. \end{DoxyCompactList}\item 
+struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply}{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-Dyadic\-Multiply}
+\begin{DoxyCompactList}\small\item\em Struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply}{F\-P\-G\-A\-Object\-\_\-\-Dyadic\-Multiply} Stores the multiplication blob of objects to be transfered to the F\-P\-G\-A. \end{DoxyCompactList}\item 
+class \hyperlink{classintel_1_1hexl_1_1fpga_1_1Device}{intel\-::hexl\-::fpga\-::\-Device}
+\begin{DoxyCompactList}\small\item\em Class \hyperlink{classintel_1_1hexl_1_1fpga_1_1Device}{Device}. \end{DoxyCompactList}\item 
+class \hyperlink{classintel_1_1hexl_1_1fpga_1_1DevicePool}{intel\-::hexl\-::fpga\-::\-Device\-Pool}
+\begin{DoxyCompactList}\small\item\em Class \hyperlink{classintel_1_1hexl_1_1fpga_1_1DevicePool}{Device\-Pool}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceintel}{intel}
+\item 
+\hyperlink{namespaceintel_1_1hexl}{intel\-::hexl}
+\item 
+\hyperlink{namespaceintel_1_1hexl_1_1fpga}{intel\-::hexl\-::fpga}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{namespaceintel_1_1hexl_1_1fpga_a1a264f07facc5f24376170ea052e4fbc}{intel\-::hexl\-::fpga\-::\-D\-E\-V\-\_\-\-T\-Y\-P\-E} \{ \hyperlink{namespaceintel_1_1hexl_1_1fpga_a1a264f07facc5f24376170ea052e4fbca665be2b62dd76ce44231d0503e468464}{intel\-::hexl\-::fpga\-::\-N\-O\-N\-E} = 0, 
+\hyperlink{namespaceintel_1_1hexl_1_1fpga_a1a264f07facc5f24376170ea052e4fbca6553acb72b13a76b0cf31197badbc164}{intel\-::hexl\-::fpga\-::\-E\-M\-U}, 
+\hyperlink{namespaceintel_1_1hexl_1_1fpga_a1a264f07facc5f24376170ea052e4fbca7fef8fda7839a871ec648c0283640975}{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A}
+ \}
+\begin{DoxyCompactList}\small\item\em enum D\-E\-V\-\_\-\-T\-Y\-P\-E Lists the available device mode\-: C\-P\-U, emulation mode, F\-P\-G\-A \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{namespaceintel_1_1hexl_1_1fpga_aa7d5b6c103f848f3b642938edf97ae22}{intel\-::hexl\-::fpga\-::attach\-\_\-fpga\-\_\-pooling} ()
+\begin{DoxyCompactList}\small\item\em attach\-\_\-fpga\-\_\-pooling Attach a device to this thread \end{DoxyCompactList}\item 
+void \hyperlink{namespaceintel_1_1hexl_1_1fpga_a768c1508c039dd1e8664cfec3a7bb159}{intel\-::hexl\-::fpga\-::detach\-\_\-fpga\-\_\-pooling} ()
+\begin{DoxyCompactList}\small\item\em detach\-\_\-fpga\-\_\-pooling Detach a device from this thread \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\-\_\-\-\_\-extension\-\_\-\-\_\- typedef unsigned \\*
+\-\_\-\-\_\-int128 \hyperlink{namespaceintel_1_1hexl_1_1fpga_abec5370ea5966ed3c9aee7817e805337}{intel\-::hexl\-::fpga\-::fpga\-\_\-uint128\-\_\-t}
+\end{DoxyCompactItemize}

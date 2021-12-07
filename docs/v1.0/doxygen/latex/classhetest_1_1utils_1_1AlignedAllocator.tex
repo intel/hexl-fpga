@@ -1,0 +1,121 @@
+\hypertarget{classhetest_1_1utils_1_1AlignedAllocator}{\section{hetest\-:\-:utils\-:\-:Aligned\-Allocator$<$ T, Alignment $>$ Class Template Reference}
+\label{classhetest_1_1utils_1_1AlignedAllocator}\index{hetest\-::utils\-::\-Aligned\-Allocator$<$ T, Alignment $>$@{hetest\-::utils\-::\-Aligned\-Allocator$<$ T, Alignment $>$}}
+}
+
+
+{\ttfamily \#include $<$utils-\/test.\-hpp$>$}
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structhetest_1_1utils_1_1AlignedAllocator_1_1rebind}{rebind}
+\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \hyperlink{classhetest_1_1utils_1_1AlignedAllocator_a1de3067f7171cca11e5c3cd10b508998}{value\-\_\-type} = T
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classhetest_1_1utils_1_1AlignedAllocator_af66cd2d6a02b27e18ba02ffc3a345544}{Aligned\-Allocator} (\hyperlink{namespacehetest_1_1utils_a3f7f347b9f62a88014bdcc45f7987846}{Allocator\-Strategy\-Ptr} strategy=nullptr) noexcept
+\item 
+\hyperlink{classhetest_1_1utils_1_1AlignedAllocator_a71bdbfb1ae4ac672c4a0dc4e7504e195}{Aligned\-Allocator} (const \hyperlink{classhetest_1_1utils_1_1AlignedAllocator}{Aligned\-Allocator} \&src)
+\item 
+{\footnotesize template$<$typename U $>$ }\\\hyperlink{classhetest_1_1utils_1_1AlignedAllocator_a3a1080fe5c9e4be3d73da338835c9fa7}{Aligned\-Allocator} (const \hyperlink{classhetest_1_1utils_1_1AlignedAllocator}{Aligned\-Allocator}$<$ U, Alignment $>$ \&src)
+\item 
+\hyperlink{classhetest_1_1utils_1_1AlignedAllocator_a0d84644228d98daf2407ff6046ceca5a}{$\sim$\-Aligned\-Allocator} ()
+\item 
+bool \hyperlink{classhetest_1_1utils_1_1AlignedAllocator_a9e7374df3ec465f1b2e522f5e7c57ee0}{operator==} (const \hyperlink{classhetest_1_1utils_1_1AlignedAllocator}{Aligned\-Allocator} \&)
+\item 
+bool \hyperlink{classhetest_1_1utils_1_1AlignedAllocator_ab17ae365e2e63a0b1c27c5b194b0dbf1}{operator!=} (const \hyperlink{classhetest_1_1utils_1_1AlignedAllocator}{Aligned\-Allocator} \&)
+\item 
+T $\ast$ \hyperlink{classhetest_1_1utils_1_1AlignedAllocator_a3d9f851ef4ffdbd83936f1810e53752d}{allocate} (size\-\_\-t n)
+\item 
+void \hyperlink{classhetest_1_1utils_1_1AlignedAllocator_a109a8cc9e6c49b75382f9c019b04ba03}{deallocate} (T $\ast$p, size\-\_\-t n)
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename , uint64\-\_\-t $>$ }\\class \hyperlink{classhetest_1_1utils_1_1AlignedAllocator_aaded07599020ca35e89e078674263c63}{Aligned\-Allocator}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Typedef Documentation}
+\hypertarget{classhetest_1_1utils_1_1AlignedAllocator_a1de3067f7171cca11e5c3cd10b508998}{\index{hetest\-::utils\-::\-Aligned\-Allocator@{hetest\-::utils\-::\-Aligned\-Allocator}!value\-\_\-type@{value\-\_\-type}}
+\index{value\-\_\-type@{value\-\_\-type}!hetest::utils::AlignedAllocator@{hetest\-::utils\-::\-Aligned\-Allocator}}
+\subsubsection[{value\-\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T, uint64\-\_\-t Alignment$>$ using {\bf hetest\-::utils\-::\-Aligned\-Allocator}$<$ T, Alignment $>$\-::{\bf value\-\_\-type} =  T}}\label{classhetest_1_1utils_1_1AlignedAllocator_a1de3067f7171cca11e5c3cd10b508998}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classhetest_1_1utils_1_1AlignedAllocator_af66cd2d6a02b27e18ba02ffc3a345544}{\index{hetest\-::utils\-::\-Aligned\-Allocator@{hetest\-::utils\-::\-Aligned\-Allocator}!Aligned\-Allocator@{Aligned\-Allocator}}
+\index{Aligned\-Allocator@{Aligned\-Allocator}!hetest::utils::AlignedAllocator@{hetest\-::utils\-::\-Aligned\-Allocator}}
+\subsubsection[{Aligned\-Allocator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T, uint64\-\_\-t Alignment$>$ {\bf hetest\-::utils\-::\-Aligned\-Allocator}$<$ T, Alignment $>$\-::{\bf Aligned\-Allocator} (
+\begin{DoxyParamCaption}
+\item[{{\bf Allocator\-Strategy\-Ptr}}]{strategy = {\ttfamily nullptr}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}, {\ttfamily [noexcept]}}}\label{classhetest_1_1utils_1_1AlignedAllocator_af66cd2d6a02b27e18ba02ffc3a345544}
+\hypertarget{classhetest_1_1utils_1_1AlignedAllocator_a71bdbfb1ae4ac672c4a0dc4e7504e195}{\index{hetest\-::utils\-::\-Aligned\-Allocator@{hetest\-::utils\-::\-Aligned\-Allocator}!Aligned\-Allocator@{Aligned\-Allocator}}
+\index{Aligned\-Allocator@{Aligned\-Allocator}!hetest::utils::AlignedAllocator@{hetest\-::utils\-::\-Aligned\-Allocator}}
+\subsubsection[{Aligned\-Allocator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T, uint64\-\_\-t Alignment$>$ {\bf hetest\-::utils\-::\-Aligned\-Allocator}$<$ T, Alignment $>$\-::{\bf Aligned\-Allocator} (
+\begin{DoxyParamCaption}
+\item[{const {\bf Aligned\-Allocator}$<$ T, Alignment $>$ \&}]{src}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classhetest_1_1utils_1_1AlignedAllocator_a71bdbfb1ae4ac672c4a0dc4e7504e195}
+\hypertarget{classhetest_1_1utils_1_1AlignedAllocator_a3a1080fe5c9e4be3d73da338835c9fa7}{\index{hetest\-::utils\-::\-Aligned\-Allocator@{hetest\-::utils\-::\-Aligned\-Allocator}!Aligned\-Allocator@{Aligned\-Allocator}}
+\index{Aligned\-Allocator@{Aligned\-Allocator}!hetest::utils::AlignedAllocator@{hetest\-::utils\-::\-Aligned\-Allocator}}
+\subsubsection[{Aligned\-Allocator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T, uint64\-\_\-t Alignment$>$ template$<$typename U $>$ {\bf hetest\-::utils\-::\-Aligned\-Allocator}$<$ T, Alignment $>$\-::{\bf Aligned\-Allocator} (
+\begin{DoxyParamCaption}
+\item[{const {\bf Aligned\-Allocator}$<$ U, Alignment $>$ \&}]{src}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classhetest_1_1utils_1_1AlignedAllocator_a3a1080fe5c9e4be3d73da338835c9fa7}
+\hypertarget{classhetest_1_1utils_1_1AlignedAllocator_a0d84644228d98daf2407ff6046ceca5a}{\index{hetest\-::utils\-::\-Aligned\-Allocator@{hetest\-::utils\-::\-Aligned\-Allocator}!$\sim$\-Aligned\-Allocator@{$\sim$\-Aligned\-Allocator}}
+\index{$\sim$\-Aligned\-Allocator@{$\sim$\-Aligned\-Allocator}!hetest::utils::AlignedAllocator@{hetest\-::utils\-::\-Aligned\-Allocator}}
+\subsubsection[{$\sim$\-Aligned\-Allocator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T, uint64\-\_\-t Alignment$>$ {\bf hetest\-::utils\-::\-Aligned\-Allocator}$<$ T, Alignment $>$\-::$\sim${\bf Aligned\-Allocator} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classhetest_1_1utils_1_1AlignedAllocator_a0d84644228d98daf2407ff6046ceca5a}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classhetest_1_1utils_1_1AlignedAllocator_a3d9f851ef4ffdbd83936f1810e53752d}{\index{hetest\-::utils\-::\-Aligned\-Allocator@{hetest\-::utils\-::\-Aligned\-Allocator}!allocate@{allocate}}
+\index{allocate@{allocate}!hetest::utils::AlignedAllocator@{hetest\-::utils\-::\-Aligned\-Allocator}}
+\subsubsection[{allocate}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T, uint64\-\_\-t Alignment$>$ T$\ast$ {\bf hetest\-::utils\-::\-Aligned\-Allocator}$<$ T, Alignment $>$\-::allocate (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{n}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classhetest_1_1utils_1_1AlignedAllocator_a3d9f851ef4ffdbd83936f1810e53752d}
+\hypertarget{classhetest_1_1utils_1_1AlignedAllocator_a109a8cc9e6c49b75382f9c019b04ba03}{\index{hetest\-::utils\-::\-Aligned\-Allocator@{hetest\-::utils\-::\-Aligned\-Allocator}!deallocate@{deallocate}}
+\index{deallocate@{deallocate}!hetest::utils::AlignedAllocator@{hetest\-::utils\-::\-Aligned\-Allocator}}
+\subsubsection[{deallocate}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T, uint64\-\_\-t Alignment$>$ void {\bf hetest\-::utils\-::\-Aligned\-Allocator}$<$ T, Alignment $>$\-::deallocate (
+\begin{DoxyParamCaption}
+\item[{T $\ast$}]{p, }
+\item[{size\-\_\-t}]{n}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classhetest_1_1utils_1_1AlignedAllocator_a109a8cc9e6c49b75382f9c019b04ba03}
+\hypertarget{classhetest_1_1utils_1_1AlignedAllocator_ab17ae365e2e63a0b1c27c5b194b0dbf1}{\index{hetest\-::utils\-::\-Aligned\-Allocator@{hetest\-::utils\-::\-Aligned\-Allocator}!operator!=@{operator!=}}
+\index{operator!=@{operator!=}!hetest::utils::AlignedAllocator@{hetest\-::utils\-::\-Aligned\-Allocator}}
+\subsubsection[{operator!=}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T, uint64\-\_\-t Alignment$>$ bool {\bf hetest\-::utils\-::\-Aligned\-Allocator}$<$ T, Alignment $>$\-::operator!= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Aligned\-Allocator}$<$ T, Alignment $>$ \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classhetest_1_1utils_1_1AlignedAllocator_ab17ae365e2e63a0b1c27c5b194b0dbf1}
+\hypertarget{classhetest_1_1utils_1_1AlignedAllocator_a9e7374df3ec465f1b2e522f5e7c57ee0}{\index{hetest\-::utils\-::\-Aligned\-Allocator@{hetest\-::utils\-::\-Aligned\-Allocator}!operator==@{operator==}}
+\index{operator==@{operator==}!hetest::utils::AlignedAllocator@{hetest\-::utils\-::\-Aligned\-Allocator}}
+\subsubsection[{operator==}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T, uint64\-\_\-t Alignment$>$ bool {\bf hetest\-::utils\-::\-Aligned\-Allocator}$<$ T, Alignment $>$\-::operator== (
+\begin{DoxyParamCaption}
+\item[{const {\bf Aligned\-Allocator}$<$ T, Alignment $>$ \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classhetest_1_1utils_1_1AlignedAllocator_a9e7374df3ec465f1b2e522f5e7c57ee0}
+
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{classhetest_1_1utils_1_1AlignedAllocator_aaded07599020ca35e89e078674263c63}{\index{hetest\-::utils\-::\-Aligned\-Allocator@{hetest\-::utils\-::\-Aligned\-Allocator}!Aligned\-Allocator@{Aligned\-Allocator}}
+\index{Aligned\-Allocator@{Aligned\-Allocator}!hetest::utils::AlignedAllocator@{hetest\-::utils\-::\-Aligned\-Allocator}}
+\subsubsection[{Aligned\-Allocator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T, uint64\-\_\-t Alignment$>$ template$<$typename , uint64\-\_\-t $>$ friend class {\bf Aligned\-Allocator}\hspace{0.3cm}{\ttfamily [friend]}}}\label{classhetest_1_1utils_1_1AlignedAllocator_aaded07599020ca35e89e078674263c63}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{utils-test_8hpp}{utils-\/test.\-hpp}\end{DoxyCompactItemize}

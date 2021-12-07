@@ -1,0 +1,90 @@
+\subsection*{Intel Acceleration Stack}
+
+There are two types of Intel Acceleration Stack (version 2.\-0.\-1), namely, the \href{https://www.intel.com/content/www/us/en/programmable/f/download/accelerator/license-agreement-pac-d5005.html?swcode=WWW-SWD-IAS-RTE-201}{\tt Acceleration Stack for Runtime} and the \href{https://www.intel.com/content/altera-www/global/en_us/index/f/download/accelerator/pac-d5005-thank-you.html?swcode=WWW-SWD-IAS-DEV-201}{\tt Acceleration Stack for Development}. The runtime stack provides a smaller footprint package for software development of runtime host application. It includes Intel F\-P\-G\-A Runtime Environment (R\-T\-E) for Open\-C\-L but does not include Intel Quartus Prime; thus, it assumes that the F\-P\-G\-A bitstreams are available. The development stack allows for accelerator function development using the Intel Quartus Prime Pro Edition software (required and included). Additionally, it comes with the Intel F\-P\-G\-A Software Development Kit (S\-D\-K) for Open\-C\-L and the Acceleration Stack. \par
+
+
+The Intel Acceleration Stack for development ({\ttfamily d5005\-\_\-pac\-\_\-ias\-\_\-2\-\_\-0\-\_\-1\-\_\-pv\-\_\-dev\-\_\-installer.\-tar.\-gz}) is encouraged and required to reap the full benefits of Intel H\-E\-X\-L for F\-P\-G\-A, especially before attempting to build the F\-P\-G\-A kernels and if intended usage of Intel H\-E\-X\-L for F\-P\-G\-A includes development contributions. Download, read more detailed installation instructions, updates and related additional resources at \href{https://www.intel.com/content/www/us/en/programmable/products/boards_and_kits/dev-kits/altera/intel-fpga-pac-d5005/getting-started.html}{\tt Intel Acceleration Stack link}. \par
+
+
+Note\-: Even though the validated operating system is R\-H\-E\-L 7.\-6, we used Cent\-O\-S 7.\-9 without issues.\par
+
+
+\subsection*{Intel Quartus Prime Pro Edition}
+
+Quartus Prime version 19.\-2 is installed in the Acceleration Stack installation. For Intel H\-E\-X\-L for F\-P\-G\-A, the installation of Quartus Prime version 20.\-3 is required. \href{https://fpgasoftware.intel.com/20.3/?edition=pro}{\tt Download the complete version} and follow the instructions below. \par
+
+
+``` tar xvf Quartus-\/pro-\/20.\-3.\-0.\-158-\/linux-\/complete.\-tar ./setup\-\_\-pro.sh ```
+
+Use the following configuration\-:\par
+
+
+``` Select the components you want to install\-:
+
+Quartus Prime Pro Edition \mbox{[}Y/n\mbox{]}\-: Y
+
+Model\-Sim -- Intel F\-P\-G\-A Starter Edition (Free) (17169.\-4\-M\-B) \mbox{[}Y/n\mbox{]}\-: n
+
+Model\-Sim -- Intel F\-P\-G\-A Edition (Free) (17169.\-4\-M\-B) \mbox{[}Y/n\mbox{]}\-: n
+
+Intel High Level Synthesis Compiler (2481.\-9\-M\-B) \mbox{[}Y/n\mbox{]}\-: Y
+
+D\-S\-P Builder Pro Edition (185.\-8\-M\-B) \mbox{[}Y/n\mbox{]}\-: n
+
+Intel F\-P\-G\-A S\-D\-K for Open\-C\-L Pro Edition (1822.\-6\-M\-B) \mbox{[}Y/n\mbox{]}\-: Y ```
+
+Note that the installation of Intel H\-L\-S compiler is required to compile the smaller I\-P modules that support the larger kernels with modular addition and modular multiplication arithmetic.\par
+
+
+\subsection*{Intel One\-A\-P\-I}
+
+Install the one\-A\-P\-I Toolkit from the following site\-: \par
+
+
+\href{https://software.intel.com/content/www/us/en/develop/articles/installation-guide-for-intel-oneapi-toolkits.html}{\tt Installation Guide for Intel One\-A\-P\-I Toolkits}.\par
+
+
+More information on the F\-P\-G\-A related components can be found on this \href{https://software.intel.com/content/www/us/en/develop/tools/oneapi/components/fpga.html#gs.6nbq2b}{\tt here}. \par
+
+
+Instructions on direct installation via yum located at \href{https://software.intel.com/content/www/us/en/develop/documentation/installation-guide-for-intel-oneapi-toolkits-linux/top/installation/install-using-package-managers/yum-dnf-zypper.html}{\tt https\-://software.\-intel.\-com/content/www/us/en/develop/documentation/installation-\/guide-\/for-\/intel-\/oneapi-\/toolkits-\/linux/top/installation/install-\/using-\/package-\/managers/yum-\/dnf-\/zypper.\-html}. \par
+
+
+``` sudo yum install intel-\/basekit sudo yum install intel-\/oneapi-\/intelfpgadpcpp-\/custom-\/platforms-\/quartus20.\-3 ```
+
+\subsection*{Initializing the F\-P\-G\-A Environment}
+
+Upon completion of the installation of the F\-P\-G\-A software stack, the next step is to initialize the environment for F\-P\-G\-A runtime and development. We provide below an example script that automates this process, in particular for the combination of software versions installed. \par
+
+
+``` \section*{init\-\_\-env.\-sh}
+
+export Q\-U\-A\-R\-T\-U\-S\-\_\-\-H\-O\-M\-E=\char`\"{}/disk1/tools/intel\-F\-P\-G\-A\-\_\-pro/19.\-2/quartus\char`\"{} export O\-P\-A\-E\-\_\-\-P\-L\-A\-T\-F\-O\-R\-M\-\_\-\-R\-O\-O\-T=\char`\"{}/disk1/tools/inteldevstack/d5005\-\_\-ias\-\_\-2\-\_\-0\-\_\-1\-\_\-b237\char`\"{}
+
+export A\-O\-C\-L\-\_\-\-B\-O\-A\-R\-D\-\_\-\-P\-A\-C\-K\-A\-G\-E\-\_\-\-R\-O\-O\-T=\char`\"{}/disk1/tools/inteldevstack/d5005\-\_\-ias\-\_\-2\-\_\-0\-\_\-1\-\_\-b237/opencl/opencl\-\_\-bsp\char`\"{} if ls /dev/intel-\/fpga-\/$\ast$ 1$>$ /dev/null 2$>$\&1; then source \$\-A\-O\-C\-L\-\_\-\-B\-O\-A\-R\-D\-\_\-\-P\-A\-C\-K\-A\-G\-E\-\_\-\-R\-O\-O\-T/linux64/libexec/setup\-\_\-permissions.sh $>$$>$ /dev/null fi
+
+O\-P\-A\-E\-\_\-\-P\-L\-A\-T\-F\-O\-R\-M\-\_\-\-B\-I\-N=\char`\"{}/disk1/tools/inteldevstack/d5005\-\_\-ias\-\_\-2\-\_\-0\-\_\-1\-\_\-b237/bin\char`\"{} if \mbox{[}\mbox{[} \char`\"{}\-:\$\{\-P\-A\-T\-H\}\-:\char`\"{} = $\ast$\char`\"{}\-:\$\{\-O\-P\-A\-E\-\_\-\-P\-L\-A\-T\-F\-O\-R\-M\-\_\-\-B\-I\-N\}\-:\char`\"{}$\ast$ \mbox{]}\mbox{]} ;then echo \char`\"{}\textbackslash{}\$\-O\-P\-A\-E\-\_\-\-P\-L\-A\-T\-F\-O\-R\-M\-\_\-\-R\-O\-O\-T/bin is in P\-A\-T\-H already\char`\"{} else echo \char`\"{}\-Adding \textbackslash{}\$\-O\-P\-A\-E\-\_\-\-P\-L\-A\-T\-F\-O\-R\-M\-\_\-\-R\-O\-O\-T/bin to P\-A\-T\-H\char`\"{} export P\-A\-T\-H=\char`\"{}\$\{\-P\-A\-T\-H\}\char`\"{}\-:\char`\"{}\$\{\-O\-P\-A\-E\-\_\-\-P\-L\-A\-T\-F\-O\-R\-M\-\_\-\-B\-I\-N\}\char`\"{} fi
+
+echo export A\-O\-C\-L\-\_\-\-B\-O\-A\-R\-D\-\_\-\-P\-A\-C\-K\-A\-G\-E\-\_\-\-R\-O\-O\-T=\char`\"{}/opt/intel/oneapi/intelfpgadpcpp/latest/board/intel\-\_\-s10sx\-\_\-pac\char`\"{} export A\-O\-C\-L\-\_\-\-B\-O\-A\-R\-D\-\_\-\-P\-A\-C\-K\-A\-G\-E\-\_\-\-R\-O\-O\-T=\char`\"{}/opt/intel/oneapi/intelfpgadpcpp/latest/board/intel\-\_\-s10sx\-\_\-pac\char`\"{} if ls /dev/intel-\/fpga-\/$\ast$ 1$>$ /dev/null 2$>$\&1; then echo source \$\-A\-O\-C\-L\-\_\-\-B\-O\-A\-R\-D\-\_\-\-P\-A\-C\-K\-A\-G\-E\-\_\-\-R\-O\-O\-T/linux64/libexec/setup\-\_\-permissions.sh source \$\-A\-O\-C\-L\-\_\-\-B\-O\-A\-R\-D\-\_\-\-P\-A\-C\-K\-A\-G\-E\-\_\-\-R\-O\-O\-T/linux64/libexec/setup\-\_\-permissions.sh $>$$>$ /dev/null fi
+
+echo export I\-N\-T\-E\-L\-F\-P\-G\-A\-O\-C\-L\-S\-D\-K\-R\-O\-O\-T=\char`\"{}/disk1/tools/intel\-F\-P\-G\-A\-\_\-pro/20.\-3/hld\char`\"{} export I\-N\-T\-E\-L\-F\-P\-G\-A\-O\-C\-L\-S\-D\-K\-R\-O\-O\-T=\char`\"{}/disk1/tools/intel\-F\-P\-G\-A\-\_\-pro/20.\-3/hld\char`\"{}
+
+\section*{Enable Backwards Compatibility with older B\-S\-P}
+
+export A\-C\-L\-\_\-\-A\-C\-D\-S\-\_\-\-V\-E\-R\-S\-I\-O\-N\-\_\-\-O\-V\-E\-R\-R\-I\-D\-E=\char`\"{}19.\-2\char`\"{} export Q\-U\-A\-R\-T\-U\-S\-\_\-\-R\-O\-O\-T\-D\-I\-R\-\_\-\-O\-V\-E\-R\-R\-I\-D\-E=\char`\"{}/disk1/tools/intel\-F\-P\-G\-A\-\_\-pro/quartus\-\_\-19.\-2.\-0b57/quartus\char`\"{}
+
+echo export A\-L\-T\-E\-R\-A\-O\-C\-L\-S\-D\-K\-R\-O\-O\-T=\$\-I\-N\-T\-E\-L\-F\-P\-G\-A\-O\-C\-L\-S\-D\-K\-R\-O\-O\-T export A\-L\-T\-E\-R\-A\-O\-C\-L\-S\-D\-K\-R\-O\-O\-T=\$\-I\-N\-T\-E\-L\-F\-P\-G\-A\-O\-C\-L\-S\-D\-K\-R\-O\-O\-T export P\-A\-C\-\_\-\-D\-M\-A\-\_\-\-W\-O\-R\-K\-\_\-\-T\-H\-R\-E\-A\-D=yes
+
+Q\-U\-A\-R\-T\-U\-S\-\_\-\-B\-I\-N=\char`\"{}/disk1/tools/intel\-F\-P\-G\-A\-\_\-pro/20.\-3/quartus/bin\char`\"{} if \mbox{[}\mbox{[} \char`\"{}\-:\$\{\-P\-A\-T\-H\}\-:\char`\"{} = $\ast$\char`\"{}\-:\$\{\-Q\-U\-A\-R\-T\-U\-S\-\_\-\-B\-I\-N\}\-:\char`\"{}$\ast$ \mbox{]}\mbox{]} ;then echo \char`\"{}\textbackslash{}\$\-Q\-U\-A\-R\-T\-U\-S\-\_\-\-H\-O\-M\-E/bin is in P\-A\-T\-H already\char`\"{} else echo \char`\"{}\-Adding \textbackslash{}\$\-Q\-U\-A\-R\-T\-U\-S\-\_\-\-H\-O\-M\-E/bin to P\-A\-T\-H\char`\"{} export P\-A\-T\-H=\char`\"{}\$\{\-Q\-U\-A\-R\-T\-U\-S\-\_\-\-B\-I\-N\}\char`\"{}\-:\char`\"{}\$\{\-P\-A\-T\-H\}\char`\"{} fi
+
+export A\-O\-C\-L\-\_\-\-B\-O\-A\-R\-D\-\_\-\-P\-A\-C\-K\-A\-G\-E\-\_\-\-R\-O\-O\-T=/opt/intel/oneapi/intelfpgadpcpp/latest/board/intel\-\_\-s10sx\-\_\-pac source \$\-I\-N\-T\-E\-L\-F\-P\-G\-A\-O\-C\-L\-S\-D\-K\-R\-O\-O\-T/init\-\_\-opencl.sh $>$$>$ /dev/null
+
+aocl initialize acl0 pac\-\_\-s10\-\_\-usm ```
+
+The script above needs to be modified to reflect the real paths where the installation have been placed. This initialization process requires sudo (administrator) privileges. The One\-A\-P\-I {\ttfamily A\-O\-C\-L\-\_\-\-B\-O\-A\-R\-D\-\_\-\-P\-A\-C\-K\-A\-G\-E\-\_\-\-R\-O\-O\-T} variable value may differ from the example, depending from the source package, which could be {\ttfamily A\-O\-C\-L\-\_\-\-B\-O\-A\-R\-D\-\_\-\-P\-A\-C\-K\-A\-G\-E\-\_\-\-R\-O\-O\-T="/opt/intel/oneapi/compiler/2021.3.\-0/linux/lib/oclfpga/board/intel\-\_\-s10sx\-\_\-pac}. Try {\ttfamily locate intel\-\_\-s10sx\-\_\-pac} to find out the actual path.
+
+\subsubsection*{Fix Permissions on /dev Files}
+
+The P\-A\-C D5005 requires sudo access with default permissions. This needs to be modified at least once during installation. The unmodified version of {\ttfamily init\-\_\-env.\-sh} performs this step every time it is called, but that requires all users to have sudo access to source {\ttfamily init\-\_\-env.\-sh}. Instead, run the permission setting script on its own after modifying {\ttfamily init\-\_\-env.\-sh}.
+
+``` \$ source \$\-A\-O\-C\-L\-\_\-\-B\-O\-A\-R\-D\-\_\-\-P\-A\-C\-K\-A\-G\-E\-\_\-\-R\-O\-O\-T/linux64/libexec/setup\-\_\-permissions.sh Configuring locked memory setting Configuring udev rules for intel-\/fpga device permission Configuring system with 2048 2\-M hugepages Finished setup\-\_\-permissions.\-sh script. All configuration settings are persistent. ``` 

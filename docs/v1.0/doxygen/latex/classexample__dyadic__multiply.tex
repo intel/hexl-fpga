@@ -1,0 +1,59 @@
+\hypertarget{classexample__dyadic__multiply}{\section{example\-\_\-dyadic\-\_\-multiply Class Reference}
+\label{classexample__dyadic__multiply}\index{example\-\_\-dyadic\-\_\-multiply@{example\-\_\-dyadic\-\_\-multiply}}
+}
+
+
+{\ttfamily \#include $<$example\-\_\-dyadic\-\_\-multiply.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classexample__dyadic__multiply_a0816be553ba8877e38dd37edf5d166be}{setup\-\_\-dyadic\-\_\-multiply} (uint64\-\_\-t \hyperlink{bench__dyadic__multiply_8cpp_a1249f7c009d650067cdc1e2254fcb63c}{n\-\_\-dyadic\-\_\-multiply}, uint64\-\_\-t \hyperlink{bench__dyadic__multiply_8cpp_a94cbf59cad79634589387a30784ed78d}{num\-\_\-moduli}, uint64\-\_\-t coeff\-\_\-count)
+\begin{DoxyCompactList}\small\item\em \hyperlink{classexample__dyadic__multiply_a0816be553ba8877e38dd37edf5d166be}{example\-\_\-dyadic\-\_\-multiply\-::setup\-\_\-dyadic\-\_\-multiply} Initializes the multiplication two operands and the vector of moduli Compute and stores the expected multiplication result for future validation. \end{DoxyCompactList}\item 
+void \hyperlink{classexample__dyadic__multiply_a1f21e56107b4fc4f522fd59ecc0f3697}{execute\-\_\-dyadic\-\_\-multiply} (std\-::vector$<$ uint64\-\_\-t $>$ \&\hyperlink{bench__dyadic__multiply_8cpp_a9df79bfc3d20b59bcaf8d6721d1b8b82}{out}, uint64\-\_\-t \hyperlink{bench__dyadic__multiply_8cpp_a1249f7c009d650067cdc1e2254fcb63c}{n\-\_\-dyadic\-\_\-multiply}, uint64\-\_\-t \hyperlink{bench__dyadic__multiply_8cpp_a94cbf59cad79634589387a30784ed78d}{num\-\_\-moduli}, uint64\-\_\-t coeff\-\_\-count)
+\begin{DoxyCompactList}\small\item\em \hyperlink{classexample__dyadic__multiply_a1f21e56107b4fc4f522fd59ecc0f3697}{example\-\_\-dyadic\-\_\-multiply\-::execute\-\_\-dyadic\-\_\-multiply} sets the work size for the multiplication calls n\-\_\-dyadic\-\_\-multiply times the multiplication function calls Dyadic\-Multiply\-Completed after completion of all multiplications \end{DoxyCompactList}\item 
+std\-::vector$<$ uint64\-\_\-t $>$ \& \hyperlink{classexample__dyadic__multiply_a11ae693700a81cd88fdc75be651f2048}{exp\-\_\-output} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classexample__dyadic__multiply_a1f21e56107b4fc4f522fd59ecc0f3697}{\index{example\-\_\-dyadic\-\_\-multiply@{example\-\_\-dyadic\-\_\-multiply}!execute\-\_\-dyadic\-\_\-multiply@{execute\-\_\-dyadic\-\_\-multiply}}
+\index{execute\-\_\-dyadic\-\_\-multiply@{execute\-\_\-dyadic\-\_\-multiply}!example_dyadic_multiply@{example\-\_\-dyadic\-\_\-multiply}}
+\subsubsection[{execute\-\_\-dyadic\-\_\-multiply}]{\setlength{\rightskip}{0pt plus 5cm}void example\-\_\-dyadic\-\_\-multiply\-::execute\-\_\-dyadic\-\_\-multiply (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ uint64\-\_\-t $>$ \&}]{out, }
+\item[{uint64\-\_\-t}]{n\-\_\-dyadic\-\_\-multiply, }
+\item[{uint64\-\_\-t}]{num\-\_\-moduli, }
+\item[{uint64\-\_\-t}]{coeff\-\_\-count}
+\end{DoxyParamCaption}
+)}}\label{classexample__dyadic__multiply_a1f21e56107b4fc4f522fd59ecc0f3697}
+
+
+\hyperlink{classexample__dyadic__multiply_a1f21e56107b4fc4f522fd59ecc0f3697}{example\-\_\-dyadic\-\_\-multiply\-::execute\-\_\-dyadic\-\_\-multiply} sets the work size for the multiplication calls n\-\_\-dyadic\-\_\-multiply times the multiplication function calls Dyadic\-Multiply\-Completed after completion of all multiplications 
+
+\hypertarget{classexample__dyadic__multiply_a11ae693700a81cd88fdc75be651f2048}{\index{example\-\_\-dyadic\-\_\-multiply@{example\-\_\-dyadic\-\_\-multiply}!exp\-\_\-output@{exp\-\_\-output}}
+\index{exp\-\_\-output@{exp\-\_\-output}!example_dyadic_multiply@{example\-\_\-dyadic\-\_\-multiply}}
+\subsubsection[{exp\-\_\-output}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$uint64\-\_\-t$>$\& example\-\_\-dyadic\-\_\-multiply\-::exp\-\_\-output (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classexample__dyadic__multiply_a11ae693700a81cd88fdc75be651f2048}
+\hypertarget{classexample__dyadic__multiply_a0816be553ba8877e38dd37edf5d166be}{\index{example\-\_\-dyadic\-\_\-multiply@{example\-\_\-dyadic\-\_\-multiply}!setup\-\_\-dyadic\-\_\-multiply@{setup\-\_\-dyadic\-\_\-multiply}}
+\index{setup\-\_\-dyadic\-\_\-multiply@{setup\-\_\-dyadic\-\_\-multiply}!example_dyadic_multiply@{example\-\_\-dyadic\-\_\-multiply}}
+\subsubsection[{setup\-\_\-dyadic\-\_\-multiply}]{\setlength{\rightskip}{0pt plus 5cm}void example\-\_\-dyadic\-\_\-multiply\-::setup\-\_\-dyadic\-\_\-multiply (
+\begin{DoxyParamCaption}
+\item[{uint64\-\_\-t}]{n\-\_\-dyadic\-\_\-multiply, }
+\item[{uint64\-\_\-t}]{num\-\_\-moduli, }
+\item[{uint64\-\_\-t}]{coeff\-\_\-count}
+\end{DoxyParamCaption}
+)}}\label{classexample__dyadic__multiply_a0816be553ba8877e38dd37edf5d166be}
+
+
+\hyperlink{classexample__dyadic__multiply_a0816be553ba8877e38dd37edf5d166be}{example\-\_\-dyadic\-\_\-multiply\-::setup\-\_\-dyadic\-\_\-multiply} Initializes the multiplication two operands and the vector of moduli Compute and stores the expected multiplication result for future validation. 
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{example__dyadic__multiply_8h}{example\-\_\-dyadic\-\_\-multiply.\-h}\item 
+\hyperlink{example__dyadic__multiply_8cpp}{example\-\_\-dyadic\-\_\-multiply.\-cpp}\end{DoxyCompactItemize}

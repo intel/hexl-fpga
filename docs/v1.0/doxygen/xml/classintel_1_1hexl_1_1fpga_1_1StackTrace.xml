@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classintel_1_1hexl_1_1fpga_1_1StackTrace" kind="class" prot="public" abstract="yes">
+    <compoundname>intel::hexl::fpga::StackTrace</compoundname>
+    <includes refid="stack__trace_8h" local="no">stack_trace.h</includes>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1StackTrace_1a13e71720d91b3ad78008fc4b71fe159c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classintel_1_1hexl_1_1fpga_1_1StackTrace" kindref="compound">StackTrace</ref> *</type>
+        <definition>static StackTrace* intel::hexl::fpga::StackTrace::stack</definition>
+        <argsstring>()</argsstring>
+        <name>stack</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/stack_trace.h" line="21" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1StackTrace_1ae3665f0cc2097380b9a5fdd6330df6e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual intel::hexl::fpga::StackTrace::~StackTrace</definition>
+        <argsstring>()=default</argsstring>
+        <name>~StackTrace</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/stack_trace.h" line="22" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1StackTrace_1a333d1509937db15dae0780b20da5b0ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void intel::hexl::fpga::StackTrace::dump</definition>
+        <argsstring>(std::ostream &amp;os)=0</argsstring>
+        <name>dump</name>
+        <param>
+          <type>std::ostream &amp;</type>
+          <declname>os</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/stack_trace.h" line="24" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1StackTrace_1a33b7e4305ba5ebd6d3210971528770f5" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>intel::hexl::fpga::StackTrace::StackTrace</definition>
+        <argsstring>()</argsstring>
+        <name>StackTrace</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/stack_trace.h" line="27" column="1" bodyfile="/home/ymeng12/he-fpga-github/host/inc/stack_trace.h" bodystart="27" bodyend="27"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class <ref refid="classintel_1_1hexl_1_1fpga_1_1StackTrace" kindref="compound">StackTrace</ref> Allows the investigation of the traces  dump Dumps the traces. </para>    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">os</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of traces </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>    </detaileddescription>
+    <location file="/home/ymeng12/he-fpga-github/host/inc/stack_trace.h" line="19" column="1" bodyfile="/home/ymeng12/he-fpga-github/host/inc/stack_trace.h" bodystart="19" bodyend="28"/>
+    <listofallmembers>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1StackTrace_1a333d1509937db15dae0780b20da5b0ea" prot="public" virt="pure-virtual"><scope>intel::hexl::fpga::StackTrace</scope><name>dump</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1StackTrace_1a13e71720d91b3ad78008fc4b71fe159c" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::StackTrace</scope><name>stack</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1StackTrace_1a33b7e4305ba5ebd6d3210971528770f5" prot="protected" virt="non-virtual"><scope>intel::hexl::fpga::StackTrace</scope><name>StackTrace</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1StackTrace_1ae3665f0cc2097380b9a5fdd6330df6e5" prot="public" virt="virtual"><scope>intel::hexl::fpga::StackTrace</scope><name>~StackTrace</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

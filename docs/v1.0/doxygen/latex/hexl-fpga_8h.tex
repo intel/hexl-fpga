@@ -1,0 +1,36 @@
+\hypertarget{hexl-fpga_8h}{\section{hexl-\/fpga.h File Reference}
+\label{hexl-fpga_8h}\index{hexl-\/fpga.\-h@{hexl-\/fpga.\-h}}
+}
+{\ttfamily \#include $<$cstdint$>$}\\*
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceintel}{intel}
+\item 
+\hyperlink{namespaceintel_1_1hexl}{intel\-::hexl}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{namespaceintel_1_1hexl_a6236e14eaac1602475c5f4e0a42754fe}{intel\-::hexl\-::acquire\-\_\-\-F\-P\-G\-A\-\_\-resources} ()
+\begin{DoxyCompactList}\small\item\em Function acquire\-\_\-\-F\-P\-G\-A\-\_\-resources Called without any parameter, reserves the F\-P\-G\-A hardware resources. \end{DoxyCompactList}\item 
+void \hyperlink{namespaceintel_1_1hexl_a717589c6dbfa6429b61e42c620d72d89}{intel\-::hexl\-::release\-\_\-\-F\-P\-G\-A\-\_\-resources} ()
+\begin{DoxyCompactList}\small\item\em Function release\-\_\-\-F\-P\-G\-A\-\_\-resources Called without any parameter, releases the F\-P\-G\-A hardware resources once we are done. \end{DoxyCompactList}\item 
+void \hyperlink{namespaceintel_1_1hexl_a0721fea3151425a86da2201107e3ddcc}{intel\-::hexl\-::set\-\_\-worksize\-\_\-\-Dyadic\-Multiply} (uint64\-\_\-t ws)
+\begin{DoxyCompactList}\small\item\em Function set\-\_\-worksize\-\_\-\-Dyadic\-Multiply Reserves software resources for the multiplication. \end{DoxyCompactList}\item 
+void \hyperlink{namespaceintel_1_1hexl_ae4e26f2cb97a43a2b81fe8643b6edf17}{intel\-::hexl\-::\-Dyadic\-Multiply} (uint64\-\_\-t $\ast$results, const uint64\-\_\-t $\ast$operand1, const uint64\-\_\-t $\ast$operand2, uint64\-\_\-t n, const uint64\-\_\-t $\ast$moduli, uint64\-\_\-t n\-\_\-moduli)
+\begin{DoxyCompactList}\small\item\em Function Dyadic\-Multiply Executes ciphertext ciphertext multiplication. \end{DoxyCompactList}\item 
+bool \hyperlink{namespaceintel_1_1hexl_a638ef00009ae573955d1138b9fb03363}{intel\-::hexl\-::\-Dyadic\-Multiply\-Completed} ()
+\begin{DoxyCompactList}\small\item\em Function Dyadic\-Multiply\-Completed Executed after ciphertext ciphertext multiplication to wrap up the task. \end{DoxyCompactList}\item 
+void \hyperlink{namespaceintel_1_1hexl_af64feb2684e5467b69273aeb64d73b32}{intel\-::hexl\-::set\-\_\-worksize\-\_\-\-N\-T\-T} (uint64\-\_\-t ws)
+\begin{DoxyCompactList}\small\item\em Function set\-\_\-worksize\-\_\-\-N\-T\-T Reserves software resources for the Number Theoretic Transform. \end{DoxyCompactList}\item 
+void \hyperlink{namespaceintel_1_1hexl_aba58174859e0cfb87d493606a9e8a530}{intel\-::hexl\-::\-N\-T\-T} (uint64\-\_\-t $\ast$operand, const uint64\-\_\-t $\ast$root\-\_\-of\-\_\-unity\-\_\-powers, const uint64\-\_\-t $\ast$precon\-\_\-root\-\_\-of\-\_\-unity\-\_\-powers, uint64\-\_\-t coeff\-\_\-modulus, uint64\-\_\-t n)
+\begin{DoxyCompactList}\small\item\em Function N\-T\-T Executes in place the Number Theoretic Transform. \end{DoxyCompactList}\item 
+bool \hyperlink{namespaceintel_1_1hexl_abeacc492f814f3fdf8659bd8067dc732}{intel\-::hexl\-::\-N\-T\-T\-Completed} ()
+\begin{DoxyCompactList}\small\item\em Function N\-T\-T\-Completed Executed after the N\-T\-T to wrap up the computation No parameters. \end{DoxyCompactList}\item 
+void \hyperlink{namespaceintel_1_1hexl_a5fd09ace83ab47ba6d55eb4fde0973d8}{intel\-::hexl\-::set\-\_\-worksize\-\_\-\-I\-N\-T\-T} (uint64\-\_\-t ws)
+\begin{DoxyCompactList}\small\item\em Function set\-\_\-worksize\-\_\-\-I\-N\-T\-T Reserves software resources for the inverse Number Theoretic Transform. \end{DoxyCompactList}\item 
+void \hyperlink{namespaceintel_1_1hexl_add1b2b65fe1dc30cfd2683dfb6f4dde6}{intel\-::hexl\-::\-I\-N\-T\-T} (uint64\-\_\-t $\ast$operand, const uint64\-\_\-t $\ast$inv\-\_\-root\-\_\-of\-\_\-unity\-\_\-powers, const uint64\-\_\-t $\ast$precon\-\_\-inv\-\_\-root\-\_\-of\-\_\-unity\-\_\-powers, uint64\-\_\-t coeff\-\_\-modulus, uint64\-\_\-t inv\-\_\-n, uint64\-\_\-t inv\-\_\-n\-\_\-w, uint64\-\_\-t n)
+\begin{DoxyCompactList}\small\item\em Function I\-N\-T\-T Executes in place the inverse Number Theoretic Transform. \end{DoxyCompactList}\item 
+bool \hyperlink{namespaceintel_1_1hexl_a87e4fb9429d04f09bbb0de8497aab0f7}{intel\-::hexl\-::\-I\-N\-T\-T\-Completed} ()
+\begin{DoxyCompactList}\small\item\em Function I\-N\-T\-T\-Completed Executed after the I\-N\-T\-T to wrap up the computation No parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}

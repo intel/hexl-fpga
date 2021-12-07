@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="structhetest_1_1utils_1_1AllocatorBase" kind="struct" prot="public" abstract="yes">
+    <compoundname>hetest::utils::AllocatorBase</compoundname>
+    <derivedcompoundref refid="structhetest_1_1utils_1_1AllocatorInterface" prot="public" virt="non-virtual">hetest::utils::AllocatorInterface&lt; AllocatorAdapter&lt; Adaptee, Args...&gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structhetest_1_1utils_1_1AllocatorInterface" prot="public" virt="non-virtual">hetest::utils::AllocatorInterface&lt; AllocatorImpl &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structhetest_1_1utils_1_1details_1_1MallocStrategy" prot="public" virt="non-virtual">hetest::utils::details::MallocStrategy</derivedcompoundref>
+    <includes refid="utils-test_8hpp" local="no">utils-test.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structhetest_1_1utils_1_1AllocatorBase_1a8b16ff8d74578e0162706b8bbfa3751a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>virtual hetest::utils::AllocatorBase::~AllocatorBase</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>~AllocatorBase</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/tests/test_utils/utils-test.hpp" line="196" column="1" bodyfile="/home/ymeng12/he-fpga-github/tests/test_utils/utils-test.hpp" bodystart="196" bodyend="196"/>
+      </memberdef>
+      <memberdef kind="function" id="structhetest_1_1utils_1_1AllocatorBase_1aa179ce655f57197104fce71166c17374" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void *</type>
+        <definition>virtual void* hetest::utils::AllocatorBase::allocate</definition>
+        <argsstring>(size_t bytes_count)=0</argsstring>
+        <name>allocate</name>
+        <reimplementedby refid="structhetest_1_1utils_1_1AllocatorInterface_1aa155e501b1e16984f8da9b1837597e66">allocate</reimplementedby>
+        <reimplementedby refid="structhetest_1_1utils_1_1AllocatorInterface_1aa155e501b1e16984f8da9b1837597e66">allocate</reimplementedby>
+        <reimplementedby refid="structhetest_1_1utils_1_1details_1_1MallocStrategy_1a6e72b748596f8ba704363b1aa4d501d9">allocate</reimplementedby>
+        <param>
+          <type>size_t</type>
+          <declname>bytes_count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/tests/test_utils/utils-test.hpp" line="197" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structhetest_1_1utils_1_1AllocatorBase_1ab9e3d2285da2861d0939afe26c6683e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void hetest::utils::AllocatorBase::deallocate</definition>
+        <argsstring>(void *p, size_t n)=0</argsstring>
+        <name>deallocate</name>
+        <reimplementedby refid="structhetest_1_1utils_1_1AllocatorInterface_1a2d76269d7edd0d9cb65e6bfeffc24432">deallocate</reimplementedby>
+        <reimplementedby refid="structhetest_1_1utils_1_1AllocatorInterface_1a2d76269d7edd0d9cb65e6bfeffc24432">deallocate</reimplementedby>
+        <reimplementedby refid="structhetest_1_1utils_1_1details_1_1MallocStrategy_1a86b2b253ec7d4da560da97f6d30e7325">deallocate</reimplementedby>
+        <param>
+          <type>void *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/tests/test_utils/utils-test.hpp" line="198" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="11">
+        <label>hetest::utils::AllocatorInterface&lt; AllocatorImpl &gt;</label>
+        <link refid="structhetest_1_1utils_1_1AllocatorInterface"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>hetest::utils::NTT::AllocatorAdapter&lt; Adaptee, Args &gt;</label>
+        <link refid="structhetest_1_1utils_1_1NTT_1_1AllocatorAdapter"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>hetest::utils::details::MallocStrategy</label>
+        <link refid="structhetest_1_1utils_1_1details_1_1MallocStrategy"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>hetest::utils::AllocatorBase</label>
+        <link refid="structhetest_1_1utils_1_1AllocatorBase"/>
+      </node>
+      <node id="9">
+        <label>hetest::utils::AllocatorInterface&lt; AllocatorAdapter&lt; Adaptee, Args...&gt; &gt;</label>
+        <link refid="structhetest_1_1utils_1_1AllocatorInterface"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/home/ymeng12/he-fpga-github/tests/test_utils/utils-test.hpp" line="195" column="1" bodyfile="/home/ymeng12/he-fpga-github/tests/test_utils/utils-test.hpp" bodystart="195" bodyend="199"/>
+    <listofallmembers>
+      <member refid="structhetest_1_1utils_1_1AllocatorBase_1aa179ce655f57197104fce71166c17374" prot="public" virt="pure-virtual"><scope>hetest::utils::AllocatorBase</scope><name>allocate</name></member>
+      <member refid="structhetest_1_1utils_1_1AllocatorBase_1ab9e3d2285da2861d0939afe26c6683e4" prot="public" virt="pure-virtual"><scope>hetest::utils::AllocatorBase</scope><name>deallocate</name></member>
+      <member refid="structhetest_1_1utils_1_1AllocatorBase_1a8b16ff8d74578e0162706b8bbfa3751a" prot="public" virt="virtual"><scope>hetest::utils::AllocatorBase</scope><name>~AllocatorBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

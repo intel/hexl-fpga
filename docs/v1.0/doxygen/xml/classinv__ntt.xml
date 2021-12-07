@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classinv__ntt" kind="class" prot="public">
+    <compoundname>inv_ntt</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Fixture</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classinv__ntt_1a88869fba7c9518875f37f1556cbcadc3" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t inv_ntt::poly_degree_</definition>
+        <argsstring></argsstring>
+        <name>poly_degree_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/benchmark/bench_inv_ntt.cpp" line="17" column="1" bodyfile="/home/ymeng12/he-fpga-github/benchmark/bench_inv_ntt.cpp" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classinv__ntt_1a4a1eae1edc58ebbc043976e9a4c4e3c9" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t inv_ntt::coeff_modulus_</definition>
+        <argsstring></argsstring>
+        <name>coeff_modulus_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/benchmark/bench_inv_ntt.cpp" line="18" column="1" bodyfile="/home/ymeng12/he-fpga-github/benchmark/bench_inv_ntt.cpp" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classinv__ntt_1a9beaaeb12b6d9c8f5124c37c2dd0a0ca" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; uint64_t &gt;</type>
+        <definition>std::vector&lt;uint64_t&gt; inv_ntt::inv_roots_</definition>
+        <argsstring></argsstring>
+        <name>inv_roots_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/benchmark/bench_inv_ntt.cpp" line="19" column="1" bodyfile="/home/ymeng12/he-fpga-github/benchmark/bench_inv_ntt.cpp" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classinv__ntt_1aa0701ae3d838b36f24b84c22d87383f9" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; uint64_t &gt;</type>
+        <definition>std::vector&lt;uint64_t&gt; inv_ntt::inv_precons_</definition>
+        <argsstring></argsstring>
+        <name>inv_precons_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/benchmark/bench_inv_ntt.cpp" line="20" column="1" bodyfile="/home/ymeng12/he-fpga-github/benchmark/bench_inv_ntt.cpp" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classinv__ntt_1acc2f999a0bd38f2908fe93e6f73d8793" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; uint64_t &gt;</type>
+        <definition>std::vector&lt;uint64_t&gt; inv_ntt::input_</definition>
+        <argsstring></argsstring>
+        <name>input_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/benchmark/bench_inv_ntt.cpp" line="21" column="1" bodyfile="/home/ymeng12/he-fpga-github/benchmark/bench_inv_ntt.cpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classinv__ntt_1a644804f2ec0853cd8f6a995b584d7356" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; uint64_t &gt;</type>
+        <definition>std::vector&lt;uint64_t&gt; inv_ntt::results_</definition>
+        <argsstring></argsstring>
+        <name>results_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/benchmark/bench_inv_ntt.cpp" line="22" column="1" bodyfile="/home/ymeng12/he-fpga-github/benchmark/bench_inv_ntt.cpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classinv__ntt_1a9601f5199b015c836205e467e121d884" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t inv_ntt::inv_n_</definition>
+        <argsstring></argsstring>
+        <name>inv_n_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/benchmark/bench_inv_ntt.cpp" line="23" column="1" bodyfile="/home/ymeng12/he-fpga-github/benchmark/bench_inv_ntt.cpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classinv__ntt_1a27d07beeffd661e59f488f62c89a4c2b" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t inv_ntt::inv_n_w_</definition>
+        <argsstring></argsstring>
+        <name>inv_n_w_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/benchmark/bench_inv_ntt.cpp" line="24" column="1" bodyfile="/home/ymeng12/he-fpga-github/benchmark/bench_inv_ntt.cpp" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classinv__ntt_1ab6f7a674950aa44f5965286334df341a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void inv_ntt::load_ntt_data</definition>
+        <argsstring>(size_t work_size)</argsstring>
+        <name>load_ntt_data</name>
+        <param>
+          <type>size_t</type>
+          <declname>work_size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/benchmark/bench_inv_ntt.cpp" line="13" column="1" bodyfile="/home/ymeng12/he-fpga-github/benchmark/bench_inv_ntt.cpp" bodystart="27" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classinv__ntt_1a22e77cf348d2fbf6dad93b8a19b09326" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void inv_ntt::fpga_inv_ntt_test</definition>
+        <argsstring>(size_t work_size)</argsstring>
+        <name>fpga_inv_ntt_test</name>
+        <param>
+          <type>size_t</type>
+          <declname>work_size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/benchmark/bench_inv_ntt.cpp" line="14" column="1" bodyfile="/home/ymeng12/he-fpga-github/benchmark/bench_inv_ntt.cpp" bodystart="50" bodyend="58"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="66">
+        <label>inv_ntt</label>
+        <link refid="classinv__ntt"/>
+        <childnode refid="67" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="67">
+        <label>benchmark::Fixture</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="68">
+        <label>inv_ntt</label>
+        <link refid="classinv__ntt"/>
+        <childnode refid="69" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="69">
+        <label>benchmark::Fixture</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/ymeng12/he-fpga-github/benchmark/bench_inv_ntt.cpp" line="11" column="1" bodyfile="/home/ymeng12/he-fpga-github/benchmark/bench_inv_ntt.cpp" bodystart="11" bodyend="25"/>
+    <listofallmembers>
+      <member refid="classinv__ntt_1a4a1eae1edc58ebbc043976e9a4c4e3c9" prot="private" virt="non-virtual"><scope>inv_ntt</scope><name>coeff_modulus_</name></member>
+      <member refid="classinv__ntt_1a22e77cf348d2fbf6dad93b8a19b09326" prot="public" virt="non-virtual"><scope>inv_ntt</scope><name>fpga_inv_ntt_test</name></member>
+      <member refid="classinv__ntt_1acc2f999a0bd38f2908fe93e6f73d8793" prot="private" virt="non-virtual"><scope>inv_ntt</scope><name>input_</name></member>
+      <member refid="classinv__ntt_1a9601f5199b015c836205e467e121d884" prot="private" virt="non-virtual"><scope>inv_ntt</scope><name>inv_n_</name></member>
+      <member refid="classinv__ntt_1a27d07beeffd661e59f488f62c89a4c2b" prot="private" virt="non-virtual"><scope>inv_ntt</scope><name>inv_n_w_</name></member>
+      <member refid="classinv__ntt_1aa0701ae3d838b36f24b84c22d87383f9" prot="private" virt="non-virtual"><scope>inv_ntt</scope><name>inv_precons_</name></member>
+      <member refid="classinv__ntt_1a9beaaeb12b6d9c8f5124c37c2dd0a0ca" prot="private" virt="non-virtual"><scope>inv_ntt</scope><name>inv_roots_</name></member>
+      <member refid="classinv__ntt_1ab6f7a674950aa44f5965286334df341a" prot="public" virt="non-virtual"><scope>inv_ntt</scope><name>load_ntt_data</name></member>
+      <member refid="classinv__ntt_1a88869fba7c9518875f37f1556cbcadc3" prot="private" virt="non-virtual"><scope>inv_ntt</scope><name>poly_degree_</name></member>
+      <member refid="classinv__ntt_1a644804f2ec0853cd8f6a995b584d7356" prot="private" virt="non-virtual"><scope>inv_ntt</scope><name>results_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
