@@ -1,0 +1,88 @@
+name: ci
+
+on:
+  # By default this will run when the activity type is "opened", "synchronize",
+  # or "reopened".
+  pull_request:
+    branches:
+      - main
+      - development
+      - "[0-9]+.[0-9]+" # Run on release branch, e.g. 1.0
+  # Run when protected branches are pushed to, e.g. via merge
+  push:
+    branches:
+      - main
+      - development
+      - "[0-9]+.[0-9]+" # Run on release branch, e.g. 1.0
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash -il -eo pipefail {0}
+
+jobs:
+  run_ci:
+    runs-on: [self-hosted, fpga]
+
+    steps:
+      - name: checkout_repo
+        uses: actions/checkout@v2
+
+      - name: pre-commit
+        run: pre-commit run --all-files
+
+      - name: show_details
+        run: |
+          echo 'pwd'
+          pwd
+          echo 'whoami'
+          whoami
+          echo 'hostname'
+          hostname
+
+      - name: build_he-fpga
+        run: |
+          mkdir build
+          cd build
+          cmake .. -DCMAKE_INSTALL_PREFIX=install -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc -DENABLE_FPGA_DEBUG=ON -DENABLE_TESTS=ON -DENABLE_BENCHMARK=ON
+          make -j
+
+      - name: build_emulation
+        run: |
+          source /disk1/tools/init_env.sh
+          source /disk1/tools/new_env_setup.sh
+          cd build
+          make emulation
+
+      - name: build_install
+        run: |
+          cd build
+          make install
+
+      - name: run_tests
+        run: |
+          source /disk1/tools/init_env.sh
+          source /disk1/tools/new_env_setup.sh
+          cd build
+          RUN_CHOICE=1 make tests
+
+      - name: run_bench
+        run: |
+          source /disk1/tools/init_env.sh
+          source /disk1/tools/new_env_setup.sh
+          cd build
+          RUN_CHOICE=1 make bench
+
+      - name: build_examples
+        run: |
+          mkdir build-examples
+          cd build-examples
+          cmake ../examples/ -DCMAKE_PREFIX_PATH=$(realpath ..)/build/install/lib/cmake/ -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc
+          make -j
+
+      - name: run_examples
+        run: |
+          source /disk1/tools/init_env.sh
+          source /disk1/tools/new_env_setup.sh
+          cd build-examples
+          RUN_CHOICE=1 make examples
