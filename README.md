@@ -54,7 +54,7 @@ For each function, the library provides an FPGA implementation using OpenCL.
 
 > **_NOTE:_**  This distribution provides an experimental integrated kernel implementing the NTT/INTT and the dyadic multiplication in one file. We also provide for convenience kernels implementing only one function stand alone. Those FPGA kernels work independently of each other, i.e. one does not require the use of another. The stand alone kernels allow testing and experimentation on a single primitive.
 
-> **_NOTE:_**  This distribution in its current version does not fully address the inherent I/O bottlenecks typically asssociated with an external accelerator card. 
+> **_NOTE:_**  This distribution in its current version does not fully address the inherent I/O bottlenecks typically associated with an external accelerator card.
 
 ## Setting up Environment
 To use this code, a prerequisite is to install a PCIe card Intel PAC D5005 and its software stack, named Intel Acceleration Stack, which includes Quartus Prime, Intel FPGA SDK and Intel PAC D5005 board software package. See [PREREQUISITE.md](PREREQUISITE.md) for details. If you have already installed the PCIe card and above mentioned softwares you can skip the procedure in the link given below. <br>
