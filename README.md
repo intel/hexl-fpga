@@ -40,7 +40,9 @@ Intel:registered: HEXL for FPGA is an open-source library that provides an imple
 ## Introduction
 Many cryptographic applications, particularly homomorphic encryption (HE), rely on integer polynomial arithmetic in a finite field. HE, which enables computation on encrypted data, typically uses polynomials with degree `N:` a power of two roughly in the range `N=[2^{10}, 2^{14}]`. The coefficients of these polynomials are in a finite field with a word-sized primes, `p`, up to `p`~62 bits. More precisely, the polynomials live in the ring `Z_p[X]/(X^N + 1)`. That is, when adding or multiplying two polynomials, each coefficient of the result is reduced by the prime modulus `p`. When multiplying two polynomials, the resulting polynomials of degree `2N` is additionally reduced by taking the remainder when dividing by `X^N+1`.
 
- The primary bottleneck in many HE applications is polynomial-polynomial multiplication in `Z_p[X]/(X^N + 1)`. Intel HEXL for FPGA provides the basic primitives that allow polynomial multiplication.   For efficient implementation, Intel HEXL for FPGA uses the negacyclic number-theoretic transform (NTT). To multiply two polynomials, `p_1(x), p_2(x)` using the NTT, we perform the forward number-theoretic transform on the two input polynomials, then perform an element-wise modular multiplication, and perform the inverse number-theoretic transform on the result.
+The primary bottleneck in many HE applications is polynomial-polynomial multiplication in `Z_p[X]/(X^N + 1)`. Intel HEXL for FPGA provides an experimental implementation of the basic primitives for accelerating polynomial multiplication.  We distribute the basic primitives as source code with open source Apache 2.0 license, which allows developers and communities to experiment with the polynomial multiplication.
+
+Intel HEXL for FPGA implements the negacyclic number-theoretic transform (NTT) that is commonly used n polynomial multiplication.  We also provide an alternative polynomial multiplication using dyadic multiplication algorithms.  To multiply two polynomials, `p_1(x), p_2(x)` using the NTT, we perform the forward number-theoretic transform on the two input polynomials, then perform an element-wise modular multiplication, and perform the inverse number-theoretic transform on the result. 
 
 Intel HEXL for FPGA implements the following functions:
 - The forward and inverse negacyclic number-theoretic transform (NTT).
@@ -48,9 +50,11 @@ Intel HEXL for FPGA implements the following functions:
 
 For each function, the library provides an FPGA implementation using OpenCL.
 
-For additional functionality, see the public headers, located in `include/hexl-fpga.h`
+> **_NOTE:_**  This distribution aims at allowing researchers, developers, and community access to FPGA kernel source code, to experiment with and test the functionality of the basic primitives. 
 
-Note: we provide an integrated kernel implementing the NTT/INTT and the dyadic multiplication in one file. We also provide for convenience kernels implementing only one function stand alone. Those FPGA kernels work independently of each other, i.e. one does not require the use of another. The stand alone kernels allow testing and experimentation on a single primitive.
+> **_NOTE:_**  This distribution provides an experimental integrated kernel implementing the NTT/INTT and the dyadic multiplication in one file. We also provide for convenience kernels implementing only one function stand alone. Those FPGA kernels work independently of each other, i.e. one does not require the use of another. The stand alone kernels allow testing and experimentation on a single primitive.
+
+> **_NOTE:_**  This distribution in its current version does not fully address the inherent I/O bottlenecks typically associated with an external accelerator card.
 
 ## Setting up Environment
 To use this code, a prerequisite is to install a PCIe card Intel PAC D5005 and its software stack, named Intel Acceleration Stack, which includes Quartus Prime, Intel FPGA SDK and Intel PAC D5005 board software package. See [PREREQUISITE.md](PREREQUISITE.md) for details. If you have already installed the PCIe card and above mentioned softwares you can skip the procedure in the link given below. <br>
@@ -275,7 +279,7 @@ The Intel contributors to this project, sorted by last name, are
   - [Fillipe D. M. de Souza](https://www.linkedin.com/in/fillipe-d-m-de-souza-a8281820/)
   - [Anil Goteli](https://www.linkedin.com/in/anil-goteti)
   - [Jingyi Jin](https://www.linkedin.com/in/jingyi-jin-655735/)
-  - [Yan Meng](https://www.linkedin.com/in/yan-meng-5832895/)
+  - [Yan Meng](https://www.linkedin.com/in/yan-meng-5832895/) (lead)
   - [Nir Peled](https://www.linkedin.com/in/nir-peled-4a52266/)
   - [Yong Wang](https://github.com/wangyon1/)
   - [Yongfa Zhou](https://www.linkedin.com/in/yongfa-zhou-16217166/)
