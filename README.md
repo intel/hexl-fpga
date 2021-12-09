@@ -279,7 +279,7 @@ The Intel contributors to this project, sorted by last name, are
   - [Fillipe D. M. de Souza](https://www.linkedin.com/in/fillipe-d-m-de-souza-a8281820/)
   - [Anil Goteli](https://www.linkedin.com/in/anil-goteti)
   - [Jingyi Jin](https://www.linkedin.com/in/jingyi-jin-655735/)
-  - [Yan Meng](https://www.linkedin.com/in/yan-meng-5832895/)
+  - [Yan Meng](https://www.linkedin.com/in/yan-meng-5832895/) (lead)
   - [Nir Peled](https://www.linkedin.com/in/nir-peled-4a52266/)
   - [Yong Wang](https://github.com/wangyon1/)
   - [Yongfa Zhou](https://www.linkedin.com/in/yongfa-zhou-16217166/)
