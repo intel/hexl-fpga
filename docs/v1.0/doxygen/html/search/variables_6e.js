@@ -1,0 +1,8 @@
+var searchData=
+[
+  ['n_5f',['n_',['../structintel_1_1hexl_1_1fpga_1_1Object__NTT.html#a680eca9bf78e81f26426cf0dc9b52f5e',1,'intel::hexl::fpga::Object_NTT::n_()'],['../structintel_1_1hexl_1_1fpga_1_1Object__INTT.html#a3e0c80ff67c84bbae44082bca8a6a1f5',1,'intel::hexl::fpga::Object_INTT::n_()'],['../structintel_1_1hexl_1_1fpga_1_1Object__DyadicMultiply.html#a836ee7996c0ab56d069fce808e9a58e4',1,'intel::hexl::fpga::Object_DyadicMultiply::n_()'],['../structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT.html#aa7b2933a6ad042a0ec97aa5b7eff3c5e',1,'intel::hexl::fpga::FPGAObject_NTT::n_()'],['../structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT.html#a79d41547e934454b4c4719d2a0d1fd4f',1,'intel::hexl::fpga::FPGAObject_INTT::n_()'],['../structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply.html#addc32ca18fbc7359effd95d67a50c561',1,'intel::hexl::fpga::FPGAObject_DyadicMultiply::n_()']]],
+  ['n_5fbatch_5f',['n_batch_',['../structintel_1_1hexl_1_1fpga_1_1FPGAObject.html#a350704607558ab455334aebe055fc2d4',1,'intel::hexl::fpga::FPGAObject']]],
+  ['n_5fdyadic_5fmultiply',['n_dyadic_multiply',['../bench__dyadic__multiply_8cpp.html#a1249f7c009d650067cdc1e2254fcb63c',1,'bench_dyadic_multiply.cpp']]],
+  ['n_5fmoduli_5f',['n_moduli_',['../structintel_1_1hexl_1_1fpga_1_1Object__DyadicMultiply.html#ac3d5d1a291f486d9ca341f2f88ed772e',1,'intel::hexl::fpga::Object_DyadicMultiply::n_moduli_()'],['../structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply.html#a1050f5eda0ca0d101a44ba609a1cfed7',1,'intel::hexl::fpga::FPGAObject_DyadicMultiply::n_moduli_()']]],
+  ['num_5fmoduli',['num_moduli',['../bench__dyadic__multiply_8cpp.html#a94cbf59cad79634589387a30784ed78d',1,'bench_dyadic_multiply.cpp']]]
+];

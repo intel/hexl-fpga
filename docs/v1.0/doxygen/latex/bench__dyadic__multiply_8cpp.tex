@@ -1,0 +1,73 @@
+\hypertarget{bench__dyadic__multiply_8cpp}{\section{bench\-\_\-dyadic\-\_\-multiply.\-cpp File Reference}
+\label{bench__dyadic__multiply_8cpp}\index{bench\-\_\-dyadic\-\_\-multiply.\-cpp@{bench\-\_\-dyadic\-\_\-multiply.\-cpp}}
+}
+{\ttfamily \#include $<$benchmark/benchmark.\-h$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include \char`\"{}hexl-\/fpga.\-h\char`\"{}}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classdyadic__multiply}{dyadic\-\_\-multiply}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{bench__dyadic__multiply_8cpp_abd4bb93f312bd5d1e97bdfe63621bf9c}{setup\-\_\-dyadic\-\_\-multiply\-\_\-io} (\hyperlink{bench__dyadic__multiply_8cpp_a1249f7c009d650067cdc1e2254fcb63c}{n\-\_\-dyadic\-\_\-multiply}, \hyperlink{bench__dyadic__multiply_8cpp_a94cbf59cad79634589387a30784ed78d}{num\-\_\-moduli}, coeff\-\_\-count)
+\item 
+std\-::vector$<$ uint64\-\_\-t $>$ \hyperlink{bench__dyadic__multiply_8cpp_a9df79bfc3d20b59bcaf8d6721d1b8b82}{out} (\hyperlink{bench__dyadic__multiply_8cpp_a1249f7c009d650067cdc1e2254fcb63c}{n\-\_\-dyadic\-\_\-multiply} $\ast$3 $\ast$\hyperlink{bench__dyadic__multiply_8cpp_a94cbf59cad79634589387a30784ed78d}{num\-\_\-moduli} $\ast$coeff\-\_\-count, 0)
+\item 
+\hyperlink{bench__dyadic__multiply_8cpp_a1b1f1299aac0fc44e1de1d990ddea174}{for} (auto st\-:state)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+benchmark\-::\-State \& \hyperlink{bench__dyadic__multiply_8cpp_af63a1df0d582366f7a03c46143e3ae0e}{state}
+\item 
+uint64\-\_\-t \hyperlink{bench__dyadic__multiply_8cpp_a94cbf59cad79634589387a30784ed78d}{num\-\_\-moduli} = 7
+\item 
+uint64\-\_\-t \hyperlink{bench__dyadic__multiply_8cpp_a1249f7c009d650067cdc1e2254fcb63c}{n\-\_\-dyadic\-\_\-multiply} = 4096
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{bench__dyadic__multiply_8cpp_a1b1f1299aac0fc44e1de1d990ddea174}{\index{bench\-\_\-dyadic\-\_\-multiply.\-cpp@{bench\-\_\-dyadic\-\_\-multiply.\-cpp}!for@{for}}
+\index{for@{for}!bench_dyadic_multiply.cpp@{bench\-\_\-dyadic\-\_\-multiply.\-cpp}}
+\subsubsection[{for}]{\setlength{\rightskip}{0pt plus 5cm}for (
+\begin{DoxyParamCaption}
+\item[{auto st\-:state}]{}
+\end{DoxyParamCaption}
+)}}\label{bench__dyadic__multiply_8cpp_a1b1f1299aac0fc44e1de1d990ddea174}
+\hypertarget{bench__dyadic__multiply_8cpp_a9df79bfc3d20b59bcaf8d6721d1b8b82}{\index{bench\-\_\-dyadic\-\_\-multiply.\-cpp@{bench\-\_\-dyadic\-\_\-multiply.\-cpp}!out@{out}}
+\index{out@{out}!bench_dyadic_multiply.cpp@{bench\-\_\-dyadic\-\_\-multiply.\-cpp}}
+\subsubsection[{out}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$uint64\-\_\-t$>$ out (
+\begin{DoxyParamCaption}
+\item[{{\bf n\-\_\-dyadic\-\_\-multiply} $\ast$3 $\ast${\bf num\-\_\-moduli} $\ast$}]{coeff\-\_\-count, }
+\item[{0}]{}
+\end{DoxyParamCaption}
+)}}\label{bench__dyadic__multiply_8cpp_a9df79bfc3d20b59bcaf8d6721d1b8b82}
+\hypertarget{bench__dyadic__multiply_8cpp_abd4bb93f312bd5d1e97bdfe63621bf9c}{\index{bench\-\_\-dyadic\-\_\-multiply.\-cpp@{bench\-\_\-dyadic\-\_\-multiply.\-cpp}!setup\-\_\-dyadic\-\_\-multiply\-\_\-io@{setup\-\_\-dyadic\-\_\-multiply\-\_\-io}}
+\index{setup\-\_\-dyadic\-\_\-multiply\-\_\-io@{setup\-\_\-dyadic\-\_\-multiply\-\_\-io}!bench_dyadic_multiply.cpp@{bench\-\_\-dyadic\-\_\-multiply.\-cpp}}
+\subsubsection[{setup\-\_\-dyadic\-\_\-multiply\-\_\-io}]{\setlength{\rightskip}{0pt plus 5cm}setup\-\_\-dyadic\-\_\-multiply\-\_\-io (
+\begin{DoxyParamCaption}
+\item[{{\bf n\-\_\-dyadic\-\_\-multiply}}]{, }
+\item[{{\bf num\-\_\-moduli}}]{, }
+\item[{coeff\-\_\-count}]{}
+\end{DoxyParamCaption}
+)}}\label{bench__dyadic__multiply_8cpp_abd4bb93f312bd5d1e97bdfe63621bf9c}
+
+
+\subsection{Variable Documentation}
+\hypertarget{bench__dyadic__multiply_8cpp_a1249f7c009d650067cdc1e2254fcb63c}{\index{bench\-\_\-dyadic\-\_\-multiply.\-cpp@{bench\-\_\-dyadic\-\_\-multiply.\-cpp}!n\-\_\-dyadic\-\_\-multiply@{n\-\_\-dyadic\-\_\-multiply}}
+\index{n\-\_\-dyadic\-\_\-multiply@{n\-\_\-dyadic\-\_\-multiply}!bench_dyadic_multiply.cpp@{bench\-\_\-dyadic\-\_\-multiply.\-cpp}}
+\subsubsection[{n\-\_\-dyadic\-\_\-multiply}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t n\-\_\-dyadic\-\_\-multiply = 4096}}\label{bench__dyadic__multiply_8cpp_a1249f7c009d650067cdc1e2254fcb63c}
+\hypertarget{bench__dyadic__multiply_8cpp_a94cbf59cad79634589387a30784ed78d}{\index{bench\-\_\-dyadic\-\_\-multiply.\-cpp@{bench\-\_\-dyadic\-\_\-multiply.\-cpp}!num\-\_\-moduli@{num\-\_\-moduli}}
+\index{num\-\_\-moduli@{num\-\_\-moduli}!bench_dyadic_multiply.cpp@{bench\-\_\-dyadic\-\_\-multiply.\-cpp}}
+\subsubsection[{num\-\_\-moduli}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t num\-\_\-moduli = 7}}\label{bench__dyadic__multiply_8cpp_a94cbf59cad79634589387a30784ed78d}
+\hypertarget{bench__dyadic__multiply_8cpp_af63a1df0d582366f7a03c46143e3ae0e}{\index{bench\-\_\-dyadic\-\_\-multiply.\-cpp@{bench\-\_\-dyadic\-\_\-multiply.\-cpp}!state@{state}}
+\index{state@{state}!bench_dyadic_multiply.cpp@{bench\-\_\-dyadic\-\_\-multiply.\-cpp}}
+\subsubsection[{state}]{\setlength{\rightskip}{0pt plus 5cm}benchmark\-::\-State\& state}}\label{bench__dyadic__multiply_8cpp_af63a1df0d582366f7a03c46143e3ae0e}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+\{
+    uint64\_t coeff\_count = 16384 / 2
+\end{DoxyCode}

@@ -1,0 +1,268 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classintel_1_1hexl_1_1fpga_1_1DevicePool" kind="class" prot="public">
+    <compoundname>intel::hexl::fpga::DevicePool</compoundname>
+    <includes refid="fpga_8h" local="no">fpga.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1DevicePool_1a815f46e1d7c50a0c44376f6b8c9a5e07" prot="private" static="no" mutable="no">
+        <type>cl_platform_id</type>
+        <definition>cl_platform_id intel::hexl::fpga::DevicePool::platform_</definition>
+        <argsstring></argsstring>
+        <name>platform_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/fpga.h" line="492" column="1" bodyfile="/home/ymeng12/he-fpga-github/host/inc/fpga.h" bodystart="492" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1DevicePool_1a6c0253ad1959d07e8082e9b7bb80ff52" prot="private" static="no" mutable="no">
+        <type>cl_uint</type>
+        <definition>cl_uint intel::hexl::fpga::DevicePool::device_count_</definition>
+        <argsstring></argsstring>
+        <name>device_count_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/fpga.h" line="493" column="1" bodyfile="/home/ymeng12/he-fpga-github/host/inc/fpga.h" bodystart="493" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1DevicePool_1a381875dd82edf557d662fe49c86af87a" prot="private" static="no" mutable="no">
+        <type>cl_device_id *</type>
+        <definition>cl_device_id* intel::hexl::fpga::DevicePool::cl_devices_</definition>
+        <argsstring></argsstring>
+        <name>cl_devices_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/fpga.h" line="494" column="1" bodyfile="/home/ymeng12/he-fpga-github/host/inc/fpga.h" bodystart="494" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1DevicePool_1a68f3d8878d2ee92ed1d672d6bc3dc7a9" prot="private" static="no" mutable="no">
+        <type><ref refid="classintel_1_1hexl_1_1fpga_1_1Device" kindref="compound">Device</ref> **</type>
+        <definition>Device** intel::hexl::fpga::DevicePool::devices_</definition>
+        <argsstring></argsstring>
+        <name>devices_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/fpga.h" line="495" column="1" bodyfile="/home/ymeng12/he-fpga-github/host/inc/fpga.h" bodystart="495" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1DevicePool_1aba0c900af22b3d34ed15ff46048167c9" prot="private" static="no" mutable="no">
+        <type>std::shared_future&lt; bool &gt;</type>
+        <definition>std::shared_future&lt;bool&gt; intel::hexl::fpga::DevicePool::future_exit_</definition>
+        <argsstring></argsstring>
+        <name>future_exit_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/fpga.h" line="496" column="1" bodyfile="/home/ymeng12/he-fpga-github/host/inc/fpga.h" bodystart="496" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1DevicePool_1a18c6045f96c0defd0acaa7f7af36b12c" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::thread &gt;</type>
+        <definition>std::vector&lt;std::thread&gt; intel::hexl::fpga::DevicePool::runners_</definition>
+        <argsstring></argsstring>
+        <name>runners_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/fpga.h" line="498" column="1" bodyfile="/home/ymeng12/he-fpga-github/host/inc/fpga.h" bodystart="498" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1DevicePool_1a3561da094204c47678f022a2d5ac26ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>intel::hexl::fpga::DevicePool::DevicePool</definition>
+        <argsstring>(int choice, Buffer &amp;buffer, std::future&lt; bool &gt; &amp;exit_signal, uint64_t coeff_size, uint32_t modulus_size, uint64_t batch_size_dyadic_multiply, uint64_t batch_size_ntt, uint64_t batch_size_intt, uint32_t debug)</argsstring>
+        <name>DevicePool</name>
+        <param>
+          <type>int</type>
+          <declname>choice</declname>
+        </param>
+        <param>
+          <type><ref refid="classintel_1_1hexl_1_1fpga_1_1Buffer" kindref="compound">Buffer</ref> &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>std::future&lt; bool &gt; &amp;</type>
+          <declname>exit_signal</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>coeff_size</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>modulus_size</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>batch_size_dyadic_multiply</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>batch_size_ntt</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>batch_size_intt</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>debug</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/fpga.h" line="482" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1DevicePool_1af8404b1e8d112a2bd8c89e980dd69354" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>intel::hexl::fpga::DevicePool::~DevicePool</definition>
+        <argsstring>()</argsstring>
+        <name>~DevicePool</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/fpga.h" line="486" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1DevicePool_1abb9d39b04629257d4023034d37d4c32f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>intel::hexl::fpga::DevicePool::DevicePool</definition>
+        <argsstring>(const DevicePool &amp;d)=delete</argsstring>
+        <name>DevicePool</name>
+        <param>
+          <type>const <ref refid="classintel_1_1hexl_1_1fpga_1_1DevicePool" kindref="compound">DevicePool</ref> &amp;</type>
+          <declname>d</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/fpga.h" line="489" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1DevicePool_1a27a18befb4dec57c26146e319c0580d6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classintel_1_1hexl_1_1fpga_1_1DevicePool" kindref="compound">DevicePool</ref> &amp;</type>
+        <definition>DevicePool&amp; intel::hexl::fpga::DevicePool::operator=</definition>
+        <argsstring>(const DevicePool &amp;d)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classintel_1_1hexl_1_1fpga_1_1DevicePool" kindref="compound">DevicePool</ref> &amp;</type>
+          <declname>d</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/ymeng12/he-fpga-github/host/inc/fpga.h" line="490" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class <ref refid="classintel_1_1hexl_1_1fpga_1_1DevicePool" kindref="compound">DevicePool</ref>. </para>    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classintel_1_1hexl_1_1fpga_1_1DevicePool" kindref="compound">DevicePool</ref> constructor <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">choice</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>selector for the mode of operation: [CPU,emulation,FPGA] </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>to store the blob transferred to the device </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">exit_signal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>flag to indicated data ready </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coeff_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>size of the polynomial coefficients </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">modulus_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>size of the coefficient modulus </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">batch_size_dyadic_multiply</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>batch size for the multiplication operation </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">batch_size_ntt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>batch size for the NTT operation </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">batch_size_intt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>batch size for the INTT operation </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">debug</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>flag indicating debug mode </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>    </detaileddescription>
+    <location file="/home/ymeng12/he-fpga-github/host/inc/fpga.h" line="480" column="1" bodyfile="/home/ymeng12/he-fpga-github/host/inc/fpga.h" bodystart="480" bodyend="499"/>
+    <listofallmembers>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1DevicePool_1a381875dd82edf557d662fe49c86af87a" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::DevicePool</scope><name>cl_devices_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1DevicePool_1a6c0253ad1959d07e8082e9b7bb80ff52" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::DevicePool</scope><name>device_count_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1DevicePool_1a3561da094204c47678f022a2d5ac26ab" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::DevicePool</scope><name>DevicePool</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1DevicePool_1abb9d39b04629257d4023034d37d4c32f" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::DevicePool</scope><name>DevicePool</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1DevicePool_1a68f3d8878d2ee92ed1d672d6bc3dc7a9" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::DevicePool</scope><name>devices_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1DevicePool_1aba0c900af22b3d34ed15ff46048167c9" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::DevicePool</scope><name>future_exit_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1DevicePool_1a27a18befb4dec57c26146e319c0580d6" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::DevicePool</scope><name>operator=</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1DevicePool_1a815f46e1d7c50a0c44376f6b8c9a5e07" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::DevicePool</scope><name>platform_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1DevicePool_1a18c6045f96c0defd0acaa7f7af36b12c" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::DevicePool</scope><name>runners_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1DevicePool_1af8404b1e8d112a2bd8c89e980dd69354" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::DevicePool</scope><name>~DevicePool</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
