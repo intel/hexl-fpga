@@ -8,6 +8,7 @@ kernels+=" dyadic_multiply"
 kernels+=" fwd_ntt"
 kernels+=" inv_ntt"
 kernels+=" hexl_fpga"
+kernels+=" keyswitch"
 
 config_dyadic_multiply=""
 
@@ -22,6 +23,8 @@ config_inv_ntt+=" -DVEC_INTT=8"
 config_hexl_fpga=${config_dyadic_multiply}
 config_hexl_fpga+=${config_fwd_ntt}
 config_hexl_fpga+=${config_inv_ntt}
+
+config_keyswitch="-no-interleaving=default"
 
 fpga_args=""
 fpga_args+=" -bsp-flow=flat"

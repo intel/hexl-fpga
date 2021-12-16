@@ -110,3 +110,50 @@ ubitwidth_t MultiplyUIntModLazy4(ubitwidth_t x, ubitwidth_t y_operand,
 
     return ret;
 }
+
+ubitwidth_t HLS_MultiplyUInt64Hi(ubitwidth_t x, ubitwidth_t y) {
+  ubitwidth2_t prod = ac_int<BITWIDTH, false>(x) * ac_int<BITWIDTH, false>(y);
+  ubitwidth_t ret = (prod >> BITWIDTH).to_uint64();
+  return ret;
+}
+
+template <int MAX_MODULUS_BITS>
+void HLS_MultiplyUInt(ubitwidth_t x, ubitwidth_t y, ubitwidth_t* prod_hi,
+                      ubitwidth_t* prod_lo) {
+  ac_int<MAX_MODULUS_BITS * 2, false> prod =
+      ac_int<MAX_MODULUS_BITS, false>(x) * ac_int<MAX_MODULUS_BITS, false>(y);
+  *prod_hi = (ubitwidth_t)((prod >> BITWIDTH).to_uint64());
+  *prod_lo = (ubitwidth_t)(prod.to_uint64());
+}
+
+void HLS_MultiplyUInt52(ubitwidth_t x, ubitwidth_t y, ubitwidth_t* prod_hi,
+                        ubitwidth_t* prod_lo) {
+  return HLS_MultiplyUInt<52>(x, y, prod_hi, prod_lo);
+}
+
+template <int MIN_K, int MAX_K, int MAX_R_K>
+ubitwidth_t HLS_BarrettReduce(ubitwidth_t input_hi, ubitwidth_t input_lo,
+                              ubitwidth_t modulus, unsigned long rk) {
+  ac_int<MAX_K + MAX_K, false> a =
+      ((ubitwidth2_t(input_hi) << BITWIDTH) | ((input_lo)));
+  ac_int<MAX_K, false> n = modulus;
+
+  ac_int<MAX_R_K, false> r = rk >> 8;
+  unsigned char k = rk & 0xff;
+  ac_int<6, false> k2 = 2 * k - 2 * MIN_K;
+
+  ac_int<MAX_K + MAX_K + MAX_R_K, false> d = a * r;
+  ac_int<MAX_K + MAX_K + MAX_R_K - 2 * MIN_K> b = d >> (2 * MIN_K) >> k2;
+  ac_int<MAX_K + 1, false> c = a - b * n;
+  if (c >= modulus) c -= modulus;
+  return c.to_uint64();
+}
+ubitwidth_t HLS_BarrettReduce104(ubitwidth_t input_hi, ubitwidth_t input_lo,
+                                 ubitwidth_t modulus, unsigned long rk) {
+  return HLS_BarrettReduce<32, 52, 53>(input_hi, input_lo, modulus, rk);
+}
+
+ubitwidth_t HLS_BarrettReduce128(ubitwidth_t input_hi, ubitwidth_t input_lo,
+                                 ubitwidth_t modulus, unsigned long rk) {
+  return HLS_BarrettReduce<32, 64, 64>(input_hi, input_lo, modulus, rk);
+}

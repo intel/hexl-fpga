@@ -20,5 +20,6 @@ install(FILES
     ${CMAKE_BINARY_DIR}/device/fwd_ntt.aocx
     ${CMAKE_BINARY_DIR}/device/inv_ntt.aocx
     ${CMAKE_BINARY_DIR}/device/hexl_fpga.aocx
+    ${CMAKE_BINARY_DIR}/device/keyswitch.aocx
     DESTINATION fpga
     PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ)
