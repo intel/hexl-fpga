@@ -1,3 +1,6 @@
+// Copyright (C) 2020-2021 Intel Corporation
+// SPDX-License-Identifier: Apache-2.0
+
 #ifndef __CHANNEL_H__
 #define __CHANNEL_H__
 // Enabling Double Precision Floating-Point Operations
@@ -21,11 +24,11 @@
 #define MAX_KEY (1UL << MAX_MODULUS_BITS)
 
 #ifdef EMULATOR
-#define ASSERT(cond, message, ...)         \
-  if (!(cond)) {                           \
-    printf("%s#%d: ", __FILE__, __LINE__); \
-    printf(message, ##__VA_ARGS__);        \
-  }
+#define ASSERT(cond, message, ...)             \
+    if (!(cond)) {                             \
+        printf("%s#%d: ", __FILE__, __LINE__); \
+        printf(message, ##__VA_ARGS__);        \
+    }
 #else
 #define ASSERT(cond, message, ...)
 #endif
@@ -49,9 +52,9 @@ typedef unsigned int __attribute__((__ap_int(256))) uint256_t;
 #define DEVICE_MEM
 #endif
 
-#define __single_task                     \
-  __attribute__((max_global_work_dim(0))) \
-      __attribute__((uses_global_work_offset(0))) __kernel
+#define __single_task                       \
+    __attribute__((max_global_work_dim(0))) \
+        __attribute__((uses_global_work_offset(0))) __kernel
 
 #define __autorun __attribute__((autorun))
 #define INTT_CHANNEL 1
@@ -69,19 +72,19 @@ typedef unsigned int __attribute__((__ap_int(256))) uint256_t;
 #define STEP(n, max) n = n == (max - 1) ? 0 : n + 1
 
 typedef struct {
-  uint64_t data[VEC * 2];
+    uint64_t data[VEC * 2];
 } ntt_elements;
 
 typedef struct {
-  uint64_t data[VEC * 2];
+    uint64_t data[VEC * 2];
 } intt_elements;
 
 typedef struct {
-  ulong4 data[8];
+    ulong4 data[8];
 } moduli_t;
 
 typedef struct {
-  ulong4 data[8];
+    ulong4 data[8];
 } invn_t;
 
 // intt1 and intt2
@@ -123,6 +126,5 @@ channel uint64_t
     ch_t_poly_prod_iter[MAX_RNS_MODULUS_SIZE][MAX_KEY_COMPONENT_SIZE]
     __attribute__((depth(MAX_COFF_COUNT * 2)));
 
-channel uint64_t ch_result[2]
-    __attribute__((depth(DEFAULT_DEPTH)));
+channel uint64_t ch_result[2] __attribute__((depth(DEFAULT_DEPTH)));
 #endif
