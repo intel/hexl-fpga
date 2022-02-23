@@ -20,6 +20,7 @@ Intel:registered: HE Acceleration Library for FPGAs is an open-source library th
       - [Compiling Host Side](#compiling-host-side)
   - [Installing Intel HE Acceleration Library for FPGAs](#installing-intel-he-acceleration-library-for-fpgas)
   - [Testing Intel HE Acceleration Library for FPGAs](#testing-intel-he-acceleration-library-for-fpgas)
+    - [Download Test Data for Keyswitch Related Tests](#download-test-data-for-keyswitch-related-tests)
     - [Run Tests in Emulation Mode](#run-tests-in-emulation-mode)
     - [Run Tests on FPGA Card](#run-tests-on-fpga-card)
   - [Benchmarking Intel HE Acceleration Library for FPGAs](#benchmarking-intel-he-acceleration-library-for-fpgas)
@@ -161,6 +162,16 @@ cmake --install build
 ## Testing Intel HE Acceleration Library for FPGAs
 To run a set of unit tests via Googletest run the following command ( for running the test you should have chosen  `-DENABLE_TESTS=ON` otherwise tests may not be enabled) (see [Configuration Options](#configuration-options)).  <br>
 Make sure that the .aocx files have been installed in the install directory that was chosen during configuration. The default choice we made was "./hexl-fpga-install". <br>
+
+### Download Test Data for Keyswitch Related Tests
+For running Keyswitch related tests, users can download the attached testdata.zip in the release v1.2, unzip it to a local directory and point to it through an environment variable KEYSWITCH_DATA_DIR.
+```
+mkdir test_data_dir
+cd test_data_dir
+wget https://github.com/intel/hexl-fpga/releases/download/v1.2/testdata.zip
+unzip testdata.zip
+export KEYSWITCH_DATA_DIR=$PWD/testdata
+```
 
 ### Run Tests in Emulation Mode
 In emulation mode the kernel will run on the CPU and the user will be able to test and validate the kernel. <br>
