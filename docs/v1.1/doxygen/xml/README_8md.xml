@@ -173,11 +173,11 @@
 <codeline lineno="164"><highlight class="normal">Make<sp/>sure<sp/>that<sp/>the<sp/>.aocx<sp/><ref refid="bench__keyswitch_8cpp_1a37dfb1be7add7ba7d1ec65c8ab64c88b" kindref="member">files</ref><sp/>have<sp/>been<sp/>installed<sp/>in<sp/>the<sp/>install<sp/>directory<sp/>that<sp/>was<sp/>chosen<sp/>during<sp/>configuration.<sp/>The<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal"><sp/>choice<sp/>we<sp/>made<sp/>was<sp/></highlight><highlight class="stringliteral">&quot;./hexl-fpga-install&quot;</highlight><highlight class="normal">.<sp/>&lt;br&gt;</highlight></codeline>
 <codeline lineno="165"><highlight class="normal"></highlight></codeline>
 <codeline lineno="166"><highlight class="normal"></highlight><highlight class="preprocessor">###<sp/>Download<sp/>Test<sp/>Data<sp/>for<sp/>Keyswitch<sp/>Related<sp/>Tests</highlight></codeline>
-<codeline lineno="167"><highlight class="preprocessor"></highlight><highlight class="normal">For<sp/>running<sp/>Keyswitch<sp/>related<sp/>tests,<sp/>users<sp/>can<sp/>download<sp/>the<sp/>attached<sp/>testdata.zip<sp/>in<sp/>the<sp/>release<sp/>v1.2,<sp/>unzip<sp/>it<sp/>to<sp/>a<sp/>local<sp/>directory<sp/>and<sp/>point<sp/>to<sp/>it<sp/>through<sp/>an<sp/>environment<sp/>variable<sp/>KEYSWITCH_DATA_DIR.</highlight></codeline>
+<codeline lineno="167"><highlight class="preprocessor"></highlight><highlight class="normal">For<sp/>running<sp/>Keyswitch<sp/>related<sp/>tests,<sp/>users<sp/>can<sp/>download<sp/>the<sp/>attached<sp/>testdata.zip<sp/>in<sp/>the<sp/>release<sp/>v1.1,<sp/>unzip<sp/>it<sp/>to<sp/>a<sp/>local<sp/>directory<sp/>and<sp/>point<sp/>to<sp/>it<sp/>through<sp/>an<sp/>environment<sp/>variable<sp/>KEYSWITCH_DATA_DIR.</highlight></codeline>
 <codeline lineno="168"><highlight class="normal">```</highlight></codeline>
 <codeline lineno="169"><highlight class="normal">mkdir<sp/>test_data_dir</highlight></codeline>
 <codeline lineno="170"><highlight class="normal">cd<sp/>test_data_dir</highlight></codeline>
-<codeline lineno="171"><highlight class="normal">wget<sp/>https:</highlight><highlight class="comment">//github.com/intel/hexl-fpga/releases/download/v1.2/testdata.zip</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal">wget<sp/>https:</highlight><highlight class="comment">//github.com/intel/hexl-fpga/releases/download/v1.1/testdata.zip</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="172"><highlight class="normal">unzip<sp/>testdata.zip</highlight></codeline>
 <codeline lineno="173"><highlight class="normal">export<sp/>KEYSWITCH_DATA_DIR=$PWD/testdata</highlight></codeline>
 <codeline lineno="174"><highlight class="normal">```</highlight></codeline>
