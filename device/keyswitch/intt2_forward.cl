@@ -3,24 +3,19 @@
 
 #include "channels.h"
 
-void _intt2_forward(int key_component) {
+void _intt2_forward(int COREID, int key_component) {
     while (true) {
-        uint64_t data = read_channel_intel(
-            ch_t_poly_prod_iter[MAX_RNS_MODULUS_SIZE - 1][key_component]);
-        write_channel_intel(ch_intt_elements_in[1 + key_component], data);
+        uint64_t data =
+            read_channel_intel(ch_t_poly_prod_iter_last[COREID][key_component]);
+        write_channel_intel(ch_intt_elements_in[COREID][1 + key_component],
+                            data);
     }
 }
 
-__attribute__((max_global_work_dim(0)))
-__attribute__((uses_global_work_offset(0))) __attribute__((autorun))
-__kernel void
-intt21_forward() {
-    _intt2_forward(0);
-}
+__single_task __autorun void intt_forward01() { _intt2_forward(0, 0); }
+__single_task __autorun void intt_forward02() { _intt2_forward(0, 1); }
 
-__attribute__((max_global_work_dim(0)))
-__attribute__((uses_global_work_offset(0))) __attribute__((autorun))
-__kernel void
-intt22_forward() {
-    _intt2_forward(1);
-}
+#if CORES > 1
+__single_task __autorun void intt_forward11() { _intt2_forward(1, 0); }
+__single_task __autorun void intt_forward12() { _intt2_forward(1, 1); }
+#endif

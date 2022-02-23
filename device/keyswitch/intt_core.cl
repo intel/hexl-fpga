@@ -4,6 +4,13 @@
 #include "channels.h"
 #include "common.h"
 
+typedef struct {
+    uint64_t data[VEC * 2];
+} intt_elements;
+
+channel intt_elements ch_intt_elements[CORES][2]
+    __attribute__((depth(MAX_COFF_COUNT / VEC / 2)));
+
 void _intt_backward(channel uint64_t ch_intt_elements_in,
                     channel intt_elements ch_intt_elements) {
     int data_index = 0;
@@ -39,56 +46,59 @@ void _intt_forward(channel uint64_t ch_intt_elements_out,
     }
 }
 
+unsigned get_ntt_log(unsigned size) {
+    unsigned log = 14;
+    if (size == 16384) {
+        log = 14;
+    } else if (size == 8192) {
+        log = 13;
+    } else if (size == 4096) {
+        log = 12;
+    } else if (size == 2048) {
+        log = 11;
+    } else if (size == 1024) {
+        log = 10;
+    } else {
+        ASSERT(false, "ntt/intt size (%u) is not supported\n", size);
+    }
+    return log;
+}
+
 void _intt_internal(channel ulong4 ch_intt_modulus,
                     channel intt_elements ch_intt_elements_in,
                     channel intt_elements ch_intt_elements_out,
                     channel ulong4 ch_normalize,
-                    __global HOST_MEM uint64_t* restrict twiddle_factors,
-                    invn_t g_inv_n, uint54_t local_roots[][VEC],
-                    const unsigned int key_modulus_start,
-                    const unsigned int key_modulus_end,
+                    channel twiddle_factor ch_twiddle_factor,
                     uint64_t output_mod_factor, unsigned int engine_id) {
-    int n = (int)FPGA_NTT_SIZE;
+    unsigned long X[MAX_COFF_COUNT / VEC / 2][VEC];
+    unsigned long X2[MAX_COFF_COUNT / VEC / 2][VEC];
 
-    unsigned long X[FPGA_NTT_SIZE / VEC / 2][VEC];
-    unsigned long X2[FPGA_NTT_SIZE / VEC / 2][VEC];
-
-    for (int k = key_modulus_start; k < key_modulus_end; k++) {
-        unsigned int offset = FPGA_NTT_SIZE * k * 4;
-        for (int i = 0; i < FPGA_NTT_SIZE / VEC; i++) {
-#pragma unroll
-            for (int j = 0; j < VEC; j++) {
-                local_roots[FPGA_NTT_SIZE / VEC * (k - key_modulus_start) +
-                            i][j] =
-                    __pipelined_load(twiddle_factors + offset + i * VEC + j);
-            }
-        }
-    }
-
+#pragma disable_loop_pipelining
     while (true) {
         ulong4 modulus = read_channel_intel(ch_intt_modulus);
-        ulong prime = modulus.s0;
+        ulong prime = modulus.s0 & MODULUS_BIT_MASK;
         ulong prime_k = modulus.s3;
-        unsigned int key_modulus_idx = modulus.s2;
+        unsigned fpga_ntt_size = GET_COEFF_COUNT(modulus.s0);
         unsigned long twice_mod = prime << 1;
         unsigned t = 1;
         unsigned logt = 0;
         unsigned int g_elements_index = 0;
 
-        unsigned roots_acc =
-            FPGA_NTT_SIZE * (key_modulus_idx - key_modulus_start);
+        unsigned roots_acc = 0;
 
-        ulong4 inv_n_u4 = g_inv_n.data[key_modulus_idx];
-        modulus.s1 = inv_n_u4.s0;
         write_channel_intel(ch_normalize, modulus);
 
-        // Normalize the Transform by N
-        // Stages
-        for (unsigned m = (n >> 1); m >= 1; m >>= 1) {
+        int last_tf_index = -1;
+        twiddle_factor tf;
+
+// Normalize the Transform by N
+// Stages
+#pragma disable_loop_pipelining
+        for (unsigned m = (fpga_ntt_size >> 1); m >= 1; m >>= 1) {
             bool b_first_stage = t == 1;
 
             unsigned rw_x_groups_log =
-                FPGA_NTT_SIZE_LOG - 1 - VEC_LOG - logt + VEC_LOG;
+                get_ntt_log(fpga_ntt_size) - 1 - VEC_LOG - logt + VEC_LOG;
             unsigned rw_x_groups = 1 << rw_x_groups_log;
             unsigned rw_x_group_size_log = logt - VEC_LOG;
             unsigned rw_x_group_size = 1 << rw_x_group_size_log;
@@ -97,7 +107,7 @@ void _intt_internal(channel ulong4 ch_intt_modulus,
 // Flights
 #pragma ivdep array(X)
 #pragma ivdep array(X2)
-            for (unsigned k = 0; k < FPGA_NTT_SIZE / 2 / VEC; k++) {
+            for (unsigned k = 0; k < fpga_ntt_size / 2 / VEC; k++) {
                 unsigned long curX[VEC * 2] __attribute__((register));
                 unsigned long curX_rep[VEC * 2] __attribute__((register));
 
@@ -128,7 +138,7 @@ void _intt_internal(channel ulong4 ch_intt_modulus,
                 unsigned rw_pos = (rw_x_group_index << rw_x_group_size_log) +
                                   (k & (rw_x_group_size - 1));
                 if (t < VEC) {
-                    rw_pos = FPGA_NTT_SIZE / 2 / VEC - 1 - k;
+                    rw_pos = fpga_ntt_size / 2 / VEC - 1 - k;
                 }
                 unsigned Xm_group_index = k >> Xm_group_log;
                 bool b_X = !(Xm_group_index & 1);
@@ -221,9 +231,15 @@ void _intt_internal(channel ulong4 ch_intt_modulus,
                 unsigned long cur_roots[VEC];
                 unsigned long cur_precons[VEC];
 
+                int tf_index = (roots_acc + i0) / VEC;
+                if (tf_index != last_tf_index) {
+                    tf = read_channel_intel(ch_twiddle_factor);
+                }
+                last_tf_index = tf_index;
+
 #pragma unroll
                 for (int n = 0; n < VEC; n++) {
-                    cur_roots[n] = local_roots[(roots_acc + i0) / VEC][n];
+                    cur_roots[n] = tf.data[n];
                 }
 
                 typedef unsigned int __attribute__((__ap_int(VEC * 64)))
@@ -279,7 +295,10 @@ void _intt_internal(channel ulong4 ch_intt_modulus,
                     unsigned long x_j2 = curX_rep[VEC + n];
 
                     // X', Y' = X + Y (mod q), W(X - Y) (mod q).
+                    ASSERT(x_j1 < prime, "x >= modulus, engine_id = %d\n",
+                           engine_id);
                     curX[n] = AddUIntMod(x_j1, x_j2, prime);
+                    ASSERT(W_op < MAX_MODULUS, "y >= modulus\n");
                     curX[VEC + n] = MultiplyUIntMod(
                         SubUIntMod(x_j1, x_j2, prime), W_op, prime, prime_k);
 
@@ -370,16 +389,17 @@ void _intt_internal(channel ulong4 ch_intt_modulus,
 void _intt_normalize(channel uint64_t ch_intt_elements_out_inter,
                      channel uint64_t ch_intt_elements_out,
                      channel ulong4 ch_normalize) {
-    unsigned i = 0;
-    ulong4 moduli;
-
     while (true) {
-        if (i == 0) {
-            moduli = read_channel_intel(ch_normalize);
+        ulong4 moduli = read_channel_intel(ch_normalize);
+        unsigned coeff_count = GET_COEFF_COUNT(moduli.s0);
+
+        for (unsigned i = 0; i < coeff_count; i++) {
+            uint64_t data = read_channel_intel(ch_intt_elements_out_inter);
+            ASSERT((moduli.s0 & MODULUS_BIT_MASK) < MAX_MODULUS,
+                   "y >= modulus\n");
+            data = MultiplyUIntMod(data, moduli.s2,
+                                   moduli.s0 & MODULUS_BIT_MASK, moduli.s3);
+            write_channel_intel(ch_intt_elements_out, data);
         }
-        uint64_t data = read_channel_intel(ch_intt_elements_out_inter);
-        data = MultiplyUIntMod(data, moduli.s1, moduli.s0, moduli.s3);
-        write_channel_intel(ch_intt_elements_out, data);
-        STEP(i, FPGA_NTT_SIZE);
     }
 }

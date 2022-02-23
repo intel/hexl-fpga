@@ -6,13 +6,13 @@ project(examples)
 
 set (HEXL_FPGA_HINT_DIR ${CMAKE_PREFIX_PATH})
 
-find_package(hexl-fpga 1.0
+find_package(hexl-fpga 1.1
     HINTS ${HEXL_FPGA_HINT_DIR}
     REQUIRED)
 if (NOT TARGET hexl-fpga::hexl-fpga)
-    message(STATUS "Intel HEXL for FPGA: not found")
+    message(STATUS "Intel HE Acceleration Library for FPGAs: not found")
 else()
-    message(STATUS "Intel HEXL for FPGA: found")
+    message(STATUS "Intel HE Acceleration Library for FPGAs: found")
 endif()
 
 add_executable(example_dyadic_multiply example_dyadic_multiply.cpp examples.cpp)

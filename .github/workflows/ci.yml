@@ -60,6 +60,13 @@ jobs:
           source /disk1/tools/init_env.sh
           source /disk1/tools/new_env_setup.sh
           cd build
+          export FPGA_DATA_DIR="/disk1/hexl-fpga-data"
+          export KEYSWITCH_DATA_DIR="${FPGA_DATA_DIR}/test-vectors"
+          echo "Run tests with bitstream"
+          export FPGA_BITSTREAM_DIR="${FPGA_DATA_DIR}/bitstreams"
+          make tests
+          echo "Run tests with emulation"
+          export FPGA_BITSTREAM_DIR=
           RUN_CHOICE=1 make tests
 
       - name: run_bench
@@ -67,7 +74,10 @@ jobs:
           source /disk1/tools/init_env.sh
           source /disk1/tools/new_env_setup.sh
           cd build
-          RUN_CHOICE=1 make bench
+          export FPGA_DATA_DIR="/disk1/hexl-fpga-data"
+          export FPGA_BITSTREAM_DIR="${FPGA_DATA_DIR}/bitstreams"
+          export KEYSWITCH_DATA_DIR="${FPGA_DATA_DIR}/test-vectors"
+          make bench
 
       - name: build_examples
         run: |

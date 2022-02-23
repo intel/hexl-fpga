@@ -8,6 +8,9 @@
 #include "keyswitch/load.cl"
 #include "keyswitch/ntt_core.cl"
 
+// twiddle factors
+#include "keyswitch/twiddle_factors.cl"
+
 // intt1
 #include "keyswitch/intt1.cl"
 #include "keyswitch/intt1_forward.cl"
@@ -19,11 +22,6 @@
 // dyadmult
 #include "keyswitch/dyadmult.cl"
 
-// intt2
-#include "keyswitch/intt2.cl"
-#include "keyswitch/intt2_forward.cl"
-#include "keyswitch/intt2_redu.cl"
-
 // ntt2
 #include "keyswitch/ntt2.cl"
 
@@ -32,3 +30,9 @@
 
 // store
 #include "keyswitch/store.cl"
+
+// intt2
+#include "keyswitch/intt2_core.cl"
+#include "keyswitch/intt2.cl"
+#include "keyswitch/intt2_forward.cl"
+#include "keyswitch/intt2_redu.cl"

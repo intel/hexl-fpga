@@ -106,11 +106,11 @@ void fwd_ntt_test::run_fwd_ntt_test(StimulusType stimulusType,
         std::vector<uint64_t> inNTT = input_[i];
         std::vector<uint64_t> outNTT = input_[i];
         ntt.ComputeForward(outNTT.data(), inNTT.data(), 1, 1);
-        intel::hexl::set_worksize_NTT(1);
-        intel::hexl::NTT(results.data(), ntt.GetRootOfUnityPowersPtr(),
-                         ntt.GetPrecon64RootOfUnityPowersPtr(),
-                         this->primes_[i], ntt_degree);
-        intel::hexl::NTTCompleted();
+        intel::hexl::_set_worksize_NTT(1);
+        intel::hexl::_NTT(results.data(), ntt.GetRootOfUnityPowersPtr(),
+                          ntt.GetPrecon64RootOfUnityPowersPtr(),
+                          this->primes_[i], ntt_degree);
+        intel::hexl::_NTTCompleted();
         // Verify NTT output against reference output
         ASSERT_EQ(results, outNTT);
     }

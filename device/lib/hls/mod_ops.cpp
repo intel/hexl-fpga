@@ -140,20 +140,21 @@ ubitwidth_t HLS_BarrettReduce(ubitwidth_t input_hi, ubitwidth_t input_lo,
 
     ac_int<MAX_R_K, false> r = rk >> 8;
     unsigned char k = rk & 0xff;
-    ac_int<6, false> k2 = 2 * k - 2 * MIN_K;
+    ac_int<7, false> k2 = 2 * k - 2 * MIN_K;
 
     ac_int<MAX_K + MAX_K + MAX_R_K, false> d = a * r;
-    ac_int<MAX_K + MAX_K + MAX_R_K - 2 * MIN_K> b = d >> (2 * MIN_K) >> k2;
+    ac_int<MAX_K + MAX_K + MAX_R_K - 2 * MIN_K, false> b =
+        d >> (2 * MIN_K) >> k2;
     ac_int<MAX_K + 1, false> c = a - b * n;
     if (c >= modulus) c -= modulus;
     return c.to_uint64();
 }
 ubitwidth_t HLS_BarrettReduce104(ubitwidth_t input_hi, ubitwidth_t input_lo,
                                  ubitwidth_t modulus, unsigned long rk) {
-    return HLS_BarrettReduce<32, 52, 53>(input_hi, input_lo, modulus, rk);
+    return HLS_BarrettReduce<16, 52, 53>(input_hi, input_lo, modulus, rk);
 }
 
 ubitwidth_t HLS_BarrettReduce128(ubitwidth_t input_hi, ubitwidth_t input_lo,
                                  ubitwidth_t modulus, unsigned long rk) {
-    return HLS_BarrettReduce<32, 64, 64>(input_hi, input_lo, modulus, rk);
+    return HLS_BarrettReduce<16, 64, 64>(input_hi, input_lo, modulus, rk);
 }

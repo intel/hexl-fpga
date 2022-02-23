@@ -19,6 +19,7 @@ function(bench_function kernel)
     target_link_directories(bench_${KERNEL} PUBLIC ${CMAKE_BINARY_DIR}/hexl-install/lib)
     target_link_libraries(bench_${KERNEL} PUBLIC hexl-fpga)
     target_link_libraries(bench_${KERNEL} PRIVATE benchmark::benchmark)
+    target_link_libraries(bench_${KERNEL} PRIVATE nlohmann_json::nlohmann_json)
 
     add_custom_command(
         TARGET bench_${KERNEL} POST_BUILD
@@ -30,11 +31,16 @@ function(bench_function kernel)
          DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 endfunction()
 
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/bitstream_dir.sh
+     DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
+bench_function(keyswitch)
 bench_function(dyadic_multiply)
 bench_function(fwd_ntt)
 bench_function(inv_ntt)
 
 add_custom_target(bench
+    COMMAND ./micro_keyswitch.sh DEPENDS bench_keyswitch
     COMMAND ./micro_dyadic_multiply.sh DEPENDS bench_dyadic_multiply
     COMMAND ./micro_fwd_ntt.sh DEPENDS bench_fwd_ntt
     COMMAND ./micro_inv_ntt.sh DEPENDS bench_inv_ntt
