@@ -21,8 +21,8 @@ target_link_libraries(example_dyadic_multiply PRIVATE hexl-fpga::hexl-fpga)
 
 add_custom_command(
     TARGET example_dyadic_multiply POST_BUILD
-    COMMAND rm -f hexl_fpga.aocx
-    COMMAND ln -s ${HEXL_FPGA_HINT_DIR}/../../fpga/hexl_fpga.aocx .
+    COMMAND rm -f dyadic_multiply_keyswitch.aocx
+    COMMAND ln -s ${HEXL_FPGA_HINT_DIR}/../../fpga/dyadic_multiply_keyswitch.aocx .
     VERBATIM
 )
 
