@@ -164,11 +164,11 @@ To run a set of unit tests via Googletest run the following command ( for runnin
 Make sure that the .aocx files have been installed in the install directory that was chosen during configuration. The default choice we made was "./hexl-fpga-install". <br>
 
 ### Download Test Data for Keyswitch Related Tests
-For running Keyswitch related tests, users can download the attached testdata.zip in the release v1.2, unzip it to a local directory and point to it through an environment variable KEYSWITCH_DATA_DIR.
+For running Keyswitch related tests, users can download the attached testdata.zip in the release v1.1, unzip it to a local directory and point to it through an environment variable KEYSWITCH_DATA_DIR.
 ```
 mkdir test_data_dir
 cd test_data_dir
-wget https://github.com/intel/hexl-fpga/releases/download/v1.2/testdata.zip
+wget https://github.com/intel/hexl-fpga/releases/download/v1.1/testdata.zip
 unzip testdata.zip
 export KEYSWITCH_DATA_DIR=$PWD/testdata
 ```
