@@ -1,0 +1,42 @@
+\hypertarget{hexl-fpga_8h}{\section{hexl-\/fpga.h File Reference}
+\label{hexl-fpga_8h}\index{hexl-\/fpga.\-h@{hexl-\/fpga.\-h}}
+}
+{\ttfamily \#include $<$cstdint$>$}\\*
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceintel}{intel}
+\item 
+\hyperlink{namespaceintel_1_1hexl}{intel\-::hexl}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{namespaceintel_1_1hexl_a6236e14eaac1602475c5f4e0a42754fe}{intel\-::hexl\-::acquire\-\_\-\-F\-P\-G\-A\-\_\-resources} ()
+\begin{DoxyCompactList}\small\item\em Function acquire\-\_\-\-F\-P\-G\-A\-\_\-resources Called without any parameter, reserves the F\-P\-G\-A hardware resources. \end{DoxyCompactList}\item 
+void \hyperlink{namespaceintel_1_1hexl_a717589c6dbfa6429b61e42c620d72d89}{intel\-::hexl\-::release\-\_\-\-F\-P\-G\-A\-\_\-resources} ()
+\begin{DoxyCompactList}\small\item\em Function release\-\_\-\-F\-P\-G\-A\-\_\-resources Called without any parameter, releases the F\-P\-G\-A hardware resources once we are done. \end{DoxyCompactList}\item 
+void \hyperlink{namespaceintel_1_1hexl_a0721fea3151425a86da2201107e3ddcc}{intel\-::hexl\-::set\-\_\-worksize\-\_\-\-Dyadic\-Multiply} (uint64\-\_\-t ws)
+\begin{DoxyCompactList}\small\item\em Function set\-\_\-worksize\-\_\-\-Dyadic\-Multiply Reserves software resources for the multiplication. \end{DoxyCompactList}\item 
+void \hyperlink{namespaceintel_1_1hexl_ae4e26f2cb97a43a2b81fe8643b6edf17}{intel\-::hexl\-::\-Dyadic\-Multiply} (uint64\-\_\-t $\ast$results, const uint64\-\_\-t $\ast$operand1, const uint64\-\_\-t $\ast$operand2, uint64\-\_\-t n, const uint64\-\_\-t $\ast$moduli, uint64\-\_\-t n\-\_\-moduli)
+\begin{DoxyCompactList}\small\item\em Function Dyadic\-Multiply Executes ciphertext ciphertext multiplication. \end{DoxyCompactList}\item 
+bool \hyperlink{namespaceintel_1_1hexl_a638ef00009ae573955d1138b9fb03363}{intel\-::hexl\-::\-Dyadic\-Multiply\-Completed} ()
+\begin{DoxyCompactList}\small\item\em Function Dyadic\-Multiply\-Completed Executed after ciphertext ciphertext multiplication to wrap up the task. \end{DoxyCompactList}\item 
+void \hyperlink{namespaceintel_1_1hexl_a8ac8866d0693f8fc89f99a9197cd04cf}{intel\-::hexl\-::set\-\_\-worksize\-\_\-\-Key\-Switch} (uint64\-\_\-t ws)
+\begin{DoxyCompactList}\small\item\em Function set\-\_\-worksize\-\_\-\-Key\-Switch Reserves software resources for the Key\-Switch. \end{DoxyCompactList}\item 
+void \hyperlink{namespaceintel_1_1hexl_aafddb377dcb2c351cfc3e014428cfe42}{intel\-::hexl\-::\-Key\-Switch} (uint64\-\_\-t $\ast$result, const uint64\-\_\-t $\ast$t\-\_\-target\-\_\-iter\-\_\-ptr, uint64\-\_\-t n, uint64\-\_\-t decomp\-\_\-modulus\-\_\-size, uint64\-\_\-t key\-\_\-modulus\-\_\-size, uint64\-\_\-t rns\-\_\-modulus\-\_\-size, uint64\-\_\-t key\-\_\-component\-\_\-count, const uint64\-\_\-t $\ast$moduli, const uint64\-\_\-t $\ast$$\ast$k\-\_\-switch\-\_\-keys, const uint64\-\_\-t $\ast$modswitch\-\_\-factors, const uint64\-\_\-t $\ast$twiddle\-\_\-factors=nullptr)
+\begin{DoxyCompactList}\small\item\em Function Key\-Switch Executes Key\-Switch operation. \end{DoxyCompactList}\item 
+bool \hyperlink{namespaceintel_1_1hexl_ad36db7f99d2e70414645f961b723ab79}{intel\-::hexl\-::\-Key\-Switch\-Completed} ()
+\begin{DoxyCompactList}\small\item\em Function Key\-Switch\-Completed Executed after Key\-Switch to sync up the outstanding Key\-Switch tasks. \end{DoxyCompactList}\item 
+void \hyperlink{namespaceintel_1_1hexl_aeaae249dd080bb7cb40aea745c3df207}{intel\-::hexl\-::\-\_\-set\-\_\-worksize\-\_\-\-N\-T\-T} (uint64\-\_\-t ws)
+\begin{DoxyCompactList}\small\item\em Function \-\_\-set\-\_\-worksize\-\_\-\-N\-T\-T \mbox{[}\mbox{[}deprecated\mbox{]}\mbox{]} Reserves software resources for the Number Theoretic Transform. \end{DoxyCompactList}\item 
+void \hyperlink{namespaceintel_1_1hexl_a8d7f5d51e5d7683ea691f86ef57d2c40}{intel\-::hexl\-::\-\_\-\-N\-T\-T} (uint64\-\_\-t $\ast$operand, const uint64\-\_\-t $\ast$root\-\_\-of\-\_\-unity\-\_\-powers, const uint64\-\_\-t $\ast$precon\-\_\-root\-\_\-of\-\_\-unity\-\_\-powers, uint64\-\_\-t coeff\-\_\-modulus, uint64\-\_\-t n)
+\begin{DoxyCompactList}\small\item\em Function \-\_\-\-N\-T\-T \mbox{[}\mbox{[}deprecated\mbox{]}\mbox{]} Executes in place the Number Theoretic Transform. \end{DoxyCompactList}\item 
+bool \hyperlink{namespaceintel_1_1hexl_a410ec4dc67583d07f4f7d1c1000c24e0}{intel\-::hexl\-::\-\_\-\-N\-T\-T\-Completed} ()
+\begin{DoxyCompactList}\small\item\em Function \-\_\-\-N\-T\-T\-Completed \mbox{[}\mbox{[}deprecated\mbox{]}\mbox{]} Executed after the N\-T\-T to wrap up the computation No parameters. \end{DoxyCompactList}\item 
+void \hyperlink{namespaceintel_1_1hexl_afc56a7a0c0870b87c5445de89a0fce81}{intel\-::hexl\-::\-\_\-set\-\_\-worksize\-\_\-\-I\-N\-T\-T} (uint64\-\_\-t ws)
+\begin{DoxyCompactList}\small\item\em Function \-\_\-set\-\_\-worksize\-\_\-\-I\-N\-T\-T \mbox{[}\mbox{[}deprecated\mbox{]}\mbox{]} Reserves software resources for the inverse Number Theoretic Transform. \end{DoxyCompactList}\item 
+void \hyperlink{namespaceintel_1_1hexl_a69f85dd306cce099d7d68dfd3567bd3c}{intel\-::hexl\-::\-\_\-\-I\-N\-T\-T} (uint64\-\_\-t $\ast$operand, const uint64\-\_\-t $\ast$inv\-\_\-root\-\_\-of\-\_\-unity\-\_\-powers, const uint64\-\_\-t $\ast$precon\-\_\-inv\-\_\-root\-\_\-of\-\_\-unity\-\_\-powers, uint64\-\_\-t coeff\-\_\-modulus, uint64\-\_\-t inv\-\_\-n, uint64\-\_\-t inv\-\_\-n\-\_\-w, uint64\-\_\-t n)
+\begin{DoxyCompactList}\small\item\em Function \-\_\-\-I\-N\-T\-T \mbox{[}\mbox{[}deprecated\mbox{]}\mbox{]} Executes in place the inverse Number Theoretic Transform. \end{DoxyCompactList}\item 
+bool \hyperlink{namespaceintel_1_1hexl_aea83cf5603f96ba86ad15d99d997fe49}{intel\-::hexl\-::\-\_\-\-I\-N\-T\-T\-Completed} ()
+\begin{DoxyCompactList}\small\item\em Function \-\_\-\-I\-N\-T\-T\-Completed \mbox{[}\mbox{[}deprecated\mbox{]}\mbox{]} Executed after the I\-N\-T\-T to wrap up the computation No parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}

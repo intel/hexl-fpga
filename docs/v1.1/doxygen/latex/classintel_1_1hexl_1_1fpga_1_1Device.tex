@@ -1,0 +1,108 @@
+\hypertarget{classintel_1_1hexl_1_1fpga_1_1Device}{\section{intel\-:\-:hexl\-:\-:fpga\-:\-:Device Class Reference}
+\label{classintel_1_1hexl_1_1fpga_1_1Device}\index{intel\-::hexl\-::fpga\-::\-Device@{intel\-::hexl\-::fpga\-::\-Device}}
+}
+
+
+Class \hyperlink{classintel_1_1hexl_1_1fpga_1_1Device}{Device}.  
+
+
+
+
+{\ttfamily \#include $<$fpga.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classintel_1_1hexl_1_1fpga_1_1Device_a0cfde50893b2950ef08ec71631bb9613}{Device} (const cl\-\_\-device\-\_\-id \&device, \hyperlink{classintel_1_1hexl_1_1fpga_1_1Buffer}{Buffer} \&buffer, std\-::shared\-\_\-future$<$ bool $>$ exit\-\_\-signal, uint64\-\_\-t coeff\-\_\-size, uint32\-\_\-t modulus\-\_\-size, uint64\-\_\-t batch\-\_\-size\-\_\-dyadic\-\_\-multiply, uint64\-\_\-t batch\-\_\-size\-\_\-ntt, uint64\-\_\-t batch\-\_\-size\-\_\-intt, uint64\-\_\-t batch\-\_\-size\-\_\-\-Key\-Switch, uint32\-\_\-t debug)
+\item 
+\hyperlink{classintel_1_1hexl_1_1fpga_1_1Device_ad7adf350f85c3d0b66607424d3281d5f}{$\sim$\-Device} ()
+\item 
+\hyperlink{classintel_1_1hexl_1_1fpga_1_1Device_a17f72dc8cfd551066bfb89138c638cf2}{Device} (const \hyperlink{classintel_1_1hexl_1_1fpga_1_1Device}{Device} \&)=delete
+\item 
+\hyperlink{classintel_1_1hexl_1_1fpga_1_1Device}{Device} \& \hyperlink{classintel_1_1hexl_1_1fpga_1_1Device_a9701bf457e5d3dede4de9cc1442d24a9}{operator=} (const \hyperlink{classintel_1_1hexl_1_1fpga_1_1Device}{Device} \&)=delete
+\item 
+void \hyperlink{classintel_1_1hexl_1_1fpga_1_1Device_a91c2dde32f856517ba1f90e6191d2850}{run} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class \hyperlink{classintel_1_1hexl_1_1fpga_1_1Device}{Device}. 
+
+\hyperlink{classintel_1_1hexl_1_1fpga_1_1Device}{Device} Constructor 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em device} & choice between emulation and F\-P\-G\-A \\
+\hline
+\mbox{\tt in}  & {\em buffer} & memory blob where objects are stored \\
+\hline
+\mbox{\tt in}  & {\em exit\-\_\-signal} & flag signaling data available \\
+\hline
+\mbox{\tt in}  & {\em coeff\-\_\-size} & polynomial coefficient size \\
+\hline
+\mbox{\tt in}  & {\em modulus\-\_\-size} & modulus size \\
+\hline
+\mbox{\tt in}  & {\em batch\-\_\-size\-\_\-dyadic\-\_\-multiply} & batch size for the multiplication operation \\
+\hline
+\mbox{\tt in}  & {\em batch\-\_\-size\-\_\-ntt} & batch size for the N\-T\-T operation \\
+\hline
+\mbox{\tt in}  & {\em batch\-\_\-size\-\_\-intt} & batch size for the I\-N\-T\-T operation \\
+\hline
+\mbox{\tt in}  & {\em batch\-\_\-size\-\_\-\-Key\-Switch} & batch size for the Key\-Switch operation \\
+\hline
+\mbox{\tt in}  & {\em debug} & flag indicating debug mode\\
+\hline
+\end{DoxyParams}
+run function to launch the operation on the F\-P\-G\-A 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classintel_1_1hexl_1_1fpga_1_1Device_a0cfde50893b2950ef08ec71631bb9613}{\index{intel\-::hexl\-::fpga\-::\-Device@{intel\-::hexl\-::fpga\-::\-Device}!Device@{Device}}
+\index{Device@{Device}!intel::hexl::fpga::Device@{intel\-::hexl\-::fpga\-::\-Device}}
+\subsubsection[{Device}]{\setlength{\rightskip}{0pt plus 5cm}intel\-::hexl\-::fpga\-::\-Device\-::\-Device (
+\begin{DoxyParamCaption}
+\item[{const cl\-\_\-device\-\_\-id \&}]{device, }
+\item[{{\bf Buffer} \&}]{buffer, }
+\item[{std\-::shared\-\_\-future$<$ bool $>$}]{exit\-\_\-signal, }
+\item[{uint64\-\_\-t}]{coeff\-\_\-size, }
+\item[{uint32\-\_\-t}]{modulus\-\_\-size, }
+\item[{uint64\-\_\-t}]{batch\-\_\-size\-\_\-dyadic\-\_\-multiply, }
+\item[{uint64\-\_\-t}]{batch\-\_\-size\-\_\-ntt, }
+\item[{uint64\-\_\-t}]{batch\-\_\-size\-\_\-intt, }
+\item[{uint64\-\_\-t}]{batch\-\_\-size\-\_\-\-Key\-Switch, }
+\item[{uint32\-\_\-t}]{debug}
+\end{DoxyParamCaption}
+)}}\label{classintel_1_1hexl_1_1fpga_1_1Device_a0cfde50893b2950ef08ec71631bb9613}
+\hypertarget{classintel_1_1hexl_1_1fpga_1_1Device_ad7adf350f85c3d0b66607424d3281d5f}{\index{intel\-::hexl\-::fpga\-::\-Device@{intel\-::hexl\-::fpga\-::\-Device}!$\sim$\-Device@{$\sim$\-Device}}
+\index{$\sim$\-Device@{$\sim$\-Device}!intel::hexl::fpga::Device@{intel\-::hexl\-::fpga\-::\-Device}}
+\subsubsection[{$\sim$\-Device}]{\setlength{\rightskip}{0pt plus 5cm}intel\-::hexl\-::fpga\-::\-Device\-::$\sim$\-Device (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classintel_1_1hexl_1_1fpga_1_1Device_ad7adf350f85c3d0b66607424d3281d5f}
+\hypertarget{classintel_1_1hexl_1_1fpga_1_1Device_a17f72dc8cfd551066bfb89138c638cf2}{\index{intel\-::hexl\-::fpga\-::\-Device@{intel\-::hexl\-::fpga\-::\-Device}!Device@{Device}}
+\index{Device@{Device}!intel::hexl::fpga::Device@{intel\-::hexl\-::fpga\-::\-Device}}
+\subsubsection[{Device}]{\setlength{\rightskip}{0pt plus 5cm}intel\-::hexl\-::fpga\-::\-Device\-::\-Device (
+\begin{DoxyParamCaption}
+\item[{const {\bf Device} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [delete]}}}\label{classintel_1_1hexl_1_1fpga_1_1Device_a17f72dc8cfd551066bfb89138c638cf2}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classintel_1_1hexl_1_1fpga_1_1Device_a9701bf457e5d3dede4de9cc1442d24a9}{\index{intel\-::hexl\-::fpga\-::\-Device@{intel\-::hexl\-::fpga\-::\-Device}!operator=@{operator=}}
+\index{operator=@{operator=}!intel::hexl::fpga::Device@{intel\-::hexl\-::fpga\-::\-Device}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Device}\& intel\-::hexl\-::fpga\-::\-Device\-::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Device} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [delete]}}}\label{classintel_1_1hexl_1_1fpga_1_1Device_a9701bf457e5d3dede4de9cc1442d24a9}
+\hypertarget{classintel_1_1hexl_1_1fpga_1_1Device_a91c2dde32f856517ba1f90e6191d2850}{\index{intel\-::hexl\-::fpga\-::\-Device@{intel\-::hexl\-::fpga\-::\-Device}!run@{run}}
+\index{run@{run}!intel::hexl::fpga::Device@{intel\-::hexl\-::fpga\-::\-Device}}
+\subsubsection[{run}]{\setlength{\rightskip}{0pt plus 5cm}void intel\-::hexl\-::fpga\-::\-Device\-::run (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classintel_1_1hexl_1_1fpga_1_1Device_a91c2dde32f856517ba1f90e6191d2850}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{fpga_8h}{fpga.\-h}\end{DoxyCompactItemize}

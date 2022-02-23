@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classkeyswitch" kind="class" prot="public">
+    <compoundname>keyswitch</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Fixture</basecompoundref>
+      <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classkeyswitch_1a44b4c789ec6ac14a37624f4cc5c36311" prot="public" static="no">
+        <name>@2</name>
+        <enumvalue id="classkeyswitch_1a44b4c789ec6ac14a37624f4cc5c36311af27c28f98028462aafb3baf3acf2e401" prot="public">
+          <name>ITERATIONS</name>
+          <initializer>= 40</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" line="82" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" bodystart="82" bodyend="82"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classkeyswitch_1a5f2fb93b57ea15b90ab5222a364e45db" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structKeySwitchTestVector" kindref="compound">KeySwitchTestVector</ref> &gt;</type>
+        <definition>std::vector&lt;KeySwitchTestVector&gt; keyswitch::test_vectors_</definition>
+        <argsstring></argsstring>
+        <name>test_vectors_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" line="85" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classkeyswitch_1acb272749c009366af60dc265f3118747" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t keyswitch::test_vector_size_</definition>
+        <argsstring></argsstring>
+        <name>test_vector_size_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" line="86" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classkeyswitch_1a57db49fef33a51c209d8797f2dc43ab9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt; std::string &gt; keyswitch::glob</definition>
+        <argsstring>(const char *pattern)</argsstring>
+        <name>glob</name>
+        <param>
+          <type>const char *</type>
+          <declname>pattern</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" line="78" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" bodystart="89" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="classkeyswitch_1a2ab9c474f05db3da844fd06672b7ef4c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void keyswitch::setup_keyswitch</definition>
+        <argsstring>(const std::vector&lt; std::string &gt; &amp;files)</argsstring>
+        <name>setup_keyswitch</name>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>files</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" line="79" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" bodystart="102" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="classkeyswitch_1a929b0b812b0e43dcee02a7223ad65da1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void keyswitch::bench_keyswitch</definition>
+        <argsstring>()</argsstring>
+        <name>bench_keyswitch</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" line="80" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" bodystart="113" bodyend="130"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="82">
+        <label>Fixture</label>
+      </node>
+      <node id="81">
+        <label>keyswitch</label>
+        <link refid="classkeyswitch"/>
+        <childnode refid="82" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="84">
+        <label>Fixture</label>
+      </node>
+      <node id="83">
+        <label>keyswitch</label>
+        <link refid="classkeyswitch"/>
+        <childnode refid="84" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" line="76" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" bodystart="76" bodyend="87"/>
+    <listofallmembers>
+      <member refid="classkeyswitch_1a929b0b812b0e43dcee02a7223ad65da1" prot="public" virt="non-virtual"><scope>keyswitch</scope><name>bench_keyswitch</name></member>
+      <member refid="classkeyswitch_1a57db49fef33a51c209d8797f2dc43ab9" prot="public" virt="non-virtual"><scope>keyswitch</scope><name>glob</name></member>
+      <member refid="classkeyswitch_1a44b4c789ec6ac14a37624f4cc5c36311af27c28f98028462aafb3baf3acf2e401" prot="public" virt="non-virtual"><scope>keyswitch</scope><name>ITERATIONS</name></member>
+      <member refid="classkeyswitch_1a2ab9c474f05db3da844fd06672b7ef4c" prot="public" virt="non-virtual"><scope>keyswitch</scope><name>setup_keyswitch</name></member>
+      <member refid="classkeyswitch_1acb272749c009366af60dc265f3118747" prot="private" virt="non-virtual"><scope>keyswitch</scope><name>test_vector_size_</name></member>
+      <member refid="classkeyswitch_1a5f2fb93b57ea15b90ab5222a364e45db" prot="private" virt="non-virtual"><scope>keyswitch</scope><name>test_vectors_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

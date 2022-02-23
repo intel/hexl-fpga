@@ -1,0 +1,1160 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classintel_1_1hexl_1_1fpga_1_1Device" kind="class" prot="public">
+    <compoundname>intel::hexl::fpga::Device</compoundname>
+    <includes refid="fpga_8h" local="no">fpga.h</includes>
+      <sectiondef kind="private-type">
+      <memberdef kind="enum" id="classintel_1_1hexl_1_1fpga_1_1Device_1a06ddfb249fe8b2ba7626c08325f9dbeb" prot="private" static="no">
+        <name>@1</name>
+        <enumvalue id="classintel_1_1hexl_1_1fpga_1_1Device_1a06ddfb249fe8b2ba7626c08325f9dbeba0fb66fceed807fc9d9ea8d7a9dc3bcbf" prot="private">
+          <name>CREDIT</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="616" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="616" bodyend="616"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1a1e5b6c83a8cb3d322c225a03807099a1" prot="private" static="no" mutable="no">
+        <type>const cl_device_id &amp;</type>
+        <definition>const cl_device_id&amp; intel::hexl::fpga::Device::device_</definition>
+        <argsstring></argsstring>
+        <name>device_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="648" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="648" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1a07e03404a01112457e4e9f6f23f76638" prot="private" static="no" mutable="no">
+        <type><ref refid="classintel_1_1hexl_1_1fpga_1_1Buffer" kindref="compound">Buffer</ref> &amp;</type>
+        <definition>Buffer&amp; intel::hexl::fpga::Device::buffer_</definition>
+        <argsstring></argsstring>
+        <name>buffer_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="649" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="649" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1adbfc963be698f810f1435e598c78724a" prot="private" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int intel::hexl::fpga::Device::credit_</definition>
+        <argsstring></argsstring>
+        <name>credit_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="650" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="650" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1a41beed852225aff58e2e78be568286ca" prot="private" static="no" mutable="no">
+        <type>std::shared_future&lt; bool &gt;</type>
+        <definition>std::shared_future&lt;bool&gt; intel::hexl::fpga::Device::future_exit_</definition>
+        <argsstring></argsstring>
+        <name>future_exit_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="651" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="651" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1ad4e2f366947f0cafdc35ea310ec3f52f" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int intel::hexl::fpga::Device::id_</definition>
+        <argsstring></argsstring>
+        <name>id_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="652" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="652" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1a04597e131055384079c627ed225aed2a" prot="private" static="no" mutable="no">
+        <type><ref refid="namespaceintel_1_1hexl_1_1fpga_1a9f07798cd59a71b9f57156192f7bf2f6" kindref="member">kernel_t</ref></type>
+        <definition>kernel_t intel::hexl::fpga::Device::kernel_type_</definition>
+        <argsstring></argsstring>
+        <name>kernel_type_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="654" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="654" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1a9096930ca91c85d1a52f71a681ae1e0f" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject" kindref="compound">FPGAObject</ref> * &gt;</type>
+        <definition>std::vector&lt;FPGAObject*&gt; intel::hexl::fpga::Device::fpgaObjects_</definition>
+        <argsstring></argsstring>
+        <name>fpgaObjects_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="656" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="656" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1a236bd0b92782f69e3d063b65c9922c67" prot="private" static="no" mutable="no">
+        <type>cl_context</type>
+        <definition>cl_context intel::hexl::fpga::Device::context_</definition>
+        <argsstring></argsstring>
+        <name>context_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="658" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="658" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1a2a8ab49dfccf6e42878384029487347f" prot="private" static="no" mutable="no">
+        <type>cl_program</type>
+        <definition>cl_program intel::hexl::fpga::Device::program_</definition>
+        <argsstring></argsstring>
+        <name>program_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="659" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="659" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1a8cf76bd4cf42ca25e944c0bffeed1778" prot="private" static="no" mutable="no">
+        <type>cl_command_queue</type>
+        <definition>cl_command_queue intel::hexl::fpga::Device::dyadic_multiply_input_queue_</definition>
+        <argsstring></argsstring>
+        <name>dyadic_multiply_input_queue_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="662" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="662" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1acb4babd0de62905984d5f711d3d98a7e" prot="private" static="no" mutable="no">
+        <type>cl_command_queue</type>
+        <definition>cl_command_queue intel::hexl::fpga::Device::dyadic_multiply_output_queue_</definition>
+        <argsstring></argsstring>
+        <name>dyadic_multiply_output_queue_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="663" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="663" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1a8be92b57f5b8344585f02783c3b2f9fc" prot="private" static="no" mutable="no">
+        <type>cl_kernel</type>
+        <definition>cl_kernel intel::hexl::fpga::Device::dyadic_multiply_input_fifo_kernel_</definition>
+        <argsstring></argsstring>
+        <name>dyadic_multiply_input_fifo_kernel_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="664" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="664" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1a270c89237532570c138708c08a8d445f" prot="private" static="no" mutable="no">
+        <type>cl_kernel</type>
+        <definition>cl_kernel intel::hexl::fpga::Device::dyadic_multiply_output_fifo_nb_kernel_</definition>
+        <argsstring></argsstring>
+        <name>dyadic_multiply_output_fifo_nb_kernel_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="665" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="665" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1af3ddd7d85eca60cb5b4f07728b17dc06" prot="private" static="no" mutable="no">
+        <type>uint64_t *</type>
+        <definition>uint64_t* intel::hexl::fpga::Device::dyadic_multiply_results_out_svm_</definition>
+        <argsstring></argsstring>
+        <name>dyadic_multiply_results_out_svm_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="667" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="667" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1a04f9e71d9e7731146812ed67684fb0c7" prot="private" static="no" mutable="no">
+        <type>int *</type>
+        <definition>int* intel::hexl::fpga::Device::dyadic_multiply_tag_out_svm_</definition>
+        <argsstring></argsstring>
+        <name>dyadic_multiply_tag_out_svm_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="668" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="668" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1a570b0ece6571ee9536e614209356c2ee" prot="private" static="no" mutable="no">
+        <type>int *</type>
+        <definition>int* intel::hexl::fpga::Device::dyadic_multiply_results_out_valid_svm_</definition>
+        <argsstring></argsstring>
+        <name>dyadic_multiply_results_out_valid_svm_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="669" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="669" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1a425f5876c1c57e59561f8ddd78ccd757" prot="private" static="no" mutable="no">
+        <type>cl_command_queue</type>
+        <definition>cl_command_queue intel::hexl::fpga::Device::ntt_load_queue_</definition>
+        <argsstring></argsstring>
+        <name>ntt_load_queue_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="673" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="673" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1ad7938bff593a9097cf6e0e863f3fc6e9" prot="private" static="no" mutable="no">
+        <type>cl_command_queue</type>
+        <definition>cl_command_queue intel::hexl::fpga::Device::ntt_store_queue_</definition>
+        <argsstring></argsstring>
+        <name>ntt_store_queue_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="674" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="674" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1a73fa87ccbfe7a587ed4764c12f436a8d" prot="private" static="no" mutable="no">
+        <type>cl_kernel</type>
+        <definition>cl_kernel intel::hexl::fpga::Device::ntt_load_kernel_</definition>
+        <argsstring></argsstring>
+        <name>ntt_load_kernel_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="675" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="675" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1a2bc97197833c4a47e4801b063ca68b24" prot="private" static="no" mutable="no">
+        <type>cl_kernel</type>
+        <definition>cl_kernel intel::hexl::fpga::Device::ntt_store_kernel_</definition>
+        <argsstring></argsstring>
+        <name>ntt_store_kernel_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="676" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="676" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1abec624d6f67bf7ab9b64b251ffd256da" prot="private" static="no" mutable="no">
+        <type>uint64_t *</type>
+        <definition>uint64_t* intel::hexl::fpga::Device::NTT_coeff_poly_svm_</definition>
+        <argsstring></argsstring>
+        <name>NTT_coeff_poly_svm_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="678" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="678" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1ac3641ca4323b6b106563a8051baee4fc" prot="private" static="no" mutable="no">
+        <type>cl_command_queue</type>
+        <definition>cl_command_queue intel::hexl::fpga::Device::intt_load_queue_</definition>
+        <argsstring></argsstring>
+        <name>intt_load_queue_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="681" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="681" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1ac36e9b16fa6cca1118f27fc7378db7d5" prot="private" static="no" mutable="no">
+        <type>cl_command_queue</type>
+        <definition>cl_command_queue intel::hexl::fpga::Device::intt_store_queue_</definition>
+        <argsstring></argsstring>
+        <name>intt_store_queue_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="682" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="682" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1a4904428584d6d672159c06304b02b5b7" prot="private" static="no" mutable="no">
+        <type>cl_kernel</type>
+        <definition>cl_kernel intel::hexl::fpga::Device::intt_load_kernel_</definition>
+        <argsstring></argsstring>
+        <name>intt_load_kernel_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="683" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="683" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1ae10ed043f9909b5a6d5bc6288838fc41" prot="private" static="no" mutable="no">
+        <type>cl_kernel</type>
+        <definition>cl_kernel intel::hexl::fpga::Device::intt_store_kernel_</definition>
+        <argsstring></argsstring>
+        <name>intt_store_kernel_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="684" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="684" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1af39d0a82a2e3b20781b27ce831fa1c02" prot="private" static="no" mutable="no">
+        <type>uint64_t *</type>
+        <definition>uint64_t* intel::hexl::fpga::Device::INTT_coeff_poly_svm_</definition>
+        <argsstring></argsstring>
+        <name>INTT_coeff_poly_svm_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="686" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="686" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1a10ef0e0802106dbb463f029f9f433475" prot="private" static="no" mutable="no">
+        <type>cl_mem</type>
+        <definition>cl_mem intel::hexl::fpga::Device::KeySwitch_mem_root_of_unity_powers_</definition>
+        <argsstring></argsstring>
+        <name>KeySwitch_mem_root_of_unity_powers_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="690" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="690" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1a9e1e7e87a7d83562608a1fcf7796c683" prot="private" static="no" mutable="no">
+        <type>cl_command_queue</type>
+        <definition>cl_command_queue intel::hexl::fpga::Device::KeySwitch_queues_[KEYSWITCH_NUM_KERNELS]</definition>
+        <argsstring>[KEYSWITCH_NUM_KERNELS]</argsstring>
+        <name>KeySwitch_queues_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="691" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="691" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1a880e12062b9d2c60a57df30870701c8d" prot="private" static="no" mutable="no">
+        <type>cl_kernel</type>
+        <definition>cl_kernel intel::hexl::fpga::Device::KeySwitch_kernels_[KEYSWITCH_NUM_KERNELS]</definition>
+        <argsstring>[KEYSWITCH_NUM_KERNELS]</argsstring>
+        <name>KeySwitch_kernels_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="692" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="692" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1a22ef85960468811cdd621e75eb77f627" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool intel::hexl::fpga::Device::KeySwitch_load_once_</definition>
+        <argsstring></argsstring>
+        <name>KeySwitch_load_once_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="693" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="693" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1a805f77611a03307836d35be41a1a8eff" prot="private" static="no" mutable="no">
+        <type>uint64_t *</type>
+        <definition>uint64_t* intel::hexl::fpga::Device::root_of_unity_powers_ptr_</definition>
+        <argsstring></argsstring>
+        <name>root_of_unity_powers_ptr_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="694" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="694" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1a190d28373e43da8d70eeedf741eef690" prot="private" static="no" mutable="no">
+        <type><ref refid="structintel_1_1hexl_1_1fpga_1_1KeySwitch__modulus__t" kindref="compound">KeySwitch_modulus_t</ref></type>
+        <definition>KeySwitch_modulus_t intel::hexl::fpga::Device::modulus_meta_</definition>
+        <argsstring></argsstring>
+        <name>modulus_meta_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="695" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="695" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1ab1b076b8440f24f0d98ce132f8a2b3a0" prot="private" static="no" mutable="no">
+        <type><ref refid="structintel_1_1hexl_1_1fpga_1_1KeySwitch__invn__t" kindref="compound">KeySwitch_invn_t</ref></type>
+        <definition>KeySwitch_invn_t intel::hexl::fpga::Device::invn_</definition>
+        <argsstring></argsstring>
+        <name>invn_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="696" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="696" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1a39f1a358e12909c73f90eaf113382ddc" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::Device::KeySwitch_id_</definition>
+        <argsstring></argsstring>
+        <name>KeySwitch_id_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="697" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="697" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1a3e7dda8c50ae285c87c33aeedc90ac3d" prot="private" static="no" mutable="no">
+        <type>cl_event</type>
+        <definition>cl_event intel::hexl::fpga::Device::KeySwitch_events_write_[2][128]</definition>
+        <argsstring>[2][128]</argsstring>
+        <name>KeySwitch_events_write_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="698" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="698" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1a244d89de28f5672aa72337bd6d49d3f8" prot="private" static="no" mutable="no">
+        <type>cl_event</type>
+        <definition>cl_event intel::hexl::fpga::Device::KeySwitch_events_enqueue_[2][2]</definition>
+        <argsstring>[2][2]</argsstring>
+        <name>KeySwitch_events_enqueue_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="699" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="699" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1aaa01c04d79047f41ac2d6ab34911a789" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; uint64_t **, <ref refid="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys" kindref="compound">KeySwitchMemKeys</ref> * &gt;</type>
+        <definition>std::unordered_map&lt;uint64_t**, KeySwitchMemKeys*&gt; intel::hexl::fpga::Device::keys_map_</definition>
+        <argsstring></argsstring>
+        <name>keys_map_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="700" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="700" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1a9fdd36c1bccf49127fd4e846eff0036f" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; uint64_t **, <ref refid="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys" kindref="compound">KeySwitchMemKeys</ref> * &gt;::iterator</type>
+        <definition>std::unordered_map&lt;uint64_t**, KeySwitchMemKeys*&gt;::iterator intel::hexl::fpga::Device::keys_map_iter_</definition>
+        <argsstring></argsstring>
+        <name>keys_map_iter_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="701" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="701" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1aa178379340997d74c095d108a5edc6dd" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t intel::hexl::fpga::Device::debug_</definition>
+        <argsstring></argsstring>
+        <name>debug_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="703" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="703" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1a2a7c3fd530413aa2fd5ad33d9ffeb011" prot="private" static="yes" mutable="no">
+        <type>int</type>
+        <definition>int intel::hexl::fpga::Device::device_id_</definition>
+        <argsstring></argsstring>
+        <name>device_id_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="653" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="653" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Device_1ab4d6ec7c261afb324cdfc8f25ae67f22" prot="private" static="yes" mutable="no">
+        <type>const std::unordered_map&lt; std::string, <ref refid="namespaceintel_1_1hexl_1_1fpga_1a9f07798cd59a71b9f57156192f7bf2f6" kindref="member">kernel_t</ref> &gt;</type>
+        <definition>const std::unordered_map&lt;std::string, kernel_t&gt; intel::hexl::fpga::Device::kernels</definition>
+        <argsstring></argsstring>
+        <name>kernels</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="704" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="704" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Device_1a0cfde50893b2950ef08ec71631bb9613" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>intel::hexl::fpga::Device::Device</definition>
+        <argsstring>(const cl_device_id &amp;device, Buffer &amp;buffer, std::shared_future&lt; bool &gt; exit_signal, uint64_t coeff_size, uint32_t modulus_size, uint64_t batch_size_dyadic_multiply, uint64_t batch_size_ntt, uint64_t batch_size_intt, uint64_t batch_size_KeySwitch, uint32_t debug)</argsstring>
+        <name>Device</name>
+        <param>
+          <type>const cl_device_id &amp;</type>
+          <declname>device</declname>
+        </param>
+        <param>
+          <type><ref refid="classintel_1_1hexl_1_1fpga_1_1Buffer" kindref="compound">Buffer</ref> &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>std::shared_future&lt; bool &gt;</type>
+          <declname>exit_signal</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>coeff_size</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>modulus_size</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>batch_size_dyadic_multiply</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>batch_size_ntt</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>batch_size_intt</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>batch_size_KeySwitch</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>debug</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="605" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Device_1ad7adf350f85c3d0b66607424d3281d5f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>intel::hexl::fpga::Device::~Device</definition>
+        <argsstring>()</argsstring>
+        <name>~Device</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="610" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Device_1a17f72dc8cfd551066bfb89138c638cf2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>intel::hexl::fpga::Device::Device</definition>
+        <argsstring>(const Device &amp;)=delete</argsstring>
+        <name>Device</name>
+        <param>
+          <type>const <ref refid="classintel_1_1hexl_1_1fpga_1_1Device" kindref="compound">Device</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="611" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Device_1a9701bf457e5d3dede4de9cc1442d24a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classintel_1_1hexl_1_1fpga_1_1Device" kindref="compound">Device</ref> &amp;</type>
+        <definition>Device&amp; intel::hexl::fpga::Device::operator=</definition>
+        <argsstring>(const Device &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classintel_1_1hexl_1_1fpga_1_1Device" kindref="compound">Device</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="612" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Device_1a91c2dde32f856517ba1f90e6191d2850" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::Device::run</definition>
+        <argsstring>()</argsstring>
+        <name>run</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="613" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Device_1a7666ea6c2ca4a755732b1018694fd6d8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::Device::process_blocking_api</definition>
+        <argsstring>()</argsstring>
+        <name>process_blocking_api</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="618" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Device_1a78ae906d7d627ddcf03cb97a03b2499f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool intel::hexl::fpga::Device::process_input</definition>
+        <argsstring>(int index)</argsstring>
+        <name>process_input</name>
+        <param>
+          <type>int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="619" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Device_1a6288e51610b0aa1d4d5f6b93c4b7dd2b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool intel::hexl::fpga::Device::process_output</definition>
+        <argsstring>()</argsstring>
+        <name>process_output</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="620" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Device_1a3e6f08ae6cdfa14c986cf990c2090481" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool intel::hexl::fpga::Device::process_output_dyadic_multiply</definition>
+        <argsstring>()</argsstring>
+        <name>process_output_dyadic_multiply</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="622" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Device_1a2adf29b9641243dbd8c934ae9835614a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool intel::hexl::fpga::Device::process_output_NTT</definition>
+        <argsstring>()</argsstring>
+        <name>process_output_NTT</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="623" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Device_1a139218328e71b16551b8d259eb5feebc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool intel::hexl::fpga::Device::process_output_INTT</definition>
+        <argsstring>()</argsstring>
+        <name>process_output_INTT</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="624" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Device_1afcc7cb8d86a7cb2e0277eba7d1e4af9d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool intel::hexl::fpga::Device::process_output_KeySwitch</definition>
+        <argsstring>()</argsstring>
+        <name>process_output_KeySwitch</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="625" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Device_1a6466a5f21aad38bdf80c96e86ed4963a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::Device::enqueue_input_data</definition>
+        <argsstring>(FPGAObject *fpga_obj)</argsstring>
+        <name>enqueue_input_data</name>
+        <param>
+          <type><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject" kindref="compound">FPGAObject</ref> *</type>
+          <declname>fpga_obj</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="627" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Device_1a07584717625224a8ce6794fc4cc76919" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::Device::enqueue_input_data_dyadic_multiply</definition>
+        <argsstring>(FPGAObject_DyadicMultiply *fpga_obj)</argsstring>
+        <name>enqueue_input_data_dyadic_multiply</name>
+        <param>
+          <type><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply" kindref="compound">FPGAObject_DyadicMultiply</ref> *</type>
+          <declname>fpga_obj</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="628" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Device_1a49a3596ae260edfc66da091212e89a32" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::Device::enqueue_input_data_NTT</definition>
+        <argsstring>(FPGAObject_NTT *fpga_obj)</argsstring>
+        <name>enqueue_input_data_NTT</name>
+        <param>
+          <type><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT" kindref="compound">FPGAObject_NTT</ref> *</type>
+          <declname>fpga_obj</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="630" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Device_1ad8d630cca93d7ffddabd5de74348a204" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::Device::enqueue_input_data_INTT</definition>
+        <argsstring>(FPGAObject_INTT *fpga_obj)</argsstring>
+        <name>enqueue_input_data_INTT</name>
+        <param>
+          <type><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT" kindref="compound">FPGAObject_INTT</ref> *</type>
+          <declname>fpga_obj</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="631" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Device_1a731eafbc6231076f76e6693619d47a10" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::Device::enqueue_input_data_KeySwitch</definition>
+        <argsstring>(FPGAObject_KeySwitch *fpga_obj)</argsstring>
+        <name>enqueue_input_data_KeySwitch</name>
+        <param>
+          <type><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch" kindref="compound">FPGAObject_KeySwitch</ref> *</type>
+          <declname>fpga_obj</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="632" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Device_1a55de2e7d79d818076998254bc60d4a11" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int intel::hexl::fpga::Device::device_id</definition>
+        <argsstring>()</argsstring>
+        <name>device_id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="634" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="634" bodyend="634"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Device_1ad38e12fcaaf580a8506c0eefc159a880" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::Device::KeySwitch_load_twiddles</definition>
+        <argsstring>(FPGAObject_KeySwitch *fpga_obj)</argsstring>
+        <name>KeySwitch_load_twiddles</name>
+        <param>
+          <type><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch" kindref="compound">FPGAObject_KeySwitch</ref> *</type>
+          <declname>fpga_obj</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="636" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Device_1a239584998ade9150df9b8e4fbfae96d7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys" kindref="compound">KeySwitchMemKeys</ref> *</type>
+        <definition>KeySwitchMemKeys* intel::hexl::fpga::Device::KeySwitch_check_keys</definition>
+        <argsstring>(uint64_t **keys)</argsstring>
+        <name>KeySwitch_check_keys</name>
+        <param>
+          <type>uint64_t **</type>
+          <declname>keys</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="637" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Device_1afe34917c699b0be3cc26a5cfe09fdb84" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys" kindref="compound">KeySwitchMemKeys</ref> *</type>
+        <definition>KeySwitchMemKeys* intel::hexl::fpga::Device::KeySwitch_load_keys</definition>
+        <argsstring>(FPGAObject_KeySwitch *fpga_obj)</argsstring>
+        <name>KeySwitch_load_keys</name>
+        <param>
+          <type><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch" kindref="compound">FPGAObject_KeySwitch</ref> *</type>
+          <declname>fpga_obj</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="638" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Device_1a27b7891577af3c8e502f6a33a99b8929" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::Device::build_modulus_meta</definition>
+        <argsstring>(FPGAObject_KeySwitch *fpga_obj)</argsstring>
+        <name>build_modulus_meta</name>
+        <param>
+          <type><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch" kindref="compound">FPGAObject_KeySwitch</ref> *</type>
+          <declname>fpga_obj</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="639" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Device_1ae96bd832a01848653841ceba4bbf3ae9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::Device::build_invn_meta</definition>
+        <argsstring>(FPGAObject_KeySwitch *fpga_obj)</argsstring>
+        <name>build_invn_meta</name>
+        <param>
+          <type><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch" kindref="compound">FPGAObject_KeySwitch</ref> *</type>
+          <declname>fpga_obj</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="640" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Device_1a6fe8d545c7d5ba67184be850775c0edd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::Device::KeySwitch_read_output</definition>
+        <argsstring>()</argsstring>
+        <name>KeySwitch_read_output</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="641" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Device_1ad7c9668dfdef0b847963e594ff703b5c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::Device::precompute_modulus_k</definition>
+        <argsstring>(uint64_t modulus)</argsstring>
+        <name>precompute_modulus_k</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>modulus</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="643" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Device_1abdfb6d14c987f0018c06dabd210ac676" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespaceintel_1_1hexl_1_1fpga_1a9f07798cd59a71b9f57156192f7bf2f6" kindref="member">kernel_t</ref></type>
+        <definition>kernel_t intel::hexl::fpga::Device::get_kernel_type</definition>
+        <argsstring>()</argsstring>
+        <name>get_kernel_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="645" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Device_1a6c43de48c42f7dfdd67be2ed0e2cc148" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string intel::hexl::fpga::Device::get_bitstream_name</definition>
+        <argsstring>()</argsstring>
+        <name>get_bitstream_name</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="646" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class <ref refid="classintel_1_1hexl_1_1fpga_1_1Device" kindref="compound">Device</ref>. </para>    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classintel_1_1hexl_1_1fpga_1_1Device" kindref="compound">Device</ref> Constructor <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">device</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>choice between emulation and FPGA </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>memory blob where objects are stored </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">exit_signal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>flag signaling data available </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coeff_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>polynomial coefficient size </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">modulus_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>modulus size </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">batch_size_dyadic_multiply</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>batch size for the multiplication operation </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">batch_size_ntt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>batch size for the NTT operation </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">batch_size_intt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>batch size for the INTT operation </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">batch_size_KeySwitch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>batch size for the KeySwitch operation </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">debug</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>flag indicating debug mode</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+run function to launch the operation on the FPGA </para>    </detaileddescription>
+    <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="603" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="603" bodyend="705"/>
+    <listofallmembers>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a07e03404a01112457e4e9f6f23f76638" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>buffer_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1ae96bd832a01848653841ceba4bbf3ae9" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>build_invn_meta</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a27b7891577af3c8e502f6a33a99b8929" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>build_modulus_meta</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a236bd0b92782f69e3d063b65c9922c67" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>context_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a06ddfb249fe8b2ba7626c08325f9dbeba0fb66fceed807fc9d9ea8d7a9dc3bcbf" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>CREDIT</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1adbfc963be698f810f1435e598c78724a" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>credit_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1aa178379340997d74c095d108a5edc6dd" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>debug_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a0cfde50893b2950ef08ec71631bb9613" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>Device</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a17f72dc8cfd551066bfb89138c638cf2" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>Device</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a1e5b6c83a8cb3d322c225a03807099a1" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>device_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a55de2e7d79d818076998254bc60d4a11" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>device_id</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a2a7c3fd530413aa2fd5ad33d9ffeb011" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>device_id_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a8be92b57f5b8344585f02783c3b2f9fc" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>dyadic_multiply_input_fifo_kernel_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a8cf76bd4cf42ca25e944c0bffeed1778" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>dyadic_multiply_input_queue_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a270c89237532570c138708c08a8d445f" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>dyadic_multiply_output_fifo_nb_kernel_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1acb4babd0de62905984d5f711d3d98a7e" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>dyadic_multiply_output_queue_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1af3ddd7d85eca60cb5b4f07728b17dc06" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>dyadic_multiply_results_out_svm_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a570b0ece6571ee9536e614209356c2ee" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>dyadic_multiply_results_out_valid_svm_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a04f9e71d9e7731146812ed67684fb0c7" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>dyadic_multiply_tag_out_svm_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a6466a5f21aad38bdf80c96e86ed4963a" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>enqueue_input_data</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a07584717625224a8ce6794fc4cc76919" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>enqueue_input_data_dyadic_multiply</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1ad8d630cca93d7ffddabd5de74348a204" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>enqueue_input_data_INTT</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a731eafbc6231076f76e6693619d47a10" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>enqueue_input_data_KeySwitch</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a49a3596ae260edfc66da091212e89a32" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>enqueue_input_data_NTT</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a9096930ca91c85d1a52f71a681ae1e0f" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>fpgaObjects_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a41beed852225aff58e2e78be568286ca" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>future_exit_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a6c43de48c42f7dfdd67be2ed0e2cc148" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>get_bitstream_name</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1abdfb6d14c987f0018c06dabd210ac676" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>get_kernel_type</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1ad4e2f366947f0cafdc35ea310ec3f52f" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>id_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1af39d0a82a2e3b20781b27ce831fa1c02" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>INTT_coeff_poly_svm_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a4904428584d6d672159c06304b02b5b7" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>intt_load_kernel_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1ac3641ca4323b6b106563a8051baee4fc" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>intt_load_queue_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1ae10ed043f9909b5a6d5bc6288838fc41" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>intt_store_kernel_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1ac36e9b16fa6cca1118f27fc7378db7d5" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>intt_store_queue_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1ab1b076b8440f24f0d98ce132f8a2b3a0" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>invn_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a04597e131055384079c627ed225aed2a" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>kernel_type_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1ab4d6ec7c261afb324cdfc8f25ae67f22" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>kernels</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1aaa01c04d79047f41ac2d6ab34911a789" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>keys_map_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a9fdd36c1bccf49127fd4e846eff0036f" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>keys_map_iter_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a239584998ade9150df9b8e4fbfae96d7" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>KeySwitch_check_keys</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a244d89de28f5672aa72337bd6d49d3f8" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>KeySwitch_events_enqueue_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a3e7dda8c50ae285c87c33aeedc90ac3d" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>KeySwitch_events_write_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a39f1a358e12909c73f90eaf113382ddc" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>KeySwitch_id_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a880e12062b9d2c60a57df30870701c8d" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>KeySwitch_kernels_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1afe34917c699b0be3cc26a5cfe09fdb84" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>KeySwitch_load_keys</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a22ef85960468811cdd621e75eb77f627" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>KeySwitch_load_once_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1ad38e12fcaaf580a8506c0eefc159a880" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>KeySwitch_load_twiddles</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a10ef0e0802106dbb463f029f9f433475" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>KeySwitch_mem_root_of_unity_powers_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a9e1e7e87a7d83562608a1fcf7796c683" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>KeySwitch_queues_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a6fe8d545c7d5ba67184be850775c0edd" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>KeySwitch_read_output</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a190d28373e43da8d70eeedf741eef690" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>modulus_meta_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1abec624d6f67bf7ab9b64b251ffd256da" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>NTT_coeff_poly_svm_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a73fa87ccbfe7a587ed4764c12f436a8d" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>ntt_load_kernel_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a425f5876c1c57e59561f8ddd78ccd757" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>ntt_load_queue_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a2bc97197833c4a47e4801b063ca68b24" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>ntt_store_kernel_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1ad7938bff593a9097cf6e0e863f3fc6e9" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>ntt_store_queue_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a9701bf457e5d3dede4de9cc1442d24a9" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>operator=</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1ad7c9668dfdef0b847963e594ff703b5c" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>precompute_modulus_k</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a7666ea6c2ca4a755732b1018694fd6d8" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>process_blocking_api</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a78ae906d7d627ddcf03cb97a03b2499f" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>process_input</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a6288e51610b0aa1d4d5f6b93c4b7dd2b" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>process_output</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a3e6f08ae6cdfa14c986cf990c2090481" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>process_output_dyadic_multiply</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a139218328e71b16551b8d259eb5feebc" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>process_output_INTT</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1afcc7cb8d86a7cb2e0277eba7d1e4af9d" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>process_output_KeySwitch</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a2adf29b9641243dbd8c934ae9835614a" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>process_output_NTT</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a2a8ab49dfccf6e42878384029487347f" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>program_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a805f77611a03307836d35be41a1a8eff" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>root_of_unity_powers_ptr_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1a91c2dde32f856517ba1f90e6191d2850" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>run</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Device_1ad7adf350f85c3d0b66607424d3281d5f" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Device</scope><name>~Device</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

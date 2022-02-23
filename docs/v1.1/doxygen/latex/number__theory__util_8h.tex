@@ -1,0 +1,86 @@
+\hypertarget{number__theory__util_8h}{\section{number\-\_\-theory\-\_\-util.\-h File Reference}
+\label{number__theory__util_8h}\index{number\-\_\-theory\-\_\-util.\-h@{number\-\_\-theory\-\_\-util.\-h}}
+}
+{\ttfamily \#include $<$cstdint$>$}\\*
+{\ttfamily \#include $<$cmath$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$limits$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include \char`\"{}fpga\-\_\-assert.\-h\char`\"{}}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classintel_1_1hexl_1_1fpga_1_1MultiplyFactor}{intel\-::hexl\-::fpga\-::\-Multiply\-Factor}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceintel}{intel}
+\item 
+\hyperlink{namespaceintel_1_1hexl}{intel\-::hexl}
+\item 
+\hyperlink{namespaceintel_1_1hexl_1_1fpga}{intel\-::hexl\-::fpga}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{namespaceintel_1_1hexl_1_1fpga_a1e16bb896a629eb017fc92f87fe9b8d1}{intel\-::hexl\-::fpga\-::\-Is\-Power\-Of\-Two} (uint64\-\_\-t num)
+\item 
+uint64\-\_\-t \hyperlink{namespaceintel_1_1hexl_1_1fpga_ab2af2089c7624a4f2f6bb86a7744e6a1}{intel\-::hexl\-::fpga\-::\-M\-S\-B} (uint64\-\_\-t modulus)
+\item 
+uint64\-\_\-t \hyperlink{namespaceintel_1_1hexl_1_1fpga_afcbeef9c605f8d1384004d4a736d1e37}{intel\-::hexl\-::fpga\-::\-Log2} (uint64\-\_\-t x)
+\item 
+uint64\-\_\-t \hyperlink{namespaceintel_1_1hexl_1_1fpga_a5da7e2d76836d01351cc264ac98ca1f2}{intel\-::hexl\-::fpga\-::\-Maximum\-Value} (uint64\-\_\-t bits)
+\item 
+\hyperlink{utils-test_8hpp_ab76ef99db23830c7fec1e3019737cab4}{uint128\-\_\-t} \hyperlink{namespaceintel_1_1hexl_1_1fpga_abc78d586df607b1930db2e69ea14f1dc}{intel\-::hexl\-::fpga\-::\-Multiply\-U\-Int64} (uint64\-\_\-t x, uint64\-\_\-t y)
+\item 
+void \hyperlink{namespaceintel_1_1hexl_1_1fpga_a7ecaf4450f87d40067692edd70725474}{intel\-::hexl\-::fpga\-::\-Multiply\-U\-Int64} (uint64\-\_\-t x, uint64\-\_\-t y, uint64\-\_\-t $\ast$prod\-\_\-hi, uint64\-\_\-t $\ast$prod\-\_\-lo)
+\item 
+{\footnotesize template$<$int Bit\-Shift$>$ }\\uint64\-\_\-t \hyperlink{namespaceintel_1_1hexl_1_1fpga_a885fc322b5c2559feed13fdf5ded1660}{intel\-::hexl\-::fpga\-::\-Multiply\-U\-Int64\-Hi} (uint64\-\_\-t x, uint64\-\_\-t y)
+\item 
+uint64\-\_\-t \hyperlink{namespaceintel_1_1hexl_1_1fpga_aef53989a5c9adf16fcc5d0a188fa2abf}{intel\-::hexl\-::fpga\-::\-Divide\-U\-Int128\-U\-Int64\-Lo} (uint64\-\_\-t x1, uint64\-\_\-t x0, uint64\-\_\-t y)
+\item 
+{\footnotesize template$<$int Bit\-Shift$>$ }\\uint64\-\_\-t \hyperlink{namespaceintel_1_1hexl_1_1fpga_adbd0b0b7a9ac26e1dd6bb182998aedb1}{intel\-::hexl\-::fpga\-::\-Multiply\-U\-Int\-Mod\-Lazy} (uint64\-\_\-t x, uint64\-\_\-t y\-\_\-operand, uint64\-\_\-t y\-\_\-barrett\-\_\-factor, uint64\-\_\-t modulus)
+\item 
+{\footnotesize template$<$int Bit\-Shift$>$ }\\uint64\-\_\-t \hyperlink{namespaceintel_1_1hexl_1_1fpga_a8ad6de5083fbeb063b3b9e697866d78e}{intel\-::hexl\-::fpga\-::\-Multiply\-U\-Int\-Mod\-Lazy} (uint64\-\_\-t x, uint64\-\_\-t y, uint64\-\_\-t modulus)
+\item 
+unsigned char \hyperlink{namespaceintel_1_1hexl_1_1fpga_a28220ed548927fc4a21cc823e2e71f42}{intel\-::hexl\-::fpga\-::\-Add\-U\-Int64} (uint64\-\_\-t operand1, uint64\-\_\-t operand2, uint64\-\_\-t $\ast$result)
+\item 
+bool \hyperlink{namespaceintel_1_1hexl_1_1fpga_a355c6cb8c5032602ed52e1c3789d8767}{intel\-::hexl\-::fpga\-::\-Is\-Prime} (uint64\-\_\-t n)
+\item 
+std\-::vector$<$ uint64\-\_\-t $>$ \hyperlink{namespaceintel_1_1hexl_1_1fpga_a138dd08495620ae05b5576f1f9de1d22}{intel\-::hexl\-::fpga\-::\-Generate\-Primes} (size\-\_\-t num\-\_\-primes, size\-\_\-t bit\-\_\-size, size\-\_\-t ntt\-\_\-size=1)
+\item 
+uint64\-\_\-t \hyperlink{namespaceintel_1_1hexl_1_1fpga_a5da697d6db585fa67212de6eb704e4ad}{intel\-::hexl\-::fpga\-::\-Barrett\-Reduce64} (uint64\-\_\-t input, uint64\-\_\-t modulus, uint64\-\_\-t q\-\_\-barr)
+\item 
+{\footnotesize template$<$int Input\-Mod\-Factor$>$ }\\uint64\-\_\-t \hyperlink{namespaceintel_1_1hexl_1_1fpga_a8c1918497a3bd37a60af3098d5923814}{intel\-::hexl\-::fpga\-::\-Reduce\-Mod} (uint64\-\_\-t x, uint64\-\_\-t modulus, const uint64\-\_\-t $\ast$twice\-\_\-modulus=nullptr, const uint64\-\_\-t $\ast$four\-\_\-times\-\_\-modulus=nullptr)
+\item 
+uint64\-\_\-t \hyperlink{namespaceintel_1_1hexl_1_1fpga_a6010de9857e16825343611c7b7f65f3f}{intel\-::hexl\-::fpga\-::\-Barrett\-Reduce128} (uint64\-\_\-t input\-\_\-hi, uint64\-\_\-t input\-\_\-lo, uint64\-\_\-t modulus)
+\item 
+uint64\-\_\-t \hyperlink{namespaceintel_1_1hexl_1_1fpga_ac7d25ff5107f521d5a1e9365bf0eeb0b}{intel\-::hexl\-::fpga\-::\-Reverse\-Bits\-U\-Int} (uint64\-\_\-t x, uint64\-\_\-t bits)
+\item 
+uint64\-\_\-t \hyperlink{namespaceintel_1_1hexl_1_1fpga_a845482aca85af5a78444389a52c61271}{intel\-::hexl\-::fpga\-::\-Inverse\-U\-Int\-Mod} (uint64\-\_\-t a, uint64\-\_\-t modulus)
+\item 
+uint64\-\_\-t \hyperlink{namespaceintel_1_1hexl_1_1fpga_a359488f73600f049c3bb43412ac677fa}{intel\-::hexl\-::fpga\-::\-Multiply\-U\-Int\-Mod} (uint64\-\_\-t x, uint64\-\_\-t y, uint64\-\_\-t modulus)
+\item 
+uint64\-\_\-t \hyperlink{namespaceintel_1_1hexl_1_1fpga_a3864868e9a43df15ba64e89800214ae6}{intel\-::hexl\-::fpga\-::\-Multiply\-Mod} (uint64\-\_\-t x, uint64\-\_\-t y, uint64\-\_\-t y\-\_\-precon, uint64\-\_\-t modulus)
+\item 
+uint64\-\_\-t \hyperlink{namespaceintel_1_1hexl_1_1fpga_a1144b661773bb78643f4785c6aa8b1da}{intel\-::hexl\-::fpga\-::\-Add\-U\-Int\-Mod} (uint64\-\_\-t x, uint64\-\_\-t y, uint64\-\_\-t modulus)
+\item 
+uint64\-\_\-t \hyperlink{namespaceintel_1_1hexl_1_1fpga_af79ff4e8c2d42008053feebe7200d741}{intel\-::hexl\-::fpga\-::\-Sub\-U\-Int\-Mod} (uint64\-\_\-t x, uint64\-\_\-t y, uint64\-\_\-t modulus)
+\item 
+uint64\-\_\-t \hyperlink{namespaceintel_1_1hexl_1_1fpga_a6c12d1ce00baa576a619d42e368a0bba}{intel\-::hexl\-::fpga\-::\-Pow\-Mod} (uint64\-\_\-t base, uint64\-\_\-t exp, uint64\-\_\-t modulus)
+\item 
+bool \hyperlink{namespaceintel_1_1hexl_1_1fpga_a30c3a0934c1a35689405952f8d5c3a77}{intel\-::hexl\-::fpga\-::\-Is\-Primitive\-Root} (uint64\-\_\-t root, uint64\-\_\-t degree, uint64\-\_\-t modulus)
+\item 
+uint64\-\_\-t \hyperlink{namespaceintel_1_1hexl_1_1fpga_a9628dca89b1827ee60f21c305705ac57}{intel\-::hexl\-::fpga\-::\-Generate\-Primitive\-Root} (uint64\-\_\-t degree, uint64\-\_\-t modulus)
+\item 
+uint64\-\_\-t \hyperlink{namespaceintel_1_1hexl_1_1fpga_af1cd2e18fc07e6f6d58d9dbcc94aaf92}{intel\-::hexl\-::fpga\-::\-Minimal\-Primitive\-Root} (uint64\-\_\-t degree, uint64\-\_\-t modulus)
+\item 
+void \hyperlink{namespaceintel_1_1hexl_1_1fpga_a4d25df05a50d6c613439b282ea5c2a0f}{intel\-::hexl\-::fpga\-::\-Compute\-Root\-Of\-Unity\-Powers} (uint64\-\_\-t m\-\_\-q, uint64\-\_\-t m\-\_\-degree, uint64\-\_\-t m\-\_\-degree\-\_\-bits, uint64\-\_\-t m\-\_\-w, uint64\-\_\-t $\ast$inv\-\_\-root\-\_\-of\-\_\-unity\-\_\-powers, uint64\-\_\-t $\ast$precon64\-\_\-inv\-\_\-root\-\_\-of\-\_\-unity\-\_\-powers, uint64\-\_\-t $\ast$root\-\_\-of\-\_\-unity\-\_\-powers, uint64\-\_\-t $\ast$precon64\-\_\-root\-\_\-of\-\_\-unity\-\_\-powers)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\-\_\-\-\_\-extension\-\_\-\-\_\- typedef unsigned \\*
+\-\_\-\-\_\-int128 \hyperlink{namespaceintel_1_1hexl_1_1fpga_a855c40574416e25f94fb6b7817c2c4f3}{intel\-::hexl\-::fpga\-::uint128\-\_\-t}
+\end{DoxyCompactItemize}

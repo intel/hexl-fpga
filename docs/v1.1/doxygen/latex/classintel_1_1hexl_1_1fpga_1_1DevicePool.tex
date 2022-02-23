@@ -1,0 +1,78 @@
+\hypertarget{classintel_1_1hexl_1_1fpga_1_1DevicePool}{\section{intel\-:\-:hexl\-:\-:fpga\-:\-:Device\-Pool Class Reference}
+\label{classintel_1_1hexl_1_1fpga_1_1DevicePool}\index{intel\-::hexl\-::fpga\-::\-Device\-Pool@{intel\-::hexl\-::fpga\-::\-Device\-Pool}}
+}
+
+
+Class \hyperlink{classintel_1_1hexl_1_1fpga_1_1DevicePool}{Device\-Pool}.  
+
+
+
+
+{\ttfamily \#include $<$fpga.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classintel_1_1hexl_1_1fpga_1_1DevicePool_a7c814d5346201aa0034e8f693e608bb2}{Device\-Pool} (int choice, \hyperlink{classintel_1_1hexl_1_1fpga_1_1Buffer}{Buffer} \&buffer, std\-::future$<$ bool $>$ \&exit\-\_\-signal, uint64\-\_\-t coeff\-\_\-size, uint32\-\_\-t modulus\-\_\-size, uint64\-\_\-t batch\-\_\-size\-\_\-dyadic\-\_\-multiply, uint64\-\_\-t batch\-\_\-size\-\_\-ntt, uint64\-\_\-t batch\-\_\-size\-\_\-intt, uint64\-\_\-t batch\-\_\-size\-\_\-\-Key\-Switch, uint32\-\_\-t debug)
+\item 
+\hyperlink{classintel_1_1hexl_1_1fpga_1_1DevicePool_af8404b1e8d112a2bd8c89e980dd69354}{$\sim$\-Device\-Pool} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class \hyperlink{classintel_1_1hexl_1_1fpga_1_1DevicePool}{Device\-Pool}. 
+
+\hyperlink{classintel_1_1hexl_1_1fpga_1_1DevicePool}{Device\-Pool} constructor 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em choice} & selector for the mode of operation\-: \mbox{[}C\-P\-U,emulation,F\-P\-G\-A\mbox{]} \\
+\hline
+\mbox{\tt in}  & {\em buffer} & to store the blob transferred to the device \\
+\hline
+\mbox{\tt in}  & {\em exit\-\_\-signal} & flag to indicated data ready \\
+\hline
+\mbox{\tt in}  & {\em coeff\-\_\-size} & size of the polynomial coefficients \\
+\hline
+\mbox{\tt in}  & {\em modulus\-\_\-size} & size of the coefficient modulus \\
+\hline
+\mbox{\tt in}  & {\em batch\-\_\-size\-\_\-dyadic\-\_\-multiply} & batch size for the multiplication operation \\
+\hline
+\mbox{\tt in}  & {\em batch\-\_\-size\-\_\-ntt} & batch size for the N\-T\-T operation \\
+\hline
+\mbox{\tt in}  & {\em batch\-\_\-size\-\_\-intt} & batch size for the I\-N\-T\-T operation \\
+\hline
+\mbox{\tt in}  & {\em batch\-\_\-size\-\_\-\-Key\-Switch} & batch size for the Key\-Switch operation \\
+\hline
+\mbox{\tt in}  & {\em debug} & flag indicating debug mode \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classintel_1_1hexl_1_1fpga_1_1DevicePool_a7c814d5346201aa0034e8f693e608bb2}{\index{intel\-::hexl\-::fpga\-::\-Device\-Pool@{intel\-::hexl\-::fpga\-::\-Device\-Pool}!Device\-Pool@{Device\-Pool}}
+\index{Device\-Pool@{Device\-Pool}!intel::hexl::fpga::DevicePool@{intel\-::hexl\-::fpga\-::\-Device\-Pool}}
+\subsubsection[{Device\-Pool}]{\setlength{\rightskip}{0pt plus 5cm}intel\-::hexl\-::fpga\-::\-Device\-Pool\-::\-Device\-Pool (
+\begin{DoxyParamCaption}
+\item[{int}]{choice, }
+\item[{{\bf Buffer} \&}]{buffer, }
+\item[{std\-::future$<$ bool $>$ \&}]{exit\-\_\-signal, }
+\item[{uint64\-\_\-t}]{coeff\-\_\-size, }
+\item[{uint32\-\_\-t}]{modulus\-\_\-size, }
+\item[{uint64\-\_\-t}]{batch\-\_\-size\-\_\-dyadic\-\_\-multiply, }
+\item[{uint64\-\_\-t}]{batch\-\_\-size\-\_\-ntt, }
+\item[{uint64\-\_\-t}]{batch\-\_\-size\-\_\-intt, }
+\item[{uint64\-\_\-t}]{batch\-\_\-size\-\_\-\-Key\-Switch, }
+\item[{uint32\-\_\-t}]{debug}
+\end{DoxyParamCaption}
+)}}\label{classintel_1_1hexl_1_1fpga_1_1DevicePool_a7c814d5346201aa0034e8f693e608bb2}
+\hypertarget{classintel_1_1hexl_1_1fpga_1_1DevicePool_af8404b1e8d112a2bd8c89e980dd69354}{\index{intel\-::hexl\-::fpga\-::\-Device\-Pool@{intel\-::hexl\-::fpga\-::\-Device\-Pool}!$\sim$\-Device\-Pool@{$\sim$\-Device\-Pool}}
+\index{$\sim$\-Device\-Pool@{$\sim$\-Device\-Pool}!intel::hexl::fpga::DevicePool@{intel\-::hexl\-::fpga\-::\-Device\-Pool}}
+\subsubsection[{$\sim$\-Device\-Pool}]{\setlength{\rightskip}{0pt plus 5cm}intel\-::hexl\-::fpga\-::\-Device\-Pool\-::$\sim$\-Device\-Pool (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classintel_1_1hexl_1_1fpga_1_1DevicePool_af8404b1e8d112a2bd8c89e980dd69354}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{fpga_8h}{fpga.\-h}\end{DoxyCompactItemize}

@@ -1,0 +1,714 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classintel_1_1hexl_1_1fpga_1_1Buffer" kind="class" prot="public">
+    <compoundname>intel::hexl::fpga::Buffer</compoundname>
+    <includes refid="fpga_8h" local="no">fpga.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1a4541c9234c5177c673ccb1fd9cda2797" prot="private" static="no" mutable="no">
+        <type>std::mutex</type>
+        <definition>std::mutex intel::hexl::fpga::Buffer::mu_</definition>
+        <argsstring></argsstring>
+        <name>mu_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="352" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="352" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1afd2ae47935cff03bb0061aa8e663f584" prot="private" static="no" mutable="no">
+        <type>std::mutex</type>
+        <definition>std::mutex intel::hexl::fpga::Buffer::mu_size_</definition>
+        <argsstring></argsstring>
+        <name>mu_size_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="353" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="353" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1ab1f5cd40eddf0bb01dce15d70338853e" prot="private" static="no" mutable="no">
+        <type>std::condition_variable</type>
+        <definition>std::condition_variable intel::hexl::fpga::Buffer::cond_</definition>
+        <argsstring></argsstring>
+        <name>cond_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="354" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="354" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1a6d790ba52644214248528ea27ea1c65e" prot="private" static="no" mutable="no">
+        <type>std::deque&lt; <ref refid="structintel_1_1hexl_1_1fpga_1_1Object" kindref="compound">Object</ref> * &gt;</type>
+        <definition>std::deque&lt;Object*&gt; intel::hexl::fpga::Buffer::buffer_</definition>
+        <argsstring></argsstring>
+        <name>buffer_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="355" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="355" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1a532b78724550f3fdc8e85bbbef044331" prot="private" static="no" mutable="no">
+        <type>const uint64_t</type>
+        <definition>const uint64_t intel::hexl::fpga::Buffer::capacity_</definition>
+        <argsstring></argsstring>
+        <name>capacity_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="356" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="356" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1aa6446e9003b73b35fc6b4acac545aa12" prot="private" static="no" mutable="no">
+        <type>const uint64_t</type>
+        <definition>const uint64_t intel::hexl::fpga::Buffer::n_batch_dyadic_multiply_</definition>
+        <argsstring></argsstring>
+        <name>n_batch_dyadic_multiply_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="357" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="357" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1a67ca0c7206e02fcd02dc1e9a6731398e" prot="private" static="no" mutable="no">
+        <type>const uint64_t</type>
+        <definition>const uint64_t intel::hexl::fpga::Buffer::n_batch_ntt_</definition>
+        <argsstring></argsstring>
+        <name>n_batch_ntt_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="358" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="358" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1af375b62a068e54f522b9479fad7f7d4c" prot="private" static="no" mutable="no">
+        <type>const uint64_t</type>
+        <definition>const uint64_t intel::hexl::fpga::Buffer::n_batch_intt_</definition>
+        <argsstring></argsstring>
+        <name>n_batch_intt_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="359" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="359" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1a26a7a32d1c86b559ccf2735d0191ede8" prot="private" static="no" mutable="no">
+        <type>const uint64_t</type>
+        <definition>const uint64_t intel::hexl::fpga::Buffer::n_batch_KeySwitch_</definition>
+        <argsstring></argsstring>
+        <name>n_batch_KeySwitch_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="360" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="360" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1aa3738841a76635c9e27e4b0137d4d54d" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::Buffer::total_worksize_DyadicMultiply_</definition>
+        <argsstring></argsstring>
+        <name>total_worksize_DyadicMultiply_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="362" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="362" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1aa5b27a88a600254ddae840c7efc15b00" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::Buffer::num_DyadicMultiply_</definition>
+        <argsstring></argsstring>
+        <name>num_DyadicMultiply_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="363" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="363" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1aa66efb4c71288471343370aab5196662" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::Buffer::total_worksize_NTT_</definition>
+        <argsstring></argsstring>
+        <name>total_worksize_NTT_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="365" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="365" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1a63e8851d8d4b0e6e2b70b0fd0b8fb33a" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::Buffer::num_NTT_</definition>
+        <argsstring></argsstring>
+        <name>num_NTT_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="366" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="366" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1a6a886d852a0fefe039107eef00d0e305" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::Buffer::total_worksize_INTT_</definition>
+        <argsstring></argsstring>
+        <name>total_worksize_INTT_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="368" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="368" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1a0c729fbf9491b4654e15f3488cefbfdd" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::Buffer::num_INTT_</definition>
+        <argsstring></argsstring>
+        <name>num_INTT_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="369" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="369" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1a1ac96a07a186b2f251139c6fce9a86ae" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::Buffer::total_worksize_KeySwitch_</definition>
+        <argsstring></argsstring>
+        <name>total_worksize_KeySwitch_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="371" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="371" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1a9014d26f4fb504da527e9d076a7c77f0" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::Buffer::num_KeySwitch_</definition>
+        <argsstring></argsstring>
+        <name>num_KeySwitch_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="372" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="372" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1a6b279585d3df783620a0b3d7bd8c1c1e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>intel::hexl::fpga::Buffer::Buffer</definition>
+        <argsstring>(uint64_t capacity, uint64_t n_batch_dyadic_multiply, uint64_t n_batch_ntt, uint64_t n_batch_intt, uint64_t n_batch_KeySwitch)</argsstring>
+        <name>Buffer</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>capacity</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>n_batch_dyadic_multiply</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>n_batch_ntt</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>n_batch_intt</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>n_batch_KeySwitch</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="275" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="275" bodyend="290"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1a6644861e903def2ff1aef60c94f4a8f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::Buffer::push</definition>
+        <argsstring>(Object *obj)</argsstring>
+        <name>push</name>
+        <param>
+          <type><ref refid="structintel_1_1hexl_1_1fpga_1_1Object" kindref="compound">Object</ref> *</type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="292" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1aef26dde58c09c63303bf8c8ba4da6991" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structintel_1_1hexl_1_1fpga_1_1Object" kindref="compound">Object</ref> *</type>
+        <definition>Object* intel::hexl::fpga::Buffer::front</definition>
+        <argsstring>() const </argsstring>
+        <name>front</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="293" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1a3e774f459e7b73d37393c5e3a5559622" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structintel_1_1hexl_1_1fpga_1_1Object" kindref="compound">Object</ref> *</type>
+        <definition>Object* intel::hexl::fpga::Buffer::back</definition>
+        <argsstring>() const </argsstring>
+        <name>back</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="294" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1ac60152c34dc6d5ac1275db07293fc7dc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="structintel_1_1hexl_1_1fpga_1_1Object" kindref="compound">Object</ref> * &gt;</type>
+        <definition>std::vector&lt;Object*&gt; intel::hexl::fpga::Buffer::pop</definition>
+        <argsstring>()</argsstring>
+        <name>pop</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="295" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1a03dbef5789ed9c28bd1b63b35164ab41" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::Buffer::size</definition>
+        <argsstring>()</argsstring>
+        <name>size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="297" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1a346da8900c5d0f689de15c754ff22095" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::Buffer::get_worksize_DyadicMultiply</definition>
+        <argsstring>() const </argsstring>
+        <name>get_worksize_DyadicMultiply</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="299" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="299" bodyend="301"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1a7814dc29476fa0be598a8f2f99043024" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::Buffer::get_worksize_NTT</definition>
+        <argsstring>() const </argsstring>
+        <name>get_worksize_NTT</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="302" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="302" bodyend="302"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1a7147f2da3c6cbeeaf13f70d725622a87" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::Buffer::get_worksize_INTT</definition>
+        <argsstring>() const </argsstring>
+        <name>get_worksize_INTT</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="303" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="303" bodyend="303"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1ae984ebf36df2f7b8c8e3b69e9110be0e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::Buffer::get_worksize_KeySwitch</definition>
+        <argsstring>() const </argsstring>
+        <name>get_worksize_KeySwitch</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="304" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="304" bodyend="306"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1a3ed2fb00d1e5eb733162588d30a395df" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::Buffer::set_worksize_DyadicMultiply</definition>
+        <argsstring>(uint64_t ws)</argsstring>
+        <name>set_worksize_DyadicMultiply</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>ws</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="308" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="308" bodyend="311"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1aa6c582210106d0e189630dbd47a2b613" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::Buffer::set_worksize_NTT</definition>
+        <argsstring>(uint64_t ws)</argsstring>
+        <name>set_worksize_NTT</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>ws</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="312" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="312" bodyend="315"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1aa9d41687d0a35d75bb12b96373a3ddf4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::Buffer::set_worksize_INTT</definition>
+        <argsstring>(uint64_t ws)</argsstring>
+        <name>set_worksize_INTT</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>ws</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="316" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="316" bodyend="319"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1a1666c262e2297c3b64ae97ae0e206e2b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::Buffer::set_worksize_KeySwitch</definition>
+        <argsstring>(uint64_t ws)</argsstring>
+        <name>set_worksize_KeySwitch</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>ws</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="320" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="320" bodyend="323"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1afef705d1a7859218cea0820b1c9ef979" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::Buffer::get_worksize_int_DyadicMultiply</definition>
+        <argsstring>() const </argsstring>
+        <name>get_worksize_int_DyadicMultiply</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="326" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="326" bodyend="330"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1ad9719864999518836a7e067b2b012a3c" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::Buffer::get_worksize_int_NTT</definition>
+        <argsstring>() const </argsstring>
+        <name>get_worksize_int_NTT</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="332" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="332" bodyend="334"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1ab8592cd41de0381a2f23de0919aafb55" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::Buffer::get_worksize_int_INTT</definition>
+        <argsstring>() const </argsstring>
+        <name>get_worksize_int_INTT</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="336" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="336" bodyend="338"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1af92002e70d3678b33592288d96af061f" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::Buffer::get_worksize_int_KeySwitch</definition>
+        <argsstring>() const </argsstring>
+        <name>get_worksize_int_KeySwitch</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="340" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="340" bodyend="343"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1a671a932de489e301a86c3ba7c3d25d3a" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::Buffer::update_DyadicMultiply_work_size</definition>
+        <argsstring>(uint64_t ws)</argsstring>
+        <name>update_DyadicMultiply_work_size</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>ws</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="345" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="345" bodyend="347"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1ad29d3e3372c993a1f5b60971ee8665fd" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::Buffer::update_NTT_work_size</definition>
+        <argsstring>(uint64_t ws)</argsstring>
+        <name>update_NTT_work_size</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>ws</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="348" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="348" bodyend="348"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1a83515823066af0e1e21416eac4a72ad6" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::Buffer::update_INTT_work_size</definition>
+        <argsstring>(uint64_t ws)</argsstring>
+        <name>update_INTT_work_size</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>ws</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="349" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="349" bodyend="349"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1Buffer_1a77ccd94cd628af4fc1885fffd24161c6" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::Buffer::update_KeySwitch_work_size</definition>
+        <argsstring>(uint64_t ws)</argsstring>
+        <name>update_KeySwitch_work_size</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>ws</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="350" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="350" bodyend="350"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Struct <ref refid="classintel_1_1hexl_1_1fpga_1_1Buffer" kindref="compound">Buffer</ref> Structure containing information for the polynomial operations. </para>    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">capacity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>of the buffer </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">n_batch_dyadic_multiply</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>batch size for the multiplication </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">n_batch_ntt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>batch size for the Number Theoretical Transform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">n_batch_intt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>batch size for the inverse Number Theoretical Transform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">n_batch_KeySwitch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>batch size for the keyswitch </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">total_worksize_DyadicMultiply</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the worksize for the multiplication </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">num_DyadicMultiply</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the number of multiplications to be performed </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">total_worksize_NTT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the worksize for the NTT </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">num_NTT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the number of NTT to be performed </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">total_worksize_INTT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the worksize for the INTT </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">num_INTT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the number of INTT to be performed </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">total_worksize_KeySwitch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the worksize for the keyswitch </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">num_KeySwitch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the number of keyswitch to be performed  push pushes an <ref refid="structintel_1_1hexl_1_1fpga_1_1Object" kindref="compound">Object</ref> in the structure  front returns the front <ref refid="structintel_1_1hexl_1_1fpga_1_1Object" kindref="compound">Object</ref> of the structure  back returns the last <ref refid="structintel_1_1hexl_1_1fpga_1_1Object" kindref="compound">Object</ref> of the structure  pop pops the front <ref refid="structintel_1_1hexl_1_1fpga_1_1Object" kindref="compound">Object</ref> out of the structure  size returns the size of the structure  get_worksize_DyadicMultiply returns the worksize of DyadicMultiply  get_worksize_NTT returns the worksize of NTT  get_worksize_INTT returns the worksize of INTT  get_worksize_KeySwitch returns the worksize of KeySwitch  set_worksize_DyadicMultiply sets the worksize of DyadicMultiply  set_worksize_NTT sets the worksize of NTT  set_worksize_INTT sets the worksize of INTT  set_worksize_KeySwitch sets the worksize of KeySwitch </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>    </detaileddescription>
+    <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="273" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="273" bodyend="373"/>
+    <listofallmembers>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a3e774f459e7b73d37393c5e3a5559622" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>back</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a6b279585d3df783620a0b3d7bd8c1c1e" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>Buffer</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a6d790ba52644214248528ea27ea1c65e" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>buffer_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a532b78724550f3fdc8e85bbbef044331" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>capacity_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1ab1f5cd40eddf0bb01dce15d70338853e" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>cond_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1aef26dde58c09c63303bf8c8ba4da6991" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>front</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a346da8900c5d0f689de15c754ff22095" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>get_worksize_DyadicMultiply</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1afef705d1a7859218cea0820b1c9ef979" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>get_worksize_int_DyadicMultiply</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1ab8592cd41de0381a2f23de0919aafb55" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>get_worksize_int_INTT</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1af92002e70d3678b33592288d96af061f" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>get_worksize_int_KeySwitch</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1ad9719864999518836a7e067b2b012a3c" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>get_worksize_int_NTT</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a7147f2da3c6cbeeaf13f70d725622a87" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>get_worksize_INTT</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1ae984ebf36df2f7b8c8e3b69e9110be0e" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>get_worksize_KeySwitch</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a7814dc29476fa0be598a8f2f99043024" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>get_worksize_NTT</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a4541c9234c5177c673ccb1fd9cda2797" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>mu_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1afd2ae47935cff03bb0061aa8e663f584" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>mu_size_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1aa6446e9003b73b35fc6b4acac545aa12" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>n_batch_dyadic_multiply_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1af375b62a068e54f522b9479fad7f7d4c" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>n_batch_intt_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a26a7a32d1c86b559ccf2735d0191ede8" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>n_batch_KeySwitch_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a67ca0c7206e02fcd02dc1e9a6731398e" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>n_batch_ntt_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1aa5b27a88a600254ddae840c7efc15b00" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>num_DyadicMultiply_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a0c729fbf9491b4654e15f3488cefbfdd" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>num_INTT_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a9014d26f4fb504da527e9d076a7c77f0" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>num_KeySwitch_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a63e8851d8d4b0e6e2b70b0fd0b8fb33a" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>num_NTT_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1ac60152c34dc6d5ac1275db07293fc7dc" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>pop</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a6644861e903def2ff1aef60c94f4a8f6" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>push</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a3ed2fb00d1e5eb733162588d30a395df" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>set_worksize_DyadicMultiply</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1aa9d41687d0a35d75bb12b96373a3ddf4" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>set_worksize_INTT</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a1666c262e2297c3b64ae97ae0e206e2b" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>set_worksize_KeySwitch</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1aa6c582210106d0e189630dbd47a2b613" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>set_worksize_NTT</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a03dbef5789ed9c28bd1b63b35164ab41" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>size</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1aa3738841a76635c9e27e4b0137d4d54d" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>total_worksize_DyadicMultiply_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a6a886d852a0fefe039107eef00d0e305" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>total_worksize_INTT_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a1ac96a07a186b2f251139c6fce9a86ae" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>total_worksize_KeySwitch_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1aa66efb4c71288471343370aab5196662" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>total_worksize_NTT_</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a671a932de489e301a86c3ba7c3d25d3a" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>update_DyadicMultiply_work_size</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a83515823066af0e1e21416eac4a72ad6" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>update_INTT_work_size</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a77ccd94cd628af4fc1885fffd24161c6" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>update_KeySwitch_work_size</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1ad29d3e3372c993a1f5b60971ee8665fd" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::Buffer</scope><name>update_NTT_work_size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

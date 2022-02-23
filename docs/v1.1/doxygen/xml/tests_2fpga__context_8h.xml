@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="tests_2fpga__context_8h" kind="file">
+    <compoundname>tests/fpga_context.h</compoundname>
+    <includes refid="hexl-fpga_8h" local="yes">hexl-fpga.h</includes>
+    <includedby refid="tests_2main_8cpp" local="yes">main.cpp</includedby>
+    <incdepgraph>
+      <node id="77">
+        <label>hexl-fpga.h</label>
+        <link refid="hexl-fpga_8h"/>
+        <childnode refid="78" relation="include">
+        </childnode>
+      </node>
+      <node id="78">
+        <label>cstdint</label>
+      </node>
+      <node id="76">
+        <label>fpga_context.h</label>
+        <link refid="tests/fpga_context.h"/>
+        <childnode refid="77" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="79">
+        <label>fpga_context.h</label>
+        <link refid="tests/fpga_context.h"/>
+        <childnode refid="80" relation="include">
+        </childnode>
+      </node>
+      <node id="80">
+        <label>main.cpp</label>
+        <link refid="tests_2main_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classfpga__context" prot="public">fpga_context</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>Copyright<sp/>(C)<sp/>2020-2021<sp/>Intel<sp/>Corporation</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>Apache-2.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight></codeline>
+<codeline lineno="5"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="hexl-fpga_8h" kindref="compound">hexl-fpga.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8" refid="classfpga__context" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classfpga__context" kindref="compound">fpga_context</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>::testing::Environment<sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="10" refid="classfpga__context_1a1bb9192ffc2972fe6ee6deb85bec921e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classfpga__context_1a1bb9192ffc2972fe6ee6deb85bec921e" kindref="member">~fpga_context</ref>()<sp/>{}</highlight></codeline>
+<codeline lineno="11" refid="classfpga__context_1a8650400eca53431dd95795429c484624" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classfpga__context_1a8650400eca53431dd95795429c484624" kindref="member">SetUp</ref>()<sp/>{<sp/><ref refid="namespaceintel_1_1hexl_1a6236e14eaac1602475c5f4e0a42754fe" kindref="member">intel::hexl::acquire_FPGA_resources</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13" refid="classfpga__context_1a3f229df43f9dff43cd2f748b72023e2a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classfpga__context_1a3f229df43f9dff43cd2f748b72023e2a" kindref="member">TearDown</ref>()<sp/>{<sp/><ref refid="namespaceintel_1_1hexl_1a717589c6dbfa6429b61e42c620d72d89" kindref="member">intel::hexl::release_FPGA_resources</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="14"><highlight class="normal">};</highlight></codeline>
+    </programlisting>
+    <location file="/disk1/ymeng12/hexl-fpga/tests/fpga_context.h"/>
+  </compounddef>
+</doxygen>

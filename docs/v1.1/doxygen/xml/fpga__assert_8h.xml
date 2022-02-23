@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="fpga__assert_8h" kind="file">
+    <compoundname>fpga_assert.h</compoundname>
+    <includedby refid="number__theory__util_8h" local="yes">number_theory_util.h</includedby>
+    <invincdepgraph>
+      <node id="72">
+        <label>number_theory_util.h</label>
+        <link refid="number__theory__util_8h"/>
+      </node>
+      <node id="71">
+        <label>fpga_assert.h</label>
+        <link refid="fpga_assert.h"/>
+        <childnode refid="72" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="fpga__assert_8h_1a215314861522d685b7de2614d6b1fc3d" prot="public" static="no">
+        <name>FPGA_ASSERT_1_ARGS</name>
+        <param><defname>condition</defname></param>
+        <initializer><ref refid="fpga__assert_8h_1a2c112d23b2fa4bb2514c91c888180907" kindref="member">FPGA_ASSERT_INT</ref>(condition, 0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga_assert.h" line="7" column="9" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga_assert.h" bodystart="7" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="fpga__assert_8h_1a84b988aa7af49d9f9e938c0f7d37ab82" prot="public" static="no">
+        <name>FPGA_ASSERT_2_ARGS</name>
+        <param><defname>condition</defname></param>
+        <param><defname>message</defname></param>
+        <initializer><ref refid="fpga__assert_8h_1a2c112d23b2fa4bb2514c91c888180907" kindref="member">FPGA_ASSERT_INT</ref>(condition, message)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga_assert.h" line="8" column="9" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga_assert.h" bodystart="8" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="fpga__assert_8h_1a5e07c0167c9bd604d8c540417c2f85e6" prot="public" static="no">
+        <name>GET_ARG</name>
+        <param><defname>arg1</defname></param>
+        <param><defname>arg2</defname></param>
+        <param><defname>func</defname></param>
+        <param><defname>...</defname></param>
+        <initializer>func</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga_assert.h" line="11" column="9" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga_assert.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="fpga__assert_8h_1a31d942383d1db5f0ccc61e0605bd36db" prot="public" static="no">
+        <name>FPGA_ASSERT_MACRO_CHOOSER</name>
+        <param><defname>...</defname></param>
+        <initializer><ref refid="fpga__assert_8h_1a5e07c0167c9bd604d8c540417c2f85e6" kindref="member">GET_ARG</ref>(__VA_ARGS__, <ref refid="fpga__assert_8h_1a84b988aa7af49d9f9e938c0f7d37ab82" kindref="member">FPGA_ASSERT_2_ARGS</ref>, <ref refid="fpga__assert_8h_1a215314861522d685b7de2614d6b1fc3d" kindref="member">FPGA_ASSERT_1_ARGS</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga_assert.h" line="12" column="9" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga_assert.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="fpga__assert_8h_1a92619e7455b5f2360dd7fe9a657aa7a3" prot="public" static="no">
+        <name>FPGA_ASSERT</name>
+        <param><defname>...</defname></param>
+        <initializer><ref refid="fpga__assert_8h_1a31d942383d1db5f0ccc61e0605bd36db" kindref="member">FPGA_ASSERT_MACRO_CHOOSER</ref>(__VA_ARGS__)(__VA_ARGS__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga_assert.h" line="15" column="9" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga_assert.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="fpga__assert_8h_1a2c112d23b2fa4bb2514c91c888180907" prot="public" static="no">
+        <name>FPGA_ASSERT_INT</name>
+        <param><defname>condition</defname></param>
+        <param><defname>message</defname></param>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga_assert.h" line="40" column="9" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga_assert.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>Copyright<sp/>(C)<sp/>2020-2021<sp/>Intel<sp/>Corporation</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>Apache-2.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>__FPGA_ASSERT_H__</highlight></codeline>
+<codeline lineno="5"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>__FPGA_ASSERT_H__</highlight></codeline>
+<codeline lineno="6"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7" refid="fpga__assert_8h_1a215314861522d685b7de2614d6b1fc3d" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>FPGA_ASSERT_1_ARGS(condition)<sp/>FPGA_ASSERT_INT(condition,<sp/>0)</highlight></codeline>
+<codeline lineno="8" refid="fpga__assert_8h_1a84b988aa7af49d9f9e938c0f7d37ab82" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>FPGA_ASSERT_2_ARGS(condition,<sp/>message)<sp/>\</highlight></codeline>
+<codeline lineno="9"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>FPGA_ASSERT_INT(condition,<sp/>message)</highlight></codeline>
+<codeline lineno="10"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11" refid="fpga__assert_8h_1a5e07c0167c9bd604d8c540417c2f85e6" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>GET_ARG(arg1,<sp/>arg2,<sp/>func,<sp/>...)<sp/>func</highlight></codeline>
+<codeline lineno="12" refid="fpga__assert_8h_1a31d942383d1db5f0ccc61e0605bd36db" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>FPGA_ASSERT_MACRO_CHOOSER(...)<sp/>\</highlight></codeline>
+<codeline lineno="13"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>GET_ARG(__VA_ARGS__,<sp/>FPGA_ASSERT_2_ARGS,<sp/>FPGA_ASSERT_1_ARGS)</highlight></codeline>
+<codeline lineno="14"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15" refid="fpga__assert_8h_1a92619e7455b5f2360dd7fe9a657aa7a3" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>FPGA_ASSERT(...)<sp/>FPGA_ASSERT_MACRO_CHOOSER(__VA_ARGS__)(__VA_ARGS__)</highlight></codeline>
+<codeline lineno="16"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>FPGA_DEBUG</highlight></codeline>
+<codeline lineno="18"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="stack__trace_8h" kindref="compound">stack_trace.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>FPGA_ASSERT_INT(condition,<sp/>message)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="23"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>{<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="24"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(!(condition))<sp/>{<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="25"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::cerr<sp/>&lt;&lt;<sp/>&quot;Assertion:<sp/>&apos;&quot;<sp/>&lt;&lt;<sp/>#condition<sp/>&lt;&lt;<sp/>&quot;&apos;<sp/>failed<sp/>at<sp/>&quot;<sp/>\</highlight></codeline>
+<codeline lineno="26"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;&lt;<sp/>__FILE__<sp/>&lt;&lt;<sp/>&quot;:&quot;<sp/>&lt;&lt;<sp/>__LINE__<sp/>&lt;&lt;<sp/>std::endl;<sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="27"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(message)<sp/>{<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="28"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::cerr<sp/>&lt;&lt;<sp/>&quot;<sp/><sp/><sp/><sp/>Error:<sp/>&quot;<sp/>&lt;&lt;<sp/>#message<sp/>&lt;&lt;<sp/>std::endl;<sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="29"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="30"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>intel::hexl::fpga::StackTrace*<sp/>stack<sp/>=<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="31"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>intel::hexl::fpga::StackTrace::stack();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="32"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>stack-&gt;dump(std::cerr);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="33"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>abort();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="34"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>exit(1);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="35"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="36"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="37"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight></codeline>
+<codeline lineno="39"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40" refid="fpga__assert_8h_1a2c112d23b2fa4bb2514c91c888180907" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>FPGA_ASSERT_INT(condition,<sp/>message)<sp/>\</highlight></codeline>
+<codeline lineno="41"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>{}</highlight></codeline>
+<codeline lineno="42"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="44"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga_assert.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,283 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="structKeySwitchTestVector" kind="struct" prot="public">
+    <compoundname>KeySwitchTestVector</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structKeySwitchTestVector_1a95aa4da3c5518ef78bcc8de60339fcbf" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t KeySwitchTestVector::coeff_count</definition>
+        <argsstring></argsstring>
+        <name>coeff_count</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" line="21" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structKeySwitchTestVector_1a553ed9a4e56035cc083f2b29cc1d16a6" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t KeySwitchTestVector::decomp_modulus_size</definition>
+        <argsstring></argsstring>
+        <name>decomp_modulus_size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" line="22" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structKeySwitchTestVector_1a98001c403e5ad60e03d188ca1bc2d0a7" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t KeySwitchTestVector::key_modulus_size</definition>
+        <argsstring></argsstring>
+        <name>key_modulus_size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" line="23" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structKeySwitchTestVector_1a700faac161b8de302d05e4cdb24080b6" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t KeySwitchTestVector::rns_modulus_size</definition>
+        <argsstring></argsstring>
+        <name>rns_modulus_size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" line="24" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structKeySwitchTestVector_1adbffef31865ff107c1fc5ece85028d18" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t KeySwitchTestVector::key_component_count</definition>
+        <argsstring></argsstring>
+        <name>key_component_count</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" line="25" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structKeySwitchTestVector_1a093fb1d7c028277e953c73e14c4bdc38" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; uint64_t &gt;</type>
+        <definition>std::vector&lt; uint64_t &gt; KeySwitchTestVector::moduli</definition>
+        <argsstring></argsstring>
+        <name>moduli</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" line="27" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structKeySwitchTestVector_1a5d7c8ad32a914bb8d8ecf78a13f911ca" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; uint64_t &gt;</type>
+        <definition>std::vector&lt; uint64_t &gt; KeySwitchTestVector::modswitch_factors</definition>
+        <argsstring></argsstring>
+        <name>modswitch_factors</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" line="28" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structKeySwitchTestVector_1a3299b1bfac2b08cfa386236a8e4b2c63" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; uint64_t &gt;</type>
+        <definition>std::vector&lt; uint64_t &gt; KeySwitchTestVector::twiddle_factors</definition>
+        <argsstring></argsstring>
+        <name>twiddle_factors</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" line="29" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structKeySwitchTestVector_1a3efccd8f33a478bb9b447e38eb38662e" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; const uint64_t * &gt;</type>
+        <definition>std::vector&lt; const uint64_t * &gt; KeySwitchTestVector::key_vectors</definition>
+        <argsstring></argsstring>
+        <name>key_vectors</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" line="30" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structKeySwitchTestVector_1a87c4ef64d069c11709451f4fe7b4a5fd" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; uint64_t &gt;</type>
+        <definition>std::vector&lt; uint64_t &gt; KeySwitchTestVector::t_target_iter_ptr</definition>
+        <argsstring></argsstring>
+        <name>t_target_iter_ptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" line="32" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structKeySwitchTestVector_1ada92bec84019ee1f4cad5ebdbc1a0be3" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; uint64_t &gt;</type>
+        <definition>std::vector&lt; uint64_t &gt; KeySwitchTestVector::input</definition>
+        <argsstring></argsstring>
+        <name>input</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" line="33" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structKeySwitchTestVector_1ad9e47be1cfb9a7be31cfbbd3edfad593" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; uint64_t &gt;</type>
+        <definition>std::vector&lt; uint64_t &gt; KeySwitchTestVector::expected_output</definition>
+        <argsstring></argsstring>
+        <name>expected_output</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" line="34" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structKeySwitchTestVector_1a00c0158e4d33300c0d34e9ca2be66a51" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::vector&lt; uint64_t &gt; &gt;</type>
+        <definition>std::vector&lt; std::vector&lt; uint64_t &gt; &gt; KeySwitchTestVector::vectors</definition>
+        <argsstring></argsstring>
+        <name>vectors</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" line="36" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structKeySwitchTestVector_1a0a100e4b04154e1a4e30905e6c8df4d7" prot="private" static="no" mutable="no">
+        <type>std::ifstream</type>
+        <definition>std::ifstream KeySwitchTestVector::json_file</definition>
+        <argsstring></argsstring>
+        <name>json_file</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" line="39" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structKeySwitchTestVector_1aa22eafd8477a129c6cacfdc5e7fbd8bd" prot="private" static="no" mutable="no">
+        <type>nlohmann::json</type>
+        <definition>nlohmann::json KeySwitchTestVector::js</definition>
+        <argsstring></argsstring>
+        <name>js</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" line="40" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structKeySwitchTestVector_1a6250ec29fdab16360c0f956fcae55b40" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>KeySwitchTestVector::KeySwitchTestVector</definition>
+        <argsstring>(const char *json_filename)</argsstring>
+        <name>KeySwitchTestVector</name>
+        <param>
+          <type>const char *</type>
+          <declname>json_filename</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" line="19" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" bodystart="185" bodyend="234"/>
+      </memberdef>
+      <memberdef kind="function" id="structKeySwitchTestVector_1a6250ec29fdab16360c0f956fcae55b40" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>KeySwitchTestVector::KeySwitchTestVector</definition>
+        <argsstring>(const char *json_filename)</argsstring>
+        <name>KeySwitchTestVector</name>
+        <param>
+          <type>const char *</type>
+          <declname>json_filename</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_keyswitch.cpp" line="32" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structKeySwitchTestVector_1a6250ec29fdab16360c0f956fcae55b40" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>KeySwitchTestVector::KeySwitchTestVector</definition>
+        <argsstring>(const char *json_filename)</argsstring>
+        <name>KeySwitchTestVector</name>
+        <param>
+          <type>const char *</type>
+          <declname>json_filename</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" line="27" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" line="18" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" bodystart="18" bodyend="41"/>
+    <listofallmembers>
+      <member refid="structKeySwitchTestVector_1a95aa4da3c5518ef78bcc8de60339fcbf" prot="public" virt="non-virtual"><scope>KeySwitchTestVector</scope><name>coeff_count</name></member>
+      <member refid="structKeySwitchTestVector_1a553ed9a4e56035cc083f2b29cc1d16a6" prot="public" virt="non-virtual"><scope>KeySwitchTestVector</scope><name>decomp_modulus_size</name></member>
+      <member refid="structKeySwitchTestVector_1ad9e47be1cfb9a7be31cfbbd3edfad593" prot="public" virt="non-virtual"><scope>KeySwitchTestVector</scope><name>expected_output</name></member>
+      <member refid="structKeySwitchTestVector_1ada92bec84019ee1f4cad5ebdbc1a0be3" prot="public" virt="non-virtual"><scope>KeySwitchTestVector</scope><name>input</name></member>
+      <member refid="structKeySwitchTestVector_1aa22eafd8477a129c6cacfdc5e7fbd8bd" prot="private" virt="non-virtual"><scope>KeySwitchTestVector</scope><name>js</name></member>
+      <member refid="structKeySwitchTestVector_1a0a100e4b04154e1a4e30905e6c8df4d7" prot="private" virt="non-virtual"><scope>KeySwitchTestVector</scope><name>json_file</name></member>
+      <member refid="structKeySwitchTestVector_1adbffef31865ff107c1fc5ece85028d18" prot="public" virt="non-virtual"><scope>KeySwitchTestVector</scope><name>key_component_count</name></member>
+      <member refid="structKeySwitchTestVector_1a98001c403e5ad60e03d188ca1bc2d0a7" prot="public" virt="non-virtual"><scope>KeySwitchTestVector</scope><name>key_modulus_size</name></member>
+      <member refid="structKeySwitchTestVector_1a3efccd8f33a478bb9b447e38eb38662e" prot="public" virt="non-virtual"><scope>KeySwitchTestVector</scope><name>key_vectors</name></member>
+      <member refid="structKeySwitchTestVector_1a6250ec29fdab16360c0f956fcae55b40" prot="public" virt="non-virtual"><scope>KeySwitchTestVector</scope><name>KeySwitchTestVector</name></member>
+      <member refid="structKeySwitchTestVector_1a6250ec29fdab16360c0f956fcae55b40" prot="public" virt="non-virtual"><scope>KeySwitchTestVector</scope><name>KeySwitchTestVector</name></member>
+      <member refid="structKeySwitchTestVector_1a6250ec29fdab16360c0f956fcae55b40" prot="public" virt="non-virtual"><scope>KeySwitchTestVector</scope><name>KeySwitchTestVector</name></member>
+      <member refid="structKeySwitchTestVector_1a5d7c8ad32a914bb8d8ecf78a13f911ca" prot="public" virt="non-virtual"><scope>KeySwitchTestVector</scope><name>modswitch_factors</name></member>
+      <member refid="structKeySwitchTestVector_1a093fb1d7c028277e953c73e14c4bdc38" prot="public" virt="non-virtual"><scope>KeySwitchTestVector</scope><name>moduli</name></member>
+      <member refid="structKeySwitchTestVector_1a700faac161b8de302d05e4cdb24080b6" prot="public" virt="non-virtual"><scope>KeySwitchTestVector</scope><name>rns_modulus_size</name></member>
+      <member refid="structKeySwitchTestVector_1a87c4ef64d069c11709451f4fe7b4a5fd" prot="public" virt="non-virtual"><scope>KeySwitchTestVector</scope><name>t_target_iter_ptr</name></member>
+      <member refid="structKeySwitchTestVector_1a3299b1bfac2b08cfa386236a8e4b2c63" prot="public" virt="non-virtual"><scope>KeySwitchTestVector</scope><name>twiddle_factors</name></member>
+      <member refid="structKeySwitchTestVector_1a00c0158e4d33300c0d34e9ca2be66a51" prot="public" virt="non-virtual"><scope>KeySwitchTestVector</scope><name>vectors</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

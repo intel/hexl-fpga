@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="stack__trace_8h" kind="file">
+    <compoundname>stack_trace.h</compoundname>
+    <includes local="no">iostream</includes>
+    <incdepgraph>
+      <node id="171">
+        <label>stack_trace.h</label>
+        <link refid="stack_trace.h"/>
+        <childnode refid="172" relation="include">
+        </childnode>
+      </node>
+      <node id="172">
+        <label>iostream</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classintel_1_1hexl_1_1fpga_1_1StackTrace" prot="public">intel::hexl::fpga::StackTrace</innerclass>
+    <innernamespace refid="namespaceintel">intel</innernamespace>
+    <innernamespace refid="namespaceintel_1_1hexl">intel::hexl</innernamespace>
+    <innernamespace refid="namespaceintel_1_1hexl_1_1fpga">intel::hexl::fpga</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>Copyright<sp/>(C)<sp/>2020-2021<sp/>Intel<sp/>Corporation</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>Apache-2.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>__STACK_TRACE_H__</highlight></codeline>
+<codeline lineno="5"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>__STACK_TRACE_H__</highlight></codeline>
+<codeline lineno="6"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">intel<sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">hexl<sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">fpga<sp/>{</highlight></codeline>
+<codeline lineno="19" refid="classintel_1_1hexl_1_1fpga_1_1StackTrace" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classintel_1_1hexl_1_1fpga_1_1StackTrace" kindref="compound">StackTrace</ref><sp/>{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1StackTrace" kindref="compound">StackTrace</ref>*<sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1StackTrace_1a13e71720d91b3ad78008fc4b71fe159c" kindref="member">stack</ref>();</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1StackTrace_1ae3665f0cc2097380b9a5fdd6330df6e5" kindref="member">~StackTrace</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1StackTrace_1a333d1509937db15dae0780b20da5b0ea" kindref="member">dump</ref>(std::ostream&amp;<sp/>os)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="27" refid="classintel_1_1hexl_1_1fpga_1_1StackTrace_1a33b7e4305ba5ebd6d3210971528770f5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1StackTrace_1a33b7e4305ba5ebd6d3210971528770f5" kindref="member">StackTrace</ref>()<sp/>{}</highlight></codeline>
+<codeline lineno="28"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>fpga</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>hexl</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>intel</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/disk1/ymeng12/hexl-fpga/host/inc/stack_trace.h"/>
+  </compounddef>
+</doxygen>

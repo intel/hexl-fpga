@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classfwd__ntt__test" kind="class" prot="public">
+    <compoundname>fwd_ntt_test</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Test</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfwd__ntt__test_1ace05988802384f416612d7b2ccf03501" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::vector&lt; uint64_t &gt; &gt;</type>
+        <definition>std::vector&lt;std::vector&lt;uint64_t&gt; &gt; fwd_ntt_test::input_</definition>
+        <argsstring></argsstring>
+        <name>input_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_fwd_ntt.cpp" line="78" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_fwd_ntt.cpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfwd__ntt__test_1a7ffecd4f039beb0a762e304c9925d016" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; uint64_t &gt;</type>
+        <definition>std::vector&lt;uint64_t&gt; fwd_ntt_test::primes_</definition>
+        <argsstring></argsstring>
+        <name>primes_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_fwd_ntt.cpp" line="79" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_fwd_ntt.cpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfwd__ntt__test_1afd48a701b23f9e9efd2e64aaded2cd32" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fwd_ntt_test::run_fwd_ntt_test</definition>
+        <argsstring>(StimulusType stimulusType, uint64_t iterations, uint64_t bitsForPrime)</argsstring>
+        <name>run_fwd_ntt_test</name>
+        <param>
+          <type><ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0" kindref="member">StimulusType</ref></type>
+          <declname>stimulusType</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>iterations</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>bitsForPrime</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_fwd_ntt.cpp" line="71" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_fwd_ntt.cpp" bodystart="97" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="function" id="classfwd__ntt__test_1a9edfd258d90a49382602613427a49111" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fwd_ntt_test::TestBody</definition>
+        <argsstring>() override</argsstring>
+        <name>TestBody</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_fwd_ntt.cpp" line="73" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_fwd_ntt.cpp" bodystart="73" bodyend="73"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfwd__ntt__test_1a2615827886eae49a230c8d7fffbbf8de" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fwd_ntt_test::load_fwd_ntt_data</definition>
+        <argsstring>(StimulusType stimulusType, uint64_t iterations, uint64_t bitsForPrime)</argsstring>
+        <name>load_fwd_ntt_data</name>
+        <param>
+          <type><ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0" kindref="member">StimulusType</ref></type>
+          <declname>stimulusType</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>iterations</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>bitsForPrime</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_fwd_ntt.cpp" line="76" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_fwd_ntt.cpp" bodystart="82" bodyend="96"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="70">
+        <label>Test</label>
+      </node>
+      <node id="69">
+        <label>fwd_ntt_test</label>
+        <link refid="classfwd__ntt__test"/>
+        <childnode refid="70" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="72">
+        <label>Test</label>
+      </node>
+      <node id="71">
+        <label>fwd_ntt_test</label>
+        <link refid="classfwd__ntt__test"/>
+        <childnode refid="72" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/disk1/ymeng12/hexl-fpga/tests/test_fwd_ntt.cpp" line="69" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_fwd_ntt.cpp" bodystart="69" bodyend="80"/>
+    <listofallmembers>
+      <member refid="classfwd__ntt__test_1ace05988802384f416612d7b2ccf03501" prot="private" virt="non-virtual"><scope>fwd_ntt_test</scope><name>input_</name></member>
+      <member refid="classfwd__ntt__test_1a2615827886eae49a230c8d7fffbbf8de" prot="private" virt="non-virtual"><scope>fwd_ntt_test</scope><name>load_fwd_ntt_data</name></member>
+      <member refid="classfwd__ntt__test_1a7ffecd4f039beb0a762e304c9925d016" prot="private" virt="non-virtual"><scope>fwd_ntt_test</scope><name>primes_</name></member>
+      <member refid="classfwd__ntt__test_1afd48a701b23f9e9efd2e64aaded2cd32" prot="public" virt="non-virtual"><scope>fwd_ntt_test</scope><name>run_fwd_ntt_test</name></member>
+      <member refid="classfwd__ntt__test_1a9edfd258d90a49382602613427a49111" prot="public" virt="non-virtual"><scope>fwd_ntt_test</scope><name>TestBody</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

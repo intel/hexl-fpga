@@ -1,0 +1,143 @@
+\hypertarget{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch}{\section{intel\-:\-:hexl\-:\-:fpga\-:\-:Object\-\_\-\-Key\-Switch Struct Reference}
+\label{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch}\index{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch@{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch}}
+}
+
+
+struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch}{Object\-\_\-\-Key\-Switch} Stores the parameters for the keyswitch  
+
+
+
+
+{\ttfamily \#include $<$fpga.\-h$>$}
+
+Inheritance diagram for intel\-:\-:hexl\-:\-:fpga\-:\-:Object\-\_\-\-Key\-Switch\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_a323050d96e7cb1710632b1088c11bf0c}{Object\-\_\-\-Key\-Switch} (uint64\-\_\-t $\ast$result, const uint64\-\_\-t $\ast$t\-\_\-target\-\_\-iter\-\_\-ptr, uint64\-\_\-t n, uint64\-\_\-t decomp\-\_\-modulus\-\_\-size, uint64\-\_\-t key\-\_\-modulus\-\_\-size, uint64\-\_\-t rns\-\_\-modulus\-\_\-size, uint64\-\_\-t key\-\_\-component\-\_\-count, const uint64\-\_\-t $\ast$moduli, const uint64\-\_\-t $\ast$$\ast$k\-\_\-switch\-\_\-keys, const uint64\-\_\-t $\ast$modswitch\-\_\-factors, const uint64\-\_\-t $\ast$twiddle\-\_\-factors, bool fence=false)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint64\-\_\-t $\ast$ \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_a52d7f28512fca04e7d1b3bafecbdccf6}{result\-\_\-}
+\item 
+const uint64\-\_\-t $\ast$ \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_ae31c6cf93ed6fb79ad68a8ae473e5e1d}{t\-\_\-target\-\_\-iter\-\_\-ptr\-\_\-}
+\item 
+uint64\-\_\-t \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_a020885135c3b3f54e574fe0cc8824133}{n\-\_\-}
+\item 
+uint64\-\_\-t \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_aef1b7966f320ffd96aeda0d57bacbeac}{decomp\-\_\-modulus\-\_\-size\-\_\-}
+\item 
+uint64\-\_\-t \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_a3fc107f08b6afabf43eace8ef0f3e30f}{key\-\_\-modulus\-\_\-size\-\_\-}
+\item 
+uint64\-\_\-t \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_a1f2b398daf647ebf2d677a512d9f04a7}{rns\-\_\-modulus\-\_\-size\-\_\-}
+\item 
+uint64\-\_\-t \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_ac7292612ff5f07a4afd5612e422385a3}{key\-\_\-component\-\_\-count\-\_\-}
+\item 
+const uint64\-\_\-t $\ast$ \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_a6452f0b40b3ca377273566ec90f1dc5a}{moduli\-\_\-}
+\item 
+const uint64\-\_\-t $\ast$$\ast$ \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_ad54e0b28e00a46996dd7f0d1da0c9750}{k\-\_\-switch\-\_\-keys\-\_\-}
+\item 
+const uint64\-\_\-t $\ast$ \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_a5be66de56ad9af10b434c22a697b00ad}{modswitch\-\_\-factors\-\_\-}
+\item 
+const uint64\-\_\-t $\ast$ \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_adbd1e4578cfb016b582d0bbefee8fe6f}{twiddle\-\_\-factors\-\_\-}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch}{Object\-\_\-\-Key\-Switch} Stores the parameters for the keyswitch 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em results} & stores the keyswitch results \\
+\hline
+\mbox{\tt in}  & {\em t\-\_\-target\-\_\-iter\-\_\-ptr} & stores the input ciphertext data \\
+\hline
+\mbox{\tt in}  & {\em n} & stores polynomial size \\
+\hline
+\mbox{\tt in}  & {\em decomp\-\_\-modulus\-\_\-size} & stores modulus size \\
+\hline
+\mbox{\tt in}  & {\em key\-\_\-modulus\-\_\-size} & stores key modulus size \\
+\hline
+\mbox{\tt in}  & {\em rns\-\_\-modulus\-\_\-size} & stores the rns modulus size \\
+\hline
+\mbox{\tt in}  & {\em key\-\_\-component\-\_\-size} & stores the key component size \\
+\hline
+\mbox{\tt in}  & {\em moduli} & stores the moduli \\
+\hline
+\mbox{\tt in}  & {\em k\-\_\-switch\-\_\-keys} & stores the keys for keyswitch operation \\
+\hline
+\mbox{\tt in}  & {\em modswitch\-\_\-factors} & stores the factors for modular switch \\
+\hline
+\mbox{\tt in}  & {\em twiddle\-\_\-factors} & stores the twiddle factors \\
+\hline
+\mbox{\tt in}  & {\em fence} & indicates whether the object is a fenced object or not \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_a323050d96e7cb1710632b1088c11bf0c}{\index{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch@{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch}!Object\-\_\-\-Key\-Switch@{Object\-\_\-\-Key\-Switch}}
+\index{Object\-\_\-\-Key\-Switch@{Object\-\_\-\-Key\-Switch}!intel::hexl::fpga::Object_KeySwitch@{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch}}
+\subsubsection[{Object\-\_\-\-Key\-Switch}]{\setlength{\rightskip}{0pt plus 5cm}intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch\-::\-Object\-\_\-\-Key\-Switch (
+\begin{DoxyParamCaption}
+\item[{uint64\-\_\-t $\ast$}]{result, }
+\item[{const uint64\-\_\-t $\ast$}]{t\-\_\-target\-\_\-iter\-\_\-ptr, }
+\item[{uint64\-\_\-t}]{n, }
+\item[{uint64\-\_\-t}]{decomp\-\_\-modulus\-\_\-size, }
+\item[{uint64\-\_\-t}]{key\-\_\-modulus\-\_\-size, }
+\item[{uint64\-\_\-t}]{rns\-\_\-modulus\-\_\-size, }
+\item[{uint64\-\_\-t}]{key\-\_\-component\-\_\-count, }
+\item[{const uint64\-\_\-t $\ast$}]{moduli, }
+\item[{const uint64\-\_\-t $\ast$$\ast$}]{k\-\_\-switch\-\_\-keys, }
+\item[{const uint64\-\_\-t $\ast$}]{modswitch\-\_\-factors, }
+\item[{const uint64\-\_\-t $\ast$}]{twiddle\-\_\-factors, }
+\item[{bool}]{fence = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_a323050d96e7cb1710632b1088c11bf0c}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_aef1b7966f320ffd96aeda0d57bacbeac}{\index{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch@{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch}!decomp\-\_\-modulus\-\_\-size\-\_\-@{decomp\-\_\-modulus\-\_\-size\-\_\-}}
+\index{decomp\-\_\-modulus\-\_\-size\-\_\-@{decomp\-\_\-modulus\-\_\-size\-\_\-}!intel::hexl::fpga::Object_KeySwitch@{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch}}
+\subsubsection[{decomp\-\_\-modulus\-\_\-size\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch\-::decomp\-\_\-modulus\-\_\-size\-\_\-}}\label{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_aef1b7966f320ffd96aeda0d57bacbeac}
+\hypertarget{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_ad54e0b28e00a46996dd7f0d1da0c9750}{\index{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch@{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch}!k\-\_\-switch\-\_\-keys\-\_\-@{k\-\_\-switch\-\_\-keys\-\_\-}}
+\index{k\-\_\-switch\-\_\-keys\-\_\-@{k\-\_\-switch\-\_\-keys\-\_\-}!intel::hexl::fpga::Object_KeySwitch@{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch}}
+\subsubsection[{k\-\_\-switch\-\_\-keys\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}const uint64\-\_\-t$\ast$$\ast$ intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch\-::k\-\_\-switch\-\_\-keys\-\_\-}}\label{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_ad54e0b28e00a46996dd7f0d1da0c9750}
+\hypertarget{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_ac7292612ff5f07a4afd5612e422385a3}{\index{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch@{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch}!key\-\_\-component\-\_\-count\-\_\-@{key\-\_\-component\-\_\-count\-\_\-}}
+\index{key\-\_\-component\-\_\-count\-\_\-@{key\-\_\-component\-\_\-count\-\_\-}!intel::hexl::fpga::Object_KeySwitch@{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch}}
+\subsubsection[{key\-\_\-component\-\_\-count\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch\-::key\-\_\-component\-\_\-count\-\_\-}}\label{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_ac7292612ff5f07a4afd5612e422385a3}
+\hypertarget{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_a3fc107f08b6afabf43eace8ef0f3e30f}{\index{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch@{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch}!key\-\_\-modulus\-\_\-size\-\_\-@{key\-\_\-modulus\-\_\-size\-\_\-}}
+\index{key\-\_\-modulus\-\_\-size\-\_\-@{key\-\_\-modulus\-\_\-size\-\_\-}!intel::hexl::fpga::Object_KeySwitch@{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch}}
+\subsubsection[{key\-\_\-modulus\-\_\-size\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch\-::key\-\_\-modulus\-\_\-size\-\_\-}}\label{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_a3fc107f08b6afabf43eace8ef0f3e30f}
+\hypertarget{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_a5be66de56ad9af10b434c22a697b00ad}{\index{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch@{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch}!modswitch\-\_\-factors\-\_\-@{modswitch\-\_\-factors\-\_\-}}
+\index{modswitch\-\_\-factors\-\_\-@{modswitch\-\_\-factors\-\_\-}!intel::hexl::fpga::Object_KeySwitch@{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch}}
+\subsubsection[{modswitch\-\_\-factors\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}const uint64\-\_\-t$\ast$ intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch\-::modswitch\-\_\-factors\-\_\-}}\label{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_a5be66de56ad9af10b434c22a697b00ad}
+\hypertarget{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_a6452f0b40b3ca377273566ec90f1dc5a}{\index{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch@{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch}!moduli\-\_\-@{moduli\-\_\-}}
+\index{moduli\-\_\-@{moduli\-\_\-}!intel::hexl::fpga::Object_KeySwitch@{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch}}
+\subsubsection[{moduli\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}const uint64\-\_\-t$\ast$ intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch\-::moduli\-\_\-}}\label{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_a6452f0b40b3ca377273566ec90f1dc5a}
+\hypertarget{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_a020885135c3b3f54e574fe0cc8824133}{\index{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch@{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch}!n\-\_\-@{n\-\_\-}}
+\index{n\-\_\-@{n\-\_\-}!intel::hexl::fpga::Object_KeySwitch@{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch}}
+\subsubsection[{n\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch\-::n\-\_\-}}\label{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_a020885135c3b3f54e574fe0cc8824133}
+\hypertarget{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_a52d7f28512fca04e7d1b3bafecbdccf6}{\index{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch@{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch}!result\-\_\-@{result\-\_\-}}
+\index{result\-\_\-@{result\-\_\-}!intel::hexl::fpga::Object_KeySwitch@{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch}}
+\subsubsection[{result\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t$\ast$ intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch\-::result\-\_\-}}\label{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_a52d7f28512fca04e7d1b3bafecbdccf6}
+\hypertarget{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_a1f2b398daf647ebf2d677a512d9f04a7}{\index{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch@{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch}!rns\-\_\-modulus\-\_\-size\-\_\-@{rns\-\_\-modulus\-\_\-size\-\_\-}}
+\index{rns\-\_\-modulus\-\_\-size\-\_\-@{rns\-\_\-modulus\-\_\-size\-\_\-}!intel::hexl::fpga::Object_KeySwitch@{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch}}
+\subsubsection[{rns\-\_\-modulus\-\_\-size\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch\-::rns\-\_\-modulus\-\_\-size\-\_\-}}\label{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_a1f2b398daf647ebf2d677a512d9f04a7}
+\hypertarget{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_ae31c6cf93ed6fb79ad68a8ae473e5e1d}{\index{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch@{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch}!t\-\_\-target\-\_\-iter\-\_\-ptr\-\_\-@{t\-\_\-target\-\_\-iter\-\_\-ptr\-\_\-}}
+\index{t\-\_\-target\-\_\-iter\-\_\-ptr\-\_\-@{t\-\_\-target\-\_\-iter\-\_\-ptr\-\_\-}!intel::hexl::fpga::Object_KeySwitch@{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch}}
+\subsubsection[{t\-\_\-target\-\_\-iter\-\_\-ptr\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}const uint64\-\_\-t$\ast$ intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch\-::t\-\_\-target\-\_\-iter\-\_\-ptr\-\_\-}}\label{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_ae31c6cf93ed6fb79ad68a8ae473e5e1d}
+\hypertarget{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_adbd1e4578cfb016b582d0bbefee8fe6f}{\index{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch@{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch}!twiddle\-\_\-factors\-\_\-@{twiddle\-\_\-factors\-\_\-}}
+\index{twiddle\-\_\-factors\-\_\-@{twiddle\-\_\-factors\-\_\-}!intel::hexl::fpga::Object_KeySwitch@{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch}}
+\subsubsection[{twiddle\-\_\-factors\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}const uint64\-\_\-t$\ast$ intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch\-::twiddle\-\_\-factors\-\_\-}}\label{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_adbd1e4578cfb016b582d0bbefee8fe6f}
+
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{fpga_8h}{fpga.\-h}\end{DoxyCompactItemize}

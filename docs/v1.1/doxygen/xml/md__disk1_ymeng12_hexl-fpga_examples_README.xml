@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="md__disk1_ymeng12_hexl-fpga_examples_README" kind="page">
+    <compoundname>md__disk1_ymeng12_hexl-fpga_examples_README</compoundname>
+    <title>Example Using Intel HE Acceleration Library for FPGAs in An External Application</title>
+    <detaileddescription>
+<para>After installing Intel HE Acceleration Library for FPGAs, you can use the library in an external application in the following way.</para><para><heading level="2">Include Intel HE Acceleration Library for FPGAs package into your <computeroutput>CMakeLists.txt</computeroutput>:</heading>
+</para><para>``` find_package(hexl-fpga 1.1 HINTS ${HEXL_FPGA_HINT_DIR} REQUIRED) target_link_libraries(&lt;your target&gt;=&quot;&quot;&gt; PRIVATE hexl-fpga::hexl-fpga) ```</para><para>If Intel HE Acceleration Library for FPGAs is installed globally, <computeroutput>HEXL_FPGA_HINT_DIR</computeroutput> is not needed. Otherwise, <computeroutput>HEXL_FPGA_HINT_DIR</computeroutput> should be the directory containing <computeroutput>hexl-fpgaConfig.cmake</computeroutput>, e.g. <computeroutput>${CMAKE_INSTALL_PREFIX}/lib/cmake/</computeroutput>, where ${CMAKE_INSTALL_PREFIX} is the pre-installed directory.</para><para><heading level="2">Build your application with preinstalled Intel HE Acceleration Library for FPGAs package</heading>
+</para><para>To build your application with Intel HE Acceleration Library for FPGAs, point ${CMAKE_PREFIX_PATH} to the pre-installed Intel HE Acceleration Library for FPGAs package. ``` mkdir -p build-examples cd build-examples cmake ../examples/ -DCMAKE_PREFIX_PATH=${CMAKE_INSTALL_PREFIX}/lib/cmake/ -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc ```</para><para><heading level="2">Compile the examples</heading>
+</para><para>``` make ```</para><para>The compiled executable is located in build-examples/ directory.</para><para><heading level="2">Run the examples</heading>
+</para><para><heading level="3">Run the examples in emulation mode</heading>
+</para><para>``` export RUN_CHOICE=1 make examples ```</para><para><heading level="3">Run the examples on FPGA card</heading>
+</para><para>``` export RUN_CHOICE=2 make examples ``` </para>    </detaileddescription>
+  </compounddef>
+</doxygen>

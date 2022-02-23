@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classdyadic__multiply" kind="class" prot="public">
+    <compoundname>dyadic_multiply</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Fixture</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classdyadic__multiply_1a75a0d84492c28514bdbee04e81d87b90" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; uint64_t &gt;</type>
+        <definition>std::vector&lt;uint64_t&gt; dyadic_multiply::moduli</definition>
+        <argsstring></argsstring>
+        <name>moduli</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/benchmark/bench_dyadic_multiply.cpp" line="19" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/benchmark/bench_dyadic_multiply.cpp" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdyadic__multiply_1ac325bd719a2437d26a61e861d06a7761" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; uint64_t &gt;</type>
+        <definition>std::vector&lt;uint64_t&gt; dyadic_multiply::op1</definition>
+        <argsstring></argsstring>
+        <name>op1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/benchmark/bench_dyadic_multiply.cpp" line="20" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/benchmark/bench_dyadic_multiply.cpp" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdyadic__multiply_1a2a67aed95473f9cb61e54ebd46c2fd2a" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; uint64_t &gt;</type>
+        <definition>std::vector&lt;uint64_t&gt; dyadic_multiply::op2</definition>
+        <argsstring></argsstring>
+        <name>op2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/benchmark/bench_dyadic_multiply.cpp" line="21" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/benchmark/bench_dyadic_multiply.cpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classdyadic__multiply_1ae7e70c56054e97f2e7422865401a1d18" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dyadic_multiply::setup_dyadic_multiply_io</definition>
+        <argsstring>(uint64_t n_dyadic_multiply, uint64_t num_moduli, uint64_t coeff_count)</argsstring>
+        <name>setup_dyadic_multiply_io</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>n_dyadic_multiply</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>num_moduli</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>coeff_count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/benchmark/bench_dyadic_multiply.cpp" line="12" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/benchmark/bench_dyadic_multiply.cpp" bodystart="24" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classdyadic__multiply_1a7104e784aa094e223ab692ab3cd1a663" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dyadic_multiply::bench_dyadic_multiply</definition>
+        <argsstring>(std::vector&lt; uint64_t &gt; &amp;out, uint64_t n_dyadic_multiply, uint64_t num_moduli, uint64_t coeff_count)</argsstring>
+        <name>bench_dyadic_multiply</name>
+        <param>
+          <type>std::vector&lt; uint64_t &gt; &amp;</type>
+          <declname>out</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>n_dyadic_multiply</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>num_moduli</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>coeff_count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/benchmark/bench_dyadic_multiply.cpp" line="14" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/benchmark/bench_dyadic_multiply.cpp" bodystart="48" bodyend="62"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="29">
+        <label>Fixture</label>
+      </node>
+      <node id="28">
+        <label>dyadic_multiply</label>
+        <link refid="classdyadic__multiply"/>
+        <childnode refid="29" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="31">
+        <label>Fixture</label>
+      </node>
+      <node id="30">
+        <label>dyadic_multiply</label>
+        <link refid="classdyadic__multiply"/>
+        <childnode refid="31" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/disk1/ymeng12/hexl-fpga/benchmark/bench_dyadic_multiply.cpp" line="10" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/benchmark/bench_dyadic_multiply.cpp" bodystart="10" bodyend="22"/>
+    <listofallmembers>
+      <member refid="classdyadic__multiply_1a7104e784aa094e223ab692ab3cd1a663" prot="public" virt="non-virtual"><scope>dyadic_multiply</scope><name>bench_dyadic_multiply</name></member>
+      <member refid="classdyadic__multiply_1a75a0d84492c28514bdbee04e81d87b90" prot="private" virt="non-virtual"><scope>dyadic_multiply</scope><name>moduli</name></member>
+      <member refid="classdyadic__multiply_1ac325bd719a2437d26a61e861d06a7761" prot="private" virt="non-virtual"><scope>dyadic_multiply</scope><name>op1</name></member>
+      <member refid="classdyadic__multiply_1a2a67aed95473f9cb61e54ebd46c2fd2a" prot="private" virt="non-virtual"><scope>dyadic_multiply</scope><name>op2</name></member>
+      <member refid="classdyadic__multiply_1ae7e70c56054e97f2e7422865401a1d18" prot="public" virt="non-virtual"><scope>dyadic_multiply</scope><name>setup_dyadic_multiply_io</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

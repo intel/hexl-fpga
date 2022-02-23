@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="namespaceintel" kind="namespace">
+    <compoundname>intel</compoundname>
+    <innernamespace refid="namespaceintel_1_1hexl">intel::hexl</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/disk1/ymeng12/hexl-fpga/host/inc/dyadic_multiply.h" line="9" column="1"/>
+  </compounddef>
+</doxygen>

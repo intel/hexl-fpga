@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classfpga__context" kind="class" prot="public">
+    <compoundname>fpga_context</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Environment</basecompoundref>
+    <includes refid="tests_2fpga__context_8h" local="no">fpga_context.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfpga__context_1a1bb9192ffc2972fe6ee6deb85bec921e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>virtual fpga_context::~fpga_context</definition>
+        <argsstring>()</argsstring>
+        <name>~fpga_context</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/fpga_context.h" line="10" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/fpga_context.h" bodystart="10" bodyend="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classfpga__context_1a8650400eca53431dd95795429c484624" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void fpga_context::SetUp</definition>
+        <argsstring>()</argsstring>
+        <name>SetUp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/fpga_context.h" line="11" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/fpga_context.h" bodystart="11" bodyend="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classfpga__context_1a3f229df43f9dff43cd2f748b72023e2a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void fpga_context::TearDown</definition>
+        <argsstring>()</argsstring>
+        <name>TearDown</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/fpga_context.h" line="13" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/fpga_context.h" bodystart="13" bodyend="13"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="42">
+        <label>fpga_context</label>
+        <link refid="classfpga__context"/>
+        <childnode refid="43" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>testing::Environment</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="44">
+        <label>fpga_context</label>
+        <link refid="classfpga__context"/>
+        <childnode refid="45" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>testing::Environment</label>
+      </node>
+    </collaborationgraph>
+    <location file="/disk1/ymeng12/hexl-fpga/tests/fpga_context.h" line="8" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/fpga_context.h" bodystart="8" bodyend="14"/>
+    <listofallmembers>
+      <member refid="classfpga__context_1a8650400eca53431dd95795429c484624" prot="public" virt="virtual"><scope>fpga_context</scope><name>SetUp</name></member>
+      <member refid="classfpga__context_1a3f229df43f9dff43cd2f748b72023e2a" prot="public" virt="virtual"><scope>fpga_context</scope><name>TearDown</name></member>
+      <member refid="classfpga__context_1a1bb9192ffc2972fe6ee6deb85bec921e" prot="public" virt="virtual"><scope>fpga_context</scope><name>~fpga_context</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,544 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="test__inv__ntt_8cpp" kind="file">
+    <compoundname>test_inv_ntt.cpp</compoundname>
+    <includes local="no">cstdlib</includes>
+    <includes local="no">limits</includes>
+    <includes local="no">random</includes>
+    <includes local="no">vector</includes>
+    <includes local="yes">gtest/gtest.h</includes>
+    <includes refid="hexl-fpga_8h" local="yes">hexl-fpga.h</includes>
+    <includes refid="ntt_8hpp" local="yes">test_utils/ntt.hpp</includes>
+    <incdepgraph>
+      <node id="212">
+        <label>limits</label>
+      </node>
+      <node id="216">
+        <label>hexl-fpga.h</label>
+        <link refid="hexl-fpga_8h"/>
+        <childnode refid="217" relation="include">
+        </childnode>
+      </node>
+      <node id="217">
+        <label>cstdint</label>
+      </node>
+      <node id="218">
+        <label>test_utils/ntt.hpp</label>
+        <link refid="ntt_8hpp"/>
+        <childnode refid="219" relation="include">
+        </childnode>
+      </node>
+      <node id="220">
+        <label>cmath</label>
+      </node>
+      <node id="219">
+        <label>utils-test.hpp</label>
+        <link refid="utils-test_8hpp"/>
+        <childnode refid="220" relation="include">
+        </childnode>
+        <childnode refid="221" relation="include">
+        </childnode>
+        <childnode refid="217" relation="include">
+        </childnode>
+        <childnode refid="211" relation="include">
+        </childnode>
+        <childnode refid="222" relation="include">
+        </childnode>
+        <childnode refid="212" relation="include">
+        </childnode>
+        <childnode refid="223" relation="include">
+        </childnode>
+        <childnode refid="224" relation="include">
+        </childnode>
+        <childnode refid="214" relation="include">
+        </childnode>
+      </node>
+      <node id="210">
+        <label>test_inv_ntt.cpp</label>
+        <link refid="test_inv_ntt.cpp"/>
+        <childnode refid="211" relation="include">
+        </childnode>
+        <childnode refid="212" relation="include">
+        </childnode>
+        <childnode refid="213" relation="include">
+        </childnode>
+        <childnode refid="214" relation="include">
+        </childnode>
+        <childnode refid="215" relation="include">
+        </childnode>
+        <childnode refid="216" relation="include">
+        </childnode>
+        <childnode refid="218" relation="include">
+        </childnode>
+      </node>
+      <node id="213">
+        <label>random</label>
+      </node>
+      <node id="214">
+        <label>vector</label>
+      </node>
+      <node id="215">
+        <label>gtest/gtest.h</label>
+      </node>
+      <node id="224">
+        <label>utility</label>
+      </node>
+      <node id="211">
+        <label>cstdlib</label>
+      </node>
+      <node id="222">
+        <label>iostream</label>
+      </node>
+      <node id="221">
+        <label>cstddef</label>
+      </node>
+      <node id="223">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classinv__ntt__test" prot="public">inv_ntt_test</innerclass>
+    <innernamespace refid="namespacehetest">hetest</innernamespace>
+    <innernamespace refid="namespacehetest_1_1utils">hetest::utils</innernamespace>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="test__inv__ntt_8cpp_1ad30e01eac3dc4b3f7be1066b2e6853e5" prot="public" static="no">
+        <type><ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0" kindref="member">hetest::utils::StimulusType</ref></type>
+        <definition>using StimulusType =  hetest::utils::StimulusType</definition>
+        <argsstring></argsstring>
+        <name>StimulusType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp" line="67" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="test__inv__ntt_8cpp_1acf98d75655f80eac92838f877e38686d" prot="public" static="yes" mutable="no">
+        <type>const uint64_t</type>
+        <definition>const uint64_t ntt_degree</definition>
+        <argsstring></argsstring>
+        <name>ntt_degree</name>
+        <initializer>= 16384</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp" line="12" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="test__inv__ntt_8cpp_1a3b56499980b0587b54018d8e1c1437bc" prot="public" static="yes" mutable="no">
+        <type>const uint64_t</type>
+        <definition>const uint64_t ntt_prime</definition>
+        <argsstring></argsstring>
+        <name>ntt_prime</name>
+        <initializer>= 136314881</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp" line="13" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="test__inv__ntt_8cpp_1ab6b85614b7b207ed86683090160fe5d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(inv_ntt_test, p16384_INV_INTT_iRAND_iters4_pbits18)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref></type>
+        </param>
+        <param>
+          <type>p16384_INV_INTT_iRAND_iters4_pbits18</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp" line="127" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp" bodystart="127" bodyend="130"/>
+      </memberdef>
+      <memberdef kind="function" id="test__inv__ntt_8cpp_1ac70dd75bb4689225ad936b73571ccd86" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(inv_ntt_test, p16384_INV_INTT_iRAMP_iters4_pbits55)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref></type>
+        </param>
+        <param>
+          <type>p16384_INV_INTT_iRAMP_iters4_pbits55</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp" line="132" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp" bodystart="132" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="test__inv__ntt_8cpp_1a188e261863bad6aac25d12b86cd218ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(inv_ntt_test, p16384_INV_INTT_iALL_ZEROS_iters4_pbits55)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref></type>
+        </param>
+        <param>
+          <type>p16384_INV_INTT_iALL_ZEROS_iters4_pbits55</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp" line="137" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp" bodystart="137" bodyend="140"/>
+      </memberdef>
+      <memberdef kind="function" id="test__inv__ntt_8cpp_1aa8e4b75a482305da1ffb3a17ef5a5d18" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(inv_ntt_test, p16384_INV_INTT_iALL_ONES_iters4_pbits55)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref></type>
+        </param>
+        <param>
+          <type>p16384_INV_INTT_iALL_ONES_iters4_pbits55</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp" line="142" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp" bodystart="142" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="function" id="test__inv__ntt_8cpp_1a658ff8e25afb4e85c8d1125afa2bc4df" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(inv_ntt_test, p16384_INV_INTT_iALL_MAX_POS_iters4_pbits55)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref></type>
+        </param>
+        <param>
+          <type>p16384_INV_INTT_iALL_MAX_POS_iters4_pbits55</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp" line="147" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp" bodystart="147" bodyend="150"/>
+      </memberdef>
+      <memberdef kind="function" id="test__inv__ntt_8cpp_1ac049ae5c003006d736ff7edff9592949" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(inv_ntt_test, p16384_INV_INTT_iALL_MAX_POS_iters4_pbits62)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref></type>
+        </param>
+        <param>
+          <type>p16384_INV_INTT_iALL_MAX_POS_iters4_pbits62</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp" line="152" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp" bodystart="152" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="function" id="test__inv__ntt_8cpp_1a59ad0b890682651d73942a10780020aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(inv_ntt_test, p16384_INV_INTT_iIMPULSE_iters4_pbits62)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref></type>
+        </param>
+        <param>
+          <type>p16384_INV_INTT_iIMPULSE_iters4_pbits62</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp" line="157" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp" bodystart="157" bodyend="160"/>
+      </memberdef>
+      <memberdef kind="function" id="test__inv__ntt_8cpp_1ae5ad6350e92f893679dd84114e62073e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(inv_ntt_test, p16384_INV_INTT_iRAND_iters4_pbits55)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref></type>
+        </param>
+        <param>
+          <type>p16384_INV_INTT_iRAND_iters4_pbits55</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp" line="161" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp" bodystart="161" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="test__inv__ntt_8cpp_1a3165c896cf3f466dc586bc287ff28e01" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(inv_ntt_test, p16384_INV_INTT_iRAND_iters4_pbits32)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref></type>
+        </param>
+        <param>
+          <type>p16384_INV_INTT_iRAND_iters4_pbits32</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp" line="166" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp" bodystart="166" bodyend="169"/>
+      </memberdef>
+      <memberdef kind="function" id="test__inv__ntt_8cpp_1a89d95d60d3f311c01eb697e9a078fba1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(inv_ntt_test, p16384_INV_INTT_iRAND_iters400_pbits55)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref></type>
+        </param>
+        <param>
+          <type>p16384_INV_INTT_iRAND_iters400_pbits55</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp" line="170" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp" bodystart="170" bodyend="173"/>
+      </memberdef>
+      <memberdef kind="function" id="test__inv__ntt_8cpp_1a989036583d652e39c4a6ea162bda277f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(inv_ntt_test, p16384_INV_INTT_iRAND_iters410_pbits64)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref></type>
+        </param>
+        <param>
+          <type>p16384_INV_INTT_iRAND_iters410_pbits64</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp" line="175" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp" bodystart="175" bodyend="178"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>Copyright<sp/>(C)<sp/>2020-2021<sp/>Intel<sp/>Corporation</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>Apache-2.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdlib&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;limits&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;random&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;gtest/gtest.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="hexl-fpga_8h" kindref="compound">hexl-fpga.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="ntt_8hpp" kindref="compound">test_utils/ntt.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t<sp/>ntt_degree<sp/>=<sp/>16384;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t<sp/>ntt_prime<sp/>=<sp/>136314881;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">hetest<sp/>{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">utils<sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0" kindref="member">StimulusType</ref><sp/>{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0ab44049cb8c478c10943b85c673d1aa6c" kindref="member">RANDOM</ref><sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0acb6d3aaabe220e808c4ebe7a4f75cba3" kindref="member">RAMP</ref>,</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0aa4357d286213142b9b8696ef0af5ee53" kindref="member">ALL_ONES</ref>,</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0abd0329a88df648015ad6e091cc1f07e2" kindref="member">ALL_ZEROS</ref>,</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0adc03ed02b009ff90c33cda86a886f525" kindref="member">IMPULSE</ref>,</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0a6574fd7efebbe5bb808fd5eb3ce8e519" kindref="member">ALL_MAX_VALUES</ref>,</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0a40004988ff05dc31725e4a31ddd18006" kindref="member">ALL_MIN_VALUES</ref>,</highlight></codeline>
+<codeline lineno="24"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>genStimulusForNTT(std::vector&lt;T&gt;&amp;<sp/>inVec,<sp/>T<sp/>prime,</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0" kindref="member">StimulusType</ref><sp/>stimulusType)<sp/>{</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>std::random_device<sp/>rd;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>std::mt19937<sp/>gen(rd());</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>std::uniform_int_distribution&lt;T&gt;<sp/>distrib(0,<sp/>prime<sp/>-<sp/>1);</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(stimulusType<sp/>==<sp/><ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0ab44049cb8c478c10943b85c673d1aa6c" kindref="member">RANDOM</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>inVec.size();<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inVec[i]<sp/>=<sp/>distrib(gen);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(stimulusType<sp/>==<sp/><ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0acb6d3aaabe220e808c4ebe7a4f75cba3" kindref="member">RAMP</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>inVec.size();<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inVec[i]<sp/>=<sp/>i;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(stimulusType<sp/>==<sp/><ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0abd0329a88df648015ad6e091cc1f07e2" kindref="member">ALL_ZEROS</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>inVec.size();<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inVec[i]<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(stimulusType<sp/>==<sp/><ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0a6574fd7efebbe5bb808fd5eb3ce8e519" kindref="member">ALL_MAX_VALUES</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>inVec.size();<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inVec[i]<sp/>=<sp/>std::numeric_limits&lt;T&gt;::max();</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(stimulusType<sp/>==<sp/><ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0a40004988ff05dc31725e4a31ddd18006" kindref="member">ALL_MIN_VALUES</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>inVec.size();<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inVec[i]<sp/>=<sp/>std::numeric_limits&lt;T&gt;::min();</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(stimulusType<sp/>==<sp/><ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0aa4357d286213142b9b8696ef0af5ee53" kindref="member">ALL_ONES</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>inVec.size();<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inVec[i]<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(stimulusType<sp/>==<sp/><ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0adc03ed02b009ff90c33cda86a886f525" kindref="member">IMPULSE</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>inVec.size();<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(i<sp/>==<sp/>0)</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inVec[i]<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inVec[i]<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="63"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>utils</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>hetest</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0" kindref="member">StimulusType</ref><sp/>=<sp/><ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0" kindref="member">hetest::utils::StimulusType</ref>;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69" refid="classinv__ntt__test" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>::testing::Test<sp/>{</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classinv__ntt__test_1a8592b35ff857a63e890076cad1b2fdf8" kindref="member">run_inv_ntt_test</ref>(<ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0" kindref="member">StimulusType</ref><sp/>stimulusType,<sp/>uint64_t<sp/>iterations,</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>bitsForPrime);</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classinv__ntt__test_1a316de69045abc6a1223fb6360f036eac" kindref="member">TestBody</ref>()</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{}</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>load_inv_ntt_data(<ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0" kindref="member">StimulusType</ref><sp/>stimulusType,<sp/>uint64_t<sp/>iterations,</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>bitsForPrime);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;std::vector&lt;uint64_t&gt;&gt;<sp/>input_;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;uint64_t&gt;<sp/>primes_;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>inv_ntt_test::load_inv_ntt_data(<ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0" kindref="member">StimulusType</ref><sp/>stimulusType,</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>iterations,</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>bitsForPrime)<sp/>{</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>std::random_device<sp/>rd;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>std::mt19937<sp/>gen(rd());</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>this-&gt;primes_<sp/>=</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehetest_1_1utils_1aa12bfb4bcbbd50266e460de87ee58cd5" kindref="member">hetest::utils::GeneratePrimes</ref>(iterations,<sp/>bitsForPrime,<sp/>ntt_degree);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>iterations;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;uint64_t&gt;<sp/>input;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>input.resize(ntt_degree);</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>hetest::utils::genStimulusForNTT&lt;uint64_t&gt;(input,<sp/>primes_[i],</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>stimulusType);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>input_.push_back(input);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="96"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classinv__ntt__test_1a8592b35ff857a63e890076cad1b2fdf8" kindref="member">inv_ntt_test::run_inv_ntt_test</ref>(<ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0" kindref="member">StimulusType</ref><sp/>stimulusType,</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>iterations,</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>bitsForPrime)<sp/>{</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/>load_inv_ntt_data(stimulusType,<sp/>iterations,<sp/>bitsForPrime);</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>iterations;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhetest_1_1utils_1_1NTT_1_1NTTImpl" kindref="compound">hetest::utils::NTT::NTTImpl</ref><sp/><ref refid="classntt" kindref="compound">ntt</ref>(ntt_degree,<sp/>this-&gt;primes_[i]);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t*<sp/>inv_root_of_unity_powers<sp/>=</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classntt" kindref="compound">ntt</ref>.GetInvRootOfUnityPowersPtr();</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>inv_ntt_degree<sp/>=</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehetest_1_1utils_1a3f409e865de8022c3ea069458b3913d6" kindref="member">hetest::utils::InverseUIntMod</ref>(ntt_degree,<sp/>this-&gt;primes_[i]);</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>W_op<sp/>=<sp/>inv_root_of_unity_powers[ntt_degree<sp/>-<sp/>1];</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>inv_n_w<sp/>=<sp/><ref refid="namespacehetest_1_1utils_1a7e1e09f25d4ed5c4b8ed51fd0e7831e0" kindref="member">hetest::utils::MultiplyUIntMod</ref>(inv_ntt_degree,<sp/>W_op,</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;primes_[i]);</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;uint64_t&gt;<sp/>results<sp/>=<sp/>input_[i];</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;uint64_t&gt;<sp/>inINTT<sp/>=<sp/>input_[i];</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;uint64_t&gt;<sp/>outINTT<sp/>=<sp/>input_[i];</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classntt" kindref="compound">ntt</ref>.ComputeInverse(outINTT.data(),<sp/>results.data(),<sp/>1,<sp/>1);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespaceintel_1_1hexl_1afc56a7a0c0870b87c5445de89a0fce81" kindref="member">intel::hexl::_set_worksize_INTT</ref>(1);</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespaceintel_1_1hexl_1a69f85dd306cce099d7d68dfd3567bd3c" kindref="member">intel::hexl::_INTT</ref>(results.data(),<sp/><ref refid="classntt" kindref="compound">ntt</ref>.GetInvRootOfUnityPowersPtr(),</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classntt" kindref="compound">ntt</ref>.GetPrecon64InvRootOfUnityPowersPtr(),</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;primes_[i],<sp/>inv_ntt_degree,<sp/>inv_n_w,</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ntt_degree);</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespaceintel_1_1hexl_1aea83cf5603f96ba86ad15d99d997fe49" kindref="member">intel::hexl::_INTTCompleted</ref>();</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ASSERT_EQ(results,<sp/>outINTT);</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="125"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><ref refid="test__dyadic__multiply_8cpp_1aedb5ee3bb161473f1d3e70ea9f9a00b9" kindref="member">TEST_F</ref>(<ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref>,<sp/>p16384_INV_INTT_iRAND_iters4_pbits18)<sp/>{</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref><sp/>he_fpga_api;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/>he_fpga_api.<ref refid="classinv__ntt__test_1a8592b35ff857a63e890076cad1b2fdf8" kindref="member">run_inv_ntt_test</ref>(<ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0ab44049cb8c478c10943b85c673d1aa6c" kindref="member">StimulusType::RANDOM</ref>,<sp/>4,<sp/>20);</highlight></codeline>
+<codeline lineno="130"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><ref refid="test__dyadic__multiply_8cpp_1aedb5ee3bb161473f1d3e70ea9f9a00b9" kindref="member">TEST_F</ref>(<ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref>,<sp/>p16384_INV_INTT_iRAMP_iters4_pbits55)<sp/>{</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref><sp/>he_fpga_api;</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/>he_fpga_api.<ref refid="classinv__ntt__test_1a8592b35ff857a63e890076cad1b2fdf8" kindref="member">run_inv_ntt_test</ref>(<ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0acb6d3aaabe220e808c4ebe7a4f75cba3" kindref="member">StimulusType::RAMP</ref>,<sp/>4,<sp/>55);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><ref refid="test__dyadic__multiply_8cpp_1aedb5ee3bb161473f1d3e70ea9f9a00b9" kindref="member">TEST_F</ref>(<ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref>,<sp/>p16384_INV_INTT_iALL_ZEROS_iters4_pbits55)<sp/>{</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref><sp/>he_fpga_api;</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/>he_fpga_api.<ref refid="classinv__ntt__test_1a8592b35ff857a63e890076cad1b2fdf8" kindref="member">run_inv_ntt_test</ref>(<ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0abd0329a88df648015ad6e091cc1f07e2" kindref="member">StimulusType::ALL_ZEROS</ref>,<sp/>4,<sp/>55);</highlight></codeline>
+<codeline lineno="140"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><ref refid="test__dyadic__multiply_8cpp_1aedb5ee3bb161473f1d3e70ea9f9a00b9" kindref="member">TEST_F</ref>(<ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref>,<sp/>p16384_INV_INTT_iALL_ONES_iters4_pbits55)<sp/>{</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref><sp/>he_fpga_api;</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/>he_fpga_api.<ref refid="classinv__ntt__test_1a8592b35ff857a63e890076cad1b2fdf8" kindref="member">run_inv_ntt_test</ref>(<ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0aa4357d286213142b9b8696ef0af5ee53" kindref="member">StimulusType::ALL_ONES</ref>,<sp/>4,<sp/>55);</highlight></codeline>
+<codeline lineno="145"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><ref refid="test__dyadic__multiply_8cpp_1aedb5ee3bb161473f1d3e70ea9f9a00b9" kindref="member">TEST_F</ref>(<ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref>,<sp/>p16384_INV_INTT_iALL_MAX_POS_iters4_pbits55)<sp/>{</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref><sp/>he_fpga_api;</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/>he_fpga_api.<ref refid="classinv__ntt__test_1a8592b35ff857a63e890076cad1b2fdf8" kindref="member">run_inv_ntt_test</ref>(<ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0a6574fd7efebbe5bb808fd5eb3ce8e519" kindref="member">StimulusType::ALL_MAX_VALUES</ref>,<sp/>4,<sp/>55);</highlight></codeline>
+<codeline lineno="150"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><ref refid="test__dyadic__multiply_8cpp_1aedb5ee3bb161473f1d3e70ea9f9a00b9" kindref="member">TEST_F</ref>(<ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref>,<sp/>p16384_INV_INTT_iALL_MAX_POS_iters4_pbits62)<sp/>{</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref><sp/>he_fpga_api;</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/>he_fpga_api.<ref refid="classinv__ntt__test_1a8592b35ff857a63e890076cad1b2fdf8" kindref="member">run_inv_ntt_test</ref>(<ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0a6574fd7efebbe5bb808fd5eb3ce8e519" kindref="member">StimulusType::ALL_MAX_VALUES</ref>,<sp/>4,<sp/>62);</highlight></codeline>
+<codeline lineno="155"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><ref refid="test__dyadic__multiply_8cpp_1aedb5ee3bb161473f1d3e70ea9f9a00b9" kindref="member">TEST_F</ref>(<ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref>,<sp/>p16384_INV_INTT_iIMPULSE_iters4_pbits62)<sp/>{</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref><sp/>he_fpga_api;</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/>he_fpga_api.<ref refid="classinv__ntt__test_1a8592b35ff857a63e890076cad1b2fdf8" kindref="member">run_inv_ntt_test</ref>(<ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0adc03ed02b009ff90c33cda86a886f525" kindref="member">StimulusType::IMPULSE</ref>,<sp/>4,<sp/>62);</highlight></codeline>
+<codeline lineno="160"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><ref refid="test__dyadic__multiply_8cpp_1aedb5ee3bb161473f1d3e70ea9f9a00b9" kindref="member">TEST_F</ref>(<ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref>,<sp/>p16384_INV_INTT_iRAND_iters4_pbits55)<sp/>{</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref><sp/>he_fpga_api;</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/>he_fpga_api.<ref refid="classinv__ntt__test_1a8592b35ff857a63e890076cad1b2fdf8" kindref="member">run_inv_ntt_test</ref>(<ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0ab44049cb8c478c10943b85c673d1aa6c" kindref="member">StimulusType::RANDOM</ref>,<sp/>4,<sp/>55);</highlight></codeline>
+<codeline lineno="164"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><ref refid="test__dyadic__multiply_8cpp_1aedb5ee3bb161473f1d3e70ea9f9a00b9" kindref="member">TEST_F</ref>(<ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref>,<sp/>p16384_INV_INTT_iRAND_iters4_pbits32)<sp/>{</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref><sp/>he_fpga_api;</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/>he_fpga_api.<ref refid="classinv__ntt__test_1a8592b35ff857a63e890076cad1b2fdf8" kindref="member">run_inv_ntt_test</ref>(<ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0ab44049cb8c478c10943b85c673d1aa6c" kindref="member">StimulusType::RANDOM</ref>,<sp/>4,<sp/>32);</highlight></codeline>
+<codeline lineno="169"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><ref refid="test__dyadic__multiply_8cpp_1aedb5ee3bb161473f1d3e70ea9f9a00b9" kindref="member">TEST_F</ref>(<ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref>,<sp/>p16384_INV_INTT_iRAND_iters400_pbits55)<sp/>{</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref><sp/>he_fpga_api;</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/>he_fpga_api.<ref refid="classinv__ntt__test_1a8592b35ff857a63e890076cad1b2fdf8" kindref="member">run_inv_ntt_test</ref>(<ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0ab44049cb8c478c10943b85c673d1aa6c" kindref="member">StimulusType::RANDOM</ref>,<sp/>100,<sp/>32);</highlight></codeline>
+<codeline lineno="173"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><ref refid="test__dyadic__multiply_8cpp_1aedb5ee3bb161473f1d3e70ea9f9a00b9" kindref="member">TEST_F</ref>(<ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref>,<sp/>p16384_INV_INTT_iRAND_iters410_pbits64)<sp/>{</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classinv__ntt__test" kindref="compound">inv_ntt_test</ref><sp/>he_fpga_api;</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/>he_fpga_api.<ref refid="classinv__ntt__test_1a8592b35ff857a63e890076cad1b2fdf8" kindref="member">run_inv_ntt_test</ref>(<ref refid="namespacehetest_1_1utils_1a17ac57eb86d3ead191cb51163ef63eb0ab44049cb8c478c10943b85c673d1aa6c" kindref="member">StimulusType::RANDOM</ref>,<sp/>10,<sp/>62);</highlight></codeline>
+<codeline lineno="178"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/disk1/ymeng12/hexl-fpga/tests/test_inv_ntt.cpp"/>
+  </compounddef>
+</doxygen>

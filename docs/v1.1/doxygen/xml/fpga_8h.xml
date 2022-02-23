@@ -1,0 +1,654 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="fpga_8h" kind="file">
+    <compoundname>fpga.h</compoundname>
+    <includes local="no">atomic</includes>
+    <includes local="no">condition_variable</includes>
+    <includes local="no">deque</includes>
+    <includes local="no">future</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">mutex</includes>
+    <includes local="no">thread</includes>
+    <includes local="no">unordered_map</includes>
+    <includes local="no">vector</includes>
+    <includes local="yes">CL/opencl.h</includes>
+    <incdepgraph>
+      <node id="59">
+        <label>atomic</label>
+      </node>
+      <node id="60">
+        <label>condition_variable</label>
+      </node>
+      <node id="68">
+        <label>CL/opencl.h</label>
+      </node>
+      <node id="62">
+        <label>future</label>
+      </node>
+      <node id="58">
+        <label>fpga.h</label>
+        <link refid="fpga.h"/>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+      </node>
+      <node id="67">
+        <label>vector</label>
+      </node>
+      <node id="61">
+        <label>deque</label>
+      </node>
+      <node id="66">
+        <label>unordered_map</label>
+      </node>
+      <node id="64">
+        <label>mutex</label>
+      </node>
+      <node id="65">
+        <label>thread</label>
+      </node>
+      <node id="63">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1moduli__info__t" prot="public">intel::hexl::fpga::moduli_info_t</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1KeySwitch__modulus__t" prot="public">intel::hexl::fpga::KeySwitch_modulus_t</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1KeySwitch__invn__t" prot="public">intel::hexl::fpga::KeySwitch_invn_t</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1____attribute____" prot="public">intel::hexl::fpga::__attribute__</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1____attribute____" prot="public">intel::hexl::fpga::__attribute__</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1____attribute____" prot="public">intel::hexl::fpga::__attribute__</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1Object" prot="public">intel::hexl::fpga::Object</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1Object__NTT" prot="public">intel::hexl::fpga::Object_NTT</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1Object__INTT" prot="public">intel::hexl::fpga::Object_INTT</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1Object__DyadicMultiply" prot="public">intel::hexl::fpga::Object_DyadicMultiply</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch" prot="public">intel::hexl::fpga::Object_KeySwitch</innerclass>
+    <innerclass refid="classintel_1_1hexl_1_1fpga_1_1Buffer" prot="public">intel::hexl::fpga::Buffer</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject" prot="public">intel::hexl::fpga::FPGAObject</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT" prot="public">intel::hexl::fpga::FPGAObject_NTT</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT" prot="public">intel::hexl::fpga::FPGAObject_INTT</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply" prot="public">intel::hexl::fpga::FPGAObject_DyadicMultiply</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch" prot="public">intel::hexl::fpga::FPGAObject_KeySwitch</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys" prot="public">intel::hexl::fpga::KeySwitchMemKeys</innerclass>
+    <innerclass refid="classintel_1_1hexl_1_1fpga_1_1Device" prot="public">intel::hexl::fpga::Device</innerclass>
+    <innerclass refid="classintel_1_1hexl_1_1fpga_1_1DevicePool" prot="public">intel::hexl::fpga::DevicePool</innerclass>
+    <innernamespace refid="namespaceintel">intel</innernamespace>
+    <innernamespace refid="namespaceintel_1_1hexl">intel::hexl</innernamespace>
+    <innernamespace refid="namespaceintel_1_1hexl_1_1fpga">intel::hexl::fpga</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="fpga_8h_1afc99f4d34ad804ac8252bd923f3d5350" prot="public" static="no">
+        <name>BIT_MASK</name>
+        <param><defname>BITS</defname></param>
+        <initializer>((1UL &lt;&lt; BITS) - 1)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="87" column="9" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="fpga_8h_1a4c111d5b853101bd82b19040fc190da3" prot="public" static="no">
+        <name>MAX_RNS_MODULUS_SIZE</name>
+        <initializer>7</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="88" column="9" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="fpga_8h_1a11b694a1b6f1f7b630c79abd5901e059" prot="public" static="no">
+        <name>RWMEM_FLAG</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="89" column="9" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>Copyright<sp/>(C)<sp/>2020-2021<sp/>Intel<sp/>Corporation</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>Apache-2.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>__FPGA_H__</highlight></codeline>
+<codeline lineno="5"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>__FPGA_H__</highlight></codeline>
+<codeline lineno="6"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;atomic&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;condition_variable&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;deque&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;future&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;mutex&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;thread&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;unordered_map&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;CL/opencl.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">intel<sp/>{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">hexl<sp/>{</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">fpga<sp/>{</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23" refid="namespaceintel_1_1hexl_1_1fpga_1abec5370ea5966ed3c9aee7817e805337" refkind="member"><highlight class="normal">__extension__<sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/>__int128<sp/><ref refid="namespaceintel_1_1hexl_1_1fpga_1abec5370ea5966ed3c9aee7817e805337" kindref="member">fpga_uint128_t</ref>;</highlight></codeline>
+<codeline lineno="30" refid="structintel_1_1hexl_1_1fpga_1_1moduli__info__t" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="31" refid="structintel_1_1hexl_1_1fpga_1_1moduli__info__t_1af853b928372ebd6d6f7e5f2d7aa8bba7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1moduli__info__t_1af853b928372ebd6d6f7e5f2d7aa8bba7" kindref="member">modulus</ref>;</highlight></codeline>
+<codeline lineno="32" refid="structintel_1_1hexl_1_1fpga_1_1moduli__info__t_1aeb4594d54e3df5373014386e6addbaa4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1moduli__info__t_1aeb4594d54e3df5373014386e6addbaa4" kindref="member">len</ref>;</highlight></codeline>
+<codeline lineno="33" refid="structintel_1_1hexl_1_1fpga_1_1moduli__info__t_1ac767dd0d3287329d896e6de911c1f4af" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1moduli__info__t_1ac767dd0d3287329d896e6de911c1f4af" kindref="member">barr_lo</ref>;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal">}<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1moduli__info__t" kindref="compound">moduli_info_t</ref>;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40" refid="structintel_1_1hexl_1_1fpga_1_1KeySwitch__modulus__t" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="41" refid="structintel_1_1hexl_1_1fpga_1_1KeySwitch__modulus__t_1a9fc7e308b64e6f993e98062a251344d4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_ulong4<sp/>data[8];</highlight></codeline>
+<codeline lineno="42"><highlight class="normal">}<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1KeySwitch__modulus__t" kindref="compound">KeySwitch_modulus_t</ref>;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48" refid="structintel_1_1hexl_1_1fpga_1_1KeySwitch__invn__t" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="49" refid="structintel_1_1hexl_1_1fpga_1_1KeySwitch__invn__t_1ad62ffdfe6b8126bed2872efb28d1f659" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_ulong4<sp/>data[8];</highlight></codeline>
+<codeline lineno="50"><highlight class="normal">}<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1KeySwitch__invn__t" kindref="compound">KeySwitch_invn_t</ref>;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55" refid="structintel_1_1hexl_1_1fpga_1_1____attribute____" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="56" refid="structintel_1_1hexl_1_1fpga_1_1____attribute_____1a2162d44dea151a52db616ca95a56ef02" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>key1<sp/>:<sp/>52;</highlight></codeline>
+<codeline lineno="57" refid="structintel_1_1hexl_1_1fpga_1_1____attribute_____1aeef311576d778306f27722e7643f3655" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>key2<sp/>:<sp/>52;</highlight></codeline>
+<codeline lineno="58" refid="structintel_1_1hexl_1_1fpga_1_1____attribute_____1a492c7ef00c2f5ef3272490e020033201" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>key3<sp/>:<sp/>52;</highlight></codeline>
+<codeline lineno="59" refid="structintel_1_1hexl_1_1fpga_1_1____attribute_____1a21a0d2969870a4181daa88a424b678b0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>key4<sp/>:<sp/>52;</highlight></codeline>
+<codeline lineno="60" refid="structintel_1_1hexl_1_1fpga_1_1____attribute_____1a0abbb812be3eb7211e64d306e732ac48" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>key5<sp/>:<sp/>48;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal">}<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1____attribute____" kindref="compound">__attribute__</ref>((packed))<sp/>DyadmultKeys1_t;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal">typedef<sp/>struct<sp/>{</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>key1<sp/>:<sp/>4;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>key2<sp/>:<sp/>52;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>key3<sp/>:<sp/>52;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>key4<sp/>:<sp/>52;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>key5<sp/>:<sp/>52;</highlight></codeline>
+<codeline lineno="72" refid="structintel_1_1hexl_1_1fpga_1_1____attribute_____1ac95e511d6edcb69c602566916413610c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>key6<sp/>:<sp/>44;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal">}<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1____attribute____" kindref="compound">__attribute__</ref>((packed))<sp/>DyadmultKeys2_t;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal">typedef<sp/>struct<sp/>{</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>key1<sp/>:<sp/>8;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>key2<sp/>:<sp/>52;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>key3<sp/>:<sp/>52;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>key4<sp/>:<sp/>52;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>key5<sp/>:<sp/>52;</highlight></codeline>
+<codeline lineno="84" refid="structintel_1_1hexl_1_1fpga_1_1____attribute_____1a41031cd0840c7059646399a9452aaae2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>NOT_USED<sp/>:<sp/>40;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal">}<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1____attribute____" kindref="compound">__attribute__</ref>((packed))<sp/>DyadmultKeys3_t;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87" refid="fpga_8h_1afc99f4d34ad804ac8252bd923f3d5350" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BIT_MASK(BITS)<sp/>((1UL<sp/>&lt;&lt;<sp/>BITS)<sp/>-<sp/>1)</highlight></codeline>
+<codeline lineno="88" refid="fpga_8h_1a4c111d5b853101bd82b19040fc190da3" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>MAX_RNS_MODULUS_SIZE<sp/>7</highlight></codeline>
+<codeline lineno="89" refid="fpga_8h_1a11b694a1b6f1f7b630c79abd5901e059" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>RWMEM_FLAG<sp/>1</highlight></codeline>
+<codeline lineno="90"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="91" refid="namespaceintel_1_1hexl_1_1fpga_1a9f208acca71106a36e1b0da993ddf3c0" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="namespaceintel_1_1hexl_1_1fpga_1a9f208acca71106a36e1b0da993ddf3c0" kindref="member">KeySwitch_Kernels</ref><sp/>{</highlight></codeline>
+<codeline lineno="92" refid="namespaceintel_1_1hexl_1_1fpga_1a9f208acca71106a36e1b0da993ddf3c0aad020d5509bc307d9766c206dd7a9049" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespaceintel_1_1hexl_1_1fpga_1a9f208acca71106a36e1b0da993ddf3c0aad020d5509bc307d9766c206dd7a9049" kindref="member">KEYSWITCH_LOAD</ref>,</highlight></codeline>
+<codeline lineno="93" refid="namespaceintel_1_1hexl_1_1fpga_1a9f208acca71106a36e1b0da993ddf3c0a28bf74f4155709486353b7d1179c9722" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespaceintel_1_1hexl_1_1fpga_1a9f208acca71106a36e1b0da993ddf3c0a28bf74f4155709486353b7d1179c9722" kindref="member">KEYSWITCH_STORE</ref>,</highlight></codeline>
+<codeline lineno="94" refid="namespaceintel_1_1hexl_1_1fpga_1a9f208acca71106a36e1b0da993ddf3c0a6af9e5813327ef64d8e05c831e411632" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespaceintel_1_1hexl_1_1fpga_1a9f208acca71106a36e1b0da993ddf3c0a6af9e5813327ef64d8e05c831e411632" kindref="member">KEYSWITCH_NUM_KERNELS</ref></highlight></codeline>
+<codeline lineno="95"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97" refid="namespaceintel_1_1hexl_1_1fpga_1a9f07798cd59a71b9f57156192f7bf2f6" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="namespaceintel_1_1hexl_1_1fpga_1a9f07798cd59a71b9f57156192f7bf2f6" kindref="member">kernel_t</ref><sp/>{</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespaceintel_1_1hexl_1_1fpga_1a1a264f07facc5f24376170ea052e4fbca665be2b62dd76ce44231d0503e468464" kindref="member">NONE</ref>,</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespaceintel_1_1hexl_1_1fpga_1a9f07798cd59a71b9f57156192f7bf2f6af1662e45a778e27ff6afab122707fe50" kindref="member">DYADIC_MULTIPLY</ref>,</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespaceintel_1_1hexl_1_1fpga_1a9f07798cd59a71b9f57156192f7bf2f6ae87c409c7bdebbc2084ef9f37e8de9ae" kindref="member">NTT</ref>,</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespaceintel_1_1hexl_1_1fpga_1a9f07798cd59a71b9f57156192f7bf2f6a766fa95963449b904a3269953efd6a35" kindref="member">INTT</ref>,</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespaceintel_1_1hexl_1_1fpga_1a9f07798cd59a71b9f57156192f7bf2f6af8037a267b684708165ca39d7f784458" kindref="member">KEYSWITCH</ref>,</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespaceintel_1_1hexl_1_1fpga_1a9f07798cd59a71b9f57156192f7bf2f6a7d8bfa28e75b84204b6c1c146b1c9bea" kindref="member">DYADIC_MULTIPLY_KEYSWITCH</ref></highlight></codeline>
+<codeline lineno="104"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113" refid="structintel_1_1hexl_1_1fpga_1_1Object" refkind="compound"><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structintel_1_1hexl_1_1fpga_1_1Object" kindref="compound">Object</ref><sp/>{</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object_1afbecbde0e8e9f2e4b87326d164d2f3a6" kindref="member">Object</ref>(<ref refid="namespaceintel_1_1hexl_1_1fpga_1a9f07798cd59a71b9f57156192f7bf2f6" kindref="member">kernel_t</ref><sp/>type<sp/>=<sp/><ref refid="namespaceintel_1_1hexl_1_1fpga_1a1a264f07facc5f24376170ea052e4fbca665be2b62dd76ce44231d0503e468464" kindref="member">kernel_t::NONE</ref>,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>fence<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object_1a53dd49a3d2fe50a55d91eda3f139e04f" kindref="member">~Object</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118" refid="structintel_1_1hexl_1_1fpga_1_1Object_1a8d6495f3b68194f0c38927d76e9c652c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object_1a8d6495f3b68194f0c38927d76e9c652c" kindref="member">ready_</ref>;</highlight></codeline>
+<codeline lineno="119" refid="structintel_1_1hexl_1_1fpga_1_1Object_1ade9313d87b44bc1bfeccca2f5829ceae" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object_1ade9313d87b44bc1bfeccca2f5829ceae" kindref="member">id_</ref>;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121" refid="structintel_1_1hexl_1_1fpga_1_1Object_1a795a35540ad7bb347d3978ca83f72e8b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespaceintel_1_1hexl_1_1fpga_1a9f07798cd59a71b9f57156192f7bf2f6" kindref="member">kernel_t</ref><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object_1a795a35540ad7bb347d3978ca83f72e8b" kindref="member">type_</ref>;</highlight></codeline>
+<codeline lineno="122" refid="structintel_1_1hexl_1_1fpga_1_1Object_1a187c9e1d3e7dca831390d438cee83b13" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object_1a187c9e1d3e7dca831390d438cee83b13" kindref="member">fence_</ref>;</highlight></codeline>
+<codeline lineno="123" refid="structintel_1_1hexl_1_1fpga_1_1Object_1a0da02feafb293ff8cea005f6312bd638" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object_1a0da02feafb293ff8cea005f6312bd638" kindref="member">g_wid_</ref>;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="136" refid="structintel_1_1hexl_1_1fpga_1_1Object__NTT" refkind="compound"><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__NTT" kindref="compound">Object_NTT</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object" kindref="compound">Object</ref><sp/>{</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__NTT_1aba6073ea63919faf1fc1e0c2f8f10fb3" kindref="member">Object_NTT</ref>(uint64_t*<sp/>coeff_poly,</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t*<sp/>root_of_unity_powers,</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t*<sp/>precon_root_of_unity_powers,</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>coeff_modulus,<sp/>uint64_t<sp/>n,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>fence<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142" refid="structintel_1_1hexl_1_1fpga_1_1Object__NTT_1a456d2d8f4eac2f2f5360ce83b4bed98d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__NTT_1a456d2d8f4eac2f2f5360ce83b4bed98d" kindref="member">coeff_poly_</ref>;</highlight></codeline>
+<codeline lineno="143" refid="structintel_1_1hexl_1_1fpga_1_1Object__NTT_1a02ad1422d0256bfe1cee773d45faca5f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__NTT_1a02ad1422d0256bfe1cee773d45faca5f" kindref="member">root_of_unity_powers_</ref>;</highlight></codeline>
+<codeline lineno="144" refid="structintel_1_1hexl_1_1fpga_1_1Object__NTT_1ac7d181c6f3d75a62f42e3115541450a2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__NTT_1ac7d181c6f3d75a62f42e3115541450a2" kindref="member">precon_root_of_unity_powers_</ref>;</highlight></codeline>
+<codeline lineno="145" refid="structintel_1_1hexl_1_1fpga_1_1Object__NTT_1a534bfc6c711a0dd767d511087a86666d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__NTT_1a534bfc6c711a0dd767d511087a86666d" kindref="member">coeff_modulus_</ref>;</highlight></codeline>
+<codeline lineno="146" refid="structintel_1_1hexl_1_1fpga_1_1Object__NTT_1a680eca9bf78e81f26426cf0dc9b52f5e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__NTT_1a680eca9bf78e81f26426cf0dc9b52f5e" kindref="member">n_</ref>;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="163" refid="structintel_1_1hexl_1_1fpga_1_1Object__INTT" refkind="compound"><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__INTT" kindref="compound">Object_INTT</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object" kindref="compound">Object</ref><sp/>{</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__INTT_1ae22d0f99e890bde6201cbcb3eb4f0cd9" kindref="member">Object_INTT</ref>(uint64_t*<sp/>coeff_poly,</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t*<sp/>inv_root_of_unity_powers,</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t*<sp/>precon_inv_root_of_unity_powers,</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>coeff_modulus,<sp/>uint64_t<sp/>inv_n,</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>inv_n_w,<sp/>uint64_t<sp/>n,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>fence<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"></highlight></codeline>
+<codeline lineno="170" refid="structintel_1_1hexl_1_1fpga_1_1Object__INTT_1a4193d2648e27da868ba8790083a6b749" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__INTT_1a4193d2648e27da868ba8790083a6b749" kindref="member">coeff_poly_</ref>;</highlight></codeline>
+<codeline lineno="171" refid="structintel_1_1hexl_1_1fpga_1_1Object__INTT_1a4821a007e352a4f2f5eff215476f2d5f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__INTT_1a4821a007e352a4f2f5eff215476f2d5f" kindref="member">inv_root_of_unity_powers_</ref>;</highlight></codeline>
+<codeline lineno="172" refid="structintel_1_1hexl_1_1fpga_1_1Object__INTT_1a916b6af204fa6a6236b3d7a332bb9999" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__INTT_1a916b6af204fa6a6236b3d7a332bb9999" kindref="member">precon_inv_root_of_unity_powers_</ref>;</highlight></codeline>
+<codeline lineno="173" refid="structintel_1_1hexl_1_1fpga_1_1Object__INTT_1a32f41552e25ee8102e9844040a3dbce5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__INTT_1a32f41552e25ee8102e9844040a3dbce5" kindref="member">coeff_modulus_</ref>;</highlight></codeline>
+<codeline lineno="174" refid="structintel_1_1hexl_1_1fpga_1_1Object__INTT_1a3b21373f1684a50b92b48938b3705fd8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__INTT_1a3b21373f1684a50b92b48938b3705fd8" kindref="member">inv_n_</ref>;</highlight></codeline>
+<codeline lineno="175" refid="structintel_1_1hexl_1_1fpga_1_1Object__INTT_1a09781e11982cbac5a01a16610f725f79" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__INTT_1a09781e11982cbac5a01a16610f725f79" kindref="member">inv_n_w_</ref>;</highlight></codeline>
+<codeline lineno="176" refid="structintel_1_1hexl_1_1fpga_1_1Object__INTT_1a3e0c80ff67c84bbae44082bca8a6a1f5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__INTT_1a3e0c80ff67c84bbae44082bca8a6a1f5" kindref="member">n_</ref>;</highlight></codeline>
+<codeline lineno="177"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="188" refid="structintel_1_1hexl_1_1fpga_1_1Object__DyadicMultiply" refkind="compound"><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__DyadicMultiply" kindref="compound">Object_DyadicMultiply</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object" kindref="compound">Object</ref><sp/>{</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__DyadicMultiply_1a168d5a114faaab094ef85324293ea86e" kindref="member">Object_DyadicMultiply</ref>(uint64_t*<sp/>results,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t*<sp/>operand1,</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t*<sp/>operand2,<sp/>uint64_t<sp/>n,</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t*<sp/>moduli,<sp/>uint64_t<sp/>n_moduli,</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>fence<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight></codeline>
+<codeline lineno="194" refid="structintel_1_1hexl_1_1fpga_1_1Object__DyadicMultiply_1a89aa54444543557280ff1ebcd250a605" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__DyadicMultiply_1a89aa54444543557280ff1ebcd250a605" kindref="member">results_</ref>;</highlight></codeline>
+<codeline lineno="195" refid="structintel_1_1hexl_1_1fpga_1_1Object__DyadicMultiply_1af4fecd5061fed1e44ff810d214d9bd73" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__DyadicMultiply_1af4fecd5061fed1e44ff810d214d9bd73" kindref="member">operand1_</ref>;</highlight></codeline>
+<codeline lineno="196" refid="structintel_1_1hexl_1_1fpga_1_1Object__DyadicMultiply_1a6593688f27a8830c1bb8ce0918db40cd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__DyadicMultiply_1a6593688f27a8830c1bb8ce0918db40cd" kindref="member">operand2_</ref>;</highlight></codeline>
+<codeline lineno="197" refid="structintel_1_1hexl_1_1fpga_1_1Object__DyadicMultiply_1a836ee7996c0ab56d069fce808e9a58e4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__DyadicMultiply_1a836ee7996c0ab56d069fce808e9a58e4" kindref="member">n_</ref>;</highlight></codeline>
+<codeline lineno="198" refid="structintel_1_1hexl_1_1fpga_1_1Object__DyadicMultiply_1a9cf828fe97ff3a03e38597bb9ed8ecf5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__DyadicMultiply_1a9cf828fe97ff3a03e38597bb9ed8ecf5" kindref="member">moduli_</ref>;</highlight></codeline>
+<codeline lineno="199" refid="structintel_1_1hexl_1_1fpga_1_1Object__DyadicMultiply_1ac3d5d1a291f486d9ca341f2f88ed772e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__DyadicMultiply_1ac3d5d1a291f486d9ca341f2f88ed772e" kindref="member">n_moduli_</ref>;</highlight></codeline>
+<codeline lineno="200"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"></highlight></codeline>
+<codeline lineno="218" refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch" refkind="compound"><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch" kindref="compound">Object_KeySwitch</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object" kindref="compound">Object</ref><sp/>{</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1a323050d96e7cb1710632b1088c11bf0c" kindref="member">Object_KeySwitch</ref>(</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t*<sp/>result,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t*<sp/>t_target_iter_ptr,<sp/>uint64_t<sp/>n,</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>decomp_modulus_size,<sp/>uint64_t<sp/>key_modulus_size,</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>rns_modulus_size,<sp/>uint64_t<sp/>key_component_count,</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t*<sp/>moduli,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t**<sp/>k_switch_keys,</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t*<sp/>modswitch_factors,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t*<sp/>twiddle_factors,</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>fence<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"></highlight></codeline>
+<codeline lineno="227" refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1a52d7f28512fca04e7d1b3bafecbdccf6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1a52d7f28512fca04e7d1b3bafecbdccf6" kindref="member">result_</ref>;</highlight></codeline>
+<codeline lineno="228" refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1ae31c6cf93ed6fb79ad68a8ae473e5e1d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1ae31c6cf93ed6fb79ad68a8ae473e5e1d" kindref="member">t_target_iter_ptr_</ref>;</highlight></codeline>
+<codeline lineno="229" refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1a020885135c3b3f54e574fe0cc8824133" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1a020885135c3b3f54e574fe0cc8824133" kindref="member">n_</ref>;</highlight></codeline>
+<codeline lineno="230" refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1aef1b7966f320ffd96aeda0d57bacbeac" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1aef1b7966f320ffd96aeda0d57bacbeac" kindref="member">decomp_modulus_size_</ref>;</highlight></codeline>
+<codeline lineno="231" refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1a3fc107f08b6afabf43eace8ef0f3e30f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1a3fc107f08b6afabf43eace8ef0f3e30f" kindref="member">key_modulus_size_</ref>;</highlight></codeline>
+<codeline lineno="232" refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1a1f2b398daf647ebf2d677a512d9f04a7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1a1f2b398daf647ebf2d677a512d9f04a7" kindref="member">rns_modulus_size_</ref>;</highlight></codeline>
+<codeline lineno="233" refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1ac7292612ff5f07a4afd5612e422385a3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1ac7292612ff5f07a4afd5612e422385a3" kindref="member">key_component_count_</ref>;</highlight></codeline>
+<codeline lineno="234" refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1a6452f0b40b3ca377273566ec90f1dc5a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1a6452f0b40b3ca377273566ec90f1dc5a" kindref="member">moduli_</ref>;</highlight></codeline>
+<codeline lineno="235" refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1ad54e0b28e00a46996dd7f0d1da0c9750" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t**<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1ad54e0b28e00a46996dd7f0d1da0c9750" kindref="member">k_switch_keys_</ref>;</highlight></codeline>
+<codeline lineno="236" refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1a5be66de56ad9af10b434c22a697b00ad" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1a5be66de56ad9af10b434c22a697b00ad" kindref="member">modswitch_factors_</ref>;</highlight></codeline>
+<codeline lineno="237" refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1adbd1e4578cfb016b582d0bbefee8fe6f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1adbd1e4578cfb016b582d0bbefee8fe6f" kindref="member">twiddle_factors_</ref>;</highlight></codeline>
+<codeline lineno="238"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"></highlight></codeline>
+<codeline lineno="273" refid="classintel_1_1hexl_1_1fpga_1_1Buffer" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classintel_1_1hexl_1_1fpga_1_1Buffer" kindref="compound">Buffer</ref><sp/>{</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="275" refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a6b279585d3df783620a0b3d7bd8c1c1e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a6b279585d3df783620a0b3d7bd8c1c1e" kindref="member">Buffer</ref>(uint64_t<sp/>capacity,<sp/>uint64_t<sp/>n_batch_dyadic_multiply,</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>n_batch_ntt,<sp/>uint64_t<sp/>n_batch_intt,</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>n_batch_KeySwitch)</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>capacity_(capacity),</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>n_batch_dyadic_multiply_(n_batch_dyadic_multiply),</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>n_batch_ntt_(n_batch_ntt),</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>n_batch_intt_(n_batch_intt),</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>n_batch_KeySwitch_(n_batch_KeySwitch),</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>total_worksize_DyadicMultiply_(1),</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>num_DyadicMultiply_(0),</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>total_worksize_NTT_(1),</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>num_NTT_(0),</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>total_worksize_INTT_(1),</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>num_INTT_(0),</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>total_worksize_KeySwitch_(1),</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>num_KeySwitch_(0)<sp/>{}</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"></highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a6644861e903def2ff1aef60c94f4a8f6" kindref="member">push</ref>(<ref refid="structintel_1_1hexl_1_1fpga_1_1Object" kindref="compound">Object</ref>*<sp/>obj);</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object" kindref="compound">Object</ref>*<sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1aef26dde58c09c63303bf8c8ba4da6991" kindref="member">front</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="294"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1Object" kindref="compound">Object</ref>*<sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a3e774f459e7b73d37393c5e3a5559622" kindref="member">back</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;Object*&gt;<sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1ac60152c34dc6d5ac1275db07293fc7dc" kindref="member">pop</ref>();</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"></highlight></codeline>
+<codeline lineno="297"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a03dbef5789ed9c28bd1b63b35164ab41" kindref="member">size</ref>();</highlight></codeline>
+<codeline lineno="298"><highlight class="normal"></highlight></codeline>
+<codeline lineno="299" refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a346da8900c5d0f689de15c754ff22095" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a346da8900c5d0f689de15c754ff22095" kindref="member">get_worksize_DyadicMultiply</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="300"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>total_worksize_DyadicMultiply_;</highlight></codeline>
+<codeline lineno="301"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="302" refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a7814dc29476fa0be598a8f2f99043024" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a7814dc29476fa0be598a8f2f99043024" kindref="member">get_worksize_NTT</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>total_worksize_NTT_;<sp/>}</highlight></codeline>
+<codeline lineno="303" refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a7147f2da3c6cbeeaf13f70d725622a87" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a7147f2da3c6cbeeaf13f70d725622a87" kindref="member">get_worksize_INTT</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>total_worksize_INTT_;<sp/>}</highlight></codeline>
+<codeline lineno="304" refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1ae984ebf36df2f7b8c8e3b69e9110be0e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1ae984ebf36df2f7b8c8e3b69e9110be0e" kindref="member">get_worksize_KeySwitch</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="305"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>total_worksize_KeySwitch_;</highlight></codeline>
+<codeline lineno="306"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"></highlight></codeline>
+<codeline lineno="308" refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a3ed2fb00d1e5eb733162588d30a395df" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a3ed2fb00d1e5eb733162588d30a395df" kindref="member">set_worksize_DyadicMultiply</ref>(uint64_t<sp/>ws)<sp/>{</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>total_worksize_DyadicMultiply_<sp/>=<sp/>ws;</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>num_DyadicMultiply_<sp/>=<sp/>total_worksize_DyadicMultiply_;</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="312" refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1aa6c582210106d0e189630dbd47a2b613" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1aa6c582210106d0e189630dbd47a2b613" kindref="member">set_worksize_NTT</ref>(uint64_t<sp/>ws)<sp/>{</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>total_worksize_NTT_<sp/>=<sp/>ws;</highlight></codeline>
+<codeline lineno="314"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>num_NTT_<sp/>=<sp/>total_worksize_NTT_;</highlight></codeline>
+<codeline lineno="315"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="316" refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1aa9d41687d0a35d75bb12b96373a3ddf4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1aa9d41687d0a35d75bb12b96373a3ddf4" kindref="member">set_worksize_INTT</ref>(uint64_t<sp/>ws)<sp/>{</highlight></codeline>
+<codeline lineno="317"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>total_worksize_INTT_<sp/>=<sp/>ws;</highlight></codeline>
+<codeline lineno="318"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>num_INTT_<sp/>=<sp/>total_worksize_INTT_;</highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="320" refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a1666c262e2297c3b64ae97ae0e206e2b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1Buffer_1a1666c262e2297c3b64ae97ae0e206e2b" kindref="member">set_worksize_KeySwitch</ref>(uint64_t<sp/>ws)<sp/>{</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>total_worksize_KeySwitch_<sp/>=<sp/>ws;</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>num_KeySwitch_<sp/>=<sp/>total_worksize_KeySwitch_;</highlight></codeline>
+<codeline lineno="323"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="324"><highlight class="normal"></highlight></codeline>
+<codeline lineno="325"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>get_worksize_int_DyadicMultiply()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>((num_DyadicMultiply_<sp/>&gt;<sp/>n_batch_dyadic_multiply_)</highlight></codeline>
+<codeline lineno="328"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>?<sp/>n_batch_dyadic_multiply_</highlight></codeline>
+<codeline lineno="329"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>num_DyadicMultiply_);</highlight></codeline>
+<codeline lineno="330"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="331"><highlight class="normal"></highlight></codeline>
+<codeline lineno="332"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>get_worksize_int_NTT()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="333"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>((num_NTT_<sp/>&gt;<sp/>n_batch_ntt_)<sp/>?<sp/>n_batch_ntt_<sp/>:<sp/>num_NTT_);</highlight></codeline>
+<codeline lineno="334"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="335"><highlight class="normal"></highlight></codeline>
+<codeline lineno="336"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>get_worksize_int_INTT()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="337"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>((num_INTT_<sp/>&gt;<sp/>n_batch_intt_)<sp/>?<sp/>n_batch_intt_<sp/>:<sp/>num_INTT_);</highlight></codeline>
+<codeline lineno="338"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="339"><highlight class="normal"></highlight></codeline>
+<codeline lineno="340"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>get_worksize_int_KeySwitch()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="341"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>((num_KeySwitch_<sp/>&gt;<sp/>n_batch_KeySwitch_)<sp/>?<sp/>n_batch_KeySwitch_</highlight></codeline>
+<codeline lineno="342"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>num_KeySwitch_);</highlight></codeline>
+<codeline lineno="343"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="344"><highlight class="normal"></highlight></codeline>
+<codeline lineno="345"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>update_DyadicMultiply_work_size(uint64_t<sp/>ws)<sp/>{</highlight></codeline>
+<codeline lineno="346"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>num_DyadicMultiply_<sp/>-=<sp/>ws;</highlight></codeline>
+<codeline lineno="347"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="348"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>update_NTT_work_size(uint64_t<sp/>ws)<sp/>{<sp/>num_NTT_<sp/>-=<sp/>ws;<sp/>}</highlight></codeline>
+<codeline lineno="349"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>update_INTT_work_size(uint64_t<sp/>ws)<sp/>{<sp/>num_INTT_<sp/>-=<sp/>ws;<sp/>}</highlight></codeline>
+<codeline lineno="350"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>update_KeySwitch_work_size(uint64_t<sp/>ws)<sp/>{<sp/>num_KeySwitch_<sp/>-=<sp/>ws;<sp/>}</highlight></codeline>
+<codeline lineno="351"><highlight class="normal"></highlight></codeline>
+<codeline lineno="352"><highlight class="normal"><sp/><sp/><sp/><sp/>std::mutex<sp/>mu_;</highlight></codeline>
+<codeline lineno="353"><highlight class="normal"><sp/><sp/><sp/><sp/>std::mutex<sp/>mu_size_;</highlight></codeline>
+<codeline lineno="354"><highlight class="normal"><sp/><sp/><sp/><sp/>std::condition_variable<sp/>cond_;</highlight></codeline>
+<codeline lineno="355"><highlight class="normal"><sp/><sp/><sp/><sp/>std::deque&lt;Object*&gt;<sp/>buffer_;</highlight></codeline>
+<codeline lineno="356"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t<sp/>capacity_;</highlight></codeline>
+<codeline lineno="357"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t<sp/>n_batch_dyadic_multiply_;</highlight></codeline>
+<codeline lineno="358"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t<sp/>n_batch_ntt_;</highlight></codeline>
+<codeline lineno="359"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t<sp/>n_batch_intt_;</highlight></codeline>
+<codeline lineno="360"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t<sp/>n_batch_KeySwitch_;</highlight></codeline>
+<codeline lineno="361"><highlight class="normal"></highlight></codeline>
+<codeline lineno="362"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>total_worksize_DyadicMultiply_;</highlight></codeline>
+<codeline lineno="363"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>num_DyadicMultiply_;</highlight></codeline>
+<codeline lineno="364"><highlight class="normal"></highlight></codeline>
+<codeline lineno="365"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>total_worksize_NTT_;</highlight></codeline>
+<codeline lineno="366"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>num_NTT_;</highlight></codeline>
+<codeline lineno="367"><highlight class="normal"></highlight></codeline>
+<codeline lineno="368"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>total_worksize_INTT_;</highlight></codeline>
+<codeline lineno="369"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>num_INTT_;</highlight></codeline>
+<codeline lineno="370"><highlight class="normal"></highlight></codeline>
+<codeline lineno="371"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>total_worksize_KeySwitch_;</highlight></codeline>
+<codeline lineno="372"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>num_KeySwitch_;</highlight></codeline>
+<codeline lineno="373"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="389" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject" refkind="compound"><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject" kindref="compound">FPGAObject</ref><sp/>{</highlight></codeline>
+<codeline lineno="390"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a389464365379dab126715a0dcf1ba922" kindref="member">FPGAObject</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>cl_context&amp;<sp/>context,<sp/>uint64_t<sp/>n_batch,</highlight></codeline>
+<codeline lineno="391"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespaceintel_1_1hexl_1_1fpga_1a9f07798cd59a71b9f57156192f7bf2f6" kindref="member">kernel_t</ref><sp/>type<sp/>=<sp/><ref refid="namespaceintel_1_1hexl_1_1fpga_1a1a264f07facc5f24376170ea052e4fbca665be2b62dd76ce44231d0503e468464" kindref="member">kernel_t::NONE</ref>,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>fence<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="392"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1adecdea2bd81579b973e9292045c8d400" kindref="member">~FPGAObject</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="393"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1abd665113bfb3b0e7a33e09078f01ae43" kindref="member">fill_in_data</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;Object*&gt;&amp;<sp/>objs)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="394"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a954c4c75077a7c406f6c81517ea7bb04" kindref="member">fill_out_data</ref>(uint64_t*<sp/>results)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="395"><highlight class="normal"></highlight></codeline>
+<codeline lineno="396"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a0131d230161e662b63af86099177beb7" kindref="member">recycle</ref>();</highlight></codeline>
+<codeline lineno="397"><highlight class="normal"></highlight></codeline>
+<codeline lineno="398" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a87af81d73a95ab1c31c8cd9ebf4b1bba" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>cl_context&amp;<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a87af81d73a95ab1c31c8cd9ebf4b1bba" kindref="member">context_</ref>;</highlight></codeline>
+<codeline lineno="399" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a246901212706cfac8299f3b47419f33f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a246901212706cfac8299f3b47419f33f" kindref="member">tag_</ref>;</highlight></codeline>
+<codeline lineno="400" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a350704607558ab455334aebe055fc2d4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a350704607558ab455334aebe055fc2d4" kindref="member">n_batch_</ref>;</highlight></codeline>
+<codeline lineno="401" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a7f3c908db1e2f024c8270b5098a8dae6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a7f3c908db1e2f024c8270b5098a8dae6" kindref="member">batch_size_</ref>;</highlight></codeline>
+<codeline lineno="402" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a6be51c4052a667f067326880474dfe97" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespaceintel_1_1hexl_1_1fpga_1a9f07798cd59a71b9f57156192f7bf2f6" kindref="member">kernel_t</ref><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a6be51c4052a667f067326880474dfe97" kindref="member">type_</ref>;</highlight></codeline>
+<codeline lineno="403" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a1dc12d446913b942a97bd5caf9e50fb8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a1dc12d446913b942a97bd5caf9e50fb8" kindref="member">fence_</ref>;</highlight></codeline>
+<codeline lineno="404"><highlight class="normal"></highlight></codeline>
+<codeline lineno="405" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a51ecca2b08e9e9d67036d8419acca68b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;Object*&gt;<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a51ecca2b08e9e9d67036d8419acca68b" kindref="member">in_objs_</ref>;</highlight></codeline>
+<codeline lineno="406"><highlight class="normal"></highlight></codeline>
+<codeline lineno="407" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a99733056751a8574c4573210bb03d5a3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::atomic&lt;int&gt;<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a99733056751a8574c4573210bb03d5a3" kindref="member">g_tag_</ref>;</highlight></codeline>
+<codeline lineno="408"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="409"><highlight class="normal"></highlight></codeline>
+<codeline lineno="425" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT" refkind="compound"><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT" kindref="compound">FPGAObject_NTT</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject" kindref="compound">FPGAObject</ref><sp/>{</highlight></codeline>
+<codeline lineno="426"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1a0ea057e0cc2e3a1b13917ac8f1bd1af3" kindref="member">FPGAObject_NTT</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>cl_context&amp;<sp/>context,<sp/>uint64_t<sp/>coeff_count,</highlight></codeline>
+<codeline lineno="427"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>batch_size);</highlight></codeline>
+<codeline lineno="428"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1abae77f82236fa240111b32bd1b665a21" kindref="member">~FPGAObject_NTT</ref>();</highlight></codeline>
+<codeline lineno="429"><highlight class="normal"></highlight></codeline>
+<codeline lineno="430"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1a0ea057e0cc2e3a1b13917ac8f1bd1af3" kindref="member">FPGAObject_NTT</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT" kindref="compound">FPGAObject_NTT</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="431"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT" kindref="compound">FPGAObject_NTT</ref>&amp;<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1aad29cb94fc8916e444d146820d0fd673" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT" kindref="compound">FPGAObject_NTT</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="432"><highlight class="normal"></highlight></codeline>
+<codeline lineno="433"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1a3aa5e6c85ae154bcf98ba99205feda16" kindref="member">fill_in_data</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;Object*&gt;&amp;<sp/>objs)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="434"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1a4f31676fdaf820560f625d2f468da397" kindref="member">fill_out_data</ref>(uint64_t*<sp/>coeff_poly)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="435"><highlight class="normal"></highlight></codeline>
+<codeline lineno="436" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1a899dea2730faece216ae48d60bb14b07" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1a899dea2730faece216ae48d60bb14b07" kindref="member">coeff_poly_in_svm_</ref>;</highlight></codeline>
+<codeline lineno="437" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1a1263c41528af5e32878a535d5422b33d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1a1263c41528af5e32878a535d5422b33d" kindref="member">root_of_unity_powers_in_svm_</ref>;</highlight></codeline>
+<codeline lineno="438" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1a7ac4c0e1180cf9b29998f1e2ae1c074c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1a7ac4c0e1180cf9b29998f1e2ae1c074c" kindref="member">precon_root_of_unity_powers_in_svm_</ref>;</highlight></codeline>
+<codeline lineno="439" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1aef6ec35bf5733224ffd5d1be64de4ab1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1aef6ec35bf5733224ffd5d1be64de4ab1" kindref="member">coeff_modulus_in_svm_</ref>;</highlight></codeline>
+<codeline lineno="440" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1aa7b2933a6ad042a0ec97aa5b7eff3c5e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT_1aa7b2933a6ad042a0ec97aa5b7eff3c5e" kindref="member">n_</ref>;</highlight></codeline>
+<codeline lineno="441"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="442"><highlight class="normal"></highlight></codeline>
+<codeline lineno="460" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT" refkind="compound"><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT" kindref="compound">FPGAObject_INTT</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject" kindref="compound">FPGAObject</ref><sp/>{</highlight></codeline>
+<codeline lineno="461"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a153585cd172743a16e84efd8659aa66c" kindref="member">FPGAObject_INTT</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>cl_context&amp;<sp/>context,<sp/>uint64_t<sp/>coeff_count,</highlight></codeline>
+<codeline lineno="462"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>batch_size);</highlight></codeline>
+<codeline lineno="463"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a7cedf64bc8c7af8f1a77dd68e9dd2037" kindref="member">~FPGAObject_INTT</ref>();</highlight></codeline>
+<codeline lineno="464"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a153585cd172743a16e84efd8659aa66c" kindref="member">FPGAObject_INTT</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT" kindref="compound">FPGAObject_INTT</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="465"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT" kindref="compound">FPGAObject_INTT</ref>&amp;<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1af77e8207b17014631d1251ecf6c375f8" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT" kindref="compound">FPGAObject_INTT</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="466"><highlight class="normal"></highlight></codeline>
+<codeline lineno="467"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a3af9d73a583150a06fee9288a7938e31" kindref="member">fill_in_data</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;Object*&gt;&amp;<sp/>objs)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="468"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a18c10384468f7e39f15b2059fe59d5db" kindref="member">fill_out_data</ref>(uint64_t*<sp/>coeff_poly)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="469"><highlight class="normal"></highlight></codeline>
+<codeline lineno="470" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a5da6fc4cb5bebebb021c6cc2b94bbd7a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a5da6fc4cb5bebebb021c6cc2b94bbd7a" kindref="member">coeff_poly_in_svm_</ref>;</highlight></codeline>
+<codeline lineno="471" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1ab85ed19766b48f1cd854a07786b59f8f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1ab85ed19766b48f1cd854a07786b59f8f" kindref="member">inv_root_of_unity_powers_in_svm_</ref>;</highlight></codeline>
+<codeline lineno="472" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a9a18cf43978c3d56bad1e3494e25859a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a9a18cf43978c3d56bad1e3494e25859a" kindref="member">precon_inv_root_of_unity_powers_in_svm_</ref>;</highlight></codeline>
+<codeline lineno="473" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a7a893fbe1ec584f7fb59e49dfce3d45e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a7a893fbe1ec584f7fb59e49dfce3d45e" kindref="member">coeff_modulus_in_svm_</ref>;</highlight></codeline>
+<codeline lineno="474" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1af7b22e09b44bad334bbf2597619b74fd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1af7b22e09b44bad334bbf2597619b74fd" kindref="member">inv_n_in_svm_</ref>;</highlight></codeline>
+<codeline lineno="475" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a4d7e4702797bb9e28dd27436e8d981e6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a4d7e4702797bb9e28dd27436e8d981e6" kindref="member">inv_n_w_in_svm_</ref>;</highlight></codeline>
+<codeline lineno="476" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a79d41547e934454b4c4719d2a0d1fd4f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a79d41547e934454b4c4719d2a0d1fd4f" kindref="member">n_</ref>;</highlight></codeline>
+<codeline lineno="477"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="478"><highlight class="normal"></highlight></codeline>
+<codeline lineno="496" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply" refkind="compound"><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply" kindref="compound">FPGAObject_DyadicMultiply</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject" kindref="compound">FPGAObject</ref><sp/>{</highlight></codeline>
+<codeline lineno="497"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply_1a2246da0a69a18053fe76d8d5b07a3b14" kindref="member">FPGAObject_DyadicMultiply</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>cl_context&amp;<sp/>context,</highlight></codeline>
+<codeline lineno="498"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>coeff_size,</highlight></codeline>
+<codeline lineno="499"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>modulus_size,</highlight></codeline>
+<codeline lineno="500"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>batch_size);</highlight></codeline>
+<codeline lineno="501"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply_1adba71553a77b8e2dea74e6c33fde39f5" kindref="member">~FPGAObject_DyadicMultiply</ref>();</highlight></codeline>
+<codeline lineno="502"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply_1a2246da0a69a18053fe76d8d5b07a3b14" kindref="member">FPGAObject_DyadicMultiply</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply" kindref="compound">FPGAObject_DyadicMultiply</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="503"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply" kindref="compound">FPGAObject_DyadicMultiply</ref>&amp;<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply_1a1be9ab40f69d59dd1c12e9f2ef41b334" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply" kindref="compound">FPGAObject_DyadicMultiply</ref>&amp;)<sp/>=</highlight></codeline>
+<codeline lineno="504"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="505"><highlight class="normal"></highlight></codeline>
+<codeline lineno="506"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply_1aa4f825403efabeffbf3c9eee6cf0ecb1" kindref="member">fill_in_data</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;Object*&gt;&amp;<sp/>objs)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="507"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply_1a2a95c53a7a8bcca57da535a5ad6e7692" kindref="member">fill_out_data</ref>(uint64_t*<sp/>results)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="508"><highlight class="normal"></highlight></codeline>
+<codeline lineno="509" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply_1a0b6fe933fcb78eefa5296400044bfb72" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply_1a0b6fe933fcb78eefa5296400044bfb72" kindref="member">operand1_in_svm_</ref>;</highlight></codeline>
+<codeline lineno="510" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply_1a9ea681f4c0135059114239ee3159fe7c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply_1a9ea681f4c0135059114239ee3159fe7c" kindref="member">operand2_in_svm_</ref>;</highlight></codeline>
+<codeline lineno="511" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply_1a4e248c4090cb01ca4f4a4a927f3a5ee0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1moduli__info__t" kindref="compound">moduli_info_t</ref>*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply_1a4e248c4090cb01ca4f4a4a927f3a5ee0" kindref="member">moduli_info_</ref>;</highlight></codeline>
+<codeline lineno="512" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply_1addc32ca18fbc7359effd95d67a50c561" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply_1addc32ca18fbc7359effd95d67a50c561" kindref="member">n_</ref>;</highlight></codeline>
+<codeline lineno="513" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply_1a1050f5eda0ca0d101a44ba609a1cfed7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply_1a1050f5eda0ca0d101a44ba609a1cfed7" kindref="member">n_moduli_</ref>;</highlight></codeline>
+<codeline lineno="514" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply_1a1a0d9e75b852a481bc7c6676854b3bcc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_mem<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply_1a1a0d9e75b852a481bc7c6676854b3bcc" kindref="member">operands_in_ddr_</ref>;</highlight></codeline>
+<codeline lineno="515" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply_1a5e4758ba8ce2f59c59c214783b85c9c4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_mem<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply_1a5e4758ba8ce2f59c59c214783b85c9c4" kindref="member">results_out_ddr_</ref>;</highlight></codeline>
+<codeline lineno="516"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="517"><highlight class="normal"></highlight></codeline>
+<codeline lineno="538" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch" refkind="compound"><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch" kindref="compound">FPGAObject_KeySwitch</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject" kindref="compound">FPGAObject</ref><sp/>{</highlight></codeline>
+<codeline lineno="539"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1ae16a9ceae20ff53065758903c0798497" kindref="member">FPGAObject_KeySwitch</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>cl_context&amp;<sp/>context,</highlight></codeline>
+<codeline lineno="540"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>batch_size);</highlight></codeline>
+<codeline lineno="541"><highlight class="normal"></highlight></codeline>
+<codeline lineno="542"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1ae2a3b0e0c4b18cf3c982eb9342b2a019" kindref="member">~FPGAObject_KeySwitch</ref>();</highlight></codeline>
+<codeline lineno="543"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1ae16a9ceae20ff53065758903c0798497" kindref="member">FPGAObject_KeySwitch</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch" kindref="compound">FPGAObject_KeySwitch</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="544"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch" kindref="compound">FPGAObject_KeySwitch</ref>&amp;<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1a5579379c8ea215dc7843090c87277595" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch" kindref="compound">FPGAObject_KeySwitch</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="545"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1a55988d14e1056f130ad9a33ca9f7460d" kindref="member">fill_in_data</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;Object*&gt;&amp;<sp/>objs)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="546"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1a3e2a88df5541b000ef61d82c65c2e26b" kindref="member">fill_out_data</ref>(uint64_t*<sp/>results)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="547"><highlight class="normal"></highlight></codeline>
+<codeline lineno="548" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1a452ad0b22caf51b8c8f4f744c0bc7919" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1a452ad0b22caf51b8c8f4f744c0bc7919" kindref="member">n_</ref>;</highlight></codeline>
+<codeline lineno="549" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1a6e28d9984e10cfde846c242698d0642f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1a6e28d9984e10cfde846c242698d0642f" kindref="member">decomp_modulus_size_</ref>;</highlight></codeline>
+<codeline lineno="550" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1a0a8593a60170dd13fe7ad108a757d2ec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1a0a8593a60170dd13fe7ad108a757d2ec" kindref="member">key_modulus_size_</ref>;</highlight></codeline>
+<codeline lineno="551" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1a401a94981eb342a63d1e6bf8682164ad" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1a401a94981eb342a63d1e6bf8682164ad" kindref="member">rns_modulus_size_</ref>;</highlight></codeline>
+<codeline lineno="552" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1a3ad113db09b041064f5555f1a9b2491e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1a3ad113db09b041064f5555f1a9b2491e" kindref="member">key_component_count_</ref>;</highlight></codeline>
+<codeline lineno="553" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1aeada90060e405a6c8dfae14935389324" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1aeada90060e405a6c8dfae14935389324" kindref="member">moduli_</ref>;</highlight></codeline>
+<codeline lineno="554" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1ad5d7d8967bbd7bddbd3ec553bb333c70" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t**<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1ad5d7d8967bbd7bddbd3ec553bb333c70" kindref="member">k_switch_keys_</ref>;</highlight></codeline>
+<codeline lineno="555" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1aa2459a3f7c2e920d15fc80b9551a9b11" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1aa2459a3f7c2e920d15fc80b9551a9b11" kindref="member">modswitch_factors_</ref>;</highlight></codeline>
+<codeline lineno="556" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1a6e27013c13e95dc4869ba7f82d6e1b0c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1a6e27013c13e95dc4869ba7f82d6e1b0c" kindref="member">twiddle_factors_</ref>;</highlight></codeline>
+<codeline lineno="557" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1a4e6b81a796415ec4926aa3c82304b7c1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t*<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1a4e6b81a796415ec4926aa3c82304b7c1" kindref="member">ms_output_</ref>;</highlight></codeline>
+<codeline lineno="558"><highlight class="normal"></highlight></codeline>
+<codeline lineno="559" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1ab0cf2a7036433760c7da47d035e6b838" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_mem<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1ab0cf2a7036433760c7da47d035e6b838" kindref="member">mem_t_target_iter_ptr_</ref>;</highlight></codeline>
+<codeline lineno="560" refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1af917dde3e47a5a1339891599c48bca6f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_mem<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch_1af917dde3e47a5a1339891599c48bca6f" kindref="member">mem_KeySwitch_results_</ref>;</highlight></codeline>
+<codeline lineno="561"><highlight class="normal"></highlight></codeline>
+<codeline lineno="562"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="563"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="564"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MAX_KEY_MODULUS_SIZE<sp/>=<sp/>7,</highlight></codeline>
+<codeline lineno="565"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MAX_KEY_COMPONENT_SIZE<sp/>=<sp/>2,</highlight></codeline>
+<codeline lineno="566"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MAX_COEFF_COUNT<sp/>=<sp/>16384</highlight></codeline>
+<codeline lineno="567"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="568"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="569"><highlight class="normal"></highlight></codeline>
+<codeline lineno="570" refid="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys" kindref="compound">KeySwitchMemKeys</ref><sp/>{</highlight></codeline>
+<codeline lineno="571"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys_1abf02925aad155c87456f1b994d901855" kindref="member">KeySwitchMemKeys</ref>(cl_mem<sp/>k1<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,<sp/>cl_mem<sp/>k2<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="572"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cl_mem<sp/>k3<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="573"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys_1a748e730ef5ada07f6497de374f035bb9" kindref="member">~KeySwitchMemKeys</ref>();</highlight></codeline>
+<codeline lineno="574"><highlight class="normal"></highlight></codeline>
+<codeline lineno="575" refid="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys_1a1ab398e60f61d42514a9ca481335ba23" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_mem<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys_1a1ab398e60f61d42514a9ca481335ba23" kindref="member">k_switch_keys_1_</ref>;</highlight></codeline>
+<codeline lineno="576" refid="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys_1a58852e402411f195954ee043f8dbb5b7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_mem<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys_1a58852e402411f195954ee043f8dbb5b7" kindref="member">k_switch_keys_2_</ref>;</highlight></codeline>
+<codeline lineno="577" refid="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys_1ab05db195636fe7912aabc7c340c5077d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_mem<sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys_1ab05db195636fe7912aabc7c340c5077d" kindref="member">k_switch_keys_3_</ref>;</highlight></codeline>
+<codeline lineno="578"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="579"><highlight class="normal"></highlight></codeline>
+<codeline lineno="584" refid="namespaceintel_1_1hexl_1_1fpga_1a1a264f07facc5f24376170ea052e4fbca665be2b62dd76ce44231d0503e468464" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>{<sp/><ref refid="namespaceintel_1_1hexl_1_1fpga_1a1a264f07facc5f24376170ea052e4fbca665be2b62dd76ce44231d0503e468464" kindref="member">NONE</ref><sp/>=<sp/>0,<sp/><ref refid="namespaceintel_1_1hexl_1_1fpga_1a1a264f07facc5f24376170ea052e4fbca6553acb72b13a76b0cf31197badbc164" kindref="member">EMU</ref>,<sp/><ref refid="namespaceintel_1_1hexl_1_1fpga_1a1a264f07facc5f24376170ea052e4fbca7fef8fda7839a871ec648c0283640975" kindref="member">FPGA</ref><sp/>}<sp/><ref refid="namespaceintel_1_1hexl_1_1fpga_1a1a264f07facc5f24376170ea052e4fbc" kindref="member">DEV_TYPE</ref>;</highlight></codeline>
+<codeline lineno="603" refid="classintel_1_1hexl_1_1fpga_1_1Device" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classintel_1_1hexl_1_1fpga_1_1Device" kindref="compound">Device</ref><sp/>{</highlight></codeline>
+<codeline lineno="604"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="605"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1Device_1a0cfde50893b2950ef08ec71631bb9613" kindref="member">Device</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>cl_device_id&amp;<sp/>device,<sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1Buffer" kindref="compound">Buffer</ref>&amp;<sp/>buffer,</highlight></codeline>
+<codeline lineno="606"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_future&lt;bool&gt;<sp/>exit_signal,<sp/>uint64_t<sp/>coeff_size,</highlight></codeline>
+<codeline lineno="607"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>modulus_size,<sp/>uint64_t<sp/>batch_size_dyadic_multiply,</highlight></codeline>
+<codeline lineno="608"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>batch_size_ntt,<sp/>uint64_t<sp/>batch_size_intt,</highlight></codeline>
+<codeline lineno="609"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>batch_size_KeySwitch,<sp/>uint32_t<sp/>debug);</highlight></codeline>
+<codeline lineno="610"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1Device_1ad7adf350f85c3d0b66607424d3281d5f" kindref="member">~Device</ref>();</highlight></codeline>
+<codeline lineno="611"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1Device_1a0cfde50893b2950ef08ec71631bb9613" kindref="member">Device</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1Device" kindref="compound">Device</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="612"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1Device" kindref="compound">Device</ref>&amp;<sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1Device_1a9701bf457e5d3dede4de9cc1442d24a9" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1Device" kindref="compound">Device</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="613"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1Device_1a91c2dde32f856517ba1f90e6191d2850" kindref="member">run</ref>();</highlight></codeline>
+<codeline lineno="614"><highlight class="normal"></highlight></codeline>
+<codeline lineno="615"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="616"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>{<sp/>CREDIT<sp/>=<sp/>2<sp/>};</highlight></codeline>
+<codeline lineno="617"><highlight class="normal"></highlight></codeline>
+<codeline lineno="618"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>process_blocking_api();</highlight></codeline>
+<codeline lineno="619"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>process_input(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>index);</highlight></codeline>
+<codeline lineno="620"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>process_output();</highlight></codeline>
+<codeline lineno="621"><highlight class="normal"></highlight></codeline>
+<codeline lineno="622"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>process_output_dyadic_multiply();</highlight></codeline>
+<codeline lineno="623"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>process_output_NTT();</highlight></codeline>
+<codeline lineno="624"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>process_output_INTT();</highlight></codeline>
+<codeline lineno="625"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>process_output_KeySwitch();</highlight></codeline>
+<codeline lineno="626"><highlight class="normal"></highlight></codeline>
+<codeline lineno="627"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>enqueue_input_data(<ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject" kindref="compound">FPGAObject</ref>*<sp/>fpga_obj);</highlight></codeline>
+<codeline lineno="628"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>enqueue_input_data_dyadic_multiply(</highlight></codeline>
+<codeline lineno="629"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply" kindref="compound">FPGAObject_DyadicMultiply</ref>*<sp/>fpga_obj);</highlight></codeline>
+<codeline lineno="630"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>enqueue_input_data_NTT(<ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT" kindref="compound">FPGAObject_NTT</ref>*<sp/>fpga_obj);</highlight></codeline>
+<codeline lineno="631"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>enqueue_input_data_INTT(<ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT" kindref="compound">FPGAObject_INTT</ref>*<sp/>fpga_obj);</highlight></codeline>
+<codeline lineno="632"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>enqueue_input_data_KeySwitch(<ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch" kindref="compound">FPGAObject_KeySwitch</ref>*<sp/>fpga_obj);</highlight></codeline>
+<codeline lineno="633"><highlight class="normal"></highlight></codeline>
+<codeline lineno="634"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>device_id()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>id_;<sp/>}</highlight></codeline>
+<codeline lineno="635"><highlight class="normal"></highlight></codeline>
+<codeline lineno="636"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>KeySwitch_load_twiddles(<ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch" kindref="compound">FPGAObject_KeySwitch</ref>*<sp/>fpga_obj);</highlight></codeline>
+<codeline lineno="637"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys" kindref="compound">KeySwitchMemKeys</ref>*<sp/>KeySwitch_check_keys(uint64_t**<sp/>keys);</highlight></codeline>
+<codeline lineno="638"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys" kindref="compound">KeySwitchMemKeys</ref>*<sp/>KeySwitch_load_keys(<ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch" kindref="compound">FPGAObject_KeySwitch</ref>*<sp/>fpga_obj);</highlight></codeline>
+<codeline lineno="639"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>build_modulus_meta(<ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch" kindref="compound">FPGAObject_KeySwitch</ref>*<sp/>fpga_obj);</highlight></codeline>
+<codeline lineno="640"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>build_invn_meta(<ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch" kindref="compound">FPGAObject_KeySwitch</ref>*<sp/>fpga_obj);</highlight></codeline>
+<codeline lineno="641"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>KeySwitch_read_output();</highlight></codeline>
+<codeline lineno="642"><highlight class="normal"></highlight></codeline>
+<codeline lineno="643"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>precompute_modulus_k(uint64_t<sp/>modulus);</highlight></codeline>
+<codeline lineno="644"><highlight class="normal"></highlight></codeline>
+<codeline lineno="645"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespaceintel_1_1hexl_1_1fpga_1a9f07798cd59a71b9f57156192f7bf2f6" kindref="member">kernel_t</ref><sp/>get_kernel_type();</highlight></codeline>
+<codeline lineno="646"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>get_bitstream_name();</highlight></codeline>
+<codeline lineno="647"><highlight class="normal"></highlight></codeline>
+<codeline lineno="648"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>cl_device_id&amp;<sp/>device_;</highlight></codeline>
+<codeline lineno="649"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1Buffer" kindref="compound">Buffer</ref>&amp;<sp/>buffer_;</highlight></codeline>
+<codeline lineno="650"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>credit_;</highlight></codeline>
+<codeline lineno="651"><highlight class="normal"><sp/><sp/><sp/><sp/>std::shared_future&lt;bool&gt;<sp/>future_exit_;</highlight></codeline>
+<codeline lineno="652"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>id_;</highlight></codeline>
+<codeline lineno="653"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>device_id_;</highlight></codeline>
+<codeline lineno="654"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespaceintel_1_1hexl_1_1fpga_1a9f07798cd59a71b9f57156192f7bf2f6" kindref="member">kernel_t</ref><sp/>kernel_type_;</highlight></codeline>
+<codeline lineno="655"><highlight class="normal"></highlight></codeline>
+<codeline lineno="656"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;FPGAObject*&gt;<sp/>fpgaObjects_;</highlight></codeline>
+<codeline lineno="657"><highlight class="normal"></highlight></codeline>
+<codeline lineno="658"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_context<sp/>context_;</highlight></codeline>
+<codeline lineno="659"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_program<sp/>program_;</highlight></codeline>
+<codeline lineno="660"><highlight class="normal"></highlight></codeline>
+<codeline lineno="661"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>DYADIC_MULTIPLY<sp/>section</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="662"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_command_queue<sp/>dyadic_multiply_input_queue_;</highlight></codeline>
+<codeline lineno="663"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_command_queue<sp/>dyadic_multiply_output_queue_;</highlight></codeline>
+<codeline lineno="664"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_kernel<sp/>dyadic_multiply_input_fifo_kernel_;</highlight></codeline>
+<codeline lineno="665"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_kernel<sp/>dyadic_multiply_output_fifo_nb_kernel_;</highlight></codeline>
+<codeline lineno="666"><highlight class="normal"></highlight></codeline>
+<codeline lineno="667"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t*<sp/>dyadic_multiply_results_out_svm_;</highlight></codeline>
+<codeline lineno="668"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*<sp/>dyadic_multiply_tag_out_svm_;</highlight></codeline>
+<codeline lineno="669"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*<sp/>dyadic_multiply_results_out_valid_svm_;</highlight></codeline>
+<codeline lineno="670"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="671"><highlight class="normal"></highlight></codeline>
+<codeline lineno="672"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>NTT<sp/>section</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="673"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_command_queue<sp/>ntt_load_queue_;</highlight></codeline>
+<codeline lineno="674"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_command_queue<sp/>ntt_store_queue_;</highlight></codeline>
+<codeline lineno="675"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_kernel<sp/>ntt_load_kernel_;</highlight></codeline>
+<codeline lineno="676"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_kernel<sp/>ntt_store_kernel_;</highlight></codeline>
+<codeline lineno="677"><highlight class="normal"></highlight></codeline>
+<codeline lineno="678"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t*<sp/>NTT_coeff_poly_svm_;</highlight></codeline>
+<codeline lineno="679"><highlight class="normal"></highlight></codeline>
+<codeline lineno="680"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>INTT<sp/>section</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="681"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_command_queue<sp/>intt_load_queue_;</highlight></codeline>
+<codeline lineno="682"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_command_queue<sp/>intt_store_queue_;</highlight></codeline>
+<codeline lineno="683"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_kernel<sp/>intt_load_kernel_;</highlight></codeline>
+<codeline lineno="684"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_kernel<sp/>intt_store_kernel_;</highlight></codeline>
+<codeline lineno="685"><highlight class="normal"></highlight></codeline>
+<codeline lineno="686"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t*<sp/>INTT_coeff_poly_svm_;</highlight></codeline>
+<codeline lineno="687"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="688"><highlight class="normal"></highlight></codeline>
+<codeline lineno="689"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>KeySwitch<sp/>section</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="690"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_mem<sp/>KeySwitch_mem_root_of_unity_powers_;</highlight></codeline>
+<codeline lineno="691"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_command_queue<sp/>KeySwitch_queues_[<ref refid="namespaceintel_1_1hexl_1_1fpga_1a9f208acca71106a36e1b0da993ddf3c0a6af9e5813327ef64d8e05c831e411632" kindref="member">KEYSWITCH_NUM_KERNELS</ref>];</highlight></codeline>
+<codeline lineno="692"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_kernel<sp/>KeySwitch_kernels_[<ref refid="namespaceintel_1_1hexl_1_1fpga_1a9f208acca71106a36e1b0da993ddf3c0a6af9e5813327ef64d8e05c831e411632" kindref="member">KEYSWITCH_NUM_KERNELS</ref>];</highlight></codeline>
+<codeline lineno="693"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>KeySwitch_load_once_;</highlight></codeline>
+<codeline lineno="694"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t*<sp/>root_of_unity_powers_ptr_;</highlight></codeline>
+<codeline lineno="695"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1KeySwitch__modulus__t" kindref="compound">KeySwitch_modulus_t</ref><sp/>modulus_meta_;</highlight></codeline>
+<codeline lineno="696"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structintel_1_1hexl_1_1fpga_1_1KeySwitch__invn__t" kindref="compound">KeySwitch_invn_t</ref><sp/>invn_;</highlight></codeline>
+<codeline lineno="697"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>KeySwitch_id_;</highlight></codeline>
+<codeline lineno="698"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_event<sp/>KeySwitch_events_write_[2][128];</highlight></codeline>
+<codeline lineno="699"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_event<sp/>KeySwitch_events_enqueue_[2][2];</highlight></codeline>
+<codeline lineno="700"><highlight class="normal"><sp/><sp/><sp/><sp/>std::unordered_map&lt;uint64_t**,<sp/>KeySwitchMemKeys*&gt;<sp/>keys_map_;</highlight></codeline>
+<codeline lineno="701"><highlight class="normal"><sp/><sp/><sp/><sp/>std::unordered_map&lt;uint64_t**,<sp/>KeySwitchMemKeys*&gt;::iterator<sp/>keys_map_iter_;</highlight></codeline>
+<codeline lineno="702"><highlight class="normal"></highlight></codeline>
+<codeline lineno="703"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>debug_;</highlight></codeline>
+<codeline lineno="704"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::unordered_map&lt;std::string,<sp/>kernel_t&gt;<sp/>kernels;</highlight></codeline>
+<codeline lineno="705"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="706"><highlight class="normal"></highlight></codeline>
+<codeline lineno="723" refid="classintel_1_1hexl_1_1fpga_1_1DevicePool" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classintel_1_1hexl_1_1fpga_1_1DevicePool" kindref="compound">DevicePool</ref><sp/>{</highlight></codeline>
+<codeline lineno="724"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="725"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1DevicePool_1a7c814d5346201aa0034e8f693e608bb2" kindref="member">DevicePool</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>choice,<sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1Buffer" kindref="compound">Buffer</ref>&amp;<sp/>buffer,<sp/>std::future&lt;bool&gt;&amp;<sp/>exit_signal,</highlight></codeline>
+<codeline lineno="726"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>coeff_size,<sp/>uint32_t<sp/>modulus_size,</highlight></codeline>
+<codeline lineno="727"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>batch_size_dyadic_multiply,<sp/>uint64_t<sp/>batch_size_ntt,</highlight></codeline>
+<codeline lineno="728"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>batch_size_intt,<sp/>uint64_t<sp/>batch_size_KeySwitch,</highlight></codeline>
+<codeline lineno="729"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>debug);</highlight></codeline>
+<codeline lineno="730"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1DevicePool_1af8404b1e8d112a2bd8c89e980dd69354" kindref="member">~DevicePool</ref>();</highlight></codeline>
+<codeline lineno="731"><highlight class="normal"></highlight></codeline>
+<codeline lineno="732"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="733"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1DevicePool_1a7c814d5346201aa0034e8f693e608bb2" kindref="member">DevicePool</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1DevicePool" kindref="compound">DevicePool</ref>&amp;<sp/>d)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="734"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1DevicePool" kindref="compound">DevicePool</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1DevicePool" kindref="compound">DevicePool</ref>&amp;<sp/>d)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="735"><highlight class="normal"></highlight></codeline>
+<codeline lineno="736"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_platform_id<sp/>platform_;</highlight></codeline>
+<codeline lineno="737"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_uint<sp/>device_count_;</highlight></codeline>
+<codeline lineno="738"><highlight class="normal"><sp/><sp/><sp/><sp/>cl_device_id*<sp/>cl_devices_;</highlight></codeline>
+<codeline lineno="739"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classintel_1_1hexl_1_1fpga_1_1Device" kindref="compound">Device</ref>**<sp/>devices_;</highlight></codeline>
+<codeline lineno="740"><highlight class="normal"><sp/><sp/><sp/><sp/>std::shared_future&lt;bool&gt;<sp/>future_exit_;</highlight></codeline>
+<codeline lineno="741"><highlight class="normal"></highlight></codeline>
+<codeline lineno="742"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;std::thread&gt;<sp/>runners_;</highlight></codeline>
+<codeline lineno="743"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="748"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="namespaceintel_1_1hexl_1_1fpga_1aa7d5b6c103f848f3b642938edf97ae22" kindref="member">attach_fpga_pooling</ref>();</highlight></codeline>
+<codeline lineno="753"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="namespaceintel_1_1hexl_1_1fpga_1a768c1508c039dd1e8664cfec3a7bb159" kindref="member">detach_fpga_pooling</ref>();</highlight></codeline>
+<codeline lineno="754"><highlight class="normal"></highlight></codeline>
+<codeline lineno="755"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>fpga</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="756"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>hexl</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="757"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>intel</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="758"><highlight class="normal"></highlight></codeline>
+<codeline lineno="759"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h"/>
+  </compounddef>
+</doxygen>

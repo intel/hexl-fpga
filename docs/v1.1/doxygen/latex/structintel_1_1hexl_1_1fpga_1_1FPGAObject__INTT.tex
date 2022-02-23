@@ -1,0 +1,150 @@
+\hypertarget{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT}{\section{intel\-:\-:hexl\-:\-:fpga\-:\-:F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T Struct Reference}
+\label{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT}\index{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T@{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}}
+}
+
+
+Struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT}{F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T} stores the I\-N\-T\-T blob of objects to be transfered to the F\-P\-G\-A.  
+
+
+
+
+{\ttfamily \#include $<$fpga.\-h$>$}
+
+Inheritance diagram for intel\-:\-:hexl\-:\-:fpga\-:\-:F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a153585cd172743a16e84efd8659aa66c}{F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T} (const cl\-\_\-context \&context, uint64\-\_\-t coeff\-\_\-count, uint64\-\_\-t batch\-\_\-size)
+\item 
+\hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a7cedf64bc8c7af8f1a77dd68e9dd2037}{$\sim$\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T} ()
+\item 
+\hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a991d2f78abe5d44b4f98f3b4ac4da29e}{F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T} (const \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT}{F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T} \&)=delete
+\item 
+\hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT}{F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T} \& \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_af77e8207b17014631d1251ecf6c375f8}{operator=} (const \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT}{F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T} \&)=delete
+\item 
+void \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a3af9d73a583150a06fee9288a7938e31}{fill\-\_\-in\-\_\-data} (const std\-::vector$<$ \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object}{Object} $\ast$ $>$ \&objs) override
+\item 
+void \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a18c10384468f7e39f15b2059fe59d5db}{fill\-\_\-out\-\_\-data} (uint64\-\_\-t $\ast$coeff\-\_\-poly) override
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint64\-\_\-t $\ast$ \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a5da6fc4cb5bebebb021c6cc2b94bbd7a}{coeff\-\_\-poly\-\_\-in\-\_\-svm\-\_\-}
+\item 
+uint64\-\_\-t $\ast$ \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_ab85ed19766b48f1cd854a07786b59f8f}{inv\-\_\-root\-\_\-of\-\_\-unity\-\_\-powers\-\_\-in\-\_\-svm\-\_\-}
+\item 
+uint64\-\_\-t $\ast$ \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a9a18cf43978c3d56bad1e3494e25859a}{precon\-\_\-inv\-\_\-root\-\_\-of\-\_\-unity\-\_\-powers\-\_\-in\-\_\-svm\-\_\-}
+\item 
+uint64\-\_\-t $\ast$ \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a7a893fbe1ec584f7fb59e49dfce3d45e}{coeff\-\_\-modulus\-\_\-in\-\_\-svm\-\_\-}
+\item 
+uint64\-\_\-t $\ast$ \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_af7b22e09b44bad334bbf2597619b74fd}{inv\-\_\-n\-\_\-in\-\_\-svm\-\_\-}
+\item 
+uint64\-\_\-t $\ast$ \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a4d7e4702797bb9e28dd27436e8d981e6}{inv\-\_\-n\-\_\-w\-\_\-in\-\_\-svm\-\_\-}
+\item 
+uint64\-\_\-t \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a79d41547e934454b4c4719d2a0d1fd4f}{n\-\_\-}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT}{F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T} stores the I\-N\-T\-T blob of objects to be transfered to the F\-P\-G\-A. 
+
+fill\-\_\-in\-\_\-data 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em vector} & of objects  fill\-\_\-out\-\_\-data \\
+\hline
+\mbox{\tt out}  & {\em vector} & of polynomial coefficients\\
+\hline
+\end{DoxyParams}
+coeff\-\_\-poly\-\_\-in\-\_\-svm vector of polynomial coefficients inv\-\_\-root\-\_\-of\-\_\-unity\-\_\-powers\-\_\-in\-\_\-svm twiddle factors precon\-\_\-inv\-\_\-root\-\_\-of\-\_\-unity\-\_\-powers\-\_\-in\-\_\-svm inverse twiddle factors coeff\-\_\-modulus\-\_\-in\-\_\-svm\-\_\- polynomial coefficients modulus inv\-\_\-n\-\_\-in\-\_\-svm\-\_\- normalization factor 1/n for the polynomial coefficients inv\-\_\-n\-\_\-w\-\_\-in\-\_\-svm\-\_\- normalization factor 1/n for the constant coefficient n polynomial size 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a153585cd172743a16e84efd8659aa66c}{\index{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T@{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}!F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T@{F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}}
+\index{F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T@{F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}!intel::hexl::fpga::FPGAObject_INTT@{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}}
+\subsubsection[{F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}]{\setlength{\rightskip}{0pt plus 5cm}intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T (
+\begin{DoxyParamCaption}
+\item[{const cl\-\_\-context \&}]{context, }
+\item[{uint64\-\_\-t}]{coeff\-\_\-count, }
+\item[{uint64\-\_\-t}]{batch\-\_\-size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a153585cd172743a16e84efd8659aa66c}
+\hypertarget{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a7cedf64bc8c7af8f1a77dd68e9dd2037}{\index{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T@{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}!$\sim$\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T@{$\sim$\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}}
+\index{$\sim$\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T@{$\sim$\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}!intel::hexl::fpga::FPGAObject_INTT@{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}}
+\subsubsection[{$\sim$\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}]{\setlength{\rightskip}{0pt plus 5cm}intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T\-::$\sim$\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a7cedf64bc8c7af8f1a77dd68e9dd2037}
+\hypertarget{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a991d2f78abe5d44b4f98f3b4ac4da29e}{\index{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T@{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}!F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T@{F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}}
+\index{F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T@{F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}!intel::hexl::fpga::FPGAObject_INTT@{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}}
+\subsubsection[{F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}]{\setlength{\rightskip}{0pt plus 5cm}intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T (
+\begin{DoxyParamCaption}
+\item[{const {\bf F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [delete]}}}\label{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a991d2f78abe5d44b4f98f3b4ac4da29e}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a3af9d73a583150a06fee9288a7938e31}{\index{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T@{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}!fill\-\_\-in\-\_\-data@{fill\-\_\-in\-\_\-data}}
+\index{fill\-\_\-in\-\_\-data@{fill\-\_\-in\-\_\-data}!intel::hexl::fpga::FPGAObject_INTT@{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}}
+\subsubsection[{fill\-\_\-in\-\_\-data}]{\setlength{\rightskip}{0pt plus 5cm}void intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T\-::fill\-\_\-in\-\_\-data (
+\begin{DoxyParamCaption}
+\item[{const std\-::vector$<$ {\bf Object} $\ast$ $>$ \&}]{objs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}}\label{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a3af9d73a583150a06fee9288a7938e31}
+
+
+Implements \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject_abd665113bfb3b0e7a33e09078f01ae43}{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object}.
+
+\hypertarget{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a18c10384468f7e39f15b2059fe59d5db}{\index{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T@{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}!fill\-\_\-out\-\_\-data@{fill\-\_\-out\-\_\-data}}
+\index{fill\-\_\-out\-\_\-data@{fill\-\_\-out\-\_\-data}!intel::hexl::fpga::FPGAObject_INTT@{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}}
+\subsubsection[{fill\-\_\-out\-\_\-data}]{\setlength{\rightskip}{0pt plus 5cm}void intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T\-::fill\-\_\-out\-\_\-data (
+\begin{DoxyParamCaption}
+\item[{uint64\-\_\-t $\ast$}]{coeff\-\_\-poly}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}}\label{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a18c10384468f7e39f15b2059fe59d5db}
+
+
+Implements \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject_a954c4c75077a7c406f6c81517ea7bb04}{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object}.
+
+\hypertarget{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_af77e8207b17014631d1251ecf6c375f8}{\index{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T@{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}!operator=@{operator=}}
+\index{operator=@{operator=}!intel::hexl::fpga::FPGAObject_INTT@{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}\& intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T\-::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [delete]}}}\label{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_af77e8207b17014631d1251ecf6c375f8}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a7a893fbe1ec584f7fb59e49dfce3d45e}{\index{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T@{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}!coeff\-\_\-modulus\-\_\-in\-\_\-svm\-\_\-@{coeff\-\_\-modulus\-\_\-in\-\_\-svm\-\_\-}}
+\index{coeff\-\_\-modulus\-\_\-in\-\_\-svm\-\_\-@{coeff\-\_\-modulus\-\_\-in\-\_\-svm\-\_\-}!intel::hexl::fpga::FPGAObject_INTT@{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}}
+\subsubsection[{coeff\-\_\-modulus\-\_\-in\-\_\-svm\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t$\ast$ intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T\-::coeff\-\_\-modulus\-\_\-in\-\_\-svm\-\_\-}}\label{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a7a893fbe1ec584f7fb59e49dfce3d45e}
+\hypertarget{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a5da6fc4cb5bebebb021c6cc2b94bbd7a}{\index{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T@{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}!coeff\-\_\-poly\-\_\-in\-\_\-svm\-\_\-@{coeff\-\_\-poly\-\_\-in\-\_\-svm\-\_\-}}
+\index{coeff\-\_\-poly\-\_\-in\-\_\-svm\-\_\-@{coeff\-\_\-poly\-\_\-in\-\_\-svm\-\_\-}!intel::hexl::fpga::FPGAObject_INTT@{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}}
+\subsubsection[{coeff\-\_\-poly\-\_\-in\-\_\-svm\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t$\ast$ intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T\-::coeff\-\_\-poly\-\_\-in\-\_\-svm\-\_\-}}\label{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a5da6fc4cb5bebebb021c6cc2b94bbd7a}
+\hypertarget{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_af7b22e09b44bad334bbf2597619b74fd}{\index{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T@{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}!inv\-\_\-n\-\_\-in\-\_\-svm\-\_\-@{inv\-\_\-n\-\_\-in\-\_\-svm\-\_\-}}
+\index{inv\-\_\-n\-\_\-in\-\_\-svm\-\_\-@{inv\-\_\-n\-\_\-in\-\_\-svm\-\_\-}!intel::hexl::fpga::FPGAObject_INTT@{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}}
+\subsubsection[{inv\-\_\-n\-\_\-in\-\_\-svm\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t$\ast$ intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T\-::inv\-\_\-n\-\_\-in\-\_\-svm\-\_\-}}\label{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_af7b22e09b44bad334bbf2597619b74fd}
+\hypertarget{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a4d7e4702797bb9e28dd27436e8d981e6}{\index{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T@{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}!inv\-\_\-n\-\_\-w\-\_\-in\-\_\-svm\-\_\-@{inv\-\_\-n\-\_\-w\-\_\-in\-\_\-svm\-\_\-}}
+\index{inv\-\_\-n\-\_\-w\-\_\-in\-\_\-svm\-\_\-@{inv\-\_\-n\-\_\-w\-\_\-in\-\_\-svm\-\_\-}!intel::hexl::fpga::FPGAObject_INTT@{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}}
+\subsubsection[{inv\-\_\-n\-\_\-w\-\_\-in\-\_\-svm\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t$\ast$ intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T\-::inv\-\_\-n\-\_\-w\-\_\-in\-\_\-svm\-\_\-}}\label{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a4d7e4702797bb9e28dd27436e8d981e6}
+\hypertarget{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_ab85ed19766b48f1cd854a07786b59f8f}{\index{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T@{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}!inv\-\_\-root\-\_\-of\-\_\-unity\-\_\-powers\-\_\-in\-\_\-svm\-\_\-@{inv\-\_\-root\-\_\-of\-\_\-unity\-\_\-powers\-\_\-in\-\_\-svm\-\_\-}}
+\index{inv\-\_\-root\-\_\-of\-\_\-unity\-\_\-powers\-\_\-in\-\_\-svm\-\_\-@{inv\-\_\-root\-\_\-of\-\_\-unity\-\_\-powers\-\_\-in\-\_\-svm\-\_\-}!intel::hexl::fpga::FPGAObject_INTT@{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}}
+\subsubsection[{inv\-\_\-root\-\_\-of\-\_\-unity\-\_\-powers\-\_\-in\-\_\-svm\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t$\ast$ intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T\-::inv\-\_\-root\-\_\-of\-\_\-unity\-\_\-powers\-\_\-in\-\_\-svm\-\_\-}}\label{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_ab85ed19766b48f1cd854a07786b59f8f}
+\hypertarget{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a79d41547e934454b4c4719d2a0d1fd4f}{\index{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T@{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}!n\-\_\-@{n\-\_\-}}
+\index{n\-\_\-@{n\-\_\-}!intel::hexl::fpga::FPGAObject_INTT@{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}}
+\subsubsection[{n\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T\-::n\-\_\-}}\label{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a79d41547e934454b4c4719d2a0d1fd4f}
+\hypertarget{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a9a18cf43978c3d56bad1e3494e25859a}{\index{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T@{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}!precon\-\_\-inv\-\_\-root\-\_\-of\-\_\-unity\-\_\-powers\-\_\-in\-\_\-svm\-\_\-@{precon\-\_\-inv\-\_\-root\-\_\-of\-\_\-unity\-\_\-powers\-\_\-in\-\_\-svm\-\_\-}}
+\index{precon\-\_\-inv\-\_\-root\-\_\-of\-\_\-unity\-\_\-powers\-\_\-in\-\_\-svm\-\_\-@{precon\-\_\-inv\-\_\-root\-\_\-of\-\_\-unity\-\_\-powers\-\_\-in\-\_\-svm\-\_\-}!intel::hexl::fpga::FPGAObject_INTT@{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}}
+\subsubsection[{precon\-\_\-inv\-\_\-root\-\_\-of\-\_\-unity\-\_\-powers\-\_\-in\-\_\-svm\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t$\ast$ intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T\-::precon\-\_\-inv\-\_\-root\-\_\-of\-\_\-unity\-\_\-powers\-\_\-in\-\_\-svm\-\_\-}}\label{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_a9a18cf43978c3d56bad1e3494e25859a}
+
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{fpga_8h}{fpga.\-h}\end{DoxyCompactItemize}

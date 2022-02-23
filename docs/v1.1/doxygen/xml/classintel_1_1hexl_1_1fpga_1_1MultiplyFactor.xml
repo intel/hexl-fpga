@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classintel_1_1hexl_1_1fpga_1_1MultiplyFactor" kind="class" prot="public">
+    <compoundname>intel::hexl::fpga::MultiplyFactor</compoundname>
+    <includes refid="number__theory__util_8h" local="no">number_theory_util.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1MultiplyFactor_1ae91a671eed1bcce10e0830d691b8779c" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::MultiplyFactor::m_operand</definition>
+        <argsstring></argsstring>
+        <name>m_operand</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="223" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" bodystart="223" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classintel_1_1hexl_1_1fpga_1_1MultiplyFactor_1ad66bbdef673fbe1e2869a39fc6ef274d" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::MultiplyFactor::m_barrett_factor</definition>
+        <argsstring></argsstring>
+        <name>m_barrett_factor</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="224" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" bodystart="224" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1MultiplyFactor_1aec4f895b6ede16736951ed97c6d07936" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>intel::hexl::fpga::MultiplyFactor::MultiplyFactor</definition>
+        <argsstring>()=default</argsstring>
+        <name>MultiplyFactor</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="199" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1MultiplyFactor_1a3c0cc8fced8ac81e2a74e1fbda837ee6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>intel::hexl::fpga::MultiplyFactor::MultiplyFactor</definition>
+        <argsstring>(uint64_t operand, uint64_t bit_shift, uint64_t modulus)</argsstring>
+        <name>MultiplyFactor</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>operand</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>bit_shift</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>modulus</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="202" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" bodystart="202" bodyend="217"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1MultiplyFactor_1aa14e2b825d1b951f5e1d1d0fb615f0bf" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::MultiplyFactor::BarrettFactor</definition>
+        <argsstring>() const </argsstring>
+        <name>BarrettFactor</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="219" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" bodystart="219" bodyend="219"/>
+      </memberdef>
+      <memberdef kind="function" id="classintel_1_1hexl_1_1fpga_1_1MultiplyFactor_1a70eefb9d515e068988d83ccf47a32c26" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::MultiplyFactor::Operand</definition>
+        <argsstring>() const </argsstring>
+        <name>Operand</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="220" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" bodystart="220" bodyend="220"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="197" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" bodystart="197" bodyend="225"/>
+    <listofallmembers>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1MultiplyFactor_1aa14e2b825d1b951f5e1d1d0fb615f0bf" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::MultiplyFactor</scope><name>BarrettFactor</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1MultiplyFactor_1ad66bbdef673fbe1e2869a39fc6ef274d" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::MultiplyFactor</scope><name>m_barrett_factor</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1MultiplyFactor_1ae91a671eed1bcce10e0830d691b8779c" prot="private" virt="non-virtual"><scope>intel::hexl::fpga::MultiplyFactor</scope><name>m_operand</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1MultiplyFactor_1aec4f895b6ede16736951ed97c6d07936" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::MultiplyFactor</scope><name>MultiplyFactor</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1MultiplyFactor_1a3c0cc8fced8ac81e2a74e1fbda837ee6" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::MultiplyFactor</scope><name>MultiplyFactor</name></member>
+      <member refid="classintel_1_1hexl_1_1fpga_1_1MultiplyFactor_1a70eefb9d515e068988d83ccf47a32c26" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::MultiplyFactor</scope><name>Operand</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

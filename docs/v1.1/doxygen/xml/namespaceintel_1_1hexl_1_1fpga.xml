@@ -1,0 +1,1983 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="namespaceintel_1_1hexl_1_1fpga" kind="namespace">
+    <compoundname>intel::hexl::fpga</compoundname>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1moduli__info__t" prot="public">intel::hexl::fpga::moduli_info_t</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1KeySwitch__modulus__t" prot="public">intel::hexl::fpga::KeySwitch_modulus_t</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1KeySwitch__invn__t" prot="public">intel::hexl::fpga::KeySwitch_invn_t</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1____attribute____" prot="public">intel::hexl::fpga::__attribute__</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1Object" prot="public">intel::hexl::fpga::Object</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1Object__NTT" prot="public">intel::hexl::fpga::Object_NTT</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1Object__INTT" prot="public">intel::hexl::fpga::Object_INTT</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1Object__DyadicMultiply" prot="public">intel::hexl::fpga::Object_DyadicMultiply</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch" prot="public">intel::hexl::fpga::Object_KeySwitch</innerclass>
+    <innerclass refid="classintel_1_1hexl_1_1fpga_1_1Buffer" prot="public">intel::hexl::fpga::Buffer</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject" prot="public">intel::hexl::fpga::FPGAObject</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT" prot="public">intel::hexl::fpga::FPGAObject_NTT</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT" prot="public">intel::hexl::fpga::FPGAObject_INTT</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply" prot="public">intel::hexl::fpga::FPGAObject_DyadicMultiply</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch" prot="public">intel::hexl::fpga::FPGAObject_KeySwitch</innerclass>
+    <innerclass refid="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys" prot="public">intel::hexl::fpga::KeySwitchMemKeys</innerclass>
+    <innerclass refid="classintel_1_1hexl_1_1fpga_1_1Device" prot="public">intel::hexl::fpga::Device</innerclass>
+    <innerclass refid="classintel_1_1hexl_1_1fpga_1_1DevicePool" prot="public">intel::hexl::fpga::DevicePool</innerclass>
+    <innerclass refid="classintel_1_1hexl_1_1fpga_1_1MultiplyFactor" prot="public">intel::hexl::fpga::MultiplyFactor</innerclass>
+    <innerclass refid="classintel_1_1hexl_1_1fpga_1_1StackTrace" prot="public">intel::hexl::fpga::StackTrace</innerclass>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespaceintel_1_1hexl_1_1fpga_1a9f208acca71106a36e1b0da993ddf3c0" prot="public" static="no">
+        <name>KeySwitch_Kernels</name>
+        <enumvalue id="namespaceintel_1_1hexl_1_1fpga_1a9f208acca71106a36e1b0da993ddf3c0aad020d5509bc307d9766c206dd7a9049" prot="public">
+          <name>KEYSWITCH_LOAD</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceintel_1_1hexl_1_1fpga_1a9f208acca71106a36e1b0da993ddf3c0a28bf74f4155709486353b7d1179c9722" prot="public">
+          <name>KEYSWITCH_STORE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceintel_1_1hexl_1_1fpga_1a9f208acca71106a36e1b0da993ddf3c0a6af9e5813327ef64d8e05c831e411632" prot="public">
+          <name>KEYSWITCH_NUM_KERNELS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="91" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="91" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespaceintel_1_1hexl_1_1fpga_1a9f07798cd59a71b9f57156192f7bf2f6" prot="public" static="no">
+        <name>kernel_t</name>
+        <enumvalue id="namespaceintel_1_1hexl_1_1fpga_1a1a264f07facc5f24376170ea052e4fbcab50339a10e1de285ac99d4c3990b8693" prot="public">
+          <name>NONE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceintel_1_1hexl_1_1fpga_1a9f07798cd59a71b9f57156192f7bf2f6af1662e45a778e27ff6afab122707fe50" prot="public">
+          <name>DYADIC_MULTIPLY</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceintel_1_1hexl_1_1fpga_1a9f07798cd59a71b9f57156192f7bf2f6ae87c409c7bdebbc2084ef9f37e8de9ae" prot="public">
+          <name>NTT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceintel_1_1hexl_1_1fpga_1a9f07798cd59a71b9f57156192f7bf2f6a766fa95963449b904a3269953efd6a35" prot="public">
+          <name>INTT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceintel_1_1hexl_1_1fpga_1a9f07798cd59a71b9f57156192f7bf2f6af8037a267b684708165ca39d7f784458" prot="public">
+          <name>KEYSWITCH</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceintel_1_1hexl_1_1fpga_1a9f07798cd59a71b9f57156192f7bf2f6a7d8bfa28e75b84204b6c1c146b1c9bea" prot="public">
+          <name>DYADIC_MULTIPLY_KEYSWITCH</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="97" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="97" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespaceintel_1_1hexl_1_1fpga_1a1a264f07facc5f24376170ea052e4fbc" prot="public" static="no">
+        <name>DEV_TYPE</name>
+        <enumvalue id="namespaceintel_1_1hexl_1_1fpga_1a1a264f07facc5f24376170ea052e4fbca665be2b62dd76ce44231d0503e468464" prot="public">
+          <name>NONE</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceintel_1_1hexl_1_1fpga_1a1a264f07facc5f24376170ea052e4fbcab50339a10e1de285ac99d4c3990b8693" prot="public">
+          <name>NONE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceintel_1_1hexl_1_1fpga_1a1a264f07facc5f24376170ea052e4fbca6553acb72b13a76b0cf31197badbc164" prot="public">
+          <name>EMU</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceintel_1_1hexl_1_1fpga_1a1a264f07facc5f24376170ea052e4fbca7fef8fda7839a871ec648c0283640975" prot="public">
+          <name>FPGA</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>enum DEV_TYPE Lists the available device mode: emulation mode, FPGA </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="584" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="584" bodyend="584"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="namespaceintel_1_1hexl_1_1fpga_1abec5370ea5966ed3c9aee7817e805337" prot="public" static="no" mutable="no">
+        <type>__extension__ typedef unsigned __int128</type>
+        <definition>__extension__ typedef unsigned __int128 intel::hexl::fpga::fpga_uint128_t</definition>
+        <argsstring></argsstring>
+        <name>fpga_uint128_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="23" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaceintel_1_1hexl_1_1fpga_1a855c40574416e25f94fb6b7817c2c4f3" prot="public" static="no" mutable="no">
+        <type>__extension__ typedef unsigned __int128</type>
+        <definition>__extension__ typedef unsigned __int128 intel::hexl::fpga::uint128_t</definition>
+        <argsstring></argsstring>
+        <name>uint128_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="19" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1ac793304e5a77cc4fb89d4d5c1c734e3d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::set_worksize_DyadicMultiply</definition>
+        <argsstring>(uint64_t ws)</argsstring>
+        <name>set_worksize_DyadicMultiply</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>ws</declname>
+        </param>
+        <briefdescription>
+<para>function set_worksize_DyadicMultiply </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ws</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>work size </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/dyadic_multiply.h" line="16" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a5f78490650fba97fc6837d2fee8554d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::DyadicMultiply</definition>
+        <argsstring>(uint64_t *results, const uint64_t *operand1, const uint64_t *operand2, uint64_t n, const uint64_t *moduli, uint64_t n_moduli)</argsstring>
+        <name>DyadicMultiply</name>
+        <param>
+          <type>uint64_t *</type>
+          <declname>results</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>operand1</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>operand2</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>moduli</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>n_moduli</declname>
+        </param>
+        <briefdescription>
+<para>function DyadicMultiply Implements the multiplication of two ciphertexts </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">results</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the result of the multiplication </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">operand1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of polynomial coefficients </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">operand2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of polynomial coefficients </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>polynomial size </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">moduli</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of modulus </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">n_moduli</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of modulus in the vector of modulus </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/dyadic_multiply.h" line="27" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a69e806b0006ab56a1c24a47ee0585952" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool intel::hexl::fpga::DyadicMultiplyCompleted</definition>
+        <argsstring>()</argsstring>
+        <name>DyadicMultiplyCompleted</name>
+        <briefdescription>
+<para>DyadicMultiplyCompleted Executed after the multiplication to wrap up the operation </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/dyadic_multiply.h" line="34" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1af34f7448c403a2654c71fae865199579" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::set_worksize_DyadicMultiply_int</definition>
+        <argsstring>(uint64_t n)</argsstring>
+        <name>set_worksize_DyadicMultiply_int</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>set_worksize_DyadicMultiply_int Sets the worksize for the multiplication </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>work size </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/dyadic_multiply_int.h" line="17" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1aa15dd341954b9ce8c0915fbb3a8df602" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::DyadicMultiply_int</definition>
+        <argsstring>(uint64_t *results, const uint64_t *operand1, const uint64_t *operand2, uint64_t n, const uint64_t *moduli, uint64_t n_moduli)</argsstring>
+        <name>DyadicMultiply_int</name>
+        <param>
+          <type>uint64_t *</type>
+          <declname>results</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>operand1</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>operand2</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>moduli</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>n_moduli</declname>
+        </param>
+        <briefdescription>
+<para>DyadicMultiply_int Internal implementation of the DyadicMultiply function call </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">results</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the output of the multiplication </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">operand1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of polynomial coefficients </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">operand2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of polynomial coefficients </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>polynomial size </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">moduli</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of coefficient modulus </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">n_moduli</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of modulus in the vector of modulus </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/dyadic_multiply_int.h" line="28" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1add004a71ed21d585bbf5ee7f88cdc492" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool intel::hexl::fpga::DyadicMultiplyCompleted_int</definition>
+        <argsstring>()</argsstring>
+        <name>DyadicMultiplyCompleted_int</name>
+        <briefdescription>
+<para>DyadicMultiplyCompleted_int Internal implementation of the DyadicMultiplyCompleted function. Called after completion of the multiplication operation </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/dyadic_multiply_int.h" line="36" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1aa7d5b6c103f848f3b642938edf97ae22" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::attach_fpga_pooling</definition>
+        <argsstring>()</argsstring>
+        <name>attach_fpga_pooling</name>
+        <briefdescription>
+<para>attach_fpga_pooling Attach a device to this thread </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="748" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a768c1508c039dd1e8664cfec3a7bb159" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::detach_fpga_pooling</definition>
+        <argsstring>()</argsstring>
+        <name>detach_fpga_pooling</name>
+        <briefdescription>
+<para>detach_fpga_pooling Detach a device from this thread </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="753" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1aaca739e67538e6072f74ac311231616c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::acquire_FPGA_resources</definition>
+        <argsstring>()</argsstring>
+        <name>acquire_FPGA_resources</name>
+        <briefdescription>
+<para>acquire_FPGA_resources Called at the beginning of the workload to acquire the usage of an FPGA </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga_context.h" line="16" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a030c29b7b3fa954ef8da1c9031911647" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::release_FPGA_resources</definition>
+        <argsstring>()</argsstring>
+        <name>release_FPGA_resources</name>
+        <briefdescription>
+<para>release_FPGA_resources Called at the end of the workload to release the FPGA </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga_context.h" line="21" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a187bc608bc5c9fc658019b87539a4b81" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::set_worksize_INTT</definition>
+        <argsstring>(uint64_t ws)</argsstring>
+        <name>set_worksize_INTT</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>ws</declname>
+        </param>
+        <briefdescription>
+<para>set_worksize_INTT Sets the work size of the INTT operation </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/intt.h" line="16" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1adb362cf8c73fdf8d22c75cbc7524c843" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::INTT</definition>
+        <argsstring>(uint64_t *coeff_poly, const uint64_t *inv_root_of_unity_powers, const uint64_t *precon_inv_root_of_unity_powers, uint64_t coeff_modulus, uint64_t inv_n, uint64_t inv_n_w, uint64_t n)</argsstring>
+        <name>INTT</name>
+        <param>
+          <type>uint64_t *</type>
+          <declname>coeff_poly</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>inv_root_of_unity_powers</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>precon_inv_root_of_unity_powers</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>coeff_modulus</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>inv_n</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>inv_n_w</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>INTT Calls the Inverse Number Theoretic Transform </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">coef_poly</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of polynomial coefficients </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coef_poly</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of polynomial coefficients </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">inv_root_of_unity_powers</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of twiddle factors </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">precon_inv_root_of_unity_powers</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of twiddle factors for the constant </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coeff_modulus</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>coefficient modulus </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">inv_n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>normalization factor </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">inv_n_w</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>normalization factor for the constant </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>polynomial size </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/intt.h" line="31" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a68437eb625e24737902a181cf11f2298" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool intel::hexl::fpga::INTTCompleted</definition>
+        <argsstring>()</argsstring>
+        <name>INTTCompleted</name>
+        <briefdescription>
+<para>INTTCompleted Called after the completion of the INTT operation </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/intt.h" line="39" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1aadedc3c7037f9134a01351c822d33cda" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::set_worksize_INTT_int</definition>
+        <argsstring>(uint64_t n)</argsstring>
+        <name>set_worksize_INTT_int</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>set_worksize_INTT_int Internal implementation. Sets the work size of the INTT operation </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/intt_int.h" line="17" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1ac90669a31121655f1d88a55ef795937b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::INTT_int</definition>
+        <argsstring>(uint64_t *coeff_poly, const uint64_t *inv_root_of_unity_powers, const uint64_t *precon_inv_root_of_unity_powers, uint64_t coeff_modulus, uint64_t inv_n, uint64_t inv_n_w, uint64_t n)</argsstring>
+        <name>INTT_int</name>
+        <param>
+          <type>uint64_t *</type>
+          <declname>coeff_poly</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>inv_root_of_unity_powers</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>precon_inv_root_of_unity_powers</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>coeff_modulus</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>inv_n</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>inv_n_w</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>INTT Calls the Inverse Number Theoretic Transform </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">coef_poly</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of polynomial coefficients </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coef_poly</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of polynomial coefficients </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">inv_root_of_unity_powers</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of twiddle factors </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">precon_inv_root_of_unity_powers</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of twiddle factors for the constant </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coeff_modulus</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>coefficient modulus </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">inv_n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>normalization factor </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">inv_n_w</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>normalization factor for the constant </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>polynomial size </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/intt_int.h" line="32" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a69aca407f3b48e7e88059b4f15619851" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool intel::hexl::fpga::INTTCompleted_int</definition>
+        <argsstring>()</argsstring>
+        <name>INTTCompleted_int</name>
+        <briefdescription>
+<para>INTTCompleted_int Called after the completion of the INTT operation. Internal implementation. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/intt_int.h" line="41" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1aa44b63d1963a3365430ad47c609579cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::set_worksize_KeySwitch</definition>
+        <argsstring>(uint64_t ws)</argsstring>
+        <name>set_worksize_KeySwitch</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>ws</declname>
+        </param>
+        <briefdescription>
+<para>Function set_worksize_KeySwitch Reserves software resources for the KeySwitch. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ws</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>integer storing the worksize </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/keyswitch.h" line="17" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a98d007085580209bcfa2ab40bc8c0322" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::KeySwitch</definition>
+        <argsstring>(uint64_t *result, const uint64_t *t_target_iter_ptr, uint64_t n, uint64_t decomp_modulus_size, uint64_t key_modulus_size, uint64_t rns_modulus_size, uint64_t key_component_count, const uint64_t *moduli, const uint64_t **k_switch_keys, const uint64_t *modswitch_factors, const uint64_t *twiddle_factors=nullptr)</argsstring>
+        <name>KeySwitch</name>
+        <param>
+          <type>uint64_t *</type>
+          <declname>result</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>t_target_iter_ptr</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>decomp_modulus_size</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>key_modulus_size</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>rns_modulus_size</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>key_component_count</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>moduli</declname>
+        </param>
+        <param>
+          <type>const uint64_t **</type>
+          <declname>k_switch_keys</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>modswitch_factors</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>twiddle_factors</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>Function KeySwitch Executes KeySwitch operation. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">results</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the keyswitch results </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">t_target_iter_ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the input ciphertext data </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores polynomial size </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">decomp_modulus_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores modulus size </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">key_modulus_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores key modulus size </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">rns_modulus_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the rns modulus size </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">key_component_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the key component size </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">moduli</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the moduli </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">k_switch_keys</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the keys for keyswitch operation </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">modswitch_factors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the factors for modular switch </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">twiddle_factors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the twiddle factors </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/keyswitch.h" line="34" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a59d10b11c2bb32dabdaa5cace87cfe29" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool intel::hexl::fpga::KeySwitchCompleted</definition>
+        <argsstring>()</argsstring>
+        <name>KeySwitchCompleted</name>
+        <briefdescription>
+<para>Function KeySwitchCompleted Executed after KeySwitch to sync up the outstanding KeySwitch tasks. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/keyswitch.h" line="45" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a79bc7f64c45a9739195b344fa0da4b62" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::set_worksize_KeySwitch_int</definition>
+        <argsstring>(uint64_t ws)</argsstring>
+        <name>set_worksize_KeySwitch_int</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>ws</declname>
+        </param>
+        <briefdescription>
+<para>Function set_worksize_KeySwitch_int Reserves software resources for the KeySwitch. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ws</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>integer storing the worksize </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/keyswitch_int.h" line="17" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a0156eca4c63183b90eeab8023329326d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::KeySwitch_int</definition>
+        <argsstring>(uint64_t *result, const uint64_t *t_target_iter_ptr, uint64_t n, uint64_t decomp_modulus_size, uint64_t key_modulus_size, uint64_t rns_modulus_size, uint64_t key_component_count, const uint64_t *moduli, const uint64_t **k_switch_keys, const uint64_t *modswitch_factors, const uint64_t *twiddle_factors=nullptr)</argsstring>
+        <name>KeySwitch_int</name>
+        <param>
+          <type>uint64_t *</type>
+          <declname>result</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>t_target_iter_ptr</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>decomp_modulus_size</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>key_modulus_size</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>rns_modulus_size</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>key_component_count</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>moduli</declname>
+        </param>
+        <param>
+          <type>const uint64_t **</type>
+          <declname>k_switch_keys</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>modswitch_factors</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>twiddle_factors</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>Function KeySwitch_int Executes KeySwitch operation. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">results</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the keyswitch results </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">t_target_iter_ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the input ciphertext data </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores polynomial size </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">decomp_modulus_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores modulus size </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">key_modulus_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores key modulus size </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">rns_modulus_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the rns modulus size </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">key_component_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the key component size </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">moduli</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the moduli </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">k_switch_keys</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the keys for keyswitch operation </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">modswitch_factors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the factors for modular switch </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">twiddle_factors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the twiddle factors </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/keyswitch_int.h" line="34" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a4b63f0f7b4b53590cece381d425c1af0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool intel::hexl::fpga::KeySwitchCompleted_int</definition>
+        <argsstring>()</argsstring>
+        <name>KeySwitchCompleted_int</name>
+        <briefdescription>
+<para>Function KeySwitchCompleted_int Executed after KeySwitch to sync up the outstanding KeySwitch tasks. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/keyswitch_int.h" line="46" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a395d82d33eb68a64244bddc0bd857121" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::set_worksize_NTT</definition>
+        <argsstring>(uint64_t ws)</argsstring>
+        <name>set_worksize_NTT</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>ws</declname>
+        </param>
+        <briefdescription>
+<para>set_worksize_NTT Sets the work size for NTT </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ws</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the worksize of the NTT </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/ntt.h" line="17" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1ab91e470f9e47aa685e33f265926f6af0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::NTT</definition>
+        <argsstring>(uint64_t *coeff_poly, const uint64_t *root_of_unity_powers, const uint64_t *precon_root_of_unity_powers, uint64_t coeff_modulus, uint64_t n)</argsstring>
+        <name>NTT</name>
+        <param>
+          <type>uint64_t *</type>
+          <declname>coeff_poly</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>root_of_unity_powers</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>precon_root_of_unity_powers</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>coeff_modulus</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>NTT Calls the Number Theorectic Transform </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coeff_poly</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of polynomial coefficients </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">coeff_poly</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of polynomial coefficients </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">root_of_unity_powers</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of twiddle factors </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">precon_root_of_unity_power</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of twiddle factors for the constant </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coeff_modulus</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the coefficient modulus </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the polynomial size </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/ntt.h" line="29" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1ab56525682080c2627f29893276ee8415" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool intel::hexl::fpga::NTTCompleted</definition>
+        <argsstring>()</argsstring>
+        <name>NTTCompleted</name>
+        <briefdescription>
+<para>NTTCompleted Called after completion of the Number Theoretic Transform </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/ntt.h" line="36" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a4f302a0544c58e8ed0b9818b891ced05" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::set_worksize_NTT_int</definition>
+        <argsstring>(uint64_t n)</argsstring>
+        <name>set_worksize_NTT_int</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>set_worksize_NTT_int Sets the work size for NTT. Internal implementation. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ws</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the worksize of the NTT </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/ntt_int.h" line="18" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a18d9571a62d998d2b64c302343c623b9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::NTT_int</definition>
+        <argsstring>(uint64_t *coeff_poly, const uint64_t *root_of_unity_powers, const uint64_t *precon_root_of_unity_powers, uint64_t coeff_modulus, uint64_t n)</argsstring>
+        <name>NTT_int</name>
+        <param>
+          <type>uint64_t *</type>
+          <declname>coeff_poly</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>root_of_unity_powers</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>precon_root_of_unity_powers</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>coeff_modulus</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>NTT_int Calls the Number Theorectic Transform. Internal implementation. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coeff_poly</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of polynomial coefficients </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">coeff_poly</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of polynomial coefficients </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">root_of_unity_powers</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of twiddle factors </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">precon_root_of_unity_power</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of twiddle factors for the constant </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coeff_modulus</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the coefficient modulus </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the polynomial size </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/ntt_int.h" line="31" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a9cf08769dd3a7d8ea67fd03c69067d91" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool intel::hexl::fpga::NTTCompleted_int</definition>
+        <argsstring>()</argsstring>
+        <name>NTTCompleted_int</name>
+        <briefdescription>
+<para>NTTCompleted_int Called after completion of the Number Theoretic Transform. Internal implementation. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/ntt_int.h" line="40" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a1e16bb896a629eb017fc92f87fe9b8d1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool intel::hexl::fpga::IsPowerOfTwo</definition>
+        <argsstring>(uint64_t num)</argsstring>
+        <name>IsPowerOfTwo</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>num</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="22" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" bodystart="22" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1ab2af2089c7624a4f2f6bb86a7744e6a1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::MSB</definition>
+        <argsstring>(uint64_t modulus)</argsstring>
+        <name>MSB</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>modulus</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="25" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" bodystart="25" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1afcbeef9c605f8d1384004d4a736d1e37" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::Log2</definition>
+        <argsstring>(uint64_t x)</argsstring>
+        <name>Log2</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="30" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" bodystart="30" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a5da7e2d76836d01351cc264ac98ca1f2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::MaximumValue</definition>
+        <argsstring>(uint64_t bits)</argsstring>
+        <name>MaximumValue</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>bits</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="36" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" bodystart="36" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1abc78d586df607b1930db2e69ea14f1dc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="namespaceintel_1_1hexl_1_1fpga_1a855c40574416e25f94fb6b7817c2c4f3" kindref="member">uint128_t</ref></type>
+        <definition>uint128_t intel::hexl::fpga::MultiplyUInt64</definition>
+        <argsstring>(uint64_t x, uint64_t y)</argsstring>
+        <name>MultiplyUInt64</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>y</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="46" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" bodystart="46" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a7ecaf4450f87d40067692edd70725474" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::MultiplyUInt64</definition>
+        <argsstring>(uint64_t x, uint64_t y, uint64_t *prod_hi, uint64_t *prod_lo)</argsstring>
+        <name>MultiplyUInt64</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>uint64_t *</type>
+          <declname>prod_hi</declname>
+        </param>
+        <param>
+          <type>uint64_t *</type>
+          <declname>prod_lo</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="53" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" bodystart="53" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a885fc322b5c2559feed13fdf5ded1660" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>int</type>
+            <declname>BitShift</declname>
+            <defname>BitShift</defname>
+          </param>
+        </templateparamlist>
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::MultiplyUInt64Hi</definition>
+        <argsstring>(uint64_t x, uint64_t y)</argsstring>
+        <name>MultiplyUInt64Hi</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>y</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="62" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" bodystart="62" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1aef53989a5c9adf16fcc5d0a188fa2abf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::DivideUInt128UInt64Lo</definition>
+        <argsstring>(uint64_t x1, uint64_t x0, uint64_t y)</argsstring>
+        <name>DivideUInt128UInt64Lo</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>x1</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>x0</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>y</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="68" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" bodystart="68" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1adbd0b0b7a9ac26e1dd6bb182998aedb1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>int</type>
+            <declname>BitShift</declname>
+            <defname>BitShift</defname>
+          </param>
+        </templateparamlist>
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::MultiplyUIntModLazy</definition>
+        <argsstring>(uint64_t x, uint64_t y_operand, uint64_t y_barrett_factor, uint64_t modulus)</argsstring>
+        <name>MultiplyUIntModLazy</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>y_operand</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>y_barrett_factor</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>modulus</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="79" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" bodystart="79" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a8ad6de5083fbeb063b3b9e697866d78e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>int</type>
+            <declname>BitShift</declname>
+            <defname>BitShift</defname>
+          </param>
+        </templateparamlist>
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::MultiplyUIntModLazy</definition>
+        <argsstring>(uint64_t x, uint64_t y, uint64_t modulus)</argsstring>
+        <name>MultiplyUIntModLazy</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>modulus</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="92" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" bodystart="92" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a28220ed548927fc4a21cc823e2e71f42" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>unsigned char</type>
+        <definition>unsigned char intel::hexl::fpga::AddUInt64</definition>
+        <argsstring>(uint64_t operand1, uint64_t operand2, uint64_t *result)</argsstring>
+        <name>AddUInt64</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>operand1</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>operand2</declname>
+        </param>
+        <param>
+          <type>uint64_t *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="115" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" bodystart="115" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a355c6cb8c5032602ed52e1c3789d8767" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool intel::hexl::fpga::IsPrime</definition>
+        <argsstring>(uint64_t n)</argsstring>
+        <name>IsPrime</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="122" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_utils/ntt.cpp" bodystart="173" bodyend="219"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a138dd08495620ae05b5576f1f9de1d22" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; uint64_t &gt;</type>
+        <definition>std::vector&lt;uint64_t&gt; intel::hexl::fpga::GeneratePrimes</definition>
+        <argsstring>(size_t num_primes, size_t bit_size, size_t ntt_size=1)</argsstring>
+        <name>GeneratePrimes</name>
+        <param>
+          <type>size_t</type>
+          <declname>num_primes</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>bit_size</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>ntt_size</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="131" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_utils/ntt.cpp" bodystart="221" bodyend="247"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a5da697d6db585fa67212de6eb704e4ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::BarrettReduce64</definition>
+        <argsstring>(uint64_t input, uint64_t modulus, uint64_t q_barr)</argsstring>
+        <name>BarrettReduce64</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>input</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>modulus</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>q_barr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="136" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_utils/ntt.cpp" bodystart="45" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a8c1918497a3bd37a60af3098d5923814" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>int</type>
+            <declname>InputModFactor</declname>
+            <defname>InputModFactor</defname>
+          </param>
+        </templateparamlist>
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::ReduceMod</definition>
+        <argsstring>(uint64_t x, uint64_t modulus, const uint64_t *twice_modulus=nullptr, const uint64_t *four_times_modulus=nullptr)</argsstring>
+        <name>ReduceMod</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>modulus</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>twice_modulus</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>four_times_modulus</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="139" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" bodystart="139" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a6010de9857e16825343611c7b7f65f3f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::BarrettReduce128</definition>
+        <argsstring>(uint64_t input_hi, uint64_t input_lo, uint64_t modulus)</argsstring>
+        <name>BarrettReduce128</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>input_hi</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>input_lo</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>modulus</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="186" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" bodystart="186" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1ac7d25ff5107f521d5a1e9365bf0eeb0b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::ReverseBitsUInt</definition>
+        <argsstring>(uint64_t x, uint64_t bits)</argsstring>
+        <name>ReverseBitsUInt</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>bits</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="228" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_utils/ntt.cpp" bodystart="160" bodyend="170"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a845482aca85af5a78444389a52c61271" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::InverseUIntMod</definition>
+        <argsstring>(uint64_t a, uint64_t modulus)</argsstring>
+        <name>InverseUIntMod</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>modulus</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="231" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_utils/ntt.cpp" bodystart="14" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a359488f73600f049c3bb43412ac677fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::MultiplyUIntMod</definition>
+        <argsstring>(uint64_t x, uint64_t y, uint64_t modulus)</argsstring>
+        <name>MultiplyUIntMod</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>modulus</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="235" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_utils/ntt.cpp" bodystart="52" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a3864868e9a43df15ba64e89800214ae6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::MultiplyMod</definition>
+        <argsstring>(uint64_t x, uint64_t y, uint64_t y_precon, uint64_t modulus)</argsstring>
+        <name>MultiplyMod</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>y_precon</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>modulus</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="239" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_utils/ntt.cpp" bodystart="62" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a1144b661773bb78643f4785c6aa8b1da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::AddUIntMod</definition>
+        <argsstring>(uint64_t x, uint64_t y, uint64_t modulus)</argsstring>
+        <name>AddUIntMod</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>modulus</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="244" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_utils/ntt.cpp" bodystart="69" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1af79ff4e8c2d42008053feebe7200d741" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::SubUIntMod</definition>
+        <argsstring>(uint64_t x, uint64_t y, uint64_t modulus)</argsstring>
+        <name>SubUIntMod</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>modulus</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="248" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_utils/ntt.cpp" bodystart="76" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a6c12d1ce00baa576a619d42e368a0bba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::PowMod</definition>
+        <argsstring>(uint64_t base, uint64_t exp, uint64_t modulus)</argsstring>
+        <name>PowMod</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>base</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>exp</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>modulus</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="251" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_utils/ntt.cpp" bodystart="84" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a30c3a0934c1a35689405952f8d5c3a77" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool intel::hexl::fpga::IsPrimitiveRoot</definition>
+        <argsstring>(uint64_t root, uint64_t degree, uint64_t modulus)</argsstring>
+        <name>IsPrimitiveRoot</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>degree</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>modulus</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="255" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_utils/ntt.cpp" bodystart="99" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a9628dca89b1827ee60f21c305705ac57" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::GeneratePrimitiveRoot</definition>
+        <argsstring>(uint64_t degree, uint64_t modulus)</argsstring>
+        <name>GeneratePrimitiveRoot</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>degree</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>modulus</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="259" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_utils/ntt.cpp" bodystart="111" bodyend="133"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1af1cd2e18fc07e6f6d58d9dbcc94aaf92" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::MinimalPrimitiveRoot</definition>
+        <argsstring>(uint64_t degree, uint64_t modulus)</argsstring>
+        <name>MinimalPrimitiveRoot</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>degree</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>modulus</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="263" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_utils/ntt.cpp" bodystart="137" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceintel_1_1hexl_1_1fpga_1a4d25df05a50d6c613439b282ea5c2a0f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::ComputeRootOfUnityPowers</definition>
+        <argsstring>(uint64_t m_q, uint64_t m_degree, uint64_t m_degree_bits, uint64_t m_w, uint64_t *inv_root_of_unity_powers, uint64_t *precon64_inv_root_of_unity_powers, uint64_t *root_of_unity_powers, uint64_t *precon64_root_of_unity_powers)</argsstring>
+        <name>ComputeRootOfUnityPowers</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>m_q</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>m_degree</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>m_degree_bits</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>m_w</declname>
+        </param>
+        <param>
+          <type>uint64_t *</type>
+          <declname>inv_root_of_unity_powers</declname>
+        </param>
+        <param>
+          <type>uint64_t *</type>
+          <declname>precon64_inv_root_of_unity_powers</declname>
+        </param>
+        <param>
+          <type>uint64_t *</type>
+          <declname>root_of_unity_powers</declname>
+        </param>
+        <param>
+          <type>uint64_t *</type>
+          <declname>precon64_root_of_unity_powers</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/number_theory_util.h" line="265" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/disk1/ymeng12/hexl-fpga/host/inc/dyadic_multiply.h" line="11" column="1"/>
+  </compounddef>
+</doxygen>

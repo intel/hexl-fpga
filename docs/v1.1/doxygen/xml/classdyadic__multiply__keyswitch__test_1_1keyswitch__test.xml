@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classdyadic__multiply__keyswitch__test_1_1keyswitch__test" kind="class" prot="public">
+    <compoundname>dyadic_multiply_keyswitch_test::keyswitch_test</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classdyadic__multiply__keyswitch__test_1_1keyswitch__test_1a6bfd831f5f657e12a0f2d47902e38302" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structKeySwitchTestVector" kindref="compound">KeySwitchTestVector</ref> &gt;</type>
+        <definition>std::vector&lt;KeySwitchTestVector&gt; dyadic_multiply_keyswitch_test::keyswitch_test::test_vectors</definition>
+        <argsstring></argsstring>
+        <name>test_vectors</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" line="85" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classdyadic__multiply__keyswitch__test_1_1keyswitch__test_1a8cfeba4a5a25c5131b8e7ca0daf03508" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>dyadic_multiply_keyswitch_test::keyswitch_test::keyswitch_test</definition>
+        <argsstring>(const std::string &amp;test_fullname)</argsstring>
+        <name>keyswitch_test</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>test_fullname</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" line="77" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" bodystart="250" bodyend="266"/>
+      </memberdef>
+      <memberdef kind="function" id="classdyadic__multiply__keyswitch__test_1_1keyswitch__test_1a0cf1d5a356c6ea0de28236523bb19130" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>dyadic_multiply_keyswitch_test::keyswitch_test::keyswitch_test</definition>
+        <argsstring>(const keyswitch_test &amp;test)=delete</argsstring>
+        <name>keyswitch_test</name>
+        <param>
+          <type>const <ref refid="classdyadic__multiply__keyswitch__test_1_1keyswitch__test" kindref="compound">keyswitch_test</ref> &amp;</type>
+          <declname>test</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" line="78" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classdyadic__multiply__keyswitch__test_1_1keyswitch__test_1a69155a01607c35e15359427c4c0c0a53" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dyadic_multiply_keyswitch_test::keyswitch_test::test_keyswitch</definition>
+        <argsstring>()</argsstring>
+        <name>test_keyswitch</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" line="80" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" bodystart="268" bodyend="285"/>
+      </memberdef>
+      <memberdef kind="function" id="classdyadic__multiply__keyswitch__test_1_1keyswitch__test_1aa7100866e2c3b9ba3f4a80d4def713a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dyadic_multiply_keyswitch_test::keyswitch_test::check_results</definition>
+        <argsstring>()</argsstring>
+        <name>check_results</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" line="81" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" bodystart="287" bodyend="293"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classdyadic__multiply__keyswitch__test_1_1keyswitch__test_1a2a59bd0139232452e39835e6a5b63f22" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt; std::string &gt; dyadic_multiply_keyswitch_test::keyswitch_test::glob</definition>
+        <argsstring>(const char *pattern)</argsstring>
+        <name>glob</name>
+        <param>
+          <type>const char *</type>
+          <declname>pattern</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" line="84" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" bodystart="236" bodyend="248"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" line="75" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_dyadic_multiply_keyswitch.cpp" bodystart="75" bodyend="86"/>
+    <listofallmembers>
+      <member refid="classdyadic__multiply__keyswitch__test_1_1keyswitch__test_1aa7100866e2c3b9ba3f4a80d4def713a2" prot="public" virt="non-virtual"><scope>dyadic_multiply_keyswitch_test::keyswitch_test</scope><name>check_results</name></member>
+      <member refid="classdyadic__multiply__keyswitch__test_1_1keyswitch__test_1a2a59bd0139232452e39835e6a5b63f22" prot="private" virt="non-virtual"><scope>dyadic_multiply_keyswitch_test::keyswitch_test</scope><name>glob</name></member>
+      <member refid="classdyadic__multiply__keyswitch__test_1_1keyswitch__test_1a8cfeba4a5a25c5131b8e7ca0daf03508" prot="public" virt="non-virtual"><scope>dyadic_multiply_keyswitch_test::keyswitch_test</scope><name>keyswitch_test</name></member>
+      <member refid="classdyadic__multiply__keyswitch__test_1_1keyswitch__test_1a0cf1d5a356c6ea0de28236523bb19130" prot="public" virt="non-virtual"><scope>dyadic_multiply_keyswitch_test::keyswitch_test</scope><name>keyswitch_test</name></member>
+      <member refid="classdyadic__multiply__keyswitch__test_1_1keyswitch__test_1a69155a01607c35e15359427c4c0c0a53" prot="public" virt="non-virtual"><scope>dyadic_multiply_keyswitch_test::keyswitch_test</scope><name>test_keyswitch</name></member>
+      <member refid="classdyadic__multiply__keyswitch__test_1_1keyswitch__test_1a6bfd831f5f657e12a0f2d47902e38302" prot="private" virt="non-virtual"><scope>dyadic_multiply_keyswitch_test::keyswitch_test</scope><name>test_vectors</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="dir_59425e443f801f1f2fd8bbe4959a3ccf" kind="dir">
+    <compoundname>tests</compoundname>
+    <innerdir refid="dir_88204cda770cd623a11ba6a0431adc07">test_utils</innerdir>
+    <innerfile refid="tests_2fpga__context_8h">tests/fpga_context.h</innerfile>
+    <innerfile refid="tests_2main_8cpp">tests/main.cpp</innerfile>
+    <innerfile refid="test__dyadic__multiply_8cpp">test_dyadic_multiply.cpp</innerfile>
+    <innerfile refid="test__dyadic__multiply__keyswitch_8cpp">test_dyadic_multiply_keyswitch.cpp</innerfile>
+    <innerfile refid="test__fwd__ntt_8cpp">test_fwd_ntt.cpp</innerfile>
+    <innerfile refid="test__inv__ntt_8cpp">test_inv_ntt.cpp</innerfile>
+    <innerfile refid="test__keyswitch_8cpp">test_keyswitch.cpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/disk1/ymeng12/hexl-fpga/tests/"/>
+  </compounddef>
+</doxygen>

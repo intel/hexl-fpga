@@ -1,0 +1,96 @@
+\hypertarget{bench__keyswitch_8cpp}{\section{bench\-\_\-keyswitch.\-cpp File Reference}
+\label{bench__keyswitch_8cpp}\index{bench\-\_\-keyswitch.\-cpp@{bench\-\_\-keyswitch.\-cpp}}
+}
+{\ttfamily \#include $<$glob.\-h$>$}\\*
+{\ttfamily \#include $<$nlohmann/json.\-hpp$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include $<$benchmark/benchmark.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}hexl-\/fpga.\-h\char`\"{}}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structKeySwitchTestVector}{Key\-Switch\-Test\-Vector}
+\item 
+class \hyperlink{classkeyswitch}{keyswitch}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{bench__keyswitch_8cpp_a0339092a1f8aca697e3a0c0e1f71e6aa}{if} (!fname)
+\item 
+\hyperlink{bench__keyswitch_8cpp_a48538bc1d1a6314f78f304cb2ac9c53b}{for} (size\-\_\-t i=0;i$<$ filesx.\-size();i++)
+\item 
+\hyperlink{bench__keyswitch_8cpp_a1d8ea5f2aa5b8b8a64f74915afd97c21}{setup\-\_\-keyswitch} (\hyperlink{bench__keyswitch_8cpp_a37dfb1be7add7ba7d1ec65c8ab64c88b}{files})
+\item 
+\hyperlink{bench__keyswitch_8cpp_a1b1f1299aac0fc44e1de1d990ddea174}{for} (auto st\-:state)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+benchmark\-::\-State \& \hyperlink{bench__keyswitch_8cpp_af63a1df0d582366f7a03c46143e3ae0e}{state}
+\item 
+std\-::string \hyperlink{bench__keyswitch_8cpp_a43ae2e017e425ea454106c5eab76fe6d}{test\-\_\-file} = \char`\"{}/16384\-\_\-6\-\_\-7\-\_\-7\-\_\-2\-\_\-$\ast$\char`\"{}
+\item 
+std\-::string \hyperlink{bench__keyswitch_8cpp_af98ed5ee0025fea2f25864641c3f5727}{test\-\_\-fullname} = fname + \hyperlink{bench__keyswitch_8cpp_a43ae2e017e425ea454106c5eab76fe6d}{test\-\_\-file} + \char`\"{}.json\char`\"{}
+\item 
+std\-::vector$<$ std\-::string $>$ \hyperlink{bench__keyswitch_8cpp_ab053510e1eb9a0fccf4cbca4dfce2720}{filesx} = \hyperlink{test__keyswitch_8cpp_a3a42deea499822d5e741e7d0f48414c7}{glob}(test\-\_\-fullname.\-c\-\_\-str())
+\item 
+std\-::vector$<$ std\-::string $>$ \hyperlink{bench__keyswitch_8cpp_a37dfb1be7add7ba7d1ec65c8ab64c88b}{files}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{bench__keyswitch_8cpp_a48538bc1d1a6314f78f304cb2ac9c53b}{\index{bench\-\_\-keyswitch.\-cpp@{bench\-\_\-keyswitch.\-cpp}!for@{for}}
+\index{for@{for}!bench_keyswitch.cpp@{bench\-\_\-keyswitch.\-cpp}}
+\subsubsection[{for}]{\setlength{\rightskip}{0pt plus 5cm}for (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{bench__keyswitch_8cpp_a48538bc1d1a6314f78f304cb2ac9c53b}
+\hypertarget{bench__keyswitch_8cpp_a1b1f1299aac0fc44e1de1d990ddea174}{\index{bench\-\_\-keyswitch.\-cpp@{bench\-\_\-keyswitch.\-cpp}!for@{for}}
+\index{for@{for}!bench_keyswitch.cpp@{bench\-\_\-keyswitch.\-cpp}}
+\subsubsection[{for}]{\setlength{\rightskip}{0pt plus 5cm}for (
+\begin{DoxyParamCaption}
+\item[{auto st\-:state}]{}
+\end{DoxyParamCaption}
+)}}\label{bench__keyswitch_8cpp_a1b1f1299aac0fc44e1de1d990ddea174}
+\hypertarget{bench__keyswitch_8cpp_a0339092a1f8aca697e3a0c0e1f71e6aa}{\index{bench\-\_\-keyswitch.\-cpp@{bench\-\_\-keyswitch.\-cpp}!if@{if}}
+\index{if@{if}!bench_keyswitch.cpp@{bench\-\_\-keyswitch.\-cpp}}
+\subsubsection[{if}]{\setlength{\rightskip}{0pt plus 5cm}if (
+\begin{DoxyParamCaption}
+\item[{!}]{fname}
+\end{DoxyParamCaption}
+)}}\label{bench__keyswitch_8cpp_a0339092a1f8aca697e3a0c0e1f71e6aa}
+\hypertarget{bench__keyswitch_8cpp_a1d8ea5f2aa5b8b8a64f74915afd97c21}{\index{bench\-\_\-keyswitch.\-cpp@{bench\-\_\-keyswitch.\-cpp}!setup\-\_\-keyswitch@{setup\-\_\-keyswitch}}
+\index{setup\-\_\-keyswitch@{setup\-\_\-keyswitch}!bench_keyswitch.cpp@{bench\-\_\-keyswitch.\-cpp}}
+\subsubsection[{setup\-\_\-keyswitch}]{\setlength{\rightskip}{0pt plus 5cm}setup\-\_\-keyswitch (
+\begin{DoxyParamCaption}
+\item[{{\bf files}}]{}
+\end{DoxyParamCaption}
+)}}\label{bench__keyswitch_8cpp_a1d8ea5f2aa5b8b8a64f74915afd97c21}
+
+
+\subsection{Variable Documentation}
+\hypertarget{bench__keyswitch_8cpp_a37dfb1be7add7ba7d1ec65c8ab64c88b}{\index{bench\-\_\-keyswitch.\-cpp@{bench\-\_\-keyswitch.\-cpp}!files@{files}}
+\index{files@{files}!bench_keyswitch.cpp@{bench\-\_\-keyswitch.\-cpp}}
+\subsubsection[{files}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$std\-::string$>$ files}}\label{bench__keyswitch_8cpp_a37dfb1be7add7ba7d1ec65c8ab64c88b}
+\hypertarget{bench__keyswitch_8cpp_ab053510e1eb9a0fccf4cbca4dfce2720}{\index{bench\-\_\-keyswitch.\-cpp@{bench\-\_\-keyswitch.\-cpp}!filesx@{filesx}}
+\index{filesx@{filesx}!bench_keyswitch.cpp@{bench\-\_\-keyswitch.\-cpp}}
+\subsubsection[{filesx}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$std\-::string$>$ filesx = {\bf glob}(test\-\_\-fullname.\-c\-\_\-str())}}\label{bench__keyswitch_8cpp_ab053510e1eb9a0fccf4cbca4dfce2720}
+\hypertarget{bench__keyswitch_8cpp_af63a1df0d582366f7a03c46143e3ae0e}{\index{bench\-\_\-keyswitch.\-cpp@{bench\-\_\-keyswitch.\-cpp}!state@{state}}
+\index{state@{state}!bench_keyswitch.cpp@{bench\-\_\-keyswitch.\-cpp}}
+\subsubsection[{state}]{\setlength{\rightskip}{0pt plus 5cm}benchmark\-::\-State\& state}}\label{bench__keyswitch_8cpp_af63a1df0d582366f7a03c46143e3ae0e}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+\{
+    \textcolor{keyword}{const} \textcolor{keywordtype}{char}* fname = getenv(\textcolor{stringliteral}{"KEYSWITCH\_DATA\_DIR"})
+\end{DoxyCode}
+\hypertarget{bench__keyswitch_8cpp_a43ae2e017e425ea454106c5eab76fe6d}{\index{bench\-\_\-keyswitch.\-cpp@{bench\-\_\-keyswitch.\-cpp}!test\-\_\-file@{test\-\_\-file}}
+\index{test\-\_\-file@{test\-\_\-file}!bench_keyswitch.cpp@{bench\-\_\-keyswitch.\-cpp}}
+\subsubsection[{test\-\_\-file}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string test\-\_\-file = \char`\"{}/16384\-\_\-6\-\_\-7\-\_\-7\-\_\-2\-\_\-$\ast$\char`\"{}}}\label{bench__keyswitch_8cpp_a43ae2e017e425ea454106c5eab76fe6d}
+\hypertarget{bench__keyswitch_8cpp_af98ed5ee0025fea2f25864641c3f5727}{\index{bench\-\_\-keyswitch.\-cpp@{bench\-\_\-keyswitch.\-cpp}!test\-\_\-fullname@{test\-\_\-fullname}}
+\index{test\-\_\-fullname@{test\-\_\-fullname}!bench_keyswitch.cpp@{bench\-\_\-keyswitch.\-cpp}}
+\subsubsection[{test\-\_\-fullname}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string test\-\_\-fullname = fname + {\bf test\-\_\-file} + \char`\"{}.json\char`\"{}}}\label{bench__keyswitch_8cpp_af98ed5ee0025fea2f25864641c3f5727}

@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys" kind="struct" prot="public">
+    <compoundname>intel::hexl::fpga::KeySwitchMemKeys</compoundname>
+    <includes refid="fpga_8h" local="no">fpga.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys_1a1ab398e60f61d42514a9ca481335ba23" prot="public" static="no" mutable="no">
+        <type>cl_mem</type>
+        <definition>cl_mem intel::hexl::fpga::KeySwitchMemKeys::k_switch_keys_1_</definition>
+        <argsstring></argsstring>
+        <name>k_switch_keys_1_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="575" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="575" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys_1a58852e402411f195954ee043f8dbb5b7" prot="public" static="no" mutable="no">
+        <type>cl_mem</type>
+        <definition>cl_mem intel::hexl::fpga::KeySwitchMemKeys::k_switch_keys_2_</definition>
+        <argsstring></argsstring>
+        <name>k_switch_keys_2_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="576" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="576" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys_1ab05db195636fe7912aabc7c340c5077d" prot="public" static="no" mutable="no">
+        <type>cl_mem</type>
+        <definition>cl_mem intel::hexl::fpga::KeySwitchMemKeys::k_switch_keys_3_</definition>
+        <argsstring></argsstring>
+        <name>k_switch_keys_3_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="577" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="577" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys_1abf02925aad155c87456f1b994d901855" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>intel::hexl::fpga::KeySwitchMemKeys::KeySwitchMemKeys</definition>
+        <argsstring>(cl_mem k1=nullptr, cl_mem k2=nullptr, cl_mem k3=nullptr)</argsstring>
+        <name>KeySwitchMemKeys</name>
+        <param>
+          <type>cl_mem</type>
+          <declname>k1</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>cl_mem</type>
+          <declname>k2</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>cl_mem</type>
+          <declname>k3</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="571" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys_1a748e730ef5ada07f6497de374f035bb9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>intel::hexl::fpga::KeySwitchMemKeys::~KeySwitchMemKeys</definition>
+        <argsstring>()</argsstring>
+        <name>~KeySwitchMemKeys</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="573" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="570" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="570" bodyend="578"/>
+    <listofallmembers>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys_1a1ab398e60f61d42514a9ca481335ba23" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::KeySwitchMemKeys</scope><name>k_switch_keys_1_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys_1a58852e402411f195954ee043f8dbb5b7" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::KeySwitchMemKeys</scope><name>k_switch_keys_2_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys_1ab05db195636fe7912aabc7c340c5077d" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::KeySwitchMemKeys</scope><name>k_switch_keys_3_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys_1abf02925aad155c87456f1b994d901855" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::KeySwitchMemKeys</scope><name>KeySwitchMemKeys</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys_1a748e730ef5ada07f6497de374f035bb9" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::KeySwitchMemKeys</scope><name>~KeySwitchMemKeys</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

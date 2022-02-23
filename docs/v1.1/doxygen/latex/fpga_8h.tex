@@ -1,0 +1,127 @@
+\hypertarget{fpga_8h}{\section{fpga.\-h File Reference}
+\label{fpga_8h}\index{fpga.\-h@{fpga.\-h}}
+}
+{\ttfamily \#include $<$atomic$>$}\\*
+{\ttfamily \#include $<$condition\-\_\-variable$>$}\\*
+{\ttfamily \#include $<$deque$>$}\\*
+{\ttfamily \#include $<$future$>$}\\*
+{\ttfamily \#include $<$memory$>$}\\*
+{\ttfamily \#include $<$mutex$>$}\\*
+{\ttfamily \#include $<$thread$>$}\\*
+{\ttfamily \#include $<$unordered\-\_\-map$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include \char`\"{}C\-L/opencl.\-h\char`\"{}}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1moduli__info__t}{intel\-::hexl\-::fpga\-::moduli\-\_\-info\-\_\-t}
+\begin{DoxyCompactList}\small\item\em Struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1moduli__info__t}{moduli\-\_\-info\-\_\-t}. \end{DoxyCompactList}\item 
+struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1KeySwitch__modulus__t}{intel\-::hexl\-::fpga\-::\-Key\-Switch\-\_\-modulus\-\_\-t}
+\begin{DoxyCompactList}\small\item\em Struct Key\-Switch\-\_\-moduli\-\_\-t. \end{DoxyCompactList}\item 
+struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1KeySwitch__invn__t}{intel\-::hexl\-::fpga\-::\-Key\-Switch\-\_\-invn\-\_\-t}
+\begin{DoxyCompactList}\small\item\em Struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1KeySwitch__invn__t}{Key\-Switch\-\_\-invn\-\_\-t}. \end{DoxyCompactList}\item 
+struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1____attribute____}{intel\-::hexl\-::fpga\-::\-\_\-\-\_\-attribute\-\_\-\-\_\-}
+\begin{DoxyCompactList}\small\item\em Struct Dyadmult\-Keys1\-\_\-t. \end{DoxyCompactList}\item 
+struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1____attribute____}{intel\-::hexl\-::fpga\-::\-\_\-\-\_\-attribute\-\_\-\-\_\-}
+\begin{DoxyCompactList}\small\item\em Struct Dyadmult\-Keys1\-\_\-t. \end{DoxyCompactList}\item 
+struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1____attribute____}{intel\-::hexl\-::fpga\-::\-\_\-\-\_\-attribute\-\_\-\-\_\-}
+\begin{DoxyCompactList}\small\item\em Struct Dyadmult\-Keys1\-\_\-t. \end{DoxyCompactList}\item 
+struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object}{intel\-::hexl\-::fpga\-::\-Object}
+\begin{DoxyCompactList}\small\item\em Struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object}{Object}. \end{DoxyCompactList}\item 
+struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object__NTT}{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-N\-T\-T}
+\begin{DoxyCompactList}\small\item\em Struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object}{Object} N\-T\-T Stores the Number Theoretic Transform parameters. \end{DoxyCompactList}\item 
+struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object__INTT}{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-I\-N\-T\-T}
+\begin{DoxyCompactList}\small\item\em Struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object}{Object} I\-N\-T\-T Stores the Inverse Number Theoretic Transform parameters. \end{DoxyCompactList}\item 
+struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object__DyadicMultiply}{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Dyadic\-Multiply}
+\begin{DoxyCompactList}\small\item\em struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object__DyadicMultiply}{Object\-\_\-\-Dyadic\-Multiply} Stores the parameters for the multiplication \end{DoxyCompactList}\item 
+struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch}{intel\-::hexl\-::fpga\-::\-Object\-\_\-\-Key\-Switch}
+\begin{DoxyCompactList}\small\item\em struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch}{Object\-\_\-\-Key\-Switch} Stores the parameters for the keyswitch \end{DoxyCompactList}\item 
+class \hyperlink{classintel_1_1hexl_1_1fpga_1_1Buffer}{intel\-::hexl\-::fpga\-::\-Buffer}
+\begin{DoxyCompactList}\small\item\em Struct \hyperlink{classintel_1_1hexl_1_1fpga_1_1Buffer}{Buffer} Structure containing information for the polynomial operations. \end{DoxyCompactList}\item 
+struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject}{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object}
+\begin{DoxyCompactList}\small\item\em Parent Struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject}{F\-P\-G\-A\-Object} stores the blob of objects to be transfered to the F\-P\-G\-A. \end{DoxyCompactList}\item 
+struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT}{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-N\-T\-T}
+\begin{DoxyCompactList}\small\item\em Struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__NTT}{F\-P\-G\-A\-Object\-\_\-\-N\-T\-T} stores the N\-T\-T blob of objects to be transfered to the F\-P\-G\-A. \end{DoxyCompactList}\item 
+struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT}{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T}
+\begin{DoxyCompactList}\small\item\em Struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT}{F\-P\-G\-A\-Object\-\_\-\-I\-N\-T\-T} stores the I\-N\-T\-T blob of objects to be transfered to the F\-P\-G\-A. \end{DoxyCompactList}\item 
+struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply}{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-Dyadic\-Multiply}
+\begin{DoxyCompactList}\small\item\em Struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__DyadicMultiply}{F\-P\-G\-A\-Object\-\_\-\-Dyadic\-Multiply} Stores the multiplication blob of objects to be transfered to the F\-P\-G\-A. \end{DoxyCompactList}\item 
+struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch}{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A\-Object\-\_\-\-Key\-Switch}
+\begin{DoxyCompactList}\small\item\em Struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1FPGAObject__KeySwitch}{F\-P\-G\-A\-Object\-\_\-\-Key\-Switch} Stores the keyswitch blob of objects to be transfered to the F\-P\-G\-A. \end{DoxyCompactList}\item 
+struct \hyperlink{structintel_1_1hexl_1_1fpga_1_1KeySwitchMemKeys}{intel\-::hexl\-::fpga\-::\-Key\-Switch\-Mem\-Keys}
+\item 
+class \hyperlink{classintel_1_1hexl_1_1fpga_1_1Device}{intel\-::hexl\-::fpga\-::\-Device}
+\begin{DoxyCompactList}\small\item\em Class \hyperlink{classintel_1_1hexl_1_1fpga_1_1Device}{Device}. \end{DoxyCompactList}\item 
+class \hyperlink{classintel_1_1hexl_1_1fpga_1_1DevicePool}{intel\-::hexl\-::fpga\-::\-Device\-Pool}
+\begin{DoxyCompactList}\small\item\em Class \hyperlink{classintel_1_1hexl_1_1fpga_1_1DevicePool}{Device\-Pool}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceintel}{intel}
+\item 
+\hyperlink{namespaceintel_1_1hexl}{intel\-::hexl}
+\item 
+\hyperlink{namespaceintel_1_1hexl_1_1fpga}{intel\-::hexl\-::fpga}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{fpga_8h_afc99f4d34ad804ac8252bd923f3d5350}{B\-I\-T\-\_\-\-M\-A\-S\-K}(B\-I\-T\-S)~((1\-U\-L $<$$<$ B\-I\-T\-S) -\/ 1)
+\item 
+\#define \hyperlink{fpga_8h_a4c111d5b853101bd82b19040fc190da3}{M\-A\-X\-\_\-\-R\-N\-S\-\_\-\-M\-O\-D\-U\-L\-U\-S\-\_\-\-S\-I\-Z\-E}~7
+\item 
+\#define \hyperlink{fpga_8h_a11b694a1b6f1f7b630c79abd5901e059}{R\-W\-M\-E\-M\-\_\-\-F\-L\-A\-G}~1
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{namespaceintel_1_1hexl_1_1fpga_a9f208acca71106a36e1b0da993ddf3c0}{intel\-::hexl\-::fpga\-::\-Key\-Switch\-\_\-\-Kernels} \{ \hyperlink{namespaceintel_1_1hexl_1_1fpga_a9f208acca71106a36e1b0da993ddf3c0aad020d5509bc307d9766c206dd7a9049}{intel\-::hexl\-::fpga\-::\-K\-E\-Y\-S\-W\-I\-T\-C\-H\-\_\-\-L\-O\-A\-D}, 
+\hyperlink{namespaceintel_1_1hexl_1_1fpga_a9f208acca71106a36e1b0da993ddf3c0a28bf74f4155709486353b7d1179c9722}{intel\-::hexl\-::fpga\-::\-K\-E\-Y\-S\-W\-I\-T\-C\-H\-\_\-\-S\-T\-O\-R\-E}, 
+\hyperlink{namespaceintel_1_1hexl_1_1fpga_a9f208acca71106a36e1b0da993ddf3c0a6af9e5813327ef64d8e05c831e411632}{intel\-::hexl\-::fpga\-::\-K\-E\-Y\-S\-W\-I\-T\-C\-H\-\_\-\-N\-U\-M\-\_\-\-K\-E\-R\-N\-E\-L\-S}
+ \}
+\item 
+enum \hyperlink{namespaceintel_1_1hexl_1_1fpga_a9f07798cd59a71b9f57156192f7bf2f6}{intel\-::hexl\-::fpga\-::kernel\-\_\-t} \{ \\*
+\hyperlink{namespaceintel_1_1hexl_1_1fpga_a1a264f07facc5f24376170ea052e4fbcab50339a10e1de285ac99d4c3990b8693}{intel\-::hexl\-::fpga\-::\-N\-O\-N\-E}, 
+\hyperlink{namespaceintel_1_1hexl_1_1fpga_a9f07798cd59a71b9f57156192f7bf2f6af1662e45a778e27ff6afab122707fe50}{intel\-::hexl\-::fpga\-::kernel\-\_\-t\-::\-D\-Y\-A\-D\-I\-C\-\_\-\-M\-U\-L\-T\-I\-P\-L\-Y}, 
+\hyperlink{namespaceintel_1_1hexl_1_1fpga_a9f07798cd59a71b9f57156192f7bf2f6ae87c409c7bdebbc2084ef9f37e8de9ae}{intel\-::hexl\-::fpga\-::kernel\-\_\-t\-::\-N\-T\-T}, 
+\hyperlink{namespaceintel_1_1hexl_1_1fpga_a9f07798cd59a71b9f57156192f7bf2f6a766fa95963449b904a3269953efd6a35}{intel\-::hexl\-::fpga\-::kernel\-\_\-t\-::\-I\-N\-T\-T}, 
+\\*
+\hyperlink{namespaceintel_1_1hexl_1_1fpga_a9f07798cd59a71b9f57156192f7bf2f6af8037a267b684708165ca39d7f784458}{intel\-::hexl\-::fpga\-::kernel\-\_\-t\-::\-K\-E\-Y\-S\-W\-I\-T\-C\-H}, 
+\hyperlink{namespaceintel_1_1hexl_1_1fpga_a9f07798cd59a71b9f57156192f7bf2f6a7d8bfa28e75b84204b6c1c146b1c9bea}{intel\-::hexl\-::fpga\-::kernel\-\_\-t\-::\-D\-Y\-A\-D\-I\-C\-\_\-\-M\-U\-L\-T\-I\-P\-L\-Y\-\_\-\-K\-E\-Y\-S\-W\-I\-T\-C\-H}
+ \}
+\item 
+enum \hyperlink{namespaceintel_1_1hexl_1_1fpga_a1a264f07facc5f24376170ea052e4fbc}{intel\-::hexl\-::fpga\-::\-D\-E\-V\-\_\-\-T\-Y\-P\-E} \{ \hyperlink{namespaceintel_1_1hexl_1_1fpga_a1a264f07facc5f24376170ea052e4fbca665be2b62dd76ce44231d0503e468464}{intel\-::hexl\-::fpga\-::\-N\-O\-N\-E} = 0, 
+\hyperlink{namespaceintel_1_1hexl_1_1fpga_a1a264f07facc5f24376170ea052e4fbcab50339a10e1de285ac99d4c3990b8693}{intel\-::hexl\-::fpga\-::\-N\-O\-N\-E}, 
+\hyperlink{namespaceintel_1_1hexl_1_1fpga_a1a264f07facc5f24376170ea052e4fbca6553acb72b13a76b0cf31197badbc164}{intel\-::hexl\-::fpga\-::\-E\-M\-U}, 
+\hyperlink{namespaceintel_1_1hexl_1_1fpga_a1a264f07facc5f24376170ea052e4fbca7fef8fda7839a871ec648c0283640975}{intel\-::hexl\-::fpga\-::\-F\-P\-G\-A}
+ \}
+\begin{DoxyCompactList}\small\item\em enum D\-E\-V\-\_\-\-T\-Y\-P\-E Lists the available device mode\-: emulation mode, F\-P\-G\-A \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{namespaceintel_1_1hexl_1_1fpga_aa7d5b6c103f848f3b642938edf97ae22}{intel\-::hexl\-::fpga\-::attach\-\_\-fpga\-\_\-pooling} ()
+\begin{DoxyCompactList}\small\item\em attach\-\_\-fpga\-\_\-pooling Attach a device to this thread \end{DoxyCompactList}\item 
+void \hyperlink{namespaceintel_1_1hexl_1_1fpga_a768c1508c039dd1e8664cfec3a7bb159}{intel\-::hexl\-::fpga\-::detach\-\_\-fpga\-\_\-pooling} ()
+\begin{DoxyCompactList}\small\item\em detach\-\_\-fpga\-\_\-pooling Detach a device from this thread \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\-\_\-\-\_\-extension\-\_\-\-\_\- typedef unsigned \\*
+\-\_\-\-\_\-int128 \hyperlink{namespaceintel_1_1hexl_1_1fpga_abec5370ea5966ed3c9aee7817e805337}{intel\-::hexl\-::fpga\-::fpga\-\_\-uint128\-\_\-t}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{fpga_8h_afc99f4d34ad804ac8252bd923f3d5350}{\index{fpga.\-h@{fpga.\-h}!B\-I\-T\-\_\-\-M\-A\-S\-K@{B\-I\-T\-\_\-\-M\-A\-S\-K}}
+\index{B\-I\-T\-\_\-\-M\-A\-S\-K@{B\-I\-T\-\_\-\-M\-A\-S\-K}!fpga.h@{fpga.\-h}}
+\subsubsection[{B\-I\-T\-\_\-\-M\-A\-S\-K}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\-I\-T\-\_\-\-M\-A\-S\-K(
+\begin{DoxyParamCaption}
+\item[{}]{B\-I\-T\-S}
+\end{DoxyParamCaption}
+)~((1\-U\-L $<$$<$ B\-I\-T\-S) -\/ 1)}}\label{fpga_8h_afc99f4d34ad804ac8252bd923f3d5350}
+\hypertarget{fpga_8h_a4c111d5b853101bd82b19040fc190da3}{\index{fpga.\-h@{fpga.\-h}!M\-A\-X\-\_\-\-R\-N\-S\-\_\-\-M\-O\-D\-U\-L\-U\-S\-\_\-\-S\-I\-Z\-E@{M\-A\-X\-\_\-\-R\-N\-S\-\_\-\-M\-O\-D\-U\-L\-U\-S\-\_\-\-S\-I\-Z\-E}}
+\index{M\-A\-X\-\_\-\-R\-N\-S\-\_\-\-M\-O\-D\-U\-L\-U\-S\-\_\-\-S\-I\-Z\-E@{M\-A\-X\-\_\-\-R\-N\-S\-\_\-\-M\-O\-D\-U\-L\-U\-S\-\_\-\-S\-I\-Z\-E}!fpga.h@{fpga.\-h}}
+\subsubsection[{M\-A\-X\-\_\-\-R\-N\-S\-\_\-\-M\-O\-D\-U\-L\-U\-S\-\_\-\-S\-I\-Z\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\-A\-X\-\_\-\-R\-N\-S\-\_\-\-M\-O\-D\-U\-L\-U\-S\-\_\-\-S\-I\-Z\-E~7}}\label{fpga_8h_a4c111d5b853101bd82b19040fc190da3}
+\hypertarget{fpga_8h_a11b694a1b6f1f7b630c79abd5901e059}{\index{fpga.\-h@{fpga.\-h}!R\-W\-M\-E\-M\-\_\-\-F\-L\-A\-G@{R\-W\-M\-E\-M\-\_\-\-F\-L\-A\-G}}
+\index{R\-W\-M\-E\-M\-\_\-\-F\-L\-A\-G@{R\-W\-M\-E\-M\-\_\-\-F\-L\-A\-G}!fpga.h@{fpga.\-h}}
+\subsubsection[{R\-W\-M\-E\-M\-\_\-\-F\-L\-A\-G}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\-W\-M\-E\-M\-\_\-\-F\-L\-A\-G~1}}\label{fpga_8h_a11b694a1b6f1f7b630c79abd5901e059}

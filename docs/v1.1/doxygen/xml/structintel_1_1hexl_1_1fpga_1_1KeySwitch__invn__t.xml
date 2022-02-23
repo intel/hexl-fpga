@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="structintel_1_1hexl_1_1fpga_1_1KeySwitch__invn__t" kind="struct" prot="public">
+    <compoundname>intel::hexl::fpga::KeySwitch_invn_t</compoundname>
+    <includes refid="fpga_8h" local="no">fpga.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1KeySwitch__invn__t_1ad62ffdfe6b8126bed2872efb28d1f659" prot="public" static="no" mutable="no">
+        <type>cl_ulong4</type>
+        <definition>cl_ulong4 intel::hexl::fpga::KeySwitch_invn_t::data[8]</definition>
+        <argsstring>[8]</argsstring>
+        <name>data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="49" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Struct <ref refid="structintel_1_1hexl_1_1fpga_1_1KeySwitch__invn__t" kindref="compound">KeySwitch_invn_t</ref>. </para>    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the KeySwitch invn data </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>    </detaileddescription>
+    <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="48" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="48" bodyend="50"/>
+    <listofallmembers>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1KeySwitch__invn__t_1ad62ffdfe6b8126bed2872efb28d1f659" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::KeySwitch_invn_t</scope><name>data</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

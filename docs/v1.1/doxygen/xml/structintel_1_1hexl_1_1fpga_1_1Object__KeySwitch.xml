@@ -1,0 +1,352 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch" kind="struct" prot="public">
+    <compoundname>intel::hexl::fpga::Object_KeySwitch</compoundname>
+    <basecompoundref refid="structintel_1_1hexl_1_1fpga_1_1Object" prot="public" virt="non-virtual">intel::hexl::fpga::Object</basecompoundref>
+    <includes refid="fpga_8h" local="no">fpga.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1a52d7f28512fca04e7d1b3bafecbdccf6" prot="public" static="no" mutable="no">
+        <type>uint64_t *</type>
+        <definition>uint64_t* intel::hexl::fpga::Object_KeySwitch::result_</definition>
+        <argsstring></argsstring>
+        <name>result_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="227" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="227" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1ae31c6cf93ed6fb79ad68a8ae473e5e1d" prot="public" static="no" mutable="no">
+        <type>const uint64_t *</type>
+        <definition>const uint64_t* intel::hexl::fpga::Object_KeySwitch::t_target_iter_ptr_</definition>
+        <argsstring></argsstring>
+        <name>t_target_iter_ptr_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="228" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="228" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1a020885135c3b3f54e574fe0cc8824133" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::Object_KeySwitch::n_</definition>
+        <argsstring></argsstring>
+        <name>n_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="229" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="229" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1aef1b7966f320ffd96aeda0d57bacbeac" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::Object_KeySwitch::decomp_modulus_size_</definition>
+        <argsstring></argsstring>
+        <name>decomp_modulus_size_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="230" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="230" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1a3fc107f08b6afabf43eace8ef0f3e30f" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::Object_KeySwitch::key_modulus_size_</definition>
+        <argsstring></argsstring>
+        <name>key_modulus_size_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="231" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="231" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1a1f2b398daf647ebf2d677a512d9f04a7" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::Object_KeySwitch::rns_modulus_size_</definition>
+        <argsstring></argsstring>
+        <name>rns_modulus_size_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="232" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="232" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1ac7292612ff5f07a4afd5612e422385a3" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::Object_KeySwitch::key_component_count_</definition>
+        <argsstring></argsstring>
+        <name>key_component_count_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="233" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="233" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1a6452f0b40b3ca377273566ec90f1dc5a" prot="public" static="no" mutable="no">
+        <type>const uint64_t *</type>
+        <definition>const uint64_t* intel::hexl::fpga::Object_KeySwitch::moduli_</definition>
+        <argsstring></argsstring>
+        <name>moduli_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="234" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="234" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1ad54e0b28e00a46996dd7f0d1da0c9750" prot="public" static="no" mutable="no">
+        <type>const uint64_t **</type>
+        <definition>const uint64_t** intel::hexl::fpga::Object_KeySwitch::k_switch_keys_</definition>
+        <argsstring></argsstring>
+        <name>k_switch_keys_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="235" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="235" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1a5be66de56ad9af10b434c22a697b00ad" prot="public" static="no" mutable="no">
+        <type>const uint64_t *</type>
+        <definition>const uint64_t* intel::hexl::fpga::Object_KeySwitch::modswitch_factors_</definition>
+        <argsstring></argsstring>
+        <name>modswitch_factors_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="236" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="236" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1adbd1e4578cfb016b582d0bbefee8fe6f" prot="public" static="no" mutable="no">
+        <type>const uint64_t *</type>
+        <definition>const uint64_t* intel::hexl::fpga::Object_KeySwitch::twiddle_factors_</definition>
+        <argsstring></argsstring>
+        <name>twiddle_factors_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="237" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="237" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1a323050d96e7cb1710632b1088c11bf0c" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>intel::hexl::fpga::Object_KeySwitch::Object_KeySwitch</definition>
+        <argsstring>(uint64_t *result, const uint64_t *t_target_iter_ptr, uint64_t n, uint64_t decomp_modulus_size, uint64_t key_modulus_size, uint64_t rns_modulus_size, uint64_t key_component_count, const uint64_t *moduli, const uint64_t **k_switch_keys, const uint64_t *modswitch_factors, const uint64_t *twiddle_factors, bool fence=false)</argsstring>
+        <name>Object_KeySwitch</name>
+        <param>
+          <type>uint64_t *</type>
+          <declname>result</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>t_target_iter_ptr</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>decomp_modulus_size</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>key_modulus_size</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>rns_modulus_size</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>key_component_count</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>moduli</declname>
+        </param>
+        <param>
+          <type>const uint64_t **</type>
+          <declname>k_switch_keys</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>modswitch_factors</declname>
+        </param>
+        <param>
+          <type>const uint64_t *</type>
+          <declname>twiddle_factors</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>fence</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="219" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>struct <ref refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch" kindref="compound">Object_KeySwitch</ref> Stores the parameters for the keyswitch </para>    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">results</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the keyswitch results </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">t_target_iter_ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the input ciphertext data </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores polynomial size </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">decomp_modulus_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores modulus size </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">key_modulus_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores key modulus size </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">rns_modulus_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the rns modulus size </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">key_component_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the key component size </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">moduli</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the moduli </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">k_switch_keys</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the keys for keyswitch operation </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">modswitch_factors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the factors for modular switch </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">twiddle_factors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the twiddle factors </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fence</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>indicates whether the object is a fenced object or not </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="128">
+        <label>intel::hexl::fpga::Object</label>
+        <link refid="structintel_1_1hexl_1_1fpga_1_1Object"/>
+      </node>
+      <node id="127">
+        <label>intel::hexl::fpga::Object_KeySwitch</label>
+        <link refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch"/>
+        <childnode refid="128" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="130">
+        <label>intel::hexl::fpga::Object</label>
+        <link refid="structintel_1_1hexl_1_1fpga_1_1Object"/>
+      </node>
+      <node id="129">
+        <label>intel::hexl::fpga::Object_KeySwitch</label>
+        <link refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch"/>
+        <childnode refid="130" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="218" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="218" bodyend="238"/>
+    <listofallmembers>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1aef1b7966f320ffd96aeda0d57bacbeac" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Object_KeySwitch</scope><name>decomp_modulus_size_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1Object_1a187c9e1d3e7dca831390d438cee83b13" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Object_KeySwitch</scope><name>fence_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1Object_1a0da02feafb293ff8cea005f6312bd638" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Object_KeySwitch</scope><name>g_wid_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1Object_1ade9313d87b44bc1bfeccca2f5829ceae" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Object_KeySwitch</scope><name>id_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1ad54e0b28e00a46996dd7f0d1da0c9750" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Object_KeySwitch</scope><name>k_switch_keys_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1ac7292612ff5f07a4afd5612e422385a3" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Object_KeySwitch</scope><name>key_component_count_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1a3fc107f08b6afabf43eace8ef0f3e30f" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Object_KeySwitch</scope><name>key_modulus_size_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1a5be66de56ad9af10b434c22a697b00ad" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Object_KeySwitch</scope><name>modswitch_factors_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1a6452f0b40b3ca377273566ec90f1dc5a" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Object_KeySwitch</scope><name>moduli_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1a020885135c3b3f54e574fe0cc8824133" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Object_KeySwitch</scope><name>n_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1Object_1afbecbde0e8e9f2e4b87326d164d2f3a6" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Object_KeySwitch</scope><name>Object</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1a323050d96e7cb1710632b1088c11bf0c" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Object_KeySwitch</scope><name>Object_KeySwitch</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1Object_1a8d6495f3b68194f0c38927d76e9c652c" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Object_KeySwitch</scope><name>ready_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1a52d7f28512fca04e7d1b3bafecbdccf6" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Object_KeySwitch</scope><name>result_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1a1f2b398daf647ebf2d677a512d9f04a7" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Object_KeySwitch</scope><name>rns_modulus_size_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1ae31c6cf93ed6fb79ad68a8ae473e5e1d" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Object_KeySwitch</scope><name>t_target_iter_ptr_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1Object__KeySwitch_1adbd1e4578cfb016b582d0bbefee8fe6f" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Object_KeySwitch</scope><name>twiddle_factors_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1Object_1a795a35540ad7bb347d3978ca83f72e8b" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::Object_KeySwitch</scope><name>type_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1Object_1a53dd49a3d2fe50a55d91eda3f139e04f" prot="public" virt="virtual"><scope>intel::hexl::fpga::Object_KeySwitch</scope><name>~Object</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

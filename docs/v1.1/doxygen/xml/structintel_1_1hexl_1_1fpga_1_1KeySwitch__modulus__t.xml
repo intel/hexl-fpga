@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="structintel_1_1hexl_1_1fpga_1_1KeySwitch__modulus__t" kind="struct" prot="public">
+    <compoundname>intel::hexl::fpga::KeySwitch_modulus_t</compoundname>
+    <includes refid="fpga_8h" local="no">fpga.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1KeySwitch__modulus__t_1a9fc7e308b64e6f993e98062a251344d4" prot="public" static="no" mutable="no">
+        <type>cl_ulong4</type>
+        <definition>cl_ulong4 intel::hexl::fpga::KeySwitch_modulus_t::data[8]</definition>
+        <argsstring>[8]</argsstring>
+        <name>data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="41" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Struct KeySwitch_moduli_t. </para>    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the KeySwitch modulus data </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>    </detaileddescription>
+    <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="40" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="40" bodyend="42"/>
+    <listofallmembers>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1KeySwitch__modulus__t_1a9fc7e308b64e6f993e98062a251344d4" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::KeySwitch_modulus_t</scope><name>data</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

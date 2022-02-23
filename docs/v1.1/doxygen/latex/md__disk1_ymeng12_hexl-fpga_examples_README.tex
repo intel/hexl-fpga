@@ -1,0 +1,27 @@
+After installing Intel H\-E Acceleration Library for F\-P\-G\-As, you can use the library in an external application in the following way.
+
+\subsection*{Include Intel H\-E Acceleration Library for F\-P\-G\-As package into your {\ttfamily C\-Make\-Lists.\-txt}\-:}
+
+``` find\-\_\-package(hexl-\/fpga 1.\-1 H\-I\-N\-T\-S \$\{H\-E\-X\-L\-\_\-\-F\-P\-G\-A\-\_\-\-H\-I\-N\-T\-\_\-\-D\-I\-R\} R\-E\-Q\-U\-I\-R\-E\-D) target\-\_\-link\-\_\-libraries($<$your target$>$=\char`\"{}\char`\"{}$>$ P\-R\-I\-V\-A\-T\-E hexl-\/fpga\-::hexl-\/fpga) ```
+
+If Intel H\-E Acceleration Library for F\-P\-G\-As is installed globally, {\ttfamily H\-E\-X\-L\-\_\-\-F\-P\-G\-A\-\_\-\-H\-I\-N\-T\-\_\-\-D\-I\-R} is not needed. Otherwise, {\ttfamily H\-E\-X\-L\-\_\-\-F\-P\-G\-A\-\_\-\-H\-I\-N\-T\-\_\-\-D\-I\-R} should be the directory containing {\ttfamily hexl-\/fpga\-Config.\-cmake}, e.\-g. {\ttfamily \$\{C\-M\-A\-K\-E\-\_\-\-I\-N\-S\-T\-A\-L\-L\-\_\-\-P\-R\-E\-F\-I\-X\}/lib/cmake/}, where \$\{C\-M\-A\-K\-E\-\_\-\-I\-N\-S\-T\-A\-L\-L\-\_\-\-P\-R\-E\-F\-I\-X\} is the pre-\/installed directory.
+
+\subsection*{Build your application with preinstalled Intel H\-E Acceleration Library for F\-P\-G\-As package}
+
+To build your application with Intel H\-E Acceleration Library for F\-P\-G\-As, point \$\{C\-M\-A\-K\-E\-\_\-\-P\-R\-E\-F\-I\-X\-\_\-\-P\-A\-T\-H\} to the pre-\/installed Intel H\-E Acceleration Library for F\-P\-G\-As package. ``` mkdir -\/p build-\/examples cd build-\/examples cmake ../examples/ -\/\-D\-C\-M\-A\-K\-E\-\_\-\-P\-R\-E\-F\-I\-X\-\_\-\-P\-A\-T\-H=\$\{C\-M\-A\-K\-E\-\_\-\-I\-N\-S\-T\-A\-L\-L\-\_\-\-P\-R\-E\-F\-I\-X\}/lib/cmake/ -\/\-D\-C\-M\-A\-K\-E\-\_\-\-C\-X\-X\-\_\-\-C\-O\-M\-P\-I\-L\-E\-R=g++ -\/\-D\-C\-M\-A\-K\-E\-\_\-\-C\-\_\-\-C\-O\-M\-P\-I\-L\-E\-R=gcc ```
+
+\subsection*{Compile the examples}
+
+``` make ```
+
+The compiled executable is located in build-\/examples/ directory.
+
+\subsection*{Run the examples}
+
+\subsubsection*{Run the examples in emulation mode}
+
+``` export R\-U\-N\-\_\-\-C\-H\-O\-I\-C\-E=1 make examples ```
+
+\subsubsection*{Run the examples on F\-P\-G\-A card}
+
+``` export R\-U\-N\-\_\-\-C\-H\-O\-I\-C\-E=2 make examples ``` 

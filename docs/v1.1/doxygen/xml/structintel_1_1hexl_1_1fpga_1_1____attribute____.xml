@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="structintel_1_1hexl_1_1fpga_1_1____attribute____" kind="struct" prot="public">
+    <compoundname>intel::hexl::fpga::__attribute__</compoundname>
+    <includes refid="fpga_8h" local="no">fpga.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1____attribute_____1a2162d44dea151a52db616ca95a56ef02" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::__attribute__::key1</definition>
+        <argsstring></argsstring>
+        <name>key1</name>
+        <bitfield> 52</bitfield>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="56" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1____attribute_____1aeef311576d778306f27722e7643f3655" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::__attribute__::key2</definition>
+        <argsstring></argsstring>
+        <name>key2</name>
+        <bitfield> 52</bitfield>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="57" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1____attribute_____1a492c7ef00c2f5ef3272490e020033201" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::__attribute__::key3</definition>
+        <argsstring></argsstring>
+        <name>key3</name>
+        <bitfield> 52</bitfield>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="58" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1____attribute_____1a21a0d2969870a4181daa88a424b678b0" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::__attribute__::key4</definition>
+        <argsstring></argsstring>
+        <name>key4</name>
+        <bitfield> 52</bitfield>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="59" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1____attribute_____1a0abbb812be3eb7211e64d306e732ac48" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::__attribute__::key5</definition>
+        <argsstring></argsstring>
+        <name>key5</name>
+        <bitfield> 48</bitfield>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="60" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1____attribute_____1ac95e511d6edcb69c602566916413610c" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::__attribute__::key6</definition>
+        <argsstring></argsstring>
+        <name>key6</name>
+        <bitfield> 44</bitfield>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="72" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1____attribute_____1a41031cd0840c7059646399a9452aaae2" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::__attribute__::NOT_USED</definition>
+        <argsstring></argsstring>
+        <name>NOT_USED</name>
+        <bitfield> 40</bitfield>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="84" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Struct DyadmultKeys1_t. </para>    </briefdescription>
+    <detaileddescription>
+<para>Struct DyadmultKeys3_t.</para><para>Struct DyadmultKeys2_t.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">key1-5</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the bits of compressed switch key data</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">key1-6</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stores the bits of compressed switch key data </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>    </detaileddescription>
+    <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="55" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="55" bodyend="61"/>
+    <listofallmembers>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1____attribute_____1a2162d44dea151a52db616ca95a56ef02" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::__attribute__</scope><name>key1</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1____attribute_____1aeef311576d778306f27722e7643f3655" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::__attribute__</scope><name>key2</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1____attribute_____1a492c7ef00c2f5ef3272490e020033201" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::__attribute__</scope><name>key3</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1____attribute_____1a21a0d2969870a4181daa88a424b678b0" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::__attribute__</scope><name>key4</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1____attribute_____1a0abbb812be3eb7211e64d306e732ac48" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::__attribute__</scope><name>key5</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1____attribute_____1ac95e511d6edcb69c602566916413610c" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::__attribute__</scope><name>key6</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1____attribute_____1a41031cd0840c7059646399a9452aaae2" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::__attribute__</scope><name>NOT_USED</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

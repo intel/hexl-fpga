@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="structhetest_1_1utils_1_1AlignedAllocator_1_1rebind" kind="struct" prot="public">
+    <compoundname>hetest::utils::AlignedAllocator::rebind</compoundname>
+    <includes refid="utils-test_8hpp" local="no">utils-test.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename U</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structhetest_1_1utils_1_1AlignedAllocator_1_1rebind_1ac55bc630e5d5c06ccfb3cdfe249f0a47" prot="public" static="no">
+        <type><ref refid="classhetest_1_1utils_1_1AlignedAllocator" kindref="compound">AlignedAllocator</ref>&lt; U, Alignment &gt;</type>
+        <definition>using hetest::utils::AlignedAllocator&lt; T, Alignment &gt;::rebind&lt; U &gt;::other =  AlignedAllocator&lt;U, Alignment&gt;</definition>
+        <argsstring></argsstring>
+        <name>other</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/tests/test_utils/utils-test.hpp" line="304" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_utils/utils-test.hpp" bodystart="304" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/disk1/ymeng12/hexl-fpga/tests/test_utils/utils-test.hpp" line="303" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/tests/test_utils/utils-test.hpp" bodystart="303" bodyend="305"/>
+    <listofallmembers>
+      <member refid="structhetest_1_1utils_1_1AlignedAllocator_1_1rebind_1ac55bc630e5d5c06ccfb3cdfe249f0a47" prot="public" virt="non-virtual"><scope>hetest::utils::AlignedAllocator::rebind</scope><name>other</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

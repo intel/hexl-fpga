@@ -1,0 +1,393 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="bench__keyswitch_8cpp" kind="file">
+    <compoundname>bench_keyswitch.cpp</compoundname>
+    <includes local="no">glob.h</includes>
+    <includes local="no">nlohmann/json.hpp</includes>
+    <includes local="no">string</includes>
+    <includes local="no">vector</includes>
+    <includes local="no">iostream</includes>
+    <includes local="no">fstream</includes>
+    <includes local="no">benchmark/benchmark.h</includes>
+    <includes refid="hexl-fpga_8h" local="yes">hexl-fpga.h</includes>
+    <incdepgraph>
+      <node id="21">
+        <label>glob.h</label>
+      </node>
+      <node id="28">
+        <label>hexl-fpga.h</label>
+        <link refid="hexl-fpga_8h"/>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>cstdint</label>
+      </node>
+      <node id="20">
+        <label>bench_keyswitch.cpp</label>
+        <link refid="bench_keyswitch.cpp"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>string</label>
+      </node>
+      <node id="26">
+        <label>fstream</label>
+      </node>
+      <node id="27">
+        <label>benchmark/benchmark.h</label>
+      </node>
+      <node id="24">
+        <label>vector</label>
+      </node>
+      <node id="25">
+        <label>iostream</label>
+      </node>
+      <node id="22">
+        <label>nlohmann/json.hpp</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structKeySwitchTestVector" prot="public">KeySwitchTestVector</innerclass>
+    <innerclass refid="classkeyswitch" prot="public">keyswitch</innerclass>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="bench__keyswitch_8cpp_1a2073710045c27e0d8e550a82c374be33" prot="public" static="yes" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t n_iter</definition>
+        <argsstring></argsstring>
+        <name>n_iter</name>
+        <initializer>= get_iter()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" line="24" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="bench__keyswitch_8cpp_1af63a1df0d582366f7a03c46143e3ae0e" prot="public" static="no" mutable="no">
+        <type>benchmark::State &amp;</type>
+        <definition>benchmark::State&amp; state</definition>
+        <argsstring></argsstring>
+        <name>state</name>
+        <initializer>{
+    const char* fname = getenv(&quot;KEYSWITCH_DATA_DIR&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" line="133" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="bench__keyswitch_8cpp_1a43ae2e017e425ea454106c5eab76fe6d" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string test_file</definition>
+        <argsstring></argsstring>
+        <name>test_file</name>
+        <initializer>= &quot;/16384_6_7_7_2_*&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" line="141" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" bodystart="141" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="bench__keyswitch_8cpp_1af98ed5ee0025fea2f25864641c3f5727" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string test_fullname</definition>
+        <argsstring></argsstring>
+        <name>test_fullname</name>
+        <initializer>= fname + <ref refid="bench__keyswitch_8cpp_1a43ae2e017e425ea454106c5eab76fe6d" kindref="member">test_file</ref> + &quot;.json&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" line="142" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="bench__keyswitch_8cpp_1ab053510e1eb9a0fccf4cbca4dfce2720" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; filesx</definition>
+        <argsstring></argsstring>
+        <name>filesx</name>
+        <initializer>= <ref refid="test__keyswitch_8cpp_1a3a42deea499822d5e741e7d0f48414c7" kindref="member">glob</ref>(test_fullname.c_str())</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" line="143" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" bodystart="143" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="bench__keyswitch_8cpp_1a37dfb1be7add7ba7d1ec65c8ab64c88b" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; files</definition>
+        <argsstring></argsstring>
+        <name>files</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" line="145" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" bodystart="145" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="bench__keyswitch_8cpp_1a4ef4ad25727e311db0550667f9b173ba" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>static uint32_t get_iter</definition>
+        <argsstring>()</argsstring>
+        <name>get_iter</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" line="15" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" bodystart="15" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="bench__keyswitch_8cpp_1a0339092a1f8aca697e3a0c0e1f71e6aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>if</definition>
+        <argsstring>(!fname)</argsstring>
+        <name>if</name>
+        <param>
+          <type>!</type>
+          <declname>fname</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" line="135" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" bodystart="135" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="bench__keyswitch_8cpp_1a48538bc1d1a6314f78f304cb2ac9c53b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>for</definition>
+        <argsstring>(size_t i=0;i&lt; filesx.size();i++)</argsstring>
+        <name>for</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" line="146" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" bodystart="146" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="function" id="bench__keyswitch_8cpp_1a1d8ea5f2aa5b8b8a64f74915afd97c21" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>setup_keyswitch</definition>
+        <argsstring>(files)</argsstring>
+        <name>setup_keyswitch</name>
+        <param>
+          <type><ref refid="bench__keyswitch_8cpp_1a37dfb1be7add7ba7d1ec65c8ab64c88b" kindref="member">files</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" line="150" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="bench__keyswitch_8cpp_1a1b1f1299aac0fc44e1de1d990ddea174" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>for</definition>
+        <argsstring>(auto st:state)</argsstring>
+        <name>for</name>
+        <param>
+          <type>auto st:state</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" line="152" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp" bodystart="152" bodyend="154"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>Copyright<sp/>(C)<sp/>2020-2021<sp/>Intel<sp/>Corporation</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>Apache-2.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;glob.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;nlohmann/json.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;fstream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;benchmark/benchmark.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="hexl-fpga_8h" kindref="compound">hexl-fpga.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>uint32_t<sp/>get_iter()<sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>env<sp/>=<sp/>getenv(</highlight><highlight class="stringliteral">&quot;ITER&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>val<sp/>=<sp/>40;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(env)<sp/>{</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>val<sp/>=<sp/>strtol(env,<sp/>NULL,<sp/>10);</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>val;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>uint32_t<sp/>n_iter<sp/>=<sp/>get_iter();</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structKeySwitchTestVector" kindref="compound">KeySwitchTestVector</ref><sp/>{</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structKeySwitchTestVector_1a6250ec29fdab16360c0f956fcae55b40" kindref="member">KeySwitchTestVector</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>json_filename);</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="structKeySwitchTestVector_1a95aa4da3c5518ef78bcc8de60339fcbf" kindref="member">coeff_count</ref>;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="structKeySwitchTestVector_1a553ed9a4e56035cc083f2b29cc1d16a6" kindref="member">decomp_modulus_size</ref>;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="structKeySwitchTestVector_1a98001c403e5ad60e03d188ca1bc2d0a7" kindref="member">key_modulus_size</ref>;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="structKeySwitchTestVector_1a700faac161b8de302d05e4cdb24080b6" kindref="member">rns_modulus_size</ref>;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="structKeySwitchTestVector_1adbffef31865ff107c1fc5ece85028d18" kindref="member">key_component_count</ref>;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;uint64_t&gt;<sp/><ref refid="structKeySwitchTestVector_1a093fb1d7c028277e953c73e14c4bdc38" kindref="member">moduli</ref>;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;uint64_t&gt;<sp/><ref refid="structKeySwitchTestVector_1a5d7c8ad32a914bb8d8ecf78a13f911ca" kindref="member">modswitch_factors</ref>;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;const<sp/>uint64_t*&gt;<sp/><ref refid="structKeySwitchTestVector_1a3efccd8f33a478bb9b447e38eb38662e" kindref="member">key_vectors</ref>;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;uint64_t&gt;<sp/><ref refid="structKeySwitchTestVector_1a87c4ef64d069c11709451f4fe7b4a5fd" kindref="member">t_target_iter_ptr</ref>;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;uint64_t&gt;<sp/><ref refid="structKeySwitchTestVector_1ada92bec84019ee1f4cad5ebdbc1a0be3" kindref="member">input</ref>;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;uint64_t&gt;<sp/><ref refid="structKeySwitchTestVector_1ad9e47be1cfb9a7be31cfbbd3edfad593" kindref="member">expected_output</ref>;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;std::vector&lt;uint64_t&gt;&gt;<sp/><ref refid="structKeySwitchTestVector_1a00c0158e4d33300c0d34e9ca2be66a51" kindref="member">vectors</ref>;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>std::ifstream<sp/>json_file;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>nlohmann::json<sp/>js;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><ref refid="structKeySwitchTestVector_1a6250ec29fdab16360c0f956fcae55b40" kindref="member">KeySwitchTestVector::KeySwitchTestVector</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>json_filename)</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/>json_file(json_filename)<sp/>{</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>json_file<sp/>&gt;&gt;<sp/>js;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>coeff_count<sp/>=<sp/>js[</highlight><highlight class="stringliteral">&quot;coeff_count&quot;</highlight><highlight class="normal">].get&lt;uint64_t&gt;();</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>decomp_modulus_size<sp/>=<sp/>js[</highlight><highlight class="stringliteral">&quot;decomp_modulus_size&quot;</highlight><highlight class="normal">].get&lt;uint64_t&gt;();</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>key_modulus_size<sp/>=<sp/>js[</highlight><highlight class="stringliteral">&quot;key_modulus_size&quot;</highlight><highlight class="normal">].get&lt;uint64_t&gt;();</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>rns_modulus_size<sp/>=<sp/>js[</highlight><highlight class="stringliteral">&quot;rns_modulus_size&quot;</highlight><highlight class="normal">].get&lt;uint64_t&gt;();</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>key_component_count<sp/>=<sp/>js[</highlight><highlight class="stringliteral">&quot;key_component_count&quot;</highlight><highlight class="normal">].get&lt;uint64_t&gt;();</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>moduli<sp/>=<sp/>js[</highlight><highlight class="stringliteral">&quot;moduli&quot;</highlight><highlight class="normal">].get&lt;std::vector&lt;uint64_t&gt;&gt;();</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>modswitch_factors<sp/>=<sp/>js[</highlight><highlight class="stringliteral">&quot;modswitch_factors&quot;</highlight><highlight class="normal">].get&lt;std::vector&lt;uint64_t&gt;&gt;();</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(uint64_t<sp/>k<sp/>=<sp/>0;<sp/>k<sp/>&lt;<sp/>decomp_modulus_size;<sp/>k++)<sp/>{</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;uint64_t&gt;<sp/>key_vector;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(uint64_t<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>2<sp/>*<sp/>key_modulus_size<sp/>*<sp/>coeff_count;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>key_vector.push_back(js[</highlight><highlight class="stringliteral">&quot;key_vector&quot;</highlight><highlight class="normal">][k][i]);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vectors.push_back(key_vector);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>key_vectors.push_back(const_cast&lt;uint64_t*&gt;(&amp;vectors[k].data()[0]));</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>t_target_iter_ptr<sp/>=<sp/>js[</highlight><highlight class="stringliteral">&quot;t_target_iter_ptr&quot;</highlight><highlight class="normal">].get&lt;std::vector&lt;uint64_t&gt;&gt;();</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>input<sp/>=<sp/>js[</highlight><highlight class="stringliteral">&quot;input&quot;</highlight><highlight class="normal">].get&lt;std::vector&lt;uint64_t&gt;&gt;();</highlight></codeline>
+<codeline lineno="74"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76" refid="classkeyswitch" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classkeyswitch" kindref="compound">keyswitch</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>benchmark::Fixture<sp/>{</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;std::string&gt;<sp/><ref refid="classkeyswitch_1a57db49fef33a51c209d8797f2dc43ab9" kindref="member">glob</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>pattern);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classkeyswitch_1a2ab9c474f05db3da844fd06672b7ef4c" kindref="member">setup_keyswitch</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;std::string&gt;&amp;<sp/><ref refid="bench__keyswitch_8cpp_1a37dfb1be7add7ba7d1ec65c8ab64c88b" kindref="member">files</ref>);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classkeyswitch_1a929b0b812b0e43dcee02a7223ad65da1" kindref="member">bench_keyswitch</ref>();</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>{<sp/><ref refid="classkeyswitch_1a44b4c789ec6ac14a37624f4cc5c36311af27c28f98028462aafb3baf3acf2e401" kindref="member">ITERATIONS</ref><sp/>=<sp/>40<sp/>};</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;KeySwitchTestVector&gt;<sp/>test_vectors_;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>test_vector_size_;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal">std::vector&lt;std::string&gt;<sp/><ref refid="classkeyswitch_1a57db49fef33a51c209d8797f2dc43ab9" kindref="member">keyswitch::glob</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>pattern)<sp/>{</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>glob_t<sp/>glob_result<sp/>=<sp/>{0};</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classkeyswitch_1a57db49fef33a51c209d8797f2dc43ab9" kindref="member">::glob</ref>(pattern,<sp/>GLOB_TILDE,<sp/>NULL,<sp/>&amp;glob_result);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;std::string&gt;<sp/>filenames(</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glob_result.gl_pathv,<sp/>glob_result.gl_pathv<sp/>+<sp/>glob_result.gl_pathc);</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/>globfree(&amp;glob_result);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>filenames;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classkeyswitch_1a2ab9c474f05db3da844fd06672b7ef4c" kindref="member">keyswitch::setup_keyswitch</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;std::string&gt;&amp;<sp/><ref refid="bench__keyswitch_8cpp_1a37dfb1be7add7ba7d1ec65c8ab64c88b" kindref="member">files</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>files.size();<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Constructing<sp/>Test<sp/>Vector<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>i<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>from<sp/>File<sp/>...<sp/>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;&lt;<sp/>files[i]<sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>test_vectors_.push_back(<ref refid="structKeySwitchTestVector" kindref="compound">KeySwitchTestVector</ref>(files[i].c_str()));</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/>test_vector_size_<sp/>=<sp/>test_vectors_.size();</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/>assert(test_vector_size_<sp/>&gt;<sp/>0);</highlight></codeline>
+<codeline lineno="111"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classkeyswitch_1a929b0b812b0e43dcee02a7223ad65da1" kindref="member">keyswitch::bench_keyswitch</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespaceintel_1_1hexl_1a8ac8866d0693f8fc89f99a9197cd04cf" kindref="member">intel::hexl::set_worksize_KeySwitch</ref>(test_vector_size_<sp/>*<sp/>n_iter);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>n<sp/>=<sp/>0;<sp/>n<sp/>&lt;<sp/>n_iter;<sp/>n++)<sp/>{</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>test_vector_size_;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespaceintel_1_1hexl_1aafddb377dcb2c351cfc3e014428cfe42" kindref="member">intel::hexl::KeySwitch</ref>(test_vectors_[i].input.data(),</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>test_vectors_[i].t_target_iter_ptr.data(),</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>test_vectors_[0].coeff_count,</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>test_vectors_[0].decomp_modulus_size,</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>test_vectors_[0].key_modulus_size,</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>test_vectors_[0].rns_modulus_size,</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>test_vectors_[0].key_component_count,</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>test_vectors_[0].moduli.data(),</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>test_vectors_[0].key_vectors.data(),</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>test_vectors_[0].modswitch_factors.data());</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespaceintel_1_1hexl_1ad36db7f99d2e70414645f961b723ab79" kindref="member">intel::hexl::KeySwitchCompleted</ref>();</highlight></codeline>
+<codeline lineno="130"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><ref refid="bench__fwd__ntt_8cpp_1a7bb592ab74bab16b2f95b4c4926e1ed9" kindref="member">BENCHMARK_F</ref>(<ref refid="classkeyswitch" kindref="compound">keyswitch</ref>,<sp/>16384_6_7_7_2)</highlight></codeline>
+<codeline lineno="133"><highlight class="normal">(benchmark::State&amp;<sp/><ref refid="bench__dyadic__multiply_8cpp_1af63a1df0d582366f7a03c46143e3ae0e" kindref="member">state</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>fname<sp/>=<sp/>getenv(</highlight><highlight class="stringliteral">&quot;KEYSWITCH_DATA_DIR&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!fname)<sp/>{</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::cerr<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;set<sp/>env<sp/>KEYSWITCH_DATA_DIR<sp/>to<sp/>the<sp/>test<sp/>vector<sp/>dir&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>exit(1);</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/><ref refid="bench__keyswitch_8cpp_1a43ae2e017e425ea454106c5eab76fe6d" kindref="member">test_file</ref><sp/>=<sp/></highlight><highlight class="stringliteral">&quot;/16384_6_7_7_2_*&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/><ref refid="bench__keyswitch_8cpp_1af98ed5ee0025fea2f25864641c3f5727" kindref="member">test_fullname</ref><sp/>=<sp/>fname<sp/>+<sp/>test_file<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;.json&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;std::string&gt;<sp/><ref refid="bench__keyswitch_8cpp_1ab053510e1eb9a0fccf4cbca4dfce2720" kindref="member">filesx</ref><sp/>=<sp/><ref refid="test__keyswitch_8cpp_1a3a42deea499822d5e741e7d0f48414c7" kindref="member">glob</ref>(test_fullname.c_str());</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;std::string&gt;<sp/><ref refid="bench__keyswitch_8cpp_1a37dfb1be7add7ba7d1ec65c8ab64c88b" kindref="member">files</ref>;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>filesx.size();<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>files.push_back(filesx[i]);</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="bench__keyswitch_8cpp_1a1d8ea5f2aa5b8b8a64f74915afd97c21" kindref="member">setup_keyswitch</ref>(files);</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>st<sp/>:<sp/><ref refid="bench__dyadic__multiply_8cpp_1af63a1df0d582366f7a03c46143e3ae0e" kindref="member">state</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bench_keyswitch();</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="155"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/disk1/ymeng12/hexl-fpga/benchmark/bench_keyswitch.cpp"/>
+  </compounddef>
+</doxygen>

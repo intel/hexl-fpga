@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="CONTRIBUTING_8md" kind="file">
+    <compoundname>CONTRIBUTING.md</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#<sp/>Pull<sp/>Requests</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal">Intel<sp/>HE-<ref refid="namespaceintel_1_1hexl_1_1fpga_1a1a264f07facc5f24376170ea052e4fbca7fef8fda7839a871ec648c0283640975" kindref="member">FPGA</ref><sp/>welcomes<sp/>pull<sp/>requests<sp/>from<sp/>external<sp/>contributors<sp/>to<sp/>the<sp/>`<ref refid="examples_8cpp_1a3c04138a5bfe5d72780bb7e82a18e627" kindref="member">main</ref>`<sp/>branch.</highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal">Before<sp/>contributing,<sp/>please<sp/>make<sp/>sure<sp/>all<sp/>tests<sp/>pass,<sp/>and<sp/>the<sp/>pre-commit<sp/>formatting<sp/>and<sp/>linter<sp/>checks<sp/>are<sp/>clean.</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal">Please<sp/>sign<sp/>your<sp/>commits<sp/>before<sp/>making<sp/>a<sp/>pull<sp/>request.<sp/>See<sp/>instructions<sp/>[here](https:</highlight><highlight class="comment">//docs.github.com/en/github/authenticating-to-github/managing-commit-signature-verification/signing-commits)<sp/>for<sp/>how<sp/>to<sp/>sign<sp/>commits.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">###<sp/>Known<sp/>Issues<sp/>###</highlight></codeline>
+<codeline lineno="10"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal">*<sp/>```Executable<sp/>`cpplint`<sp/>not<sp/>found```</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/>Make<sp/>sure<sp/>you<sp/>install<sp/>cpplint:<sp/>```pip<sp/>install<sp/>cpplint```.</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/>If<sp/>you<sp/>install<sp/>`cpplint`<sp/>locally,<sp/>make<sp/>sure<sp/>to<sp/>add<sp/>it<sp/>to<sp/>your<sp/>`PATH`.</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal">*<sp/>```/bin/sh:<sp/>1:<sp/>pre-commit:<sp/>not<sp/>found```</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/>Install<sp/>`pre-commit`.<sp/>More<sp/>info<sp/>at<sp/>https:</highlight><highlight class="comment">//pre-commit.com/.</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/disk1/ymeng12/hexl-fpga/CONTRIBUTING.md"/>
+  </compounddef>
+</doxygen>

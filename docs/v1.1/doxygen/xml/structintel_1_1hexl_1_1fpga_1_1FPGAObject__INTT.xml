@@ -1,0 +1,279 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT" kind="struct" prot="public">
+    <compoundname>intel::hexl::fpga::FPGAObject_INTT</compoundname>
+    <basecompoundref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject" prot="public" virt="non-virtual">intel::hexl::fpga::FPGAObject</basecompoundref>
+    <includes refid="fpga_8h" local="no">fpga.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a5da6fc4cb5bebebb021c6cc2b94bbd7a" prot="public" static="no" mutable="no">
+        <type>uint64_t *</type>
+        <definition>uint64_t* intel::hexl::fpga::FPGAObject_INTT::coeff_poly_in_svm_</definition>
+        <argsstring></argsstring>
+        <name>coeff_poly_in_svm_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="470" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="470" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1ab85ed19766b48f1cd854a07786b59f8f" prot="public" static="no" mutable="no">
+        <type>uint64_t *</type>
+        <definition>uint64_t* intel::hexl::fpga::FPGAObject_INTT::inv_root_of_unity_powers_in_svm_</definition>
+        <argsstring></argsstring>
+        <name>inv_root_of_unity_powers_in_svm_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="471" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="471" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a9a18cf43978c3d56bad1e3494e25859a" prot="public" static="no" mutable="no">
+        <type>uint64_t *</type>
+        <definition>uint64_t* intel::hexl::fpga::FPGAObject_INTT::precon_inv_root_of_unity_powers_in_svm_</definition>
+        <argsstring></argsstring>
+        <name>precon_inv_root_of_unity_powers_in_svm_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="472" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="472" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a7a893fbe1ec584f7fb59e49dfce3d45e" prot="public" static="no" mutable="no">
+        <type>uint64_t *</type>
+        <definition>uint64_t* intel::hexl::fpga::FPGAObject_INTT::coeff_modulus_in_svm_</definition>
+        <argsstring></argsstring>
+        <name>coeff_modulus_in_svm_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="473" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="473" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1af7b22e09b44bad334bbf2597619b74fd" prot="public" static="no" mutable="no">
+        <type>uint64_t *</type>
+        <definition>uint64_t* intel::hexl::fpga::FPGAObject_INTT::inv_n_in_svm_</definition>
+        <argsstring></argsstring>
+        <name>inv_n_in_svm_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="474" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="474" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a4d7e4702797bb9e28dd27436e8d981e6" prot="public" static="no" mutable="no">
+        <type>uint64_t *</type>
+        <definition>uint64_t* intel::hexl::fpga::FPGAObject_INTT::inv_n_w_in_svm_</definition>
+        <argsstring></argsstring>
+        <name>inv_n_w_in_svm_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="475" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="475" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a79d41547e934454b4c4719d2a0d1fd4f" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t intel::hexl::fpga::FPGAObject_INTT::n_</definition>
+        <argsstring></argsstring>
+        <name>n_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="476" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="476" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a153585cd172743a16e84efd8659aa66c" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>intel::hexl::fpga::FPGAObject_INTT::FPGAObject_INTT</definition>
+        <argsstring>(const cl_context &amp;context, uint64_t coeff_count, uint64_t batch_size)</argsstring>
+        <name>FPGAObject_INTT</name>
+        <param>
+          <type>const cl_context &amp;</type>
+          <declname>context</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>coeff_count</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>batch_size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="461" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a7cedf64bc8c7af8f1a77dd68e9dd2037" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>intel::hexl::fpga::FPGAObject_INTT::~FPGAObject_INTT</definition>
+        <argsstring>()</argsstring>
+        <name>~FPGAObject_INTT</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="463" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a991d2f78abe5d44b4f98f3b4ac4da29e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>intel::hexl::fpga::FPGAObject_INTT::FPGAObject_INTT</definition>
+        <argsstring>(const FPGAObject_INTT &amp;)=delete</argsstring>
+        <name>FPGAObject_INTT</name>
+        <param>
+          <type>const <ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT" kindref="compound">FPGAObject_INTT</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="464" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1af77e8207b17014631d1251ecf6c375f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT" kindref="compound">FPGAObject_INTT</ref> &amp;</type>
+        <definition>FPGAObject_INTT&amp; intel::hexl::fpga::FPGAObject_INTT::operator=</definition>
+        <argsstring>(const FPGAObject_INTT &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT" kindref="compound">FPGAObject_INTT</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="465" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a3af9d73a583150a06fee9288a7938e31" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::FPGAObject_INTT::fill_in_data</definition>
+        <argsstring>(const std::vector&lt; Object * &gt; &amp;objs) override</argsstring>
+        <name>fill_in_data</name>
+        <reimplements refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1abd665113bfb3b0e7a33e09078f01ae43">fill_in_data</reimplements>
+        <param>
+          <type>const std::vector&lt; <ref refid="structintel_1_1hexl_1_1fpga_1_1Object" kindref="compound">Object</ref> * &gt; &amp;</type>
+          <declname>objs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="467" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a18c10384468f7e39f15b2059fe59d5db" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void intel::hexl::fpga::FPGAObject_INTT::fill_out_data</definition>
+        <argsstring>(uint64_t *coeff_poly) override</argsstring>
+        <name>fill_out_data</name>
+        <reimplements refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a954c4c75077a7c406f6c81517ea7bb04">fill_out_data</reimplements>
+        <param>
+          <type>uint64_t *</type>
+          <declname>coeff_poly</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="468" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Struct <ref refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT" kindref="compound">FPGAObject_INTT</ref> stores the INTT blob of objects to be transfered to the FPGA. </para>    </briefdescription>
+    <detaileddescription>
+<para>fill_in_data <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">vector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>of objects  fill_out_data </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">vector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>of polynomial coefficients</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+coeff_poly_in_svm vector of polynomial coefficients inv_root_of_unity_powers_in_svm twiddle factors precon_inv_root_of_unity_powers_in_svm inverse twiddle factors coeff_modulus_in_svm_ polynomial coefficients modulus inv_n_in_svm_ normalization factor 1/n for the polynomial coefficients inv_n_w_in_svm_ normalization factor 1/n for the constant coefficient n polynomial size </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="57">
+        <label>intel::hexl::fpga::FPGAObject_INTT</label>
+        <link refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT"/>
+        <childnode refid="58" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="58">
+        <label>intel::hexl::fpga::FPGAObject</label>
+        <link refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="59">
+        <label>intel::hexl::fpga::FPGAObject_INTT</label>
+        <link refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT"/>
+        <childnode refid="60" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="60">
+        <label>intel::hexl::fpga::FPGAObject</label>
+        <link refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject"/>
+      </node>
+    </collaborationgraph>
+    <location file="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" line="460" column="1" bodyfile="/disk1/ymeng12/hexl-fpga/host/inc/fpga.h" bodystart="460" bodyend="477"/>
+    <listofallmembers>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a7f3c908db1e2f024c8270b5098a8dae6" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_INTT</scope><name>batch_size_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a7a893fbe1ec584f7fb59e49dfce3d45e" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_INTT</scope><name>coeff_modulus_in_svm_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a5da6fc4cb5bebebb021c6cc2b94bbd7a" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_INTT</scope><name>coeff_poly_in_svm_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a87af81d73a95ab1c31c8cd9ebf4b1bba" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_INTT</scope><name>context_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a1dc12d446913b942a97bd5caf9e50fb8" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_INTT</scope><name>fence_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a3af9d73a583150a06fee9288a7938e31" prot="public" virt="virtual"><scope>intel::hexl::fpga::FPGAObject_INTT</scope><name>fill_in_data</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a18c10384468f7e39f15b2059fe59d5db" prot="public" virt="virtual"><scope>intel::hexl::fpga::FPGAObject_INTT</scope><name>fill_out_data</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a389464365379dab126715a0dcf1ba922" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_INTT</scope><name>FPGAObject</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a153585cd172743a16e84efd8659aa66c" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_INTT</scope><name>FPGAObject_INTT</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a991d2f78abe5d44b4f98f3b4ac4da29e" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_INTT</scope><name>FPGAObject_INTT</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a99733056751a8574c4573210bb03d5a3" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_INTT</scope><name>g_tag_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a51ecca2b08e9e9d67036d8419acca68b" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_INTT</scope><name>in_objs_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1af7b22e09b44bad334bbf2597619b74fd" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_INTT</scope><name>inv_n_in_svm_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a4d7e4702797bb9e28dd27436e8d981e6" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_INTT</scope><name>inv_n_w_in_svm_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1ab85ed19766b48f1cd854a07786b59f8f" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_INTT</scope><name>inv_root_of_unity_powers_in_svm_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a79d41547e934454b4c4719d2a0d1fd4f" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_INTT</scope><name>n_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a350704607558ab455334aebe055fc2d4" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_INTT</scope><name>n_batch_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1af77e8207b17014631d1251ecf6c375f8" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_INTT</scope><name>operator=</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a9a18cf43978c3d56bad1e3494e25859a" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_INTT</scope><name>precon_inv_root_of_unity_powers_in_svm_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a0131d230161e662b63af86099177beb7" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_INTT</scope><name>recycle</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a246901212706cfac8299f3b47419f33f" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_INTT</scope><name>tag_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1a6be51c4052a667f067326880474dfe97" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_INTT</scope><name>type_</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject_1adecdea2bd81579b973e9292045c8d400" prot="public" virt="virtual"><scope>intel::hexl::fpga::FPGAObject_INTT</scope><name>~FPGAObject</name></member>
+      <member refid="structintel_1_1hexl_1_1fpga_1_1FPGAObject__INTT_1a7cedf64bc8c7af8f1a77dd68e9dd2037" prot="public" virt="non-virtual"><scope>intel::hexl::fpga::FPGAObject_INTT</scope><name>~FPGAObject_INTT</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

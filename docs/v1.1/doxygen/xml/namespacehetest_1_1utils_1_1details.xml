@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="namespacehetest_1_1utils_1_1details" kind="namespace">
+    <compoundname>hetest::utils::details</compoundname>
+    <innerclass refid="structhetest_1_1utils_1_1details_1_1MallocStrategy" prot="public">hetest::utils::details::MallocStrategy</innerclass>
+    <innerclass refid="structhetest_1_1utils_1_1details_1_1CustomAllocStrategy" prot="public">hetest::utils::details::CustomAllocStrategy</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/disk1/ymeng12/hexl-fpga/tests/test_utils/utils-test.hpp" line="245" column="1"/>
+  </compounddef>
+</doxygen>
