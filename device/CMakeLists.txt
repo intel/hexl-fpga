@@ -11,7 +11,7 @@ add_dependencies(emulation hls)
 
 add_custom_target(fpga
     COMMENT "Compiling FPGA bitstream"
-    COMMAND ${CMAKE_SOURCE_DIR}/device/compile.sh -board=pac_s10_usm ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR}
+    COMMAND ${CMAKE_SOURCE_DIR}/device/compile.sh -g0 ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR}
 )
 add_dependencies(fpga hls)
 
@@ -19,6 +19,7 @@ install(FILES
     ${CMAKE_BINARY_DIR}/device/dyadic_multiply.aocx
     ${CMAKE_BINARY_DIR}/device/fwd_ntt.aocx
     ${CMAKE_BINARY_DIR}/device/inv_ntt.aocx
-    ${CMAKE_BINARY_DIR}/device/hexl_fpga.aocx
+    ${CMAKE_BINARY_DIR}/device/keyswitch.aocx
+    ${CMAKE_BINARY_DIR}/device/dyadic_multiply_keyswitch.aocx
     DESTINATION fpga
     PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ)

@@ -1,8 +1,8 @@
 # Copyright (C) 2020-2021 Intel Corporation
 # SPDX-License-Identifier: Apache-2.0
 
-PROJECT_NAME           = "Intel HEXL for FPGA"
-PROJECT_BRIEF          = "Intel Homomorphic Encryption FPGA Acceleration Library, accelerating the modular arithmetic operations used in homomorphic encryption."
+PROJECT_NAME           = "Intel HE Acceleration Library for FPGAs"
+PROJECT_BRIEF          = "Intel Homomorphic Encryption Acceleration Library for FPGAs, accelerating the modular arithmetic operations used in homomorphic encryption on Intel FPGAs."
 
 OUTPUT_DIRECTORY       = @CMAKE_BINARY_DIR@/doc/doxygen
 INPUT                  = @CMAKE_SOURCE_DIR@/host/inc \

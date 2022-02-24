@@ -6,13 +6,13 @@ project(examples)
 
 set (HEXL_FPGA_HINT_DIR ${CMAKE_PREFIX_PATH})
 
-find_package(hexl-fpga 1.0
+find_package(hexl-fpga 1.1
     HINTS ${HEXL_FPGA_HINT_DIR}
     REQUIRED)
 if (NOT TARGET hexl-fpga::hexl-fpga)
-    message(STATUS "Intel HEXL for FPGA: not found")
+    message(STATUS "Intel HE Acceleration Library for FPGAs: not found")
 else()
-    message(STATUS "Intel HEXL for FPGA: found")
+    message(STATUS "Intel HE Acceleration Library for FPGAs: found")
 endif()
 
 add_executable(example_dyadic_multiply example_dyadic_multiply.cpp examples.cpp)
@@ -21,8 +21,8 @@ target_link_libraries(example_dyadic_multiply PRIVATE hexl-fpga::hexl-fpga)
 
 add_custom_command(
     TARGET example_dyadic_multiply POST_BUILD
-    COMMAND rm -f hexl_fpga.aocx
-    COMMAND ln -s ${HEXL_FPGA_HINT_DIR}/../../fpga/hexl_fpga.aocx .
+    COMMAND rm -f dyadic_multiply_keyswitch.aocx
+    COMMAND ln -s ${HEXL_FPGA_HINT_DIR}/../../fpga/dyadic_multiply_keyswitch.aocx .
     VERBATIM
 )
 

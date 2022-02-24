@@ -4,7 +4,7 @@
 cmake_minimum_required(VERSION 3.5.1)
 
 project(hexl-fpga LANGUAGES C CXX)
-set(hexl-fpga_VERSION 1.0)
+set(hexl-fpga_VERSION 1.1)
 
 set(CMAKE_CONFIGURATION_TYPES Debug Release CACHE STRING INTERNAL FORCE)
 set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build Type: Debug or Release")

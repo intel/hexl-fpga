@@ -43,12 +43,12 @@ void ntt::load_ntt_data(size_t work_size) {
 }
 
 void ntt::fpga_ntt_test(size_t work_size) {
-    intel::hexl::set_worksize_NTT(work_size);
+    intel::hexl::_set_worksize_NTT(work_size);
     for (unsigned int j = 0; j < work_size; j++) {
-        intel::hexl::NTT(input_.data() + j * poly_degree_, roots_.data(),
-                         precons_.data(), coeff_modulus_, poly_degree_);
+        intel::hexl::_NTT(input_.data() + j * poly_degree_, roots_.data(),
+                          precons_.data(), coeff_modulus_, poly_degree_);
     }
-    intel::hexl::NTTCompleted();
+    intel::hexl::_NTTCompleted();
 }
 
 BENCHMARK_F(ntt, fpga_ntt_p16384_ws4096)(benchmark::State& state) {

@@ -8,3 +8,4 @@ PointerAlignment: Left
 IndentWidth: 4
 AccessModifierOffset: -4
 IndentCaseLabels: false
+SortIncludes: false

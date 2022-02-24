@@ -49,16 +49,58 @@ void DyadicMultiply(uint64_t* results, const uint64_t* operand1,
 /// up the task
 bool DyadicMultiplyCompleted();
 
+// KeySwitch Section
+/// @brief
+/// Function set_worksize_KeySwitch
+/// Reserves software resources for the KeySwitch
+/// @param ws integer storing the worksize
+///
+void set_worksize_KeySwitch(uint64_t ws);
+/// @brief
+///
+/// Function KeySwitch
+/// Executes KeySwitch operation
+/// @param[out] results stores the keyswitch results
+/// @param[in]  t_target_iter_ptr stores the input ciphertext data
+/// @param[in]  n stores polynomial size
+/// @param[in]  decomp_modulus_size stores modulus size
+/// @param[in]  key_modulus_size stores key modulus size
+/// @param[in]  rns_modulus_size stores the rns modulus size
+/// @param[in]  key_component_size stores the key component size
+/// @param[in]  moduli stores the moduli
+/// @param[in]  k_switch_keys stores the keys for keyswitch operation
+/// @param[in]  modswitch_factors stores the factors for modular switch
+/// @param[in]  twiddle_factors stores the twiddle factors
+///
+void KeySwitch(uint64_t* result, const uint64_t* t_target_iter_ptr, uint64_t n,
+               uint64_t decomp_modulus_size, uint64_t key_modulus_size,
+               uint64_t rns_modulus_size, uint64_t key_component_count,
+               const uint64_t* moduli, const uint64_t** k_switch_keys,
+               const uint64_t* modswitch_factors,
+               const uint64_t* twiddle_factors = nullptr);
+
+/// @brief
+///
+/// Function KeySwitchCompleted
+/// Executed after KeySwitch to sync up the outstanding KeySwitch tasks
+bool KeySwitchCompleted();
+
+////////////////////////////////////////////////////////////////////////////////////////
+//
+// WARNING: The following NTT and INTT related APIs are deprecated since
+// version 1.1. //
+//
+////////////////////////////////////////////////////////////////////////////////////////
 // NTT Section
 
 /// @brief
-/// Function set_worksize_NTT
+/// Function _set_worksize_NTT [[deprecated]]
 /// Reserves software resources for the Number Theoretic Transform
 /// @param ws integer storing the worksize
 ///
-void set_worksize_NTT(uint64_t ws);
+[[deprecated]] void _set_worksize_NTT(uint64_t ws);
 /// @brief
-/// Function NTT
+/// Function _NTT [[deprecated]]
 /// Executes in place the Number Theoretic Transform
 /// @param[in] operand input ciphertext. This is also the output result since
 /// the transform is in place.
@@ -69,27 +111,28 @@ void set_worksize_NTT(uint64_t ws);
 /// factors
 /// @param[in] coeff_modulus stores the modulus
 /// @param[in] n stores the size of the Number Theoretic Transform
-/////
-void NTT(uint64_t* operand, const uint64_t* root_of_unity_powers,
-         const uint64_t* precon_root_of_unity_powers, uint64_t coeff_modulus,
-         uint64_t n);
+///
+[[deprecated]] void _NTT(uint64_t* operand,
+                         const uint64_t* root_of_unity_powers,
+                         const uint64_t* precon_root_of_unity_powers,
+                         uint64_t coeff_modulus, uint64_t n);
 /// @brief
-/// Function NTTCompleted
+/// Function _NTTCompleted [[deprecated]]
 /// Executed after the NTT to wrap up the computation
 /// No parameters
 ///
-bool NTTCompleted();
+[[deprecated]] bool _NTTCompleted();
 
 // INTT Section
 /// @brief
-/// Function set_worksize_INTT
+/// Function _set_worksize_INTT [[deprecated]]
 /// Reserves software resources for the inverse Number Theoretic Transform
 /// @param ws integer storing the worksize
 ///
-void set_worksize_INTT(uint64_t ws);
+[[deprecated]] void _set_worksize_INTT(uint64_t ws);
 
 /// @brief
-/// Function INTT
+/// Function _INTT [[deprecated]]
 /// Executes in place the inverse Number Theoretic Transform
 /// @param[in] operand input ciphertext. This is also the output result since
 /// the transform is in place.
@@ -104,16 +147,18 @@ void set_worksize_INTT(uint64_t ws);
 /// @param[in] inv_n_w  stores the  normalization factor for the constant.
 /// @param[in] n stores the size of the Number Theoretic Transform
 ///
-void INTT(uint64_t* operand, const uint64_t* inv_root_of_unity_powers,
-          const uint64_t* precon_inv_root_of_unity_powers,
-          uint64_t coeff_modulus, uint64_t inv_n, uint64_t inv_n_w, uint64_t n);
+[[deprecated]] void _INTT(uint64_t* operand,
+                          const uint64_t* inv_root_of_unity_powers,
+                          const uint64_t* precon_inv_root_of_unity_powers,
+                          uint64_t coeff_modulus, uint64_t inv_n,
+                          uint64_t inv_n_w, uint64_t n);
 
 /// @brief
-/// Function INTTCompleted
+/// Function _INTTCompleted [[deprecated]]
 /// Executed after the INTT to wrap up the computation
 /// No parameters
 ///
-bool INTTCompleted();
+[[deprecated]] bool _INTTCompleted();
 
 }  // namespace hexl
 }  // namespace intel

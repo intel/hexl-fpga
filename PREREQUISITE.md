@@ -4,13 +4,13 @@
 
 There are two types of Intel Acceleration Stack (version 2.0.1), namely, the [Acceleration Stack for Runtime](https://www.intel.com/content/www/us/en/programmable/f/download/accelerator/license-agreement-pac-d5005.html?swcode=WWW-SWD-IAS-RTE-201) and the [Acceleration Stack for Development](https://www.intel.com/content/altera-www/global/en_us/index/f/download/accelerator/pac-d5005-thank-you.html?swcode=WWW-SWD-IAS-DEV-201). The runtime stack provides a smaller footprint package for software development of runtime host application.  It includes Intel FPGA Runtime Environment (RTE) for OpenCL but does not include Intel Quartus Prime; thus, it assumes that the FPGA bitstreams are available. The development stack allows for accelerator function development using the Intel Quartus Prime Pro Edition software (required and included). Additionally, it comes with the Intel FPGA Software Development Kit (SDK) for OpenCL and the Acceleration Stack. <br>
 
-The Intel Acceleration Stack for development (`d5005_pac_ias_2_0_1_pv_dev_installer.tar.gz`) is encouraged and required to reap the full benefits of Intel HEXL for FPGA, especially before attempting to build the FPGA kernels and if intended usage of Intel HEXL for FPGA includes development contributions. Download, read more detailed installation instructions, updates and related additional resources at [Intel Acceleration Stack link](https://www.intel.com/content/www/us/en/programmable/products/boards_and_kits/dev-kits/altera/intel-fpga-pac-d5005/getting-started.html). <br>
+The Intel Acceleration Stack for development (`d5005_pac_ias_2_0_1_pv_dev_installer.tar.gz`) is encouraged and required to reap the full benefits of Intel HE Acceleration Library for FPGAs, especially before attempting to build the FPGA kernels and if intended usage of Intel HE Acceleration Library for FPGAs includes development contributions. Download, read more detailed installation instructions, updates and related additional resources at [Intel Acceleration Stack link](https://www.intel.com/content/www/us/en/programmable/products/boards_and_kits/dev-kits/altera/intel-fpga-pac-d5005/getting-started.html). <br>
 
 Note: Even though the validated operating system is RHEL 7.6, we used CentOS 7.9 without issues.<br>
 
 ## Intel Quartus Prime Pro Edition
 
-Quartus Prime version 19.2 is installed in the Acceleration Stack installation. For Intel HEXL for FPGA, the installation of Quartus Prime version 20.3 is required. [Download the complete version ](https://fpgasoftware.intel.com/20.3/?edition=pro) and follow the instructions below. <br>
+Quartus Prime version 19.2 is installed in the Acceleration Stack installation. For Intel HE Acceleration Library for FPGAs, the installation of Quartus Prime version 20.3 is required. [Download the complete version ](https://fpgasoftware.intel.com/20.3/?edition=pro) and follow the instructions below. <br>
 
 ```
 tar xvf Quartus-pro-20.3.0.158-linux-complete.tar

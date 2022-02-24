@@ -5,35 +5,22 @@
 
 set -eo pipefail
 
+spath=$(dirname $0)
+. ${spath}/bitstream_dir.sh
+
 ########################################
 # FPGA run with individual bitstream
 ########################################
-if [[ -n ${RUN_CHOICE} ]] && [[ ${RUN_CHOICE} -eq 2 ]]
+if [[ -z ${RUN_CHOICE} ]] || [[ ${RUN_CHOICE} -eq 2 ]]
 then
-    aocl program acl0 inv_ntt.aocx
+    aocl program acl0 ${bitstream_dir}/inv_ntt.aocx
 fi
 
 echo ""
-echo "FPGA_KERNEL=INTT"
+echo "FPGA_BITSTREAM=${bitstream_dir}/inv_ntt.aocx FPGA_KERNEL=INTT"
 # batch 1 (default)
-FPGA_KERNEL=INTT ./test_inv_ntt
+FPGA_BITSTREAM=${bitstream_dir}/inv_ntt.aocx FPGA_KERNEL=INTT ./test_inv_ntt
 echo ""
-echo "FPGA_KERNEL=INTT BATCH_SIZE_INTT=8"
+echo "FPGA_BITSTREAM=${bitstream_dir}/inv_ntt.aocx FPGA_KERNEL=INTT BATCH_SIZE_INTT=8"
 # batch 8
-FPGA_KERNEL=INTT BATCH_SIZE_INTT=8 ./test_inv_ntt
-
-########################################
-# FPGA run with integrated bitstream
-########################################
-if [[ -n ${RUN_CHOICE} ]] && [[ ${RUN_CHOICE} -eq 2 ]]
-then
-    aocl program acl0 hexl_fpga.aocx
-fi
-
-echo ""
-# batch 1 (default)
-./test_inv_ntt
-echo ""
-echo "FPGA_KERNEL=INTEGRATED BATCH_SIZE_INTT=8"
-# batch 8
-FPGA_KERNEL=INTEGRATED BATCH_SIZE_INTT=8 ./test_inv_ntt
+FPGA_BITSTREAM=${bitstream_dir}/inv_ntt.aocx FPGA_KERNEL=INTT BATCH_SIZE_INTT=8 ./test_inv_ntt
