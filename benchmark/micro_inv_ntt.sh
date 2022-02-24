@@ -5,24 +5,29 @@
 
 set -eo pipefail
 
+spath=$(dirname $0)
+. ${spath}/bitstream_dir.sh
+
+########################################
 # FPGA run with individual bitstream
-if [[ -n ${RUN_CHOICE} ]] && [[ ${RUN_CHOICE} -eq 2 ]]
+########################################
+if [[ -z ${RUN_CHOICE} ]] || [[ ${RUN_CHOICE} -eq 2 ]]
 then
-    aocl program acl0 inv_ntt.aocx
+    aocl program acl0 ${bitstream_dir}/inv_ntt.aocx
 fi
 
 echo ""
-echo "FPGA_KERNEL=INTT BATCH_SIZE_INTT = 1"
-FPGA_KERNEL=INTT BATCH_SIZE_INTT=1 ./bench_inv_ntt
+echo "FPGA_BITSTREAM=${bitstream_dir}/inv_ntt.aocx FPGA_KERNEL=INTT BATCH_SIZE_INTT = 1"
+FPGA_BITSTREAM=${bitstream_dir}/inv_ntt.aocx FPGA_KERNEL=INTT BATCH_SIZE_INTT=1 ./bench_inv_ntt
 echo ""
-echo "FPGA_KERNEL=INTT BATCH_SIZE_INTT = 8"
-FPGA_KERNEL=INTT BATCH_SIZE_INTT=8 ./bench_inv_ntt
+echo "FPGA_BITSTREAM=${bitstream_dir}/inv_ntt.aocx FPGA_KERNEL=INTT BATCH_SIZE_INTT = 8"
+FPGA_BITSTREAM=${bitstream_dir}/inv_ntt.aocx FPGA_KERNEL=INTT BATCH_SIZE_INTT=8 ./bench_inv_ntt
 echo ""
-echo "FPGA_KERNEL=INTT BATCH_SIZE_INTT = 32"
-FPGA_KERNEL=INTT BATCH_SIZE_INTT=32 ./bench_inv_ntt
+echo "FPGA_BITSTREAM=${bitstream_dir}/inv_ntt.aocx FPGA_KERNEL=INTT BATCH_SIZE_INTT = 32"
+FPGA_BITSTREAM=${bitstream_dir}/inv_ntt.aocx FPGA_KERNEL=INTT BATCH_SIZE_INTT=32 ./bench_inv_ntt
 echo ""
-echo "FPGA_KERNEL=INTT BATCH_SIZE_INTT = 128"
-FPGA_KERNEL=INTT BATCH_SIZE_INTT=128 ./bench_inv_ntt
+echo "FPGA_BITSTREAM=${bitstream_dir}/inv_ntt.aocx FPGA_KERNEL=INTT BATCH_SIZE_INTT = 128"
+FPGA_BITSTREAM=${bitstream_dir}/inv_ntt.aocx FPGA_KERNEL=INTT BATCH_SIZE_INTT=128 ./bench_inv_ntt
 echo ""
-echo "FPGA_KERNEL=INTT BATCH_SIZE_INTT = 512"
-FPGA_KERNEL=INTT BATCH_SIZE_INTT=512 ./bench_inv_ntt
+echo "FPGA_BITSTREAM=${bitstream_dir}/inv_ntt.aocx FPGA_KERNEL=INTT BATCH_SIZE_INTT = 512"
+FPGA_BITSTREAM=${bitstream_dir}/inv_ntt.aocx FPGA_KERNEL=INTT BATCH_SIZE_INTT=512 ./bench_inv_ntt

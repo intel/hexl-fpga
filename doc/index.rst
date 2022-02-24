@@ -1,4 +1,4 @@
-## Intel HEXL Documentation ##  
+## Intel HE Acceleration Library for FPGAs Documentation ##  
 .. toctree::  
       api  
 

@@ -8,6 +8,7 @@
 #include "dyadic_multiply.h"
 #include "fpga_context.h"
 #include "intt.h"
+#include "keyswitch.h"
 #include "ntt.h"
 
 namespace intel {
@@ -34,33 +35,60 @@ bool DyadicMultiplyCompleted() {
     return intel::hexl::fpga::DyadicMultiplyCompleted();
 }
 
+// KeySwitch Section
+void KeySwitch(uint64_t* result, const uint64_t* t_target_iter_ptr, uint64_t n,
+               uint64_t decomp_modulus_size, uint64_t key_modulus_size,
+               uint64_t rns_modulus_size, uint64_t key_component_count,
+               const uint64_t* moduli, const uint64_t** k_switch_keys,
+               const uint64_t* modswitch_factors,
+               const uint64_t* twiddle_factors) {
+    intel::hexl::fpga::KeySwitch(
+        result, t_target_iter_ptr, n, decomp_modulus_size, key_modulus_size,
+        rns_modulus_size, key_component_count, moduli, k_switch_keys,
+        modswitch_factors, twiddle_factors);
+}
+
+void set_worksize_KeySwitch(uint64_t ws) {
+    intel::hexl::fpga::set_worksize_KeySwitch(ws);
+}
+
+bool KeySwitchCompleted() { return intel::hexl::fpga::KeySwitchCompleted(); }
+
+////////////////////////////////////////////////////////////////////////////////////////
+//
+// WARNING: The following NTT and INTT related APIs are deprecated since
+// version 1.1. //
+//
+////////////////////////////////////////////////////////////////////////////////////////
+
 // NTT Section
-void NTT(uint64_t* coeff_poly, const uint64_t* root_of_unity_powers,
-         const uint64_t* precon_root_of_unity_powers, uint64_t coeff_modulus,
-         uint64_t n) {
+
+void _NTT(uint64_t* coeff_poly, const uint64_t* root_of_unity_powers,
+          const uint64_t* precon_root_of_unity_powers, uint64_t coeff_modulus,
+          uint64_t n) {
     intel::hexl::fpga::NTT(coeff_poly, root_of_unity_powers,
                            precon_root_of_unity_powers, coeff_modulus, n);
 }
 
-void set_worksize_NTT(uint64_t ws) { intel::hexl::fpga::set_worksize_NTT(ws); }
+void _set_worksize_NTT(uint64_t ws) { intel::hexl::fpga::set_worksize_NTT(ws); }
 
-bool NTTCompleted() { return intel::hexl::fpga::NTTCompleted(); }
+bool _NTTCompleted() { return intel::hexl::fpga::NTTCompleted(); }
 
 // INTT Section
-void INTT(uint64_t* coeff_poly, const uint64_t* inv_root_of_unity_powers,
-          const uint64_t* precon_inv_root_of_unity_powers,
-          uint64_t coeff_modulus, uint64_t inv_n, uint64_t inv_n_w,
-          uint64_t n) {
+void _INTT(uint64_t* coeff_poly, const uint64_t* inv_root_of_unity_powers,
+           const uint64_t* precon_inv_root_of_unity_powers,
+           uint64_t coeff_modulus, uint64_t inv_n, uint64_t inv_n_w,
+           uint64_t n) {
     intel::hexl::fpga::INTT(coeff_poly, inv_root_of_unity_powers,
                             precon_inv_root_of_unity_powers, coeff_modulus,
                             inv_n, inv_n_w, n);
 }
 
-void set_worksize_INTT(uint64_t ws) {
+void _set_worksize_INTT(uint64_t ws) {
     intel::hexl::fpga::set_worksize_INTT(ws);
 }
 
-bool INTTCompleted() { return intel::hexl::fpga::INTTCompleted(); }
+bool _INTTCompleted() { return intel::hexl::fpga::INTTCompleted(); }
 
 }  // namespace hexl
 }  // namespace intel

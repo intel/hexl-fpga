@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 cmake_minimum_required(VERSION 3.5.1)
+include(../cmake/json/json.cmake)
 
 function(test_function kernel)
 
@@ -22,6 +23,7 @@ function(test_function kernel)
     target_link_directories(test_${KERNEL} PUBLIC ${CMAKE_BINARY_DIR}/hexl-install/lib)
     target_link_libraries(test_${KERNEL} PUBLIC hexl-fpga)
     target_link_libraries(test_${KERNEL} PRIVATE gtest)
+    target_link_libraries(test_${KERNEL} PRIVATE nlohmann_json::nlohmann_json)
 
     if(ENABLE_FPGA_DEBUG)
         target_compile_options(test_${KERNEL} PRIVATE -DFPGA_DEBUG)
@@ -36,14 +38,19 @@ function(test_function kernel)
          DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 endfunction()
 
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/bitstream_dir.sh
+     DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
 test_function(dyadic_multiply)
 test_function(fwd_ntt)
 test_function(inv_ntt)
-test_function(hexl_fpga)
+test_function(keyswitch)
+test_function(dyadic_multiply_keyswitch)
 
 add_custom_target(tests
     COMMAND ./micro_dyadic_multiply.sh DEPENDS test_dyadic_multiply
     COMMAND ./micro_fwd_ntt.sh DEPENDS test_fwd_ntt
     COMMAND ./micro_inv_ntt.sh DEPENDS test_inv_ntt
-    COMMAND ./micro_hexl_fpga.sh DEPENDS test_hexl_fpga
+    COMMAND ./micro_keyswitch.sh DEPENDS test_keyswitch
+    COMMAND ./micro_dyadic_multiply_keyswitch.sh DEPENDS test_dyadic_multiply_keyswitch
 )

@@ -291,6 +291,8 @@ public:
     AlignedAllocator(const AlignedAllocator& src)
         : m_alloc_impl(src.m_alloc_impl) {}
 
+    AlignedAllocator& operator=(const AlignedAllocator& src) = delete;
+
     template <typename U>
     AlignedAllocator(const AlignedAllocator<U, Alignment>& src)
         : m_alloc_impl(src.m_alloc_impl) {}

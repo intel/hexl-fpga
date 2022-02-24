@@ -13,6 +13,9 @@ set(KERNELS_SRCS
     ${FPGA_SRC_ROOT_DIR}/host/src/dyadic_multiply.cpp
     ${FPGA_SRC_ROOT_DIR}/host/src/intt.cpp
     ${FPGA_SRC_ROOT_DIR}/host/src/ntt.cpp
+    ${FPGA_SRC_ROOT_DIR}/host/src/keyswitch.cpp
+    ${FPGA_SRC_ROOT_DIR}/host/src/twiddle-factors.cpp
+    ${FPGA_SRC_ROOT_DIR}/host/src/number_theory_util.cpp
     ${FPGA_SRC_ROOT_DIR}/host/src/fpga_int.cpp
     ${FPGA_SRC_ROOT_DIR}/host/src/fpga.cpp
     ${FPGA_SRC_ROOT_DIR}/host/src/fpga_context.cpp
@@ -27,7 +30,7 @@ set_property(TARGET hexl-fpga PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 target_compile_options(hexl-fpga PRIVATE -fPIE -fPIC -pie -fstack-protector -Wformat -Wformat-security)
 target_compile_options(hexl-fpga PRIVATE -z noexecstack -Wl,-z,relro,-z,now -Wl,-Bsymbolic)
-
+target_compile_options(hexl-fpga PRIVATE -Wno-address-of-packed-member -faligned-new=1 -Wno-strict-aliasing -Wno-deprecated-declarations)
 if(ENABLE_FPGA_DEBUG)
     target_compile_options(hexl-fpga PRIVATE -DFPGA_DEBUG)
 endif(ENABLE_FPGA_DEBUG)

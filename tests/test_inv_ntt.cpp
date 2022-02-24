@@ -114,12 +114,12 @@ void inv_ntt_test::run_inv_ntt_test(StimulusType stimulusType,
         std::vector<uint64_t> inINTT = input_[i];
         std::vector<uint64_t> outINTT = input_[i];
         ntt.ComputeInverse(outINTT.data(), results.data(), 1, 1);
-        intel::hexl::set_worksize_INTT(1);
-        intel::hexl::INTT(results.data(), ntt.GetInvRootOfUnityPowersPtr(),
-                          ntt.GetPrecon64InvRootOfUnityPowersPtr(),
-                          this->primes_[i], inv_ntt_degree, inv_n_w,
-                          ntt_degree);
-        intel::hexl::INTTCompleted();
+        intel::hexl::_set_worksize_INTT(1);
+        intel::hexl::_INTT(results.data(), ntt.GetInvRootOfUnityPowersPtr(),
+                           ntt.GetPrecon64InvRootOfUnityPowersPtr(),
+                           this->primes_[i], inv_ntt_degree, inv_n_w,
+                           ntt_degree);
+        intel::hexl::_INTTCompleted();
         ASSERT_EQ(results, outINTT);
     }
 }
