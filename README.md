@@ -51,7 +51,7 @@ In sum, Intel HE Acceleration Library for FPGAs implements the following functio
 - KeySwitch
 - Forward and inverse negacyclic number-theoretic transforms (NTT)
 
-To ensure the correctness of the functions in Intel HE Acceleration Library for FPGAs, the functions support the following configurations.  Dyadic multiplication supports the ciphertext polynomial size of 1024, 2048, 4096, 8192, 16384, and 32768.  Keyswitch supports the ciphertext polynomial size of 1024, 2048, 4096, and 16384, the decomposed modulus size of no more than seven, and all ciphertext moduli to be no more than 52 bits.  The standalone forward and inverse negacyclic number-theoretic transform functions support the ciphertext polynomial size of 16384.
+To ensure the correctness of the functions in Intel HE Acceleration Library for FPGAs, the functions support the following configurations.  Dyadic multiplication supports the ciphertext polynomial size of 1024, 2048, 4096, 8192, 16384, and 32768.  Keyswitch supports the ciphertext polynomial size of 1024, 2048, 4096, 8192, and 16384, the decomposed modulus size of no more than seven, and all ciphertext moduli to be no more than 52 bits.  The standalone forward and inverse negacyclic number-theoretic transform functions support the ciphertext polynomial size of 16384.
 
 For each function, the library provides an FPGA implementation using OpenCL.
 
@@ -308,6 +308,7 @@ The Intel contributors to this project, sorted by last name, are
   - [Jingyi Jin](https://www.linkedin.com/in/jingyi-jin-655735/)
   - [Yan Meng](https://www.linkedin.com/in/yan-meng-5832895/) (lead)
   - [Nir Peled](https://www.linkedin.com/in/nir-peled-4a52266/)
+  - [Dennis Calderon Vega](https://www.linkedin.com/in/dennis-calderon-996840a9/)
   - [Yong Wang](https://github.com/wangyon1/)
   - [Yongfa Zhou](https://www.linkedin.com/in/yongfa-zhou-16217166/)
   
