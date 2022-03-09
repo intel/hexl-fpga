@@ -46,9 +46,10 @@ __single_task void load(__global HOST_MEM uint64_t* restrict t_target_iter_ptr,
                                    k_switch_keys3};
         // only broadcast only once
         if (decomp_index == 0) {
+            unsigned coeff_log = get_ntt_log(coeff_count);
             write_channel_intel(
                 ch_ntt2_decomp_size,
-                decomp_modulus_size * coeff_count_int / VEC - 1);
+                decomp_modulus_size * coeff_log * coeff_count / 2 / VEC - 1);
             write_channel_intel(
                 ch_intt1_decomp_size,
                 decomp_modulus_size * coeff_count_int / VEC - 1);

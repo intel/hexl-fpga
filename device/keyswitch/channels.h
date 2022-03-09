@@ -75,9 +75,10 @@ typedef unsigned int __attribute__((__ap_int(256))) uint256_t;
 #define NTT_ENGINES (MAX_RNS_MODULUS_SIZE + MAX_KEY_COMPONENT_SIZE)
 #define MAX_COFF_COUNT 16384
 #define DEFAULT_DEPTH 1
+#define MAX_U32 (unsigned)(-1)
 
 #define STEP(n, max) n = n == ((max)-1) ? 0 : n + 1
-#define STEP2(n, max) n = n == (max) ? -1 : n + 1
+#define STEP2(n, max) n = n == (max) ? MAX_U32 : n + 1
 
 typedef struct {
     uint64_t data[VEC * 2];

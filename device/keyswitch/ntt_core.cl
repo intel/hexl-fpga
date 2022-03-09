@@ -192,11 +192,7 @@ void _ntt_internal(channel ulong4 ch_ntt_modulus,
                 unsigned shift_left_elements = (roots_start) % VEC;
                 unsigned long cur_roots[VEC];
 
-                int tf_index = roots_start / VEC;
-                if (tf_index != last_tf_index) {
-                    tf = read_channel_intel(ch_twiddle_factor);
-                }
-                last_tf_index = tf_index;
+                tf = read_channel_intel(ch_twiddle_factor);
 
 #pragma unroll
                 for (int n = 0; n < VEC; n++) {
