@@ -185,53 +185,7 @@ void _ntt_internal(channel ulong4 ch_ntt_modulus,
                     }
                 }
 
-                unsigned ivec = (k * VEC + VEC - 1) >> t_log;
-                unsigned roots_start = roots_off + m + i0;
-                unsigned roots_end = roots_off + m + ivec;
-
-                unsigned shift_left_elements = (roots_start) % VEC;
-                unsigned long cur_roots[VEC];
-
                 tf = read_channel_intel(ch_twiddle_factor);
-
-#pragma unroll
-                for (int n = 0; n < VEC; n++) {
-                    cur_roots[n] = tf.data[n];
-                }
-
-                typedef unsigned int __attribute__((__ap_int(VEC * 64)))
-                uint_vec_t;
-                *(uint_vec_t*)cur_roots =
-                    (*(uint_vec_t*)cur_roots) >> (shift_left_elements * 64);
-
-                unsigned select_num = roots_end % VEC - roots_start % VEC + 1;
-
-                unsigned long reorder_roots[VEC];
-
-#pragma unroll
-                for (int n = 0; n < VEC; n++) {
-                    reorder_roots[n] = cur_roots[n];
-                }
-
-                if (select_num == 1) {
-#pragma unroll
-                    for (int n = 1; n < VEC; n++) {
-                        reorder_roots[n] = cur_roots[0];
-                    }
-                } else if (select_num == 2) {
-#pragma unroll
-                    for (int n = 0; n < VEC / 2; n++) {
-                        reorder_roots[n] = cur_roots[0];
-                        reorder_roots[n + VEC / 2] = cur_roots[1];
-                    }
-                } else if (select_num == 4) {
-#pragma unroll
-                    for (int n = 0; n < 4; n++) {
-                        reorder_roots[n * 2] = cur_roots[n];
-                        reorder_roots[n * 2 + 1] = cur_roots[n];
-                    }
-                }
-
                 ntt_elements elements;
 #pragma unroll
                 for (int n = 0; n < VEC; n++) {
@@ -240,8 +194,7 @@ void _ntt_internal(channel ulong4 ch_ntt_modulus,
                     unsigned j = (k * VEC + n) &
                                  (t - 1);  // j is the position of a group
                     unsigned j1 = i * 2 * t;
-
-                    const unsigned long W_op = reorder_roots[n];
+                    unsigned long W_op = tf.data[n];
 
                     const int Xn = n / t * (2 * t) + n % t;
                     unsigned long tx = curX_rep[n];

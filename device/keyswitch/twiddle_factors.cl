@@ -3,6 +3,42 @@
 
 #include "channels.h"
 
+twiddle_factor shift_and_select_twiddle_factors(twiddle_factor tf,
+                                                unsigned shift_left_elements,
+                                                unsigned select_num) {
+    twiddle_factor reordered_tf;
+    typedef unsigned int __attribute__((__ap_int(VEC * 64))) uint_vec_t;
+    *(uint_vec_t*)(tf.data) =
+        (*(uint_vec_t*)tf.data) >> (shift_left_elements * 64);
+
+    unsigned long reorder_roots[VEC];
+
+#pragma unroll
+    for (int n = 0; n < VEC; n++) {
+        reordered_tf.data[n] = tf.data[n];
+    }
+
+    if (select_num == 1) {
+#pragma unroll
+        for (int n = 1; n < VEC; n++) {
+            reordered_tf.data[n] = tf.data[0];
+        }
+    } else if (select_num == 2) {
+#pragma unroll
+        for (int n = 0; n < VEC / 2; n++) {
+            reordered_tf.data[n] = tf.data[0];
+            reordered_tf.data[n + VEC / 2] = tf.data[1];
+        }
+    } else if (select_num == 4) {
+#pragma unroll
+        for (int n = 0; n < 4; n++) {
+            reordered_tf.data[n * 2] = tf.data[n];
+            reordered_tf.data[n * 2 + 1] = tf.data[n];
+        }
+    }
+    return reordered_tf;
+}
+
 __single_task __autorun void dispatch_twiddle_factors() {
     uint64_t twiddle_factors0[MAX_COFF_COUNT / VEC][VEC];
     uint64_t twiddle_factors1[MAX_COFF_COUNT / VEC][VEC];
@@ -95,15 +131,24 @@ __single_task __autorun void dispatch_twiddle_factors() {
         }
 
         unsigned ntt1_tf_index[MAX_KEY_MODULUS_SIZE];
+        unsigned select_num[MAX_KEY_MODULUS_SIZE];
+        unsigned shift_left_elements[MAX_KEY_MODULUS_SIZE];
+
         unsigned coeff_log = get_ntt_log(coeff_count);
 #pragma unroll
         for (int i = 0; i < MAX_KEY_MODULUS_SIZE; i++) {
             unsigned fly_index = ntt1_index[i] / (coeff_count / 2 / VEC);
-            unsigned i0 =
-                ((ntt1_index[i] & ((coeff_count / 2 / VEC)) - 1) * VEC) >>
-                (coeff_log - 1 - fly_index);
+            unsigned t_log = coeff_log - 1 - fly_index;
+            unsigned k = ntt1_index[i] & ((coeff_count / 2 / VEC)) - 1;
+            unsigned i0 = (k * VEC) >> t_log;
             unsigned m = 1 << fly_index;
             ntt1_tf_index[i] = (m + i0) / VEC;
+
+            unsigned ivec = (k * VEC + VEC - 1) >> t_log;
+            unsigned roots_end = 0 + m + ivec;
+            unsigned roots_start = 0 + m + i0;
+            select_num[i] = roots_end % VEC - roots_start % VEC + 1;
+            shift_left_elements[i] = (roots_start) % VEC;
         }
         unsigned ntt1_tf_size = coeff_log * coeff_count / 2 / VEC;
 
@@ -114,7 +159,10 @@ __single_task __autorun void dispatch_twiddle_factors() {
             for (int j = 0; j < VEC; j++) {
                 tf.data[j] = twiddle_factors0[ntt1_tf_index[k]][j];
             }
-            bool success = write_channel_nb_intel(ch_twiddle_factor_rep[k], tf);
+            bool success = write_channel_nb_intel(
+                ch_twiddle_factor_rep[k],
+                shift_and_select_twiddle_factors(tf, shift_left_elements[k],
+                                                 select_num[k]));
             if (success) STEP(ntt1_index[k], ntt1_tf_size);
         }
 
@@ -125,7 +173,10 @@ __single_task __autorun void dispatch_twiddle_factors() {
             for (int j = 0; j < VEC; j++) {
                 tf.data[j] = twiddle_factors1[ntt1_tf_index[k]][j];
             }
-            bool success = write_channel_nb_intel(ch_twiddle_factor_rep[k], tf);
+            bool success = write_channel_nb_intel(
+                ch_twiddle_factor_rep[k],
+                shift_and_select_twiddle_factors(tf, shift_left_elements[k],
+                                                 select_num[k]));
             if (success) STEP(ntt1_index[k], ntt1_tf_size);
         }
 
@@ -136,7 +187,10 @@ __single_task __autorun void dispatch_twiddle_factors() {
             for (int j = 0; j < VEC; j++) {
                 tf.data[j] = twiddle_factors2[ntt1_tf_index[k]][j];
             }
-            bool success = write_channel_nb_intel(ch_twiddle_factor_rep[k], tf);
+            bool success = write_channel_nb_intel(
+                ch_twiddle_factor_rep[k],
+                shift_and_select_twiddle_factors(tf, shift_left_elements[k],
+                                                 select_num[k]));
             if (success) STEP(ntt1_index[k], ntt1_tf_size);
         }
 
@@ -147,7 +201,10 @@ __single_task __autorun void dispatch_twiddle_factors() {
             for (int j = 0; j < VEC; j++) {
                 tf.data[j] = twiddle_factors3[ntt1_tf_index[k]][j];
             }
-            bool success = write_channel_nb_intel(ch_twiddle_factor_rep[k], tf);
+            bool success = write_channel_nb_intel(
+                ch_twiddle_factor_rep[k],
+                shift_and_select_twiddle_factors(tf, shift_left_elements[k],
+                                                 select_num[k]));
             if (success) STEP(ntt1_index[k], ntt1_tf_size);
         }
 
@@ -158,7 +215,10 @@ __single_task __autorun void dispatch_twiddle_factors() {
             for (int j = 0; j < VEC; j++) {
                 tf.data[j] = twiddle_factors4[ntt1_tf_index[k]][j];
             }
-            bool success = write_channel_nb_intel(ch_twiddle_factor_rep[k], tf);
+            bool success = write_channel_nb_intel(
+                ch_twiddle_factor_rep[k],
+                shift_and_select_twiddle_factors(tf, shift_left_elements[k],
+                                                 select_num[k]));
             if (success) STEP(ntt1_index[k], ntt1_tf_size);
         }
 
@@ -169,7 +229,10 @@ __single_task __autorun void dispatch_twiddle_factors() {
             for (int j = 0; j < VEC; j++) {
                 tf.data[j] = twiddle_factors5[ntt1_tf_index[k]][j];
             }
-            bool success = write_channel_nb_intel(ch_twiddle_factor_rep[k], tf);
+            bool success = write_channel_nb_intel(
+                ch_twiddle_factor_rep[k],
+                shift_and_select_twiddle_factors(tf, shift_left_elements[k],
+                                                 select_num[k]));
             if (success) STEP(ntt1_index[k], ntt1_tf_size);
         }
 
@@ -180,7 +243,10 @@ __single_task __autorun void dispatch_twiddle_factors() {
             for (int j = 0; j < VEC; j++) {
                 tf.data[j] = twiddle_factors6[ntt1_tf_index[k]][j];
             }
-            bool success = write_channel_nb_intel(ch_twiddle_factor_rep[k], tf);
+            bool success = write_channel_nb_intel(
+                ch_twiddle_factor_rep[k],
+                shift_and_select_twiddle_factors(tf, shift_left_elements[k],
+                                                 select_num[k]));
             if (success) STEP(ntt1_index[k], ntt1_tf_size);
         }
 
@@ -191,11 +257,18 @@ __single_task __autorun void dispatch_twiddle_factors() {
             ntt2_index == MAX_U32 ? 0 : ntt2_index % ntt_loops;
 
         unsigned fly_index = ntt2_coeff_index / (coeff_count / 2 / VEC);
-        unsigned i0 =
-            ((ntt2_coeff_index & ((coeff_count / 2 / VEC)) - 1) * VEC) >>
-            (coeff_log - 1 - fly_index);
+        unsigned t_log = coeff_log - 1 - fly_index;
+        unsigned k = ntt2_coeff_index & ((coeff_count / 2 / VEC)) - 1;
+        unsigned i0 = (k * VEC) >> t_log;
+
         unsigned m = 1 << fly_index;
         unsigned ntt2_tf_index = (m + i0) / VEC;
+
+        unsigned ivec = (k * VEC + VEC - 1) >> t_log;
+        unsigned roots_end = 0 + m + ivec;
+        unsigned roots_start = 0 + m + i0;
+        unsigned select_num2 = roots_end % VEC - roots_start % VEC + 1;
+        unsigned shift_left_elements2 = (roots_start) % VEC;
 
         twiddle_factor tf;
 #pragma unroll
@@ -225,7 +298,9 @@ __single_task __autorun void dispatch_twiddle_factors() {
         // write ntt2
         if (ntt2_index != MAX_U32) {
             bool success = write_channel_nb_intel(
-                ch_twiddle_factor_rep[NTT_ENGINES - 2], tf);
+                ch_twiddle_factor_rep[NTT_ENGINES - 2],
+                shift_and_select_twiddle_factors(tf, shift_left_elements2,
+                                                 select_num2));
             if (success) STEP2(ntt2_index, ntt2_decomp_size);
         }
 
