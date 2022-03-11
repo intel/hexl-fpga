@@ -61,9 +61,8 @@ run_fpga() {
     ./bench_keyswitch  > ${results}/fpga.iter-${iter}.batch-${batch}.log
 }
 
-#build_cpu
-
-#build_fpga
+build_cpu
+build_fpga
 
 pushd build/benchmark
 for i in 1 1024 4096 16384
