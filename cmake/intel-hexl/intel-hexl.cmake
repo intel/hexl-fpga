@@ -4,7 +4,7 @@
 include(ExternalProject)
 
 set(INTEL_HEXL_GIT_REPO_URL https://github.com/intel/hexl.git)
-set(INTEL_HEXL_GIT_LABEL development)
+set(INTEL_HEXL_GIT_LABEL v1.2.4)
 
 ExternalProject_Add(
     ext_intel_hexl
