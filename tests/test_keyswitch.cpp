@@ -100,8 +100,13 @@ KeySwitchTestVector::KeySwitchTestVector(const char* json_filename)
     }
 
     t_target_iter_ptr = js["t_target_iter_ptr"].get<std::vector<uint64_t>>();
-    input = js["input"].get<std::vector<uint64_t>>();
-    expected_output = js["expected_output"].get<std::vector<uint64_t>>();
+    for (uint64_t k = 0; k < decomp_modulus_size * coeff_count; k++) {
+        input.push_back(js["input"][k]);
+        input.push_back(js["input"][k + decomp_modulus_size * coeff_count]);
+        expected_output.push_back(js["expected_output"][k]);
+        expected_output.push_back(
+            js["expected_output"][k + decomp_modulus_size * coeff_count]);
+    }
 }
 
 std::vector<std::string> glob(const char* pattern) {

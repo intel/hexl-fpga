@@ -74,7 +74,10 @@ KeySwitchTestVector::KeySwitchTestVector(const char* json_filename)
     }
 
     t_target_iter_ptr = js["t_target_iter_ptr"].get<std::vector<uint64_t>>();
-    input = js["input"].get<std::vector<uint64_t>>();
+    for (uint64_t k = 0; k < decomp_modulus_size * coeff_count; k++) {
+        input.push_back(js["input"][k]);
+        input.push_back(js["input"][k + decomp_modulus_size * coeff_count]);
+    }
 }
 
 class keyswitch : public benchmark::Fixture {

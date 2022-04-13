@@ -696,7 +696,7 @@ private:
     KeySwitch_invn_t invn_;
     uint64_t KeySwitch_id_;
     cl_event KeySwitch_events_write_[2][128];
-    cl_event KeySwitch_events_enqueue_[2][2];
+    cl_event KeySwitch_events_enqueue_[2][3];
     std::unordered_map<uint64_t**, KeySwitchMemKeys*> keys_map_;
     std::unordered_map<uint64_t**, KeySwitchMemKeys*>::iterator keys_map_iter_;
 
