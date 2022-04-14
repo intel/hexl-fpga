@@ -167,6 +167,9 @@ BENCHMARK_F(keyswitch, 16384_6_7_7_2)
 
     setup_keyswitch(files);
 
+    // warm up
+    bench_keyswitch();
+
     for (auto st : state) {
         bench_keyswitch();
     }
