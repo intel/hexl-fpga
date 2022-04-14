@@ -648,7 +648,7 @@ private:
     KeySwitchMemKeys* KeySwitch_load_keys(FPGAObject_KeySwitch* fpga_obj);
     void build_modulus_meta(FPGAObject_KeySwitch* fpga_obj);
     void build_invn_meta(FPGAObject_KeySwitch* fpga_obj);
-    void KeySwitch_read_output();
+    void KeySwitch_read_output(int peer_id);
 
     uint64_t precompute_modulus_k(uint64_t modulus);
 

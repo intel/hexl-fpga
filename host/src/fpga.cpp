@@ -923,9 +923,16 @@ void Device::run() {
                                       fpga_obj->batch_size_ - 1) /
                                      fpga_obj->batch_size_;
                     if (batch == KeySwitch_id_) {
-                        for (int i = 0; i < NUM_KEYSWITCH_LATENCY - 1; i++) {
-                            KeySwitch_read_output();
-                            KeySwitch_id_++;
+                        unsigned leftsize =
+                            KeySwitch_id_ % NUM_KEYSWITCH_LATENCY;
+                        leftsize = KeySwitch_id_ >= NUM_KEYSWITCH_LATENCY
+                                       ? (NUM_KEYSWITCH_LATENCY - 1)
+                                       : leftsize;
+                        for (unsigned i = 0; i < leftsize; i++) {
+                            KeySwitch_read_output((KeySwitch_id_ +
+                                                   NUM_KEYSWITCH_LATENCY + i -
+                                                   leftsize) %
+                                                  NUM_KEYSWITCH_LATENCY);
                         }
                         KeySwitch_id_ = 0;
                     }
@@ -1729,9 +1736,7 @@ bool Device::process_output_INTT() {
     return 0;
 }
 
-void Device::KeySwitch_read_output() {
-    int peer_id =
-        (KeySwitch_id_ - (NUM_KEYSWITCH_LATENCY - 1)) % NUM_KEYSWITCH_LATENCY;
+void Device::KeySwitch_read_output(int peer_id) {
     FPGAObject* peer = fpgaObjects_[CREDIT + 2 + peer_id];
     FPGAObject_KeySwitch* peer_obj = dynamic_cast<FPGAObject_KeySwitch*>(peer);
 
@@ -1800,7 +1805,7 @@ bool Device::process_output_KeySwitch() {
 
     const auto& start_io = std::chrono::high_resolution_clock::now();
     if (KeySwitch_id_ > (NUM_KEYSWITCH_LATENCY - 2)) {
-        KeySwitch_read_output();
+        KeySwitch_read_output((KeySwitch_id_ + 1) % NUM_KEYSWITCH_LATENCY);
     }
 
     if (debug_) {
