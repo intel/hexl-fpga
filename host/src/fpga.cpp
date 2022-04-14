@@ -478,10 +478,30 @@ void FPGAObject_KeySwitch::fill_out_data(uint64_t* output) {
         size_t size_out =
             batch * decomp_modulus_size_ * n_ * key_component_count_;
         FPGA_ASSERT(key_component_count_ == 2);
+#if 0
         memcpy(obj_KeySwitch->result_, output + size_out,
                decomp_modulus_size_ * n_ * key_component_count_ *
                    sizeof(uint64_t));
-
+#else
+        unsigned k = 0;
+        for (size_t i = 0; i < decomp_modulus_size_; i++) {
+            uint64_t modulus = moduli_[i];
+            for (size_t j = 0; j < n_ * key_component_count_; j++) {
+                obj_KeySwitch->result_[k] += output[size_out + k];
+#if 1
+                obj_KeySwitch->result_[k] =
+                    obj_KeySwitch->result_[k] > modulus
+                        ? obj_KeySwitch->result_[k] - modulus
+                        : obj_KeySwitch->result_[k];
+#else
+                if (obj_KeySwitch->result_[k] > modulus) {
+                    obj_KeySwitch->result_[k] -= modulus;
+                }
+#endif
+                k++;
+            }
+        }
+#endif
         obj->ready_ = true;
         batch++;
     }
@@ -712,13 +732,12 @@ Device::Device(const cl_device_id& device, Buffer& buffer,
 
     if ((kernel_type_ == kernel_t::DYADIC_MULTIPLY_KEYSWITCH) ||
         (kernel_type_ == kernel_t::KEYSWITCH)) {
-        for (int k = 0; k < KEYSWITCH_NUM_KERNELS; ++k) {
+        for (int k = 0; k < KEYSWITCH_NUM_QUEUES; ++k) {
             // Create the command queue.
             KeySwitch_queues_[k] = clCreateCommandQueue(
                 context_, device_, CL_QUEUE_PROFILING_ENABLE, &status);
             aocl_utils::checkError(
-                status, "Failed to create command queue for kernel %s",
-                keyswitch_kernel_name[k]);
+                status, "Failed to create command queue");
         }
         for (int k = 0; k < KEYSWITCH_NUM_KERNELS; ++k) {
             const char* keyswitch_kernel_name1 = keyswitch_kernel_name[k];
@@ -833,7 +852,9 @@ Device::~Device() {
         for (int k = 0; k < KEYSWITCH_NUM_KERNELS; ++k) {
             if (KeySwitch_kernels_[k]) {
                 clReleaseKernel(KeySwitch_kernels_[k]);
-            }
+            }            
+        }
+        for (int k = 0; k < KEYSWITCH_NUM_QUEUES; ++k) {
             if (KeySwitch_queues_[k]) {
                 clReleaseCommandQueue(KeySwitch_queues_[k]);
             }
@@ -1388,7 +1409,7 @@ void Device::enqueue_input_data_KeySwitch(FPGAObject_KeySwitch* fpga_obj) {
         Object_KeySwitch* obj_KeySwitch = dynamic_cast<Object_KeySwitch*>(obj);
         FPGA_ASSERT(obj_KeySwitch);
         status =
-            clEnqueueWriteBuffer(KeySwitch_queues_[KEYSWITCH_LOAD],
+            clEnqueueWriteBuffer(KeySwitch_queues_[KEYSWITCH_QUEUE_WRITE],
                                  fpga_obj->mem_t_target_iter_ptr_, CL_FALSE,
                                  batch * size_in * sizeof(uint64_t),  // offset
                                  size_in * sizeof(uint64_t),          // size
@@ -1436,7 +1457,7 @@ void Device::enqueue_input_data_KeySwitch(FPGAObject_KeySwitch* fpga_obj) {
                        sizeof(unsigned), (void*)&rmem);
     }
 
-    status = clEnqueueTask(KeySwitch_queues_[KEYSWITCH_LOAD],
+    status = clEnqueueTask(KeySwitch_queues_[KEYSWITCH_QUEUE_LOAD],
                            KeySwitch_kernels_[KEYSWITCH_LOAD],
                            fpga_obj->n_batch_, KeySwitch_events_write_[obj_id],
                            &KeySwitch_events_enqueue_[obj_id][0]);
@@ -1705,19 +1726,18 @@ void Device::KeySwitch_read_output() {
 
     size_t result_size = size_out * sizeof(uint64_t);
 
-    // memset(peer_obj->ms_output_, 0, size_out * sizeof(uint64_t));
     cl_int status = clEnqueueReadBuffer(
-        KeySwitch_queues_[KEYSWITCH_STORE], peer_obj->mem_KeySwitch_results_,
-        CL_TRUE, 0, result_size, peer_obj->ms_output_, 2,
-        KeySwitch_events_enqueue_[peer_id], NULL);
+        KeySwitch_queues_[KEYSWITCH_QUEUE_READ], peer_obj->mem_KeySwitch_results_,
+        CL_TRUE, 0, result_size, peer_obj->ms_output_, 1, &KeySwitch_events_enqueue_[peer_id][1], NULL);
     aocl_utils::checkError(status, "Failed to finish KeySwitch_store_queue");
+#if 0
     for (size_t i = 0; i < peer_obj->n_batch_; i++) {
         clReleaseEvent(KeySwitch_events_write_[peer_id][i]);
     }
     clReleaseEvent(KeySwitch_events_enqueue_[peer_id][0]);
     clReleaseEvent(KeySwitch_events_enqueue_[peer_id][1]);
     clReleaseEvent(KeySwitch_events_enqueue_[peer_id][2]);
-
+#endif
     peer->fill_out_data(peer_obj->ms_output_);
     peer->recycle();
 }
@@ -1734,6 +1754,7 @@ bool Device::process_output_KeySwitch() {
 
     const auto& start_ocl = std::chrono::high_resolution_clock::now();
 
+#if 0
     size_t size_in =
         fpga_obj->n_batch_ * fpga_obj->n_ * fpga_obj->decomp_modulus_size_;
     uint64_t size_out = size_in * fpga_obj->key_component_count_;
@@ -1755,10 +1776,11 @@ bool Device::process_output_KeySwitch() {
     }
 
     cl_int stat = clEnqueueWriteBuffer(
-        KeySwitch_queues_[KEYSWITCH_STORE], fpga_obj->mem_KeySwitch_results_,
+        KeySwitch_queues_[KEYSWITCH_QUEUE_WRITE], fpga_obj->mem_KeySwitch_results_,
         CL_FALSE, 0, result_size, fpga_obj->ms_output_, 0, NULL,
         &KeySwitch_events_enqueue_[obj_id][2]);
     aocl_utils::checkError(stat, "Failed to finish KeySwitch_store_queue");
+#endif
 
     int argi = 0;
     clSetKernelArg(KeySwitch_kernels_[KEYSWITCH_STORE], argi++, sizeof(cl_mem),
@@ -1779,15 +1801,18 @@ bool Device::process_output_KeySwitch() {
         clSetKernelArg(KeySwitch_kernels_[KEYSWITCH_STORE], argi++,
                        sizeof(unsigned), (void*)&wmem);
     }
+
     cl_int status = clEnqueueTask(
-        KeySwitch_queues_[KEYSWITCH_STORE], KeySwitch_kernels_[KEYSWITCH_STORE],
-        1, &KeySwitch_events_enqueue_[obj_id][2],
+        KeySwitch_queues_[KEYSWITCH_QUEUE_STORE], KeySwitch_kernels_[KEYSWITCH_STORE],
+        0, NULL,
         &KeySwitch_events_enqueue_[obj_id][1]);
 
     aocl_utils::checkError(status, "Failed to launch KeySwitch_store_kernel");
-    //status = clFinish(KeySwitch_queues_[KEYSWITCH_STORE]);
-    const auto& end_ocl = std::chrono::high_resolution_clock::now();
+#if 0
+    status = clFinish(KeySwitch_queues_[KEYSWITCH_QUEUE_STORE]);    
     aocl_utils::checkError(status, "Failed to finish KeySwitch_store_queue");
+#endif
+    const auto& end_ocl = std::chrono::high_resolution_clock::now();
 
     const auto& start_io = std::chrono::high_resolution_clock::now();
     if (KeySwitch_id_ > 0) {

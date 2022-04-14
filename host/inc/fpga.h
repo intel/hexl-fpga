@@ -94,6 +94,14 @@ enum KeySwitch_Kernels {
     KEYSWITCH_NUM_KERNELS
 };
 
+enum KeySwitch_Queues {
+    KEYSWITCH_QUEUE_LOAD,
+    KEYSWITCH_QUEUE_STORE,
+    KEYSWITCH_QUEUE_WRITE,
+    KEYSWITCH_QUEUE_READ,
+    KEYSWITCH_NUM_QUEUES
+};
+
 enum class kernel_t {
     NONE,
     DYADIC_MULTIPLY,
@@ -688,7 +696,7 @@ private:
 
     // KeySwitch section
     cl_mem KeySwitch_mem_root_of_unity_powers_;
-    cl_command_queue KeySwitch_queues_[KEYSWITCH_NUM_KERNELS];
+    cl_command_queue KeySwitch_queues_[KEYSWITCH_NUM_QUEUES];
     cl_kernel KeySwitch_kernels_[KEYSWITCH_NUM_KERNELS];
     bool KeySwitch_load_once_;
     uint64_t* root_of_unity_powers_ptr_;
