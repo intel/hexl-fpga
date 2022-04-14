@@ -20,6 +20,8 @@ namespace intel {
 namespace hexl {
 namespace fpga {
 
+#define NUM_KEYSWITCH_LATENCY 4
+
 __extension__ typedef unsigned __int128 fpga_uint128_t;
 /// @brief
 /// Struct moduli_info_t
@@ -703,8 +705,8 @@ private:
     KeySwitch_modulus_t modulus_meta_;
     KeySwitch_invn_t invn_;
     uint64_t KeySwitch_id_;
-    cl_event KeySwitch_events_write_[2][128];
-    cl_event KeySwitch_events_enqueue_[2][3];
+    cl_event KeySwitch_events_write_[NUM_KEYSWITCH_LATENCY][128];
+    cl_event KeySwitch_events_enqueue_[NUM_KEYSWITCH_LATENCY][3];
     std::unordered_map<uint64_t**, KeySwitchMemKeys*> keys_map_;
     std::unordered_map<uint64_t**, KeySwitchMemKeys*>::iterator keys_map_iter_;
 

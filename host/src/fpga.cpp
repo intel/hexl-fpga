@@ -759,7 +759,7 @@ Device::Device(const cl_device_id& device, Buffer& buffer,
     fpgaObjects_.emplace_back(
         new FPGAObject_NTT(context_, 16384, batch_size_ntt));
     // KEYSWITCH: CREDIT + 2 and CREDIT + 2 + 1
-    for (size_t i = 0; i < 2; i++) {
+    for (size_t i = 0; i < NUM_KEYSWITCH_LATENCY; i++) {
         fpgaObjects_.emplace_back(
             new FPGAObject_KeySwitch(context_, batch_size_KeySwitch));
     }
@@ -899,7 +899,7 @@ void Device::run() {
                 process_output_NTT();
                 break;
             case kernel_t::KEYSWITCH:
-                process_input(CREDIT + 2 + KeySwitch_id_ % 2);
+                process_input(CREDIT + 2 + KeySwitch_id_ % NUM_KEYSWITCH_LATENCY);
                 process_output_KeySwitch();
                 KeySwitch_id_++;
                 break;
@@ -923,7 +923,10 @@ void Device::run() {
                                       fpga_obj->batch_size_ - 1) /
                                      fpga_obj->batch_size_;
                     if (batch == KeySwitch_id_) {
-                        KeySwitch_read_output();
+                        for (int i = 0; i < NUM_KEYSWITCH_LATENCY - 1; i++) {
+                            KeySwitch_read_output();
+                            KeySwitch_id_++;
+                        }
                         KeySwitch_id_ = 0;
                     }
                 }
@@ -1382,6 +1385,8 @@ KeySwitchMemKeys* Device::KeySwitch_load_keys(FPGAObject_KeySwitch* obj) {
 void Device::enqueue_input_data_KeySwitch(FPGAObject_KeySwitch* fpga_obj) {
     bool load_once = KeySwitch_load_once_;
 
+    const auto& pre_start = std::chrono::high_resolution_clock::now();
+    const bool _KeySwitch_load_once_ = KeySwitch_load_once_;
     if (!KeySwitch_load_once_) {
         KeySwitch_load_twiddles(fpga_obj);
         KeySwitch_load_once_ = true;
@@ -1399,12 +1404,23 @@ void Device::enqueue_input_data_KeySwitch(FPGAObject_KeySwitch* fpga_obj) {
         keys = KeySwitch_load_keys(fpga_obj);
     }
     FPGA_ASSERT(keys);
-
+    const auto& pre_end = std::chrono::high_resolution_clock::now();
+    if (!_KeySwitch_load_once_) {
+        const auto& duration_ocl =
+            std::chrono::duration_cast<std::chrono::duration<double>>(
+                pre_end - pre_start);
+        double unit = 1.0e+6;  // microseconds
+        std::cout << "Preparing time taken: " << std::fixed
+                  << std::setprecision(8) << duration_ocl.count() * unit
+                  << " us" << std::endl;
+    }
     const auto& start_ocl = std::chrono::high_resolution_clock::now();
     size_t size_in = fpga_obj->n_ * fpga_obj->decomp_modulus_size_;
-    int obj_id = KeySwitch_id_ % 2;
+    int obj_id = KeySwitch_id_ % NUM_KEYSWITCH_LATENCY;
     cl_int status;
     uint64_t batch = 0;
+    // printf("enqueue_input_data_KeySwitch %d\n", obj_id);
+    
     for (const auto& obj : fpga_obj->in_objs_) {
         Object_KeySwitch* obj_KeySwitch = dynamic_cast<Object_KeySwitch*>(obj);
         FPGA_ASSERT(obj_KeySwitch);
@@ -1419,7 +1435,7 @@ void Device::enqueue_input_data_KeySwitch(FPGAObject_KeySwitch* fpga_obj) {
             status, "Failed to enqueue KeySwitch_queues_[KEYSWITCH_LOAD]");
         batch++;
     }
-
+    
     int i = 0;
     clSetKernelArg(KeySwitch_kernels_[KEYSWITCH_LOAD], i++, sizeof(cl_mem),
                    &fpga_obj->mem_t_target_iter_ptr_);
@@ -1460,6 +1476,7 @@ void Device::enqueue_input_data_KeySwitch(FPGAObject_KeySwitch* fpga_obj) {
     status = clEnqueueTask(KeySwitch_queues_[KEYSWITCH_QUEUE_LOAD],
                            KeySwitch_kernels_[KEYSWITCH_LOAD],
                            fpga_obj->n_batch_, KeySwitch_events_write_[obj_id],
+                           //0, NULL,
                            &KeySwitch_events_enqueue_[obj_id][0]);
     aocl_utils::checkError(status, "Failed to launch keyswitch_load_kernel");
 
@@ -1714,7 +1731,8 @@ bool Device::process_output_INTT() {
 }
 
 void Device::KeySwitch_read_output() {
-    int peer_id = (KeySwitch_id_ + 1) % 2;
+    int peer_id =
+        (KeySwitch_id_ - (NUM_KEYSWITCH_LATENCY - 1)) % NUM_KEYSWITCH_LATENCY;
     FPGAObject* peer = fpgaObjects_[CREDIT + 2 + peer_id];
     FPGAObject_KeySwitch* peer_obj = dynamic_cast<FPGAObject_KeySwitch*>(peer);
 
@@ -1726,6 +1744,7 @@ void Device::KeySwitch_read_output() {
 
     size_t result_size = size_out * sizeof(uint64_t);
 
+    //printf("KeySwitch_read_output %d\n", peer_id);
     cl_int status = clEnqueueReadBuffer(
         KeySwitch_queues_[KEYSWITCH_QUEUE_READ], peer_obj->mem_KeySwitch_results_,
         CL_TRUE, 0, result_size, peer_obj->ms_output_, 1, &KeySwitch_events_enqueue_[peer_id][1], NULL);
@@ -1743,7 +1762,7 @@ void Device::KeySwitch_read_output() {
 }
 
 bool Device::process_output_KeySwitch() {
-    int obj_id = KeySwitch_id_ % 2;
+    int obj_id = KeySwitch_id_ % NUM_KEYSWITCH_LATENCY;
     int KeySwitch_instance_index = CREDIT + 2 + obj_id;
 
     FPGAObject* completed = fpgaObjects_[KeySwitch_instance_index];
@@ -1802,6 +1821,7 @@ bool Device::process_output_KeySwitch() {
                        sizeof(unsigned), (void*)&wmem);
     }
 
+    // printf("enqueue store %d\n", obj_id);
     cl_int status = clEnqueueTask(
         KeySwitch_queues_[KEYSWITCH_QUEUE_STORE], KeySwitch_kernels_[KEYSWITCH_STORE],
         0, NULL,
@@ -1815,7 +1835,7 @@ bool Device::process_output_KeySwitch() {
     const auto& end_ocl = std::chrono::high_resolution_clock::now();
 
     const auto& start_io = std::chrono::high_resolution_clock::now();
-    if (KeySwitch_id_ > 0) {
+    if (KeySwitch_id_ > (NUM_KEYSWITCH_LATENCY - 2)) {
         KeySwitch_read_output();
     }
 
