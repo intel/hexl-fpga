@@ -1403,7 +1403,7 @@ void Device::enqueue_input_data_KeySwitch(FPGAObject_KeySwitch* fpga_obj) {
         FPGA_ASSERT(obj_KeySwitch);
         status =
             clEnqueueWriteBuffer(KeySwitch_queues_[KEYSWITCH_LOAD],
-                                 fpga_obj->mem_t_target_iter_ptr_, CL_FALSE,
+                                 fpga_obj->mem_t_target_iter_ptr_, CL_TRUE,
                                  batch * size_in * sizeof(uint64_t),  // offset
                                  size_in * sizeof(uint64_t),          // size
                                  obj_KeySwitch->t_target_iter_ptr_, 0, NULL,
