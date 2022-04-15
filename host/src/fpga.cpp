@@ -1742,6 +1742,7 @@ void Device::KeySwitch_read_output(int peer_id) {
 
     FPGA_ASSERT(peer_obj);
 
+#if 0
     size_t size_in =
         peer_obj->n_batch_ * peer_obj->n_ * peer_obj->decomp_modulus_size_;
     uint64_t size_out = size_in * peer_obj->key_component_count_;
@@ -1755,6 +1756,27 @@ void Device::KeySwitch_read_output(int peer_id) {
     aocl_utils::checkError(status, "Failed to finish KeySwitch_store_queue");
 
     peer->fill_out_data(peer_obj->ms_output_);
+#else
+    clWaitForEvents(1, &KeySwitch_events_enqueue_[peer_id][1]);
+    int batch = 0;
+    for (auto& obj : peer->in_objs_) {
+        Object_KeySwitch* obj_KeySwitch = dynamic_cast<Object_KeySwitch*>(obj);
+        FPGA_ASSERT(obj_KeySwitch);
+
+        cl_int status = clEnqueueReadBuffer(
+            KeySwitch_queues_[KEYSWITCH_QUEUE_READ],
+            peer_obj->mem_KeySwitch_results_, CL_TRUE,
+            batch * peer_obj->decomp_modulus_size_ * peer_obj->n_ *
+                peer_obj->key_component_count_ * sizeof(uint64_t),
+            peer_obj->decomp_modulus_size_ * peer_obj->n_ *
+                peer_obj->key_component_count_ * sizeof(uint64_t),
+            obj_KeySwitch->result_, 0, NULL, NULL);
+        aocl_utils::checkError(status,
+                               "Failed to finish KeySwitch_store_queue");
+        batch++;
+        obj->ready_ = true;
+    }
+#endif
     peer->recycle();
 }
 

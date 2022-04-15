@@ -122,6 +122,13 @@ std::vector<std::string> glob(const char* pattern) {
     return filenames;
 }
 
+void* alignedMalloc(size_t size) {
+    void* result = NULL;
+    posix_memalign(&result, 64, size);
+    assert(result != NULL);
+    return result;
+}
+
 void test_KeySwitch(const std::vector<std::string>& files) {
     std::vector<KeySwitchTestVector> test_vectors;
 
@@ -135,10 +142,13 @@ void test_KeySwitch(const std::vector<std::string>& files) {
     assert(test_vector_size > 0);
 
     intel::hexl::set_worksize_KeySwitch(test_vector_size);
+    std::vector<uint64_t*> results;
     for (size_t i = 0; i < test_vector_size; i++) {
+        uint64_t* result = (uint64_t*)alignedMalloc(
+            test_vectors[i].input.size() * sizeof(uint64_t));
+        results.push_back(result);
         intel::hexl::KeySwitch(
-            test_vectors[i].input.data(),
-            test_vectors[i].t_target_iter_ptr.data(),
+            result, test_vectors[i].t_target_iter_ptr.data(),
             test_vectors[0].coeff_count, test_vectors[0].decomp_modulus_size,
             test_vectors[0].key_modulus_size, test_vectors[0].rns_modulus_size,
             test_vectors[0].key_component_count, test_vectors[0].moduli.data(),
@@ -149,6 +159,21 @@ void test_KeySwitch(const std::vector<std::string>& files) {
     intel::hexl::KeySwitchCompleted();
 
     for (size_t i = 0; i < files.size(); i++) {
+        size_t ind = 0;
+        for (size_t j = 0; j < test_vectors[0].decomp_modulus_size; j++) {
+            uint64_t modulus = test_vectors[0].moduli[j];
+            for (size_t n = 0; n < test_vectors[0].coeff_count *
+                                       test_vectors[0].key_component_count;
+                 n++) {
+                test_vectors[i].input[ind] += results[i][ind];
+                test_vectors[i].input[ind] =
+                    test_vectors[i].input[ind] > modulus
+                        ? test_vectors[i].input[ind] - modulus
+                        : test_vectors[i].input[ind];
+                ind++;
+            }
+        }
+
         ASSERT_EQ(test_vectors[i].input, test_vectors[i].expected_output);
     }
 }
