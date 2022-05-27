@@ -149,6 +149,9 @@ BENCHMARK_F(keyswitch, 16384_6_7_7_2)
 
     setup_keyswitch(files);
 
+    // warm up the FPGA kernels specially the twiddle factor dispatching kernel
+    bench_keyswitch();
+
     for (auto st : state) {
         bench_keyswitch();
     }
