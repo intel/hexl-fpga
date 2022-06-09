@@ -6,9 +6,9 @@
 __single_task void load(__global HOST_MEM uint64_t* restrict t_target_iter_ptr,
                         moduli_t moduli, uint64_t coeff_count,
                         uint64_t decomp_modulus_size, uint64_t num_batch,
-                        __global DEVICE_MEM uint256_t* restrict k_switch_keys1,
-                        __global DEVICE_MEM uint256_t* restrict k_switch_keys2,
-                        __global DEVICE_MEM uint256_t* restrict k_switch_keys3,
+                        __global DEVICE_MEM ulong8* restrict k_switch_keys1,
+                        __global DEVICE_MEM ulong8* restrict k_switch_keys2,
+                        __global DEVICE_MEM ulong8* restrict k_switch_keys3,
                         __global HOST_MEM uint64_t* restrict twiddle_factors,
                         invn_t inv_n, unsigned reload_twiddle_factors,
                         unsigned rmem) {
@@ -36,7 +36,7 @@ __single_task void load(__global HOST_MEM uint64_t* restrict t_target_iter_ptr,
 #pragma unroll
     for (int i = 0; i < MAX_KEY_MODULUS_SIZE; i++) {
         moduli.data[i].s0 =
-            moduli.data[i].s0 | ((coeff_count >> 10) << MAX_MODULUS_BITS);
+            moduli.data[i].s0 | (((coeff_count >> 10) - 1) << MAX_MODULUS_BITS);
     }
 
 #pragma disable_loop_pipelining

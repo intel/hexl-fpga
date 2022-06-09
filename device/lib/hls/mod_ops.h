@@ -22,10 +22,14 @@ ubitwidth_t MultiplyUIntModLazy3(ubitwidth_t x, ubitwidth_t y,
 ubitwidth_t HLS_MultiplyUInt64Hi(ubitwidth_t x, ubitwidth_t y);
 void HLS_MultiplyUInt52(ubitwidth_t x, ubitwidth_t y, ubitwidth_t* prod_hi,
                         ubitwidth_t* prod_lo);
+void HLS_MultiplyUInt64(ubitwidth_t x, ubitwidth_t y, ubitwidth_t* prod_hi,
+                        ubitwidth_t* prod_lo);
 ubitwidth_t HLS_BarrettReduce104(ubitwidth_t input_hi, ubitwidth_t input_lo,
-                                 ubitwidth_t modulus, unsigned long k);
-ubitwidth_t HLS_BarrettReduce128(ubitwidth_t input_hi, ubitwidth_t input_lo,
-                                 ubitwidth_t modulus, unsigned long k);
+                                 ubitwidth_t modulus, unsigned long r,
+                                 unsigned char k);
+ubitwidth_t HLS_BarrettReduce120(ubitwidth_t input_hi, ubitwidth_t input_lo,
+                                 ubitwidth_t modulus, unsigned long r,
+                                 unsigned char k);
 #ifdef __cplusplus
 }
 #endif

@@ -8,35 +8,30 @@ __single_task __autorun void broadcast_keys() {
     while (true) {
         keyswitch_params params = read_channel_intel(ch_keyswitch_params);
 
-        __global uint256_t* restrict k_switch_keys1 = params.k_switch_keys1;
-        __global uint256_t* restrict k_switch_keys2 = params.k_switch_keys2;
-        __global uint256_t* restrict k_switch_keys3 = params.k_switch_keys3;
+        __global ulong8* restrict k_switch_keys1 = params.k_switch_keys1;
+        __global ulong8* restrict k_switch_keys2 = params.k_switch_keys2;
 
         for (int i = 0; i < params.size; i++) {
-            uint256_t keys1 = k_switch_keys1[i];
-            uint256_t keys2 = k_switch_keys2[i];
-            uint256_t keys3 = k_switch_keys3[i];
+            ulong8 keys1 = k_switch_keys1[i];
+            ulong8 keys2 = k_switch_keys2[i];
 
             ulong keys[MAX_RNS_MODULUS_SIZE * 2];
             int j = 0;
-            keys[j++] = keys1 & BIT_MASK_52;
-            keys[j++] = (keys1 >> 52) & BIT_MASK_52;
-            keys[j++] = (keys1 >> (52 * 2)) & BIT_MASK_52;
-            keys[j++] = (keys1 >> (52 * 3)) & BIT_MASK_52;
-            keys[j++] = ((keys1 >> (52 * 4)) & BIT_MASK_52) |
-                        ((keys2 & BIT_MASK_4) << 48);
+            keys[j++] = keys1.s0;
+            keys[j++] = keys1.s1;
+            keys[j++] = keys1.s2;
+            keys[j++] = keys1.s3;
+            keys[j++] = keys1.s4;
+            keys[j++] = keys1.s5;
+            keys[j++] = keys1.s6;
+            keys[j++] = keys1.s7;
 
-            keys[j++] = (keys2 >> 4) & BIT_MASK_52;
-            keys[j++] = (keys2 >> (4 + 52)) & BIT_MASK_52;
-            keys[j++] = (keys2 >> (4 + 52 * 2)) & BIT_MASK_52;
-            keys[j++] = (keys2 >> (4 + 52 * 3)) & BIT_MASK_52;
-            keys[j++] = ((keys2 >> (4 + 52 * 4)) & BIT_MASK_52) |
-                        ((keys3 & BIT_MASK_8) << 44);
-
-            keys[j++] = (keys3 >> 8) & BIT_MASK_52;
-            keys[j++] = (keys3 >> (8 + 52)) & BIT_MASK_52;
-            keys[j++] = (keys3 >> (8 + 52 * 2)) & BIT_MASK_52;
-            keys[j++] = (keys3 >> (8 + 52 * 3)) & BIT_MASK_52;
+            keys[j++] = keys2.s0;
+            keys[j++] = keys2.s1;
+            keys[j++] = keys2.s2;
+            keys[j++] = keys2.s3;
+            keys[j++] = keys2.s4;
+            keys[j++] = keys2.s5;
 
 #pragma unroll
             for (int ins = 0; ins < MAX_RNS_MODULUS_SIZE; ins++) {
@@ -64,6 +59,7 @@ void _dyadmult(int COREID, unsigned key_modulus_size,
             read_channel_intel(ch_dyadmult_params[COREID][ntt_ins]);
         uint64_t decomp_modulus_index = curr_moduli.s1 & 0xf;
         uint64_t decomp_modulus_size = curr_moduli.s1 >> 4;
+        uint8_t modulus_k = gen_modulus_k(curr_moduli.s0 & MODULUS_BIT_MASK);
 
         if (ntt_ins == (key_modulus_size - 1) && decomp_modulus_index == 0) {
 #pragma unroll
@@ -86,7 +82,7 @@ void _dyadmult(int COREID, unsigned key_modulus_size,
                 ASSERT(((ulong*)&keys)[k] < MAX_MODULUS, "y >= modulus\n");
                 uint64_t prod = MultiplyUIntMod(
                     val, ((ulong*)&keys)[k], curr_moduli.s0 & MODULUS_BIT_MASK,
-                    curr_moduli.s3);
+                    curr_moduli.s3, modulus_k);
 
                 uint64_t prev = t_poly_lazy[j][k];
                 prev = decomp_modulus_index == 0 ? 0 : prev;

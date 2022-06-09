@@ -77,7 +77,8 @@ void _intt_internal(channel ulong4 ch_intt_modulus,
     while (true) {
         ulong4 modulus = read_channel_intel(ch_intt_modulus);
         ulong prime = modulus.s0 & MODULUS_BIT_MASK;
-        ulong prime_k = modulus.s3;
+        ulong prime_r = modulus.s3;
+        unsigned char prime_k = gen_modulus_k(prime);
         unsigned fpga_ntt_size = GET_COEFF_COUNT(modulus.s0);
         unsigned long twice_mod = prime << 1;
         unsigned t = 1;
@@ -299,8 +300,9 @@ void _intt_internal(channel ulong4 ch_intt_modulus,
                            engine_id);
                     curX[n] = AddUIntMod(x_j1, x_j2, prime);
                     ASSERT(W_op < MAX_MODULUS, "y >= modulus\n");
-                    curX[VEC + n] = MultiplyUIntMod(
-                        SubUIntMod(x_j1, x_j2, prime), W_op, prime, prime_k);
+                    curX[VEC + n] =
+                        MultiplyUIntMod(SubUIntMod(x_j1, x_j2, prime), W_op,
+                                        prime, prime_r, prime_k);
 
                     elements.data[n * 2] = curX[n];
                     elements.data[n * 2 + 1] = curX[VEC + n];
@@ -392,13 +394,15 @@ void _intt_normalize(channel uint64_t ch_intt_elements_out_inter,
     while (true) {
         ulong4 moduli = read_channel_intel(ch_normalize);
         unsigned coeff_count = GET_COEFF_COUNT(moduli.s0);
+        uint8_t modulus_k = gen_modulus_k(moduli.s0 & MODULUS_BIT_MASK);
 
         for (unsigned i = 0; i < coeff_count; i++) {
             uint64_t data = read_channel_intel(ch_intt_elements_out_inter);
             ASSERT((moduli.s0 & MODULUS_BIT_MASK) < MAX_MODULUS,
                    "y >= modulus\n");
-            data = MultiplyUIntMod(data, moduli.s2,
-                                   moduli.s0 & MODULUS_BIT_MASK, moduli.s3);
+            data =
+                MultiplyUIntMod(data, moduli.s2, moduli.s0 & MODULUS_BIT_MASK,
+                                moduli.s3, modulus_k);
             write_channel_intel(ch_intt_elements_out, data);
         }
     }

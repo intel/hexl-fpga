@@ -9,6 +9,8 @@
 #include "HLS/ac_int.h"
 #endif
 
+#define ENABLE_BARRETT_REDUCTION
+
 constexpr unsigned int BITWIDTH = 64;
 constexpr unsigned int BITWIDTHp1 = 1 + BITWIDTH;
 constexpr unsigned int BITWIDTH2 = (2 * BITWIDTH);
@@ -131,15 +133,21 @@ void HLS_MultiplyUInt52(ubitwidth_t x, ubitwidth_t y, ubitwidth_t* prod_hi,
     return HLS_MultiplyUInt<52>(x, y, prod_hi, prod_lo);
 }
 
+void HLS_MultiplyUInt64(ubitwidth_t x, ubitwidth_t y, ubitwidth_t* prod_hi,
+                        ubitwidth_t* prod_lo) {
+    return HLS_MultiplyUInt<64>(x, y, prod_hi, prod_lo);
+}
+
 template <int MIN_K, int MAX_K, int MAX_R_K>
 ubitwidth_t HLS_BarrettReduce(ubitwidth_t input_hi, ubitwidth_t input_lo,
-                              ubitwidth_t modulus, unsigned long rk) {
+                              ubitwidth_t modulus, unsigned long _r,
+                              unsigned char k) {
+#ifdef ENABLE_BARRETT_REDUCTION
     ac_int<MAX_K + MAX_K, false> a =
         ((ubitwidth2_t(input_hi) << BITWIDTH) | ((input_lo)));
     ac_int<MAX_K, false> n = modulus;
 
-    ac_int<MAX_R_K, false> r = rk >> 8;
-    unsigned char k = rk & 0xff;
+    ac_int<MAX_R_K, false> r = _r;
     ac_int<7, false> k2 = 2 * k - 2 * MIN_K;
 
     ac_int<MAX_K + MAX_K + MAX_R_K, false> d = a * r;
@@ -148,13 +156,21 @@ ubitwidth_t HLS_BarrettReduce(ubitwidth_t input_hi, ubitwidth_t input_lo,
     ac_int<MAX_K + 1, false> c = a - b * n;
     if (c >= modulus) c -= modulus;
     return c.to_uint64();
+#else
+    ac_int<128, false> a =
+        ((ubitwidth2_t(input_hi) << BITWIDTH) | ((input_lo)));
+    ac_int<64, false> n = modulus;
+    return (a - a / n * n).to_uint64();
+#endif
 }
 ubitwidth_t HLS_BarrettReduce104(ubitwidth_t input_hi, ubitwidth_t input_lo,
-                                 ubitwidth_t modulus, unsigned long rk) {
-    return HLS_BarrettReduce<16, 52, 53>(input_hi, input_lo, modulus, rk);
+                                 ubitwidth_t modulus, unsigned long r,
+                                 unsigned char k) {
+    return HLS_BarrettReduce<16, 52, 53>(input_hi, input_lo, modulus, r, k);
 }
 
-ubitwidth_t HLS_BarrettReduce128(ubitwidth_t input_hi, ubitwidth_t input_lo,
-                                 ubitwidth_t modulus, unsigned long rk) {
-    return HLS_BarrettReduce<16, 64, 64>(input_hi, input_lo, modulus, rk);
+ubitwidth_t HLS_BarrettReduce120(ubitwidth_t input_hi, ubitwidth_t input_lo,
+                                 ubitwidth_t modulus, unsigned long r,
+                                 unsigned char k) {
+    return HLS_BarrettReduce<16, 60, 61>(input_hi, input_lo, modulus, r, k);
 }

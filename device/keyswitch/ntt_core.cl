@@ -50,7 +50,8 @@ void _ntt_internal(channel ulong4 ch_ntt_modulus,
     while (true) {
         ulong4 cur_moduli = read_channel_intel(ch_ntt_modulus);
         uint64_t modulus = cur_moduli.s0 & MODULUS_BIT_MASK;
-        uint64_t modulus_k = cur_moduli.s3;
+        uint8_t modulus_k = gen_modulus_k(modulus);
+        uint64_t modulus_r = cur_moduli.s3;
         unsigned fpga_ntt_size = GET_COEFF_COUNT(cur_moduli.s0);
 
         unsigned long coeff_mod = modulus;
@@ -253,8 +254,8 @@ void _ntt_internal(channel ulong4 ch_ntt_modulus,
 
                     ASSERT(W_op < MAX_MODULUS, "y >= modulus, ntt_ins = %d\n",
                            engine_id);
-                    uint64_t W_x_Y =
-                        MultiplyUIntMod(a, W_op, coeff_mod, modulus_k);
+                    uint64_t W_x_Y = MultiplyUIntMod(a, W_op, coeff_mod,
+                                                     modulus_r, modulus_k);
                     ASSERT(tx < coeff_mod, "x >= modulus, engine_id = %d\n",
                            engine_id);
                     curX[n] = AddUIntMod(tx, W_x_Y, coeff_mod);

@@ -12,7 +12,8 @@ void _ms(int COREID, uint64_t key_modulus_size, int key_component) {
         uint64_t decomp_modulus_index = moduli.s1;
         uint64_t modulus = moduli.s0 & MODULUS_BIT_MASK;
         uint64_t arg2 = moduli.s2;
-        uint64_t rk = moduli.s3;
+        uint64_t modulus_r = moduli.s3;
+        unsigned char modulus_k = gen_modulus_k(modulus);
         unsigned coeff_count = GET_COEFF_COUNT(moduli.s0);
 
         for (unsigned j = 0; j < coeff_count; j++) {
@@ -54,8 +55,9 @@ void _ms(int COREID, uint64_t key_modulus_size, int key_component) {
             uint64_t in = t_ith_poly + qi_lazy - data;
             uint64_t arg1_val = ReduceMod(InputModFactor, in, modulus,
                                           &twice_modulus, &four_times_modulus);
-            write_channel_intel(ch_result[COREID][key_component],
-                                MultiplyUIntMod(arg1_val, arg2, modulus, rk));
+            write_channel_intel(
+                ch_result[COREID][key_component],
+                MultiplyUIntMod(arg1_val, arg2, modulus, modulus_r, modulus_k));
         }
     }
 }

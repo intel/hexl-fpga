@@ -51,37 +51,23 @@ typedef struct {
 
 /// @brief
 /// Struct DyadmultKeys1_t
-/// @param[in] key1-5 stores the bits of compressed switch key data
+/// @param[in] 8 keys with 2 key components
 typedef struct {
-    uint64_t key1 : 52;
-    uint64_t key2 : 52;
-    uint64_t key3 : 52;
-    uint64_t key4 : 52;
-    uint64_t key5 : 48;
+    uint64_t keys[8];
 } __attribute__((packed)) DyadmultKeys1_t;
 
 /// @brief
 /// Struct DyadmultKeys2_t
-/// @param[in] key1-6 stores the bits of compressed switch key data
+/// @param[in] 8 keys with 2 key components
 typedef struct {
-    uint64_t key1 : 4;
-    uint64_t key2 : 52;
-    uint64_t key3 : 52;
-    uint64_t key4 : 52;
-    uint64_t key5 : 52;
-    uint64_t key6 : 44;
+    uint64_t keys[8];
 } __attribute__((packed)) DyadmultKeys2_t;
 
 /// @brief
 /// Struct DyadmultKeys3_t
-/// @param[in] key1-5 stores the bits of compressed switch key data
+/// @param[in] 8 keys with 2 key components
 typedef struct {
-    uint64_t key1 : 8;
-    uint64_t key2 : 52;
-    uint64_t key3 : 52;
-    uint64_t key4 : 52;
-    uint64_t key5 : 52;
-    uint64_t NOT_USED : 40;
+    uint64_t keys[8];
 } __attribute__((packed)) DyadmultKeys3_t;
 
 #define BIT_MASK(BITS) ((1UL << BITS) - 1)

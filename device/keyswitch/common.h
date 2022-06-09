@@ -9,24 +9,23 @@ void MultiplyUInt64(uint64_t x, uint64_t y, uint64_t* prod_hi,
                     uint64_t* prod_lo) {
     ASSERT(x < MAX_MODULUS, "x >= modulus\n");
     ASSERT(y < MAX_MODULUS, "y >= modulus\n");
-    HLS_MultiplyUInt52(x, y, prod_hi, prod_lo);
+    HLS_MultiplyUInt64(x, y, prod_hi, prod_lo);
 }
 
-uint64_t BarrettReduce128(uint64_t prod_hi, uint64_t prod_lo, uint64_t modulus,
-                          uint64_t rk) {
-    uint64_t ret = HLS_BarrettReduce104(prod_hi, prod_lo, modulus, rk);
+uint64_t BarrettReduce120(uint64_t prod_hi, uint64_t prod_lo, uint64_t modulus,
+                          uint64_t r, unsigned char k) {
+    uint64_t ret = HLS_BarrettReduce120(prod_hi, prod_lo, modulus, r, k);
     ASSERT(ret < modulus, "BarrettReduce Failed\n");
     return ret;
 }
 
-uint64_t MultiplyUIntMod(uint64_t x, uint64_t y, uint64_t modulus,
-                         uint64_t rk) {
+uint64_t MultiplyUIntMod(uint64_t x, uint64_t y, uint64_t modulus, uint64_t r,
+                         unsigned char k) {
     ASSERT(x < MAX_MODULUS, "x >= modulus\n");
     ASSERT(y < MAX_MODULUS, "y >= modulus\n");
     uint64_t prod_hi, prod_lo;
     MultiplyUInt64(x, y, &prod_hi, &prod_lo);
-
-    return BarrettReduce128(prod_hi, prod_lo, modulus, rk);
+    return BarrettReduce120(prod_hi, prod_lo, modulus, r, k);
 }
 
 uint64_t SubUIntMod(uint64_t x, uint64_t y, uint64_t modulus) {
@@ -92,5 +91,16 @@ uint64_t ReduceMod(int InputModFactor, uint64_t x, uint64_t modulus,
     }
     ASSERT(false, "Should be unreachable");
     return x;
+}
+
+unsigned char gen_modulus_k(uint64_t modulus) {
+    unsigned char k = 0;
+#pragma unroll
+    for (unsigned char i = 64; i > 0; i--) {
+        if ((1UL << i) >= modulus) {
+            k = i;
+        }
+    }
+    return k;
 }
 #endif

@@ -17,16 +17,15 @@
 #define CORES 1
 #endif
 
-#define MAX_MODULUS_BITS 52
+#define MAX_MODULUS_BITS 60
 #define MAX_MODULUS (1UL << MAX_MODULUS_BITS)
 #define MAX_KEY (1UL << MAX_MODULUS_BITS)
 
 #define BIT_MASK(BITS) ((1UL << BITS) - 1)
-#define BIT_MASK_52 BIT_MASK(52)
 #define BIT_MASK_4 BIT_MASK(4)
 #define BIT_MASK_8 BIT_MASK(8)
-#define MODULUS_BIT_MASK BIT_MASK_52
-#define GET_COEFF_COUNT(mod) ((mod >> MAX_MODULUS_BITS) << 10)
+#define MODULUS_BIT_MASK BIT_MASK(MAX_MODULUS_BITS)
+#define GET_COEFF_COUNT(mod) (((mod >> MAX_MODULUS_BITS) + 1) << 10)
 
 #ifdef EMULATOR
 #define ASSERT(cond, message, ...)             \
@@ -42,12 +41,9 @@
 
 typedef unsigned long uint64_t;
 typedef long int64_t;
+typedef unsigned char uint8_t;
 #define NULL 0
 #define nullptr 0
-
-typedef unsigned int __attribute__((__ap_int(64))) uint54_t;
-typedef unsigned int __attribute__((__ap_int(52))) uint52_t;
-typedef unsigned int __attribute__((__ap_int(256))) uint256_t;
 
 #ifdef PAC_S10_USM
 #pragma message("Using the USM BSP")
@@ -93,9 +89,9 @@ typedef struct {
 
 typedef struct {
     unsigned size;
-    __global uint256_t* restrict k_switch_keys1;
-    __global uint256_t* restrict k_switch_keys2;
-    __global uint256_t* restrict k_switch_keys3;
+    __global ulong8* restrict k_switch_keys1;
+    __global ulong8* restrict k_switch_keys2;
+    __global ulong8* restrict k_switch_keys3;
 } keyswitch_params;
 
 typedef struct {
@@ -104,7 +100,7 @@ typedef struct {
     __global uint64_t* restrict data;
 } twiddle_factors_t;
 
-channel keyswitch_params ch_keyswitch_params __attribute__((depth(32)));
+channel keyswitch_params ch_keyswitch_params __attribute__((depth(8)));
 channel twiddle_factors_t ch_twiddle_factors;
 channel ulong4 ch_intt_redu_params[CORES][MAX_RNS_MODULUS_SIZE]
     __attribute__((depth(32)));

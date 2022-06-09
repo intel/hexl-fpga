@@ -1191,7 +1191,7 @@ void Device::build_modulus_meta(FPGAObject_KeySwitch* obj) {
         uint64_t k = precompute_modulus_k(obj->moduli_[i]);
         __int128 a = 1;
         uint64_t r = (a << (2 * k)) / obj->moduli_[i];
-        m.s[3] = (r << 8) | k;
+        m.s[3] = r;
 
         modulus_meta_.data[i] = m;
     }
@@ -1279,12 +1279,12 @@ KeySwitchMemKeys* Device::KeySwitch_check_keys(uint64_t** keys) {
 }
 
 KeySwitchMemKeys* Device::KeySwitch_load_keys(FPGAObject_KeySwitch* obj) {
-    cl_ulong4* key_vector1 = (cl_ulong4*)aocl_utils::alignedMalloc(
-        sizeof(cl_ulong4) * obj->decomp_modulus_size_ * obj->n_);
-    cl_ulong4* key_vector2 = (cl_ulong4*)aocl_utils::alignedMalloc(
-        sizeof(cl_ulong4) * obj->decomp_modulus_size_ * obj->n_);
-    cl_ulong4* key_vector3 = (cl_ulong4*)aocl_utils::alignedMalloc(
-        sizeof(cl_ulong4) * obj->decomp_modulus_size_ * obj->n_);
+    cl_ulong8* key_vector1 = (cl_ulong8*)aocl_utils::alignedMalloc(
+        sizeof(cl_ulong8) * obj->decomp_modulus_size_ * obj->n_);
+    cl_ulong8* key_vector2 = (cl_ulong8*)aocl_utils::alignedMalloc(
+        sizeof(cl_ulong8) * obj->decomp_modulus_size_ * obj->n_);
+    cl_ulong8* key_vector3 = (cl_ulong8*)aocl_utils::alignedMalloc(
+        sizeof(cl_ulong8) * obj->decomp_modulus_size_ * obj->n_);
 
     size_t key_vector_index = 0;
 
@@ -1299,38 +1299,18 @@ KeySwitchMemKeys* Device::KeySwitch_load_keys(FPGAObject_KeySwitch* obj) {
                     obj->k_switch_keys_[k]
                                        [(i + obj->key_modulus_size_) * obj->n_ +
                                         j];
-                if (i == 0) {
-                    k1.key1 = key1;
-                    k1.key2 = key2;
-                } else if (i == 1) {
-                    k1.key3 = key1;
-                    k1.key4 = key2;
-                } else if (i == 2) {
-                    k1.key5 = key1 & BIT_MASK(48);
-                    k2.key1 = (key1 >> 48) & BIT_MASK(4);
-                    k2.key2 = key2;
-                } else if (i == 3) {
-                    k2.key3 = key1;
-                    k2.key4 = key2;
-                } else if (i == 4) {
-                    k2.key5 = key1;
-                    k2.key6 = key2 & BIT_MASK(44);
-                    k3.key1 = (key2 >> 44) & BIT_MASK(8);
-                } else if (i == 5) {
-                    k3.key2 = key1;
-                    k3.key3 = key2;
-                } else if (i == 6) {
-                    k3.key4 = key1;
-                    k3.key5 = key2;
-                    k3.NOT_USED = 0;
+                if (i < 4) {
+                    k1.keys[i * 2] = key1;
+                    k1.keys[i * 2 + 1] = key2;
                 } else {
-                    FPGA_ASSERT(0, "NOT SUPPORTED KEYS");
+                    k2.keys[(i - 4) * 2] = key1;
+                    k2.keys[(i - 4) * 2 + 1] = key2;
                 }
             }
 
-            key_vector1[key_vector_index] = *((cl_ulong4*)(&k1));
-            key_vector2[key_vector_index] = *((cl_ulong4*)(&k2));
-            key_vector3[key_vector_index] = *((cl_ulong4*)(&k3));
+            key_vector1[key_vector_index] = *((cl_ulong8*)(&k1));
+            key_vector2[key_vector_index] = *((cl_ulong8*)(&k2));
+            key_vector3[key_vector_index] = *((cl_ulong8*)(&k3));
             key_vector_index++;
         }
     }
@@ -1338,27 +1318,27 @@ KeySwitchMemKeys* Device::KeySwitch_load_keys(FPGAObject_KeySwitch* obj) {
     size_t key_size = obj->decomp_modulus_size_ * obj->n_;
     cl_mem k_switch_keys_1 =
         clCreateBuffer(context_, CL_MEM_READ_ONLY | CL_CHANNEL_2_INTELFPGA,
-                       key_size * sizeof(cl_ulong4), NULL, NULL);
+                       key_size * sizeof(cl_ulong8), NULL, NULL);
     cl_mem k_switch_keys_2 =
         clCreateBuffer(context_, CL_MEM_READ_ONLY | CL_CHANNEL_3_INTELFPGA,
-                       key_size * sizeof(cl_ulong4), NULL, NULL);
+                       key_size * sizeof(cl_ulong8), NULL, NULL);
     cl_mem k_switch_keys_3 =
         clCreateBuffer(context_, CL_MEM_READ_ONLY | CL_CHANNEL_4_INTELFPGA,
-                       key_size * sizeof(cl_ulong4), NULL, NULL);
+                       key_size * sizeof(cl_ulong8), NULL, NULL);
     cl_int status;
     status = clEnqueueWriteBuffer(
         KeySwitch_queues_[KEYSWITCH_LOAD], k_switch_keys_1, CL_TRUE, 0,
-        key_size * sizeof(cl_ulong4), key_vector1, 0, NULL, NULL);
+        key_size * sizeof(cl_ulong8), key_vector1, 0, NULL, NULL);
     aocl_utils::checkError(
         status, "Failed to enqueue KeySwitch_queues_[KEYSWITCH_LOAD]");
     status = clEnqueueWriteBuffer(
         KeySwitch_queues_[KEYSWITCH_LOAD], k_switch_keys_2, CL_TRUE, 0,
-        key_size * sizeof(cl_ulong4), key_vector2, 0, NULL, NULL);
+        key_size * sizeof(cl_ulong8), key_vector2, 0, NULL, NULL);
     aocl_utils::checkError(
         status, "Failed to enqueue KeySwitch_queues_[KEYSWITCH_LOAD]");
     status = clEnqueueWriteBuffer(
         KeySwitch_queues_[KEYSWITCH_LOAD], k_switch_keys_3, CL_TRUE, 0,
-        key_size * sizeof(cl_ulong4), key_vector3, 0, NULL, NULL);
+        key_size * sizeof(cl_ulong8), key_vector3, 0, NULL, NULL);
     aocl_utils::checkError(
         status, "Failed to enqueue KeySwitch_queues_[KEYSWITCH_LOAD]");
 
