@@ -2,6 +2,8 @@
 
 ## Disclaimer: The experimental integration provides sample code to integrate with external libraries.  It is for experiments only.  You are free to use it at your own risk.  Developers bear no liability of any form.
 
+After installing Intel HE Acceleration Library for FPGAs, you can use the library to accelerate operations in an external library in the following way.
+
 ## Experimental integration with [Microsoft SEAL v4.0.0](https://github.com/microsoft/SEAL/tree/v4.0.0)
 
 The integration with Microsoft SEAL is through a patch.  To build SEAL library accelerated with Intel HE Acceleration Library for FPGAs, point ${CMAKE_PREFIX_PATH} to the pre-installed Intel HE Acceleration Library for FPGAs package.
@@ -10,7 +12,7 @@ cmake -S . -B build-seal4.0.0-fpga -DCMAKE_CXX_COMPILER=g++ -DCMAKE_BUILD_TYPE=R
 cmake --build build-seal4.0.0-fpga -j
 ```
 
-## Compile the test examples that uses FPGA accelerated SEAL.
+## Compile the SEAL-based test that accelerated with Intel HE Acceleration Library for FPGAs.
 ```
 pushd tests
 cmake -S . -B build -DCMAKE_CXX_COMPILER=g++ -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(realpath ${PWD}/../../../hexl-fpga-install);$(realpath ${PWD}/../seal-fpga-install)"
@@ -20,7 +22,7 @@ popd
 
 The compiled executable is located in tests/build directory.
 
-### Run the examples on FPGA card
+### Run the test on a FPGA card
 ```
 pushd tests/build
 
