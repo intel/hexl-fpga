@@ -37,3 +37,21 @@ if(TARGET HEXL::hexl)
 else()
     message(FATAL_ERROR "Cannot find target hexl")
 endif()
+
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/seal_test.sh
+     DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/bitstream_dir.sh
+     DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
+list(GET CMAKE_PREFIX_PATH 0 fpga)
+add_custom_command(
+    TARGET keyswitch-example POST_BUILD
+    COMMAND rm -f keyswitch.aocx
+    COMMAND ln -s ${fpga}/fpga/keyswitch.aocx .
+    VERBATIM
+)
+
+add_custom_target(seal_test
+    COMMAND ./seal_test.sh DEPENDS keyswitch-example
+)

@@ -96,3 +96,31 @@ jobs:
           source /disk1/tools/new_env_setup.sh
           cd build-examples
           RUN_CHOICE=1 make examples
+
+      - name: build_experimental_bridges
+        run: |
+          pushd experimental/bridge-seal
+          cmake -S . -B build-seal4.0.0-fpga -DCMAKE_CXX_COMPILER=g++ -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(realpath ${PWD}/../../install)" -DCMAKE_INSTALL_PREFIX=seal-fpga-install
+          cmake --build build-seal4.0.0-fpga -j
+          popd
+
+      - name: build_experimental_tests
+        run: |
+          pushd experimental/bridge-seal/tests
+          cmake -S . -B build -DCMAKE_CXX_COMPILER=g++ -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(realpath ${PWD}/../../../install);$(realpath ${PWD}/../seal-fpga-install)"
+          cmake --build build -j
+          popd
+
+      - name: run_experimental_tests
+        run: |
+          source /disk1/tools/init_env.sh
+          source /disk1/tools/new_env_setup.sh
+          pushd experimental/bridge-seal/tests/build
+          echo "Run experimental tests with FPGA bitstream"
+          export FPGA_DATA_DIR="/disk1/hexl-fpga-data"
+          export FPGA_BITSTREAM_DIR="${FPGA_DATA_DIR}/bitstreams"
+          make seal_test
+          echo "Run experimental tests with emulation"
+          export FPGA_BITSTREAM_DIR=
+          RUN_CHOICE=1 make seal_test
+          popd

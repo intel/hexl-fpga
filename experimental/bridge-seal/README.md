@@ -23,23 +23,22 @@ cmake --build build -j
 popd
 ```
 
-The compiled executable is located in tests/build directory.
+The compiled executable is located in *tests/build* directory.
 
 ### Run the test on a FPGA card
 ```
 pushd tests/build
+rm -f keyswitch.aocx
+ln -s /path-to-fpga-bitstreams/keyswitch.aocx .
+RUN_CHOICE=2 make seal_test
+popd
+```
 
-export aocx=/path-to-fpga-bitstreams/keyswitch.aocx
-
-export FPGA_BITSTREAM=${aocx}
-export FPGA_KERNEL=KEYSWITCH
-export BATCH_SIZE_KEYSWITCH=16
-
-export RUN_CHOICE=2
-
-aocl program acl0 ${aocx}
-
-./keyswitch-example -test_loops=3 -poly_modulus_degree=16384 -coeff_mod_bit_sizes=52,30,30,40,27,27,27 -scale_bit_size=52 -security_lvl=128
-
+### Run the test on emulation
+```
+pushd tests/build
+rm -f keyswitch.aocx
+ln -s /path-to-emulation/keyswitch.aocx .
+RUN_CHOICE=1 make seal_test
 popd
 ```
