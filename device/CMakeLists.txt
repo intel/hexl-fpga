@@ -103,9 +103,9 @@ if(EMULATION_LIB)
     function(build_standalone_emu_shared_lib kernel)
         set(KERNEL ${kernel})
         set(SRC ${CMAKE_CURRENT_SOURCE_DIR}/${KERNEL}.cpp)
-    
+
         message(STATUS "${KERNEL} configurations: ${config_${KERNEL}}")
-    
+
         add_library(${KERNEL} EXCLUDE_FROM_ALL SHARED ${SRC})
         target_compile_options(${KERNEL} PRIVATE ${EMU_COMPILE_FLAGS} ${config_${kernel}})
         target_link_options(${KERNEL} PRIVATE ${EMU_LINK_FLAGS})
@@ -142,7 +142,7 @@ else()
 
     message(STATUS "Build Hardware shared lib image Compile Flags: ${HW_COMPILE_FLAGS}")
     message(STATUS "Build Hardware shared lib image Link Flags: ${HW_LINK_FLAGS}")
-    
+
     function(build_standalone_hw_shared_lib kernel)
         set(KERNEL ${kernel})
         set(SRC ${KERNEL}.cpp)
@@ -170,7 +170,7 @@ else()
         COMMENT "Compiling FPGA bitstream"
         DEPENDS dyadic_multiply fwd_ntt inv_ntt keyswitch dyadic_multiply_keyswitch
     )
-    
+
     ## since FPGA hardware bitstream build prcess takes long time, so the fpga bitstream libary installation
     ## should seperate from the default installation.
     ## run "cmake --install build --component hw_install" to install hw bitstream

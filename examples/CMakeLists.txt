@@ -19,13 +19,6 @@ add_executable(example_dyadic_multiply example_dyadic_multiply.cpp examples.cpp)
 
 target_link_libraries(example_dyadic_multiply PRIVATE hexl-fpga::hexl-fpga)
 
-add_custom_command(
-    TARGET example_dyadic_multiply POST_BUILD
-    COMMAND rm -f libdyadic_multiply_keyswitch.so
-    COMMAND ln -s ${HEXL_FPGA_HINT_DIR}../../fpga/libdyadic_multiply_keyswitch.so .
-    VERBATIM
-)
-
 add_custom_target(examples
     COMMAND ./example_dyadic_multiply DEPENDS example_dyadic_multiply
 )
