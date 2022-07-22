@@ -55,19 +55,29 @@ jobs:
           source /opt/intel/oneapi/setvars.sh
           cmake --build build --target emulation -j
 
+
       - name: build_install
         run: |
           cmake --install build
 
-      - name: run_test
+      - name: run_test_fpga
         run: |
           source /opt/intel/oneapi/setvars.sh
           export FPGA_DATA_DIR="/disk1/hexl-fpga-data-oneapi"
-          export FPGA_BITSTREAM_DIR="${FPGA_DATA_DIR}/bitstreams"
           export KEYSWITCH_DATA_DIR="${FPGA_DATA_DIR}/test-vectors"
+          export RUN_CHOICE=2
+          export FPGA_BITSTREAM_DIR="${FPGA_DATA_DIR}/bitstreams"
           cmake --build build --target tests
 
-      - name: run_bench
+      - name: run_test_emu
+        run: |
+          source /opt/intel/oneapi/setvars.sh
+          export FPGA_DATA_DIR="/disk1/hexl-fpga-data-oneapi"
+          export KEYSWITCH_DATA_DIR="${FPGA_DATA_DIR}/test-vectors"
+          export RUN_CHOICE=1
+          cmake --build build --target tests
+
+      - name: run_bench_fpga
         run: |
           source /opt/intel/oneapi/setvars.sh
           export FPGA_DATA_DIR="/disk1/hexl-fpga-data-oneapi"
@@ -80,15 +90,18 @@ jobs:
         run: |
           source /opt/intel/oneapi/setvars.sh
           mkdir build-examples
-          cmake -S ./examples -B ./build-examples -DCMAKE_PREFIX_PATH=$(realpath .)/hexl-fpga-install/lib/cmake/ -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=dpcpp -DCMAKE_C_COMPILER=gcc -DEMULATION_LIB=ON
+          cmake -S ./examples -B ./build-examples -DCMAKE_PREFIX_PATH=$(realpath .)/hexl-fpga-install/lib/cmake/ -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=dpcpp
           cmake --build build-examples
 
-      - name: run_examples
+      - name: run_examples_fpga
         run: |
           source /opt/intel/oneapi/setvars.sh
+          aocl initialize acl0 pac_s10_usm
+          export FPGA_DATA_DIR="/disk1/hexl-fpga-data-oneapi"
+          export FPGA_KERNEL=DYADIC_MULTIPLY
+          export FPGA_BITSTREAM="${FPGA_DATA_DIR}/bitstreams/libdyadic_multiply.so"
+          export RUN_CHOICE=2
           cd build-examples
-          export RUN_CHOICE=1
-          export OCL_TBB_NUM_WORKERS=255
           make examples
 
       - name: build_experimental_bridges

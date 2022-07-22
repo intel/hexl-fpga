@@ -12,6 +12,7 @@ if [[ -z ${RUN_CHOICE} ]] || [[ ${RUN_CHOICE} -eq 2 ]]
 then
     aocl initialize acl0 pac_s10_usm
 fi
+
 ########################################
 # FPGA run with integrated bitstream
 ########################################

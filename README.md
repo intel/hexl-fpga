@@ -98,7 +98,7 @@ Intel HE Acceleration Library for FPGAs requires the following dependencies:
 After cloning the git repository into your local area, you can use the following commands to set the install path and create a build directory. It will also create cmake cache files and make files that will be used for building host and kernels. Most of the build options described in previous section can be enabled or disabled by modifying the command given below:
 
 ```
-cmake -S . -B build -DCMAKE_INSTALL_PREFIX=./hexl-fpga-install -DCMAKE_BUILD_TYPE=Release  -DENABLE_TESTS=ON  -DENABLE_BENCHMARK=ON -DENABLE_DOCS=ON -DENABLE_FPGA_DEBUG=OFF
+cmake -S . -B build -DCMAKE_INSTALL_PREFIX=./hexl-fpga-install -DCMAKE_BUILD_TYPE=Release -DENABLE_TESTS=ON -DENABLE_BENCHMARK=ON -DENABLE_DOCS=ON -DENABLE_FPGA_DEBUG=ON
 ```
 
 Different cmake options are provided allowing users to configure the overall build process. With these options the user can control if it is required to build tests, benchmark etc. Note that by default all options are off: the user must enable at least a few options to create a useful code. The recommended options can be found below. 
@@ -126,7 +126,7 @@ The kernels can be compiled in two different modes, emulation and FPGA. The emul
 ##### Compile Kernels for Emulation
 To compile the device kernel for running in emulation mode, create a new directory and set the EMULATION_LIB option to ON during the configuration: <br>
 ```
-cmake -S . -B emu_build -DCMAKE_INSTALL_PREFIX=./hexl-fpga-install -DCMAKE_BUILD_TYPE=Release  -DENABLE_TESTS=ON  -DENABLE_BENCHMARK=ON -DENABLE_DOCS=ON -DENABLE_FPGA_DEBUG=OFF -DEMULATION_LIB=ON
+cmake -S . -B emu_build -DCMAKE_INSTALL_PREFIX=./hexl-fpga-install -DCMAKE_BUILD_TYPE=Release -DEMULATION_LIB=ON
 cmake --build emu_build --target emulation 
 ```
 
@@ -139,7 +139,7 @@ This command takes a few minutes to execute.
 
 To compile the device kernel in fpga mode, create a new directory and set the EMULATION_LIB option to OFF during the configuration <br>
 ```
-cmake -S . -B hw_build -DCMAKE_INSTALL_PREFIX=./hexl-fpga-install -DCMAKE_BUILD_TYPE=Release  -DENABLE_TESTS=ON  -DENABLE_BENCHMARK=ON -DENABLE_DOCS=ON -DENABLE_FPGA_DEBUG=OFF -DEMULATION_LIB=OFF
+cmake -S . -B hw_build -DCMAKE_INSTALL_PREFIX=./hexl-fpga-install -DCMAKE_BUILD_TYPE=Release -DEMULATION_LIB=OFF
 cmake --build hw_build --target fpga 
 ```
 This command takes a few hours to execute.
@@ -273,6 +273,18 @@ Private headers, e.g. those containing fpga code should not be put in this folde
 
 # Citing Intel HE Acceleration Library for FPGAs
 To cite Intel HE Acceleration Library for FPGAs, please use the following BibTeX entry.
+
+### Version 2.0
+```tex
+    @misc{IntelHEXLFPGA,
+        author={Meng,Yan and de Souza, Fillipe D. M. and Butt, Shahzad and de Lassus, Hubert and González Aragón, Tomás and Zhou, Yongfa and Wang, Yong and others},
+        title = {{I}ntel {Homomorphic Encryption Acceleration Library for FPGAs} (Version 2.0)},
+        howpublished = {\url{https://github.com/intel/hexl-fpga}},
+        month = July,
+        year = 2022,
+        key = {Intel HE Acceleration Library for FPGAs}  
+    }
+```
 
 ### Version 1.1
 ```tex

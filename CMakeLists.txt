@@ -2,13 +2,10 @@
 # SPDX-License-Identifier: Apache-2.0
 
 cmake_minimum_required(VERSION 3.5.1)
-set(CMAKE_CXX_COMPILER dpcpp)
-
 project(hexl-fpga)
-
 set(hexl-fpga_VERSION 2.0)
-set(ENABLE_TESTS ON)
 
+set(CMAKE_CXX_COMPILER dpcpp)
 set(FPGA_SRC_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
 option(ENABLE_FPGA_DEBUG "Enable FPGA debugging info" OFF)
