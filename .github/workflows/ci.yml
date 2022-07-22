@@ -107,14 +107,15 @@ jobs:
       - name: build_experimental_bridges
         run: |
           pushd experimental/bridge-seal
-          cmake -S . -B build-seal4.0.0-fpga -DCMAKE_CXX_COMPILER=g++ -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(realpath ${PWD}/../../build/install)" -DCMAKE_INSTALL_PREFIX=seal-fpga-install
+          cmake -S . -B build-seal4.0.0-fpga -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(realpath ${PWD}/../../hexl-fpga-install)" -DCMAKE_INSTALL_PREFIX=seal-fpga-install
           cmake --build build-seal4.0.0-fpga -j
           popd
 
       - name: build_seal_based_test
         run: |
+          source /opt/intel/oneapi/setvars.sh
           pushd experimental/bridge-seal/tests
-          cmake -S . -B build -DCMAKE_CXX_COMPILER=g++ -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(realpath ${PWD}/../../../hexl-fpga-install);$(realpath ${PWD}/../seal-fpga-install)" -DEMULATION_LIB=ON
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(realpath ${PWD}/../../../hexl-fpga-install);$(realpath ${PWD}/../seal-fpga-install)" -DEMULATION_LIB=ON
           cmake --build build -j
           popd
 
@@ -126,7 +127,4 @@ jobs:
           export FPGA_DATA_DIR="/disk1/hexl-fpga-data-oneapi"
           export FPGA_BITSTREAM_DIR="${FPGA_DATA_DIR}/bitstreams"
           RUN_CHOICE=2 make seal_test
-          echo "Run experimental tests with emulation"
-          export FPGA_BITSTREAM_DIR=
-          RUN_CHOICE=1 make seal_test
           popd

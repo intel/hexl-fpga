@@ -1,5 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 03d2b5da..f6d944d1 100644
+index 03d2b5da..c33d8299 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -218,15 +218,38 @@ set(SEAL_USE_INTEL_HEXL_OPTION_STR "Use Intel HEXL library")
@@ -32,7 +32,7 @@ index 03d2b5da..f6d944d1 100644
          endif()
 +
 +        if(SEAL_USE_INTEL_HEXL_FPGA)
-+            find_package(hexl-fpga 2.0-rc1)
++            find_package(hexl-fpga 2.0)
 +            if (NOT TARGET hexl-fpga::hexl-fpga)
 +                message(FATAL_ERROR "Intel HEXL-FPGA: not found")
 +            else()
