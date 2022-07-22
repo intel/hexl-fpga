@@ -5,14 +5,14 @@ on:
   # or "reopened".
   pull_request:
     branches:
-      - main
       - development
+      - main
       - "[0-9]+.[0-9]+" # Run on release branch, e.g. 1.0
   # Run when protected branches are pushed to, e.g. via merge
   push:
     branches:
-      - main
       - development
+      - main
       - "[0-9]+.[0-9]+" # Run on release branch, e.g. 1.0
   workflow_dispatch:
 
@@ -26,7 +26,9 @@ jobs:
 
     steps:
       - name: checkout_repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with:
+          ref: development
 
       - name: pre-commit
         run: pre-commit run --all-files
@@ -42,60 +44,53 @@ jobs:
 
       - name: build_he-fpga
         run: |
+          source /opt/intel/oneapi/setvars.sh
+          rm -rf build
+          rm -rf hexl-fpga-install
           mkdir build
-          cd build
-          cmake .. -DCMAKE_INSTALL_PREFIX=install -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc -DENABLE_FPGA_DEBUG=ON -DENABLE_TESTS=ON -DENABLE_BENCHMARK=ON
-          make -j
+          cmake -S . -B build -DCMAKE_INSTALL_PREFIX=hexl-fpga-install -DCMAKE_BUILD_TYPE=Release  -DENABLE_FPGA_DEBUG=OFF -DENABLE_TESTS=ON -DENABLE_BENCHMARK=ON -DEMULATION_LIB=ON
+          cmake --build build --target hexl-fpga -j
 
       - name: build_emulation
         run: |
-          source /disk1/tools/init_env.sh
-          source /disk1/tools/new_env_setup.sh
-          cd build
-          make emulation
+          source /opt/intel/oneapi/setvars.sh
+          cmake --build build --target emulation -j
 
       - name: build_install
         run: |
-          cd build
-          make install
+          cmake --install build
 
-      - name: run_tests
+      - name: run_test
         run: |
-          source /disk1/tools/init_env.sh
-          source /disk1/tools/new_env_setup.sh
-          cd build
-          export FPGA_DATA_DIR="/disk1/hexl-fpga-data"
-          export KEYSWITCH_DATA_DIR="${FPGA_DATA_DIR}/test-vectors"
-          echo "Run tests with bitstream"
+          source /opt/intel/oneapi/setvars.sh
+          export FPGA_DATA_DIR="/disk1/hexl-fpga-data-oneapi"
           export FPGA_BITSTREAM_DIR="${FPGA_DATA_DIR}/bitstreams"
-          make tests
-          echo "Run tests with emulation"
-          export FPGA_BITSTREAM_DIR=
-          RUN_CHOICE=1 make tests
+          export KEYSWITCH_DATA_DIR="${FPGA_DATA_DIR}/test-vectors"
+          cmake --build build --target tests
 
       - name: run_bench
         run: |
-          source /disk1/tools/init_env.sh
-          source /disk1/tools/new_env_setup.sh
-          cd build
-          export FPGA_DATA_DIR="/disk1/hexl-fpga-data"
+          source /opt/intel/oneapi/setvars.sh
+          export FPGA_DATA_DIR="/disk1/hexl-fpga-data-oneapi"
           export FPGA_BITSTREAM_DIR="${FPGA_DATA_DIR}/bitstreams"
           export KEYSWITCH_DATA_DIR="${FPGA_DATA_DIR}/test-vectors"
-          make bench
+          echo "Run benchmark with hardware bitstream"
+          cmake --build build --target bench
 
       - name: build_examples
         run: |
+          source /opt/intel/oneapi/setvars.sh
           mkdir build-examples
-          cd build-examples
-          cmake ../examples/ -DCMAKE_PREFIX_PATH=$(realpath ..)/build/install/lib/cmake/ -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc
-          make -j
+          cmake -S ./examples -B ./build-examples -DCMAKE_PREFIX_PATH=$(realpath .)/hexl-fpga-install/lib/cmake/ -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=dpcpp -DCMAKE_C_COMPILER=gcc -DEMULATION_LIB=ON
+          cmake --build build-examples
 
       - name: run_examples
         run: |
-          source /disk1/tools/init_env.sh
-          source /disk1/tools/new_env_setup.sh
+          source /opt/intel/oneapi/setvars.sh
           cd build-examples
-          RUN_CHOICE=1 make examples
+          export RUN_CHOICE=1
+          export OCL_TBB_NUM_WORKERS=255
+          make examples
 
       - name: build_experimental_bridges
         run: |
@@ -104,22 +99,21 @@ jobs:
           cmake --build build-seal4.0.0-fpga -j
           popd
 
-      - name: build_experimental_tests
+      - name: build_seal_based_test
         run: |
           pushd experimental/bridge-seal/tests
-          cmake -S . -B build -DCMAKE_CXX_COMPILER=g++ -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(realpath ${PWD}/../../../build/install);$(realpath ${PWD}/../seal-fpga-install)"
+          cmake -S . -B build -DCMAKE_CXX_COMPILER=g++ -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(realpath ${PWD}/../../../hexl-fpga-install);$(realpath ${PWD}/../seal-fpga-install)" -DEMULATION_LIB=ON
           cmake --build build -j
           popd
 
       - name: run_experimental_tests
         run: |
-          source /disk1/tools/init_env.sh
-          source /disk1/tools/new_env_setup.sh
+          source /opt/intel/oneapi/setvars.sh
           pushd experimental/bridge-seal/tests/build
           echo "Run experimental tests with FPGA bitstream"
-          export FPGA_DATA_DIR="/disk1/hexl-fpga-data"
+          export FPGA_DATA_DIR="/disk1/hexl-fpga-data-oneapi"
           export FPGA_BITSTREAM_DIR="${FPGA_DATA_DIR}/bitstreams"
-          make seal_test
+          RUN_CHOICE=2 make seal_test
           echo "Run experimental tests with emulation"
           export FPGA_BITSTREAM_DIR=
           RUN_CHOICE=1 make seal_test
