@@ -28,7 +28,6 @@ jobs:
       - name: checkout_repo
         uses: actions/checkout@v2
 
-
       - name: pre-commit
         run: pre-commit run --all-files
 
@@ -47,14 +46,13 @@ jobs:
           rm -rf build
           rm -rf hexl-fpga-install
           mkdir build
-          cmake -S . -B build -DCMAKE_INSTALL_PREFIX=hexl-fpga-install -DCMAKE_BUILD_TYPE=Release  -DENABLE_FPGA_DEBUG=OFF -DENABLE_TESTS=ON -DENABLE_BENCHMARK=ON -DEMULATION_LIB=ON
+          cmake -S . -B build -DCMAKE_CXX_COMPILER=dpcpp -DCMAKE_INSTALL_PREFIX=hexl-fpga-install -DCMAKE_BUILD_TYPE=Release  -DENABLE_FPGA_DEBUG=OFF -DENABLE_TESTS=ON -DENABLE_BENCHMARK=ON -DEMULATION_LIB=ON
           cmake --build build --target hexl-fpga -j
 
       - name: build_emulation
         run: |
           source /opt/intel/oneapi/setvars.sh
           cmake --build build --target emulation -j
-
 
       - name: build_install
         run: |

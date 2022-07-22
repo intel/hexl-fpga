@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 #!/usr/bin/env bash
+
 set -eo pipefail
 
 spath=$(dirname $0)
@@ -11,6 +12,7 @@ if [[ -z ${RUN_CHOICE} ]] || [[ ${RUN_CHOICE} -eq 2 ]]
 then
     aocl initialize acl0 pac_s10
 fi
+
 ########################################
 # FPGA run with individual bitstream
 ########################################

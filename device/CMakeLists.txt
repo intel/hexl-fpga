@@ -1,17 +1,14 @@
 if(DEFINED CHECK_BUILD_DEVICE)
-if(UNIX)
-    # Direct CMake to use dpcpp rather than the default C++ compiler/linker
-    set(CMAKE_CXX_COMPILER dpcpp)
-else() # Windows
-    # Force CMake to use dpcpp rather than the default C++ compiler/linker
-    # (needed on Windows only)
-    include (CMakeForceCompiler)
-    CMAKE_FORCE_CXX_COMPILER (dpcpp IntelDPCPP)
-    include (Platform/Windows-Clang)
-endif()
-cmake_minimum_required (VERSION 3.4)
-
-project(PROJ_CHECK_BUILD_DEVICE)
+    if(UNIX)
+        # Direct CMake to use dpcpp rather than the default C++ compiler/linker
+        set(CMAKE_CXX_COMPILER dpcpp)
+    else() # Windows
+        # Force CMake to use dpcpp rather than the default C++ compiler/linker
+        # (needed on Windows only)
+        include (CMakeForceCompiler)
+        CMAKE_FORCE_CXX_COMPILER (dpcpp IntelDPCPP)
+        include (Platform/Windows-Clang)
+    endif()
 endif()
 
 set(DPCPP_VERBOSE "-v" )
@@ -46,7 +43,7 @@ set(HIGH_EFFORT_COMPILE off)
 set(ENABLE_HYPER_OPTIMIZED_HANDSHAKING off)
 set(ENABLE_NO_CACHING on)
 
-if (ENABLE_SHARED_PERF_COUNTER)
+if(ENABLE_SHARED_PERF_COUNTER)
     set(SHARED_PERF_COUNTER "-Xsprofile-shared-counters")
 else()
     set(SHARED_PERF_COUNTER "")
@@ -61,30 +58,30 @@ else()
 endif()
 
 if(ENABLE_FLAT_BSP)
-  set(BSP_CHOICE_CONTROL "-Xsbsp-flow=flat")
+    set(BSP_CHOICE_CONTROL "-Xsbsp-flow=flat")
 else()
-  set(BSP_CHOICE_CONTROL "")
+    set(BSP_CHOICE_CONTROL "")
 endif()
 
 if(ENABLE_PROFILING)
-	set(PROFILING_CONTROL "-Xsprofile")
+    set(PROFILING_CONTROL "-Xsprofile")
 else()
-	set(PROFILING_CONTROL "")
+    set(PROFILING_CONTROL "")
 endif()
 
 if(HIGH_EFFORT_COMPILE)
-  set(HIGH_EFFORT_COMPILE_CONTROL "-Xshigh-effort")
+    set(HIGH_EFFORT_COMPILE_CONTROL "-Xshigh-effort")
 else()
-  set(HIGH_EFFORT_COMPILE_CONTROL "")
+    set(HIGH_EFFORT_COMPILE_CONTROL "")
 endif()
 
-if (ENABLE_HYPER_OPTIMIZED_HANDSHAKING)
+if(ENABLE_HYPER_OPTIMIZED_HANDSHAKING)
     set(HYPER_OPTIMIZED_HANDSHAKING_SET "-Xshyper-optimized-handshaking=off")
 else()
     set(HYPER_OPTIMIZED_HANDSHAKING_SET "")
 endif()
 
-if (ENABLE_NO_CACHING)
+if(ENABLE_NO_CACHING)
     set(NOCACHING "-Xsopt-arg=-nocaching")
 else()
     set(NOCACHING "")
@@ -92,105 +89,97 @@ endif()
 
 set(AC_TYPES_FLAGS "-qactypes")
 
-###############################################################################
-### FPGA Emulation compile flow
-###############################################################################
-
 option(EMULATION_LIB "Enable FPGA emulation library build flow" OFF)
 message(STATUS "EMULATION_LIB: ${EMULATION_LIB}")
 
 if(EMULATION_LIB)
+    ###############################################################################
+    ### FPGA Emulation compile flow
+    ###############################################################################
 
-set(EMU_COMPILE_FLAGS -fPIC -fintelfpga -c ${AC_TYPES_FLAGS})
-set(EMU_LINK_FLAGS -fintelfpga)
+    set(EMU_COMPILE_FLAGS -fPIC -fintelfpga -c ${AC_TYPES_FLAGS})
+    set(EMU_LINK_FLAGS -fintelfpga)
 
-function(build_standalone_emu_shared_lib kernel)
-    set(KERNEL ${kernel})
-    set(SRC ${CMAKE_CURRENT_SOURCE_DIR}/${KERNEL}.cpp)
+    function(build_standalone_emu_shared_lib kernel)
+        set(KERNEL ${kernel})
+        set(SRC ${CMAKE_CURRENT_SOURCE_DIR}/${KERNEL}.cpp)
 
-    message(STATUS "${KERNEL} configurations: ${config_${KERNEL}}")
+        message(STATUS "${KERNEL} configurations: ${config_${KERNEL}}")
 
-    add_library(${KERNEL} EXCLUDE_FROM_ALL SHARED ${SRC})
-    target_compile_options(${KERNEL} PRIVATE ${EMU_COMPILE_FLAGS} ${config_${kernel}})
-    target_link_options(${KERNEL} PRIVATE ${EMU_LINK_FLAGS})
+        add_library(${KERNEL} EXCLUDE_FROM_ALL SHARED ${SRC})
+        target_compile_options(${KERNEL} PRIVATE ${EMU_COMPILE_FLAGS} ${config_${kernel}})
+        target_link_options(${KERNEL} PRIVATE ${EMU_LINK_FLAGS})
+    endfunction()
 
-endfunction()
+    build_standalone_emu_shared_lib(dyadic_multiply)
+    build_standalone_emu_shared_lib(fwd_ntt)
+    build_standalone_emu_shared_lib(inv_ntt)
+    build_standalone_emu_shared_lib(keyswitch)
+    build_standalone_emu_shared_lib(dyadic_multiply_keyswitch)
 
-build_standalone_emu_shared_lib(dyadic_multiply)
-build_standalone_emu_shared_lib(fwd_ntt)
-build_standalone_emu_shared_lib(inv_ntt)
-build_standalone_emu_shared_lib(keyswitch)
-build_standalone_emu_shared_lib(dyadic_multiply_keyswitch)
+    add_custom_target(fwd_emu DEPENDS fwd_ntt)
+    add_custom_target(inv_emu DEPENDS inv_ntt)
+    add_custom_target(dyadicmult_emu DEPENDS dyadic_multiply)
+    add_custom_target(ks_emu DEPENDS keyswitch)
+    add_custom_target(dyadicmult_ks_emu DEPENDS dyadic_multiply_keyswitch)
 
-add_custom_target(fwd_emu DEPENDS fwd_ntt)
-add_custom_target(inv_emu DEPENDS inv_ntt)
-add_custom_target(dyadicmult_emu DEPENDS dyadic_multiply)
-add_custom_target(ks_emu DEPENDS keyswitch)
-add_custom_target(dyadicmult_ks_emu DEPENDS dyadic_multiply_keyswitch)
+    add_custom_target(emulation
+        COMMENT "Compiling for emulation"
+        DEPENDS dyadic_multiply_keyswitch dyadic_multiply fwd_ntt inv_ntt keyswitch
+    )
 
-
-add_custom_target(emulation
-    COMMENT "Compiling for emulation"
-    DEPENDS dyadic_multiply_keyswitch dyadic_multiply fwd_ntt inv_ntt keyswitch
-)
-
-install(TARGETS dyadic_multiply fwd_ntt inv_ntt keyswitch dyadic_multiply_keyswitch
-    LIBRARY
-    DESTINATION emu)
-
+    install(TARGETS dyadic_multiply fwd_ntt inv_ntt keyswitch dyadic_multiply_keyswitch
+        LIBRARY
+        DESTINATION emu)
 else()
+    ##############################################################
+    # Build FPGA Hardware shared library
+    ##############################################################
 
-##############################################################
-# Build FPGA Hardware shared library
-##############################################################
+    set(HW_COMPILE_FLAGS -fPIC -fintelfpga -c ${AC_TYPES_FLAGS} )
+    set(HW_LINK_FLAGS  -fintelfpga -shared -Xshardware ${AC_TYPES_FLAGS}
+        ${INTERLEAVING_CONTROL} ${BSP_CHOICE_CONTROL} ${HIGH_EFFORT_COMPILE_CONTROL} ${PROFILING_CONTROL} ${HYPER_OPTIMIZED_HANDSHAKING_SET} ${NOCACHING})
 
-set(HW_COMPILE_FLAGS -fPIC -fintelfpga -c ${AC_TYPES_FLAGS} )
-set(HW_LINK_FLAGS  -fintelfpga -shared -Xshardware ${AC_TYPES_FLAGS}
-    ${INTERLEAVING_CONTROL} ${BSP_CHOICE_CONTROL} ${HIGH_EFFORT_COMPILE_CONTROL} ${PROFILING_CONTROL} ${HYPER_OPTIMIZED_HANDSHAKING_SET} ${NOCACHING})
+    message(STATUS "Build Hardware shared lib image Compile Flags: ${HW_COMPILE_FLAGS}")
+    message(STATUS "Build Hardware shared lib image Link Flags: ${HW_LINK_FLAGS}")
 
-message(STATUS "Build Hardware shared lib image Compile Flags: ${HW_COMPILE_FLAGS}")
-message(STATUS "Build Hardware shared lib image Link Flags: ${HW_LINK_FLAGS}")
+    function(build_standalone_hw_shared_lib kernel)
+        set(KERNEL ${kernel})
+        set(SRC ${KERNEL}.cpp)
 
+        add_library(${KERNEL} EXCLUDE_FROM_ALL SHARED ${SRC})
+        target_compile_options(${KERNEL} PRIVATE ${HW_COMPILE_FLAGS} ${config_${KERNEL}} )
+        target_link_options(${KERNEL} PRIVATE ${HW_LINK_FLAGS} -Xsboard=${BOARD_${KERNEL}} -Xsclock=${FMAX_${KERNEL}} -Xsseed=${HW_SEED})
 
-function(build_standalone_hw_shared_lib kernel)
-    set(KERNEL ${kernel})
-    set(SRC ${KERNEL}.cpp)
+        message(STATUS "Build ${KERNEL} with target Fmax: ${FMAX_${KERNEL}}, FPGA board: ${BOARD_${KERNEL}}, Seed: ${HW_SEED}")
+    endfunction()
 
-    add_library(${KERNEL} EXCLUDE_FROM_ALL SHARED ${SRC})
-    target_compile_options(${KERNEL} PRIVATE ${HW_COMPILE_FLAGS} ${config_${KERNEL}} )
-    target_link_options(${KERNEL} PRIVATE ${HW_LINK_FLAGS} -Xsboard=${BOARD_${KERNEL}} -Xsclock=${FMAX_${KERNEL}} -Xsseed=${HW_SEED})
+    build_standalone_hw_shared_lib(fwd_ntt)
+    build_standalone_hw_shared_lib(inv_ntt)
+    build_standalone_hw_shared_lib(dyadic_multiply)
+    build_standalone_hw_shared_lib(keyswitch)
+    build_standalone_hw_shared_lib(dyadic_multiply_keyswitch)
 
-    message(STATUS "Build ${KERNEL} with target Fmax: ${FMAX_${KERNEL}}, FPGA board: ${BOARD_${KERNEL}}, Seed: ${HW_SEED}")
-endfunction()
+    add_custom_target(fwd_hw DEPENDS fwd_ntt)
+    add_custom_target(inv_hw DEPENDS inv_ntt)
+    add_custom_target(dyad_hw DEPENDS dyadic_multiply)
+    add_custom_target(ks_hw DEPENDS keyswitch)
+    add_custom_target(dyadicmult_ks_hw DEPENDS dyadic_multiply_keyswitch)
 
-build_standalone_hw_shared_lib(fwd_ntt)
-build_standalone_hw_shared_lib(inv_ntt)
-build_standalone_hw_shared_lib(dyadic_multiply)
-build_standalone_hw_shared_lib(keyswitch)
-build_standalone_hw_shared_lib(dyadic_multiply_keyswitch)
+    add_custom_target(fpga
+        COMMENT "Compiling FPGA bitstream"
+        DEPENDS dyadic_multiply fwd_ntt inv_ntt keyswitch dyadic_multiply_keyswitch
+    )
 
-add_custom_target(fwd_hw DEPENDS fwd_ntt)
-add_custom_target(inv_hw DEPENDS inv_ntt)
-add_custom_target(dyad_hw DEPENDS dyadic_multiply)
-add_custom_target(ks_hw DEPENDS keyswitch)
-add_custom_target(dyadicmult_ks_hw DEPENDS dyadic_multiply_keyswitch)
-
-add_custom_target(fpga
-    COMMENT "Compiling FPGA bitstream"
-    DEPENDS dyadic_multiply fwd_ntt inv_ntt keyswitch dyadic_multiply_keyswitch
-)
-
-## since FPGA hardware bitstream build prcess takes long time, so the fpga bitstream libary installation
-## should seperate from the default installation.
-## run "cmake --install build --component hw_install" to install hw bitstream
-install(TARGETS  dyadic_multiply fwd_ntt keyswitch dyadic_multiply_keyswitch
-    LIBRARY
-    DESTINATION fpga
-    COMPONENT hw_install
-    EXCLUDE_FROM_ALL)
-
+    ## since FPGA hardware bitstream build prcess takes long time, so the fpga bitstream libary installation
+    ## should seperate from the default installation.
+    ## run "cmake --install build --component hw_install" to install hw bitstream
+    install(TARGETS  dyadic_multiply fwd_ntt keyswitch dyadic_multiply_keyswitch
+        LIBRARY
+        DESTINATION fpga
+        COMPONENT hw_install
+        EXCLUDE_FROM_ALL)
 endif()
-
 
 ###############################################################################
 ### Generate Report
@@ -199,19 +188,16 @@ endif()
 #   dpcpp -fintelfpga -Xshardware -Xsboard=<FPGA_BOARD> -fsycl-link=early kernel.cpp -o kernel_report.a
 # fsycl-link=early stops the compiler after RTL generation, before invoking Quartus
 
-
 set(REPORT_COMPILE_FLAGS -fPIC -fintelfpga -c ${AC_TYPES_FLAGS})
 set(REPORT_LINK_FLAGS -fintelfpga -Xshardware -fsycl-link=early )
 
 function(build_standalone_report kernel)
-
     set(KERNEL ${kernel})
     set(SRC ${KERNEL}.cpp)
 
     add_library(${KERNEL}_report EXCLUDE_FROM_ALL SHARED ${SRC})
     target_compile_options(${KERNEL}_report PRIVATE ${REPORT_COMPILE_FLAGS} ${config_${KERNEL}})
     target_link_options(${KERNEL}_report PRIVATE ${REPORT_LINK_FLAGS} -Xsboard=${BOARD_${KERNEL}})
-
 endfunction()
 
 build_standalone_report(fwd_ntt)
