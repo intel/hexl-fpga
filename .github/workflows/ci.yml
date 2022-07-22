@@ -68,7 +68,7 @@ jobs:
           export RUN_CHOICE=2
           export FPGA_BITSTREAM_DIR="${FPGA_DATA_DIR}/bitstreams"
           cmake --build build --target tests
-      
+
       - name: run_test_emu
         run: |
           source /opt/intel/oneapi/setvars.sh
