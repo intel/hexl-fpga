@@ -12,6 +12,12 @@ namespace intel {
 namespace hexl {
 namespace fpga {
 
+/// @brief
+/// class Dynamic Interface
+/// Parent Interface class for loading fpga bitstreams
+/// contained in dynamic libraries
+/// @param[in] libName name or path to library that is to be loaded
+
 class DynamicIF {
 public:
     explicit DynamicIF(const std::string& libName);
@@ -24,6 +30,11 @@ private:
     std::string m_lib_name_;
 };
 
+/// @brief
+/// class NTT Dynamic Interface
+/// Interface class for loading NTT fpga bitstreams
+/// contained in dynamic libraries
+/// @param[in] lib name or path to library that is to be loaded
 class NTTDynamicIF : public DynamicIF {
 public:
     explicit NTTDynamicIF(const std::string& lib);
@@ -47,6 +58,12 @@ public:
      */
     sycl::event (*ntt_output)(sycl::queue& q, int, uint64_t* __restrict__);
 };
+
+/// @brief
+/// class INTT Dynamic Interface
+/// Interface class for loading INTT fpga bitstreams
+/// contained in dynamic libraries
+/// @param[in] lib name or path to library that is to be loaded
 
 class INTTDynamicIF : public DynamicIF {
 public:
@@ -80,6 +97,11 @@ public:
                               uint64_t* __restrict__, uint64_t* __restrict__);
 };
 
+/// @brief
+/// class Dyadic Multiplier Dynamic Interface
+/// Interface class for loading Dyadic Multiplier fpga bitstreams
+/// contained in dynamic libraries
+/// @param[in] lib name or path to library that is to be loaded
 class DyadicMultDynamicIF : public DynamicIF {
 public:
     explicit DyadicMultDynamicIF(std::string& lib);
@@ -92,6 +114,11 @@ public:
     void (*submit_autorun_kernels)(sycl::queue& q);
 };
 
+/// @brief
+/// class KeySwitchDynamic Dynamic Interface
+/// Interface class for loading KeySwitchDynamic fpga bitstreams
+/// contained in dynamic libraries
+/// @param[in] lib name or path to library that is to be loaded
 class KeySwitchDynamicIF : public DynamicIF {
 public:
     explicit KeySwitchDynamicIF(std::string& lib);
@@ -109,6 +136,11 @@ public:
     void (*launchAllAutoRunKernels)(sycl::queue&);
 };
 
+/// @brief
+/// class Dyadic Multiplier and KeySwitchDynamic Dynamic Interface
+/// Interface class for loading Dyadic Multiplier and KeySwitchDynamic
+/// fpga bitstreams contained in dynamic libraries
+/// @param[in] lib name or path to library that is to be loaded
 class DyadicMultKeySwitchDynamicIF : public DynamicIF {
 public:
     explicit DyadicMultKeySwitchDynamicIF(std::string& lib);
