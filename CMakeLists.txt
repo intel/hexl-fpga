@@ -6,7 +6,7 @@ set(CMAKE_CXX_COMPILER dpcpp)
 
 project(hexl-fpga)
 
-set(hexl-fpga_VERSION 1.1)
+set(hexl-fpga_VERSION 2.0-rc1)
 set(ENABLE_TESTS ON)
 
 set(FPGA_SRC_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
