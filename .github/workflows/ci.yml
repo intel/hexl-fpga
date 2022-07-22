@@ -114,7 +114,4 @@ jobs:
           export FPGA_DATA_DIR="/disk1/hexl-fpga-data-oneapi"
           export FPGA_BITSTREAM_DIR="${FPGA_DATA_DIR}/bitstreams"
           RUN_CHOICE=2 make seal_test
-          echo "Run experimental tests with emulation"
-          export FPGA_BITSTREAM_DIR=
-          RUN_CHOICE=1 make seal_test
           popd
