@@ -100,6 +100,7 @@ jobs:
 
       - name: build_seal_based_test
         run: |
+          source /opt/intel/oneapi/setvars.sh
           pushd experimental/bridge-seal/tests
           cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(realpath ${PWD}/../../../hexl-fpga-install);$(realpath ${PWD}/../seal-fpga-install)" -DEMULATION_LIB=ON
           cmake --build build -j
