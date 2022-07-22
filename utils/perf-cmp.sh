@@ -11,10 +11,10 @@ mkdir -p testdata
 setup_testdata() {
     pushd testdata
 
-    # downloading bitstream keyswitch.aocx
-    wget https://github.com/intel/hexl-fpga/releases/download/v1.1/keyswitch.aocx
-    aocx=${PWD}/keyswitch.aocx
-    export FPGA_BITSTREAM=${aocx}
+    # downloading bitstream libkeyswitch_hw.so
+    wget https://github.com/intel/hexl-fpga/releases/download/v1.1/libkeyswitch_hw.so
+    shared_lib=${PWD}/libkeyswitch_hw.so
+    export FPGA_BITSTREAM_PATH=${PWD}/
     export FPGA_KERNEL=KEYSWITCH
 
     # downloading test vectors testdata.zip
@@ -33,7 +33,7 @@ build_cpu() {
     cmake .. \
     -DCMAKE_INSTALL_PREFIX=./hexl-fpga-install \
     -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_CXX_COMPILER=g++ \
+    -DCMAKE_CXX_COMPILER=dpcpp \
     -DCMAKE_C_COMPILER=gcc \
     -DENABLE_TESTS=ON \
     -DENABLE_BENCHMARK=ON \
@@ -52,7 +52,7 @@ build_fpga() {
     cmake .. \
     -DCMAKE_INSTALL_PREFIX=./hexl-fpga-install \
     -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_CXX_COMPILER=g++ \
+    -DCMAKE_CXX_COMPILER=dpcpp \
     -DCMAKE_C_COMPILER=gcc \
     -DENABLE_TESTS=ON \
     -DENABLE_BENCHMARK=ON \
@@ -89,7 +89,8 @@ do
 done
 popd
 
-aocl program acl0 ${aocx}
+# Initializing FPGA to use non-USM BSP
+aocl initialize acl0 pac_s10
 pushd build-fpga/benchmark
 batch=128
 for i in 1 1024 4096 16384

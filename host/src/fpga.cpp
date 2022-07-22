@@ -1,34 +1,27 @@
 // Copyright (C) 2020-2021 Intel Corporation
 // SPDX-License-Identifier: Apache-2.0
 
+#include <dlfcn.h>
 #include <string.h>
 
 #include <cmath>
 #include <iomanip>
 #include <iostream>
 #include <unordered_map>
-#define CL_TARGET_OPENCL_VERSION 200
-#include <CL/cl_ext_intelfpga.h>
-#include <CL/opencl.h>
-#undef CL_VERSION_2_0
-#include "AOCLUtils/aocl_utils.h"
 #include "fpga.h"
 #include "fpga_assert.h"
 #include "number_theory_util.h"
-
 namespace intel {
 namespace hexl {
 namespace fpga {
+// utility function for copying input data batch for KeySwitch
 
 const char* keyswitch_kernel_name[] = {"load", "store"};
-
 unsigned int Object::g_wid_ = 0;
-
 Object::Object(kernel_t type, bool fence)
     : ready_(false), type_(type), fence_(fence) {
     id_ = Object::g_wid_++;
 }
-
 Object_DyadicMultiply::Object_DyadicMultiply(uint64_t* results,
                                              const uint64_t* operand1,
                                              const uint64_t* operand2,
@@ -41,7 +34,6 @@ Object_DyadicMultiply::Object_DyadicMultiply(uint64_t* results,
       n_(n),
       moduli_(moduli),
       n_moduli_(n_moduli) {}
-
 Object_NTT::Object_NTT(uint64_t* coeff_poly,
                        const uint64_t* root_of_unity_powers,
                        const uint64_t* precon_root_of_unity_powers,
@@ -52,7 +44,6 @@ Object_NTT::Object_NTT(uint64_t* coeff_poly,
       precon_root_of_unity_powers_(precon_root_of_unity_powers),
       coeff_modulus_(coeff_modulus),
       n_(n) {}
-
 Object_INTT::Object_INTT(uint64_t* coeff_poly,
                          const uint64_t* inv_root_of_unity_powers,
                          const uint64_t* precon_inv_root_of_unity_powers,
@@ -66,7 +57,6 @@ Object_INTT::Object_INTT(uint64_t* coeff_poly,
       inv_n_(inv_n),
       inv_n_w_(inv_n_w),
       n_(n) {}
-
 Object_KeySwitch::Object_KeySwitch(
     uint64_t* result, const uint64_t* t_target_iter_ptr, uint64_t n,
     uint64_t decomp_modulus_size, uint64_t key_modulus_size,
@@ -86,17 +76,14 @@ Object_KeySwitch::Object_KeySwitch(
       k_switch_keys_(k_switch_keys),
       modswitch_factors_(modswitch_factors),
       twiddle_factors_(twiddle_factors) {}
-
 Object* Buffer::front() const {
     Object* obj = buffer_.front();
     return obj;
 }
-
 Object* Buffer::back() const {
     Object* obj = buffer_.back();
     return obj;
 }
-
 void Buffer::push(Object* obj) {
     std::unique_lock<std::mutex> locker(mu_);
     cond_.wait(locker, [this]() { return buffer_.size() < capacity_; });
@@ -104,7 +91,6 @@ void Buffer::push(Object* obj) {
     locker.unlock();
     cond_.notify_all();
 }
-
 std::vector<Object*> Buffer::pop() {
     std::unique_lock<std::mutex> locker(mu_);
 
@@ -192,9 +178,9 @@ uint64_t Buffer::size() {
 
 std::atomic<int> FPGAObject::g_tag_(0);
 
-FPGAObject::FPGAObject(const cl_context& context, uint64_t n_batch,
-                       kernel_t type, bool fence)
-    : context_(context),
+FPGAObject::FPGAObject(sycl::queue& p_q, uint64_t n_batch, kernel_t type,
+                       bool fence)
+    : m_q(p_q),
       tag_(-1),
       n_batch_(n_batch),
       batch_size_(n_batch),
@@ -207,65 +193,55 @@ void FPGAObject::recycle() {
     in_objs_.resize(0);
 }
 
-FPGAObject_NTT::FPGAObject_NTT(const cl_context& context, uint64_t coeff_count,
+FPGAObject_NTT::FPGAObject_NTT(sycl::queue& p_q, uint64_t coeff_count,
                                uint64_t batch_size)
-    : FPGAObject(context, batch_size, kernel_t::NTT),
+    : FPGAObject(p_q, batch_size, kernel_t::NTT),
 
       n_(coeff_count) {
     uint64_t data_size = batch_size * coeff_count;
-    coeff_poly_in_svm_ =
-        (uint64_t*)clSVMAlloc(context_, 0, data_size * sizeof(uint64_t), 0);
+    coeff_poly_in_svm_ = sycl::malloc_shared<uint64_t>(data_size, m_q);
     root_of_unity_powers_in_svm_ =
-        (uint64_t*)clSVMAlloc(context_, 0, coeff_count * sizeof(uint64_t), 0);
+        sycl::malloc_shared<uint64_t>(coeff_count, m_q);
     precon_root_of_unity_powers_in_svm_ =
-        (uint64_t*)clSVMAlloc(context_, 0, coeff_count * sizeof(uint64_t), 0);
-    coeff_modulus_in_svm_ =
-        (uint64_t*)clSVMAlloc(context_, 0, sizeof(uint64_t), 0);
+        sycl::malloc_shared<uint64_t>(coeff_count, m_q);
+    coeff_modulus_in_svm_ = sycl::malloc_shared<uint64_t>(1, m_q);
 }
 
-FPGAObject_INTT::FPGAObject_INTT(const cl_context& context,
-                                 uint64_t coeff_count, uint64_t batch_size)
-    : FPGAObject(context, batch_size, kernel_t::INTT),
+FPGAObject_INTT::FPGAObject_INTT(sycl::queue& p_q, uint64_t coeff_count,
+                                 uint64_t batch_size)
+    : FPGAObject(p_q, batch_size, kernel_t::INTT),
 
       n_(coeff_count) {
     uint64_t data_size = batch_size * coeff_count;
-    coeff_poly_in_svm_ =
-        (uint64_t*)clSVMAlloc(context_, 0, data_size * sizeof(uint64_t), 0);
-    inv_n_in_svm_ = (uint64_t*)clSVMAlloc(context_, 0, sizeof(uint64_t), 0);
-    inv_n_w_in_svm_ = (uint64_t*)clSVMAlloc(context_, 0, sizeof(uint64_t), 0);
+    coeff_poly_in_svm_ = sycl::malloc_shared<uint64_t>(data_size, m_q);
+    inv_n_in_svm_ = sycl::malloc_shared<uint64_t>(1, m_q);
+    inv_n_w_in_svm_ = sycl::malloc_shared<uint64_t>(1, m_q);
     inv_root_of_unity_powers_in_svm_ =
-        (uint64_t*)clSVMAlloc(context_, 0, coeff_count * sizeof(uint64_t), 0);
+        sycl::malloc_shared<uint64_t>(coeff_count, m_q);
     precon_inv_root_of_unity_powers_in_svm_ =
-        (uint64_t*)clSVMAlloc(context_, 0, coeff_count * sizeof(uint64_t), 0);
-    coeff_modulus_in_svm_ =
-        (uint64_t*)clSVMAlloc(context_, 0, sizeof(uint64_t), 0);
+        sycl::malloc_shared<uint64_t>(coeff_count, m_q);
+    coeff_modulus_in_svm_ = sycl::malloc_shared<uint64_t>(1, m_q);
 }
 
-FPGAObject_DyadicMultiply::FPGAObject_DyadicMultiply(const cl_context& context,
+FPGAObject_DyadicMultiply::FPGAObject_DyadicMultiply(sycl::queue& p_q,
                                                      uint64_t coeff_size,
                                                      uint32_t modulus_size,
                                                      uint64_t batch_size)
-    : FPGAObject(context, batch_size, kernel_t::DYADIC_MULTIPLY),
+    : FPGAObject(p_q, batch_size, kernel_t::DYADIC_MULTIPLY),
       n_(coeff_size),
       n_moduli_(0) {
     uint64_t n = batch_size * modulus_size * coeff_size;
-    operand1_in_svm_ =
-        (uint64_t*)clSVMAlloc(context_, 0, n * 2 * sizeof(uint64_t), 0);
-    operand2_in_svm_ =
-        (uint64_t*)clSVMAlloc(context_, 0, n * 2 * sizeof(uint64_t), 0);
-    moduli_info_ = (moduli_info_t*)clSVMAlloc(
-        context_, 0, batch_size * modulus_size * sizeof(moduli_info_t), 0);
-
-    cl_int status;
-    operands_in_ddr_ = clCreateBuffer(context_, CL_MEM_READ_WRITE,
-                                      n * 4 * sizeof(uint64_t), NULL, &status);
-    results_out_ddr_ = clCreateBuffer(context_, CL_MEM_READ_WRITE,
-                                      n * 3 * sizeof(uint64_t), NULL, &status);
+    operand1_in_svm_ = sycl::malloc_shared<uint64_t>(n * 2, m_q);
+    operand2_in_svm_ = sycl::malloc_shared<uint64_t>(n * 2, m_q);
+    moduli_info_ =
+        sycl::malloc_shared<moduli_info_t>(batch_size * modulus_size, m_q);
+    operands_in_ddr_ = sycl::malloc_device<uint64_t>(n * 4, m_q);
+    results_out_ddr_ = sycl::malloc_device<uint64_t>(n * 3, m_q);
 }
 
-FPGAObject_KeySwitch::FPGAObject_KeySwitch(const cl_context& context,
+FPGAObject_KeySwitch::FPGAObject_KeySwitch(sycl::queue& p_q,
                                            uint64_t batch_size)
-    : FPGAObject(context, batch_size, kernel_t::KEYSWITCH),
+    : FPGAObject(p_q, batch_size, kernel_t::KEYSWITCH),
       n_(0),
       decomp_modulus_size_(0),
       key_modulus_size_(0),
@@ -275,70 +251,65 @@ FPGAObject_KeySwitch::FPGAObject_KeySwitch(const cl_context& context,
       k_switch_keys_(nullptr),
       modswitch_factors_(nullptr),
       twiddle_factors_(nullptr) {
-    size_t size_in = batch_size * MAX_COEFF_COUNT * MAX_KEY_MODULUS_SIZE;
-    size_t size_out = size_in * MAX_KEY_COMPONENT_SIZE;
-    ms_output_ =
-        (uint64_t*)aocl_utils::alignedMalloc(size_out * sizeof(uint64_t));
-
-    mem_t_target_iter_ptr_ =
-        clCreateBuffer(context, CL_MEM_READ_ONLY | CL_CHANNEL_2_INTELFPGA,
-                       size_in * sizeof(uint64_t), NULL, NULL);
-    mem_KeySwitch_results_ =
-        clCreateBuffer(context, CL_MEM_READ_WRITE | CL_CHANNEL_1_INTELFPGA,
-                       size_out * sizeof(uint64_t), NULL, NULL);
+    size_t size_in = batch_size * H_MAX_COEFF_COUNT * H_MAX_KEY_MODULUS_SIZE;
+    size_t size_out = size_in * H_MAX_KEY_COMPONENT_SIZE;
+    ms_output_ = static_cast<uint64_t*>(
+        aligned_alloc(HOST_MEM_ALIGNMENT, size_out * sizeof(uint64_t)));
+    mem_t_target_iter_ptr_ = new sycl::buffer<uint64_t>(
+        sycl::range(size_in),
+        {sycl::property::buffer::mem_channel{MEM_CHANNEL_K2}});
+    mem_KeySwitch_results_ = new sycl::buffer<sycl::ulong2>(
+        sycl::range(size_out / 2),
+        {sycl::property::buffer::mem_channel{MEM_CHANNEL_K2}});
+    mem_t_target_iter_ptr_->set_write_back(false);
+    mem_KeySwitch_results_->set_write_back(false);
 }
 
 FPGAObject_KeySwitch::~FPGAObject_KeySwitch() {
     if (ms_output_) {
-        aocl_utils::alignedFree(ms_output_);
-    }
-    if (mem_t_target_iter_ptr_) {
-        clReleaseMemObject(mem_t_target_iter_ptr_);
+        free(ms_output_);
     }
     if (mem_KeySwitch_results_) {
-        clReleaseMemObject(mem_KeySwitch_results_);
+        delete mem_KeySwitch_results_;
     }
 }
-
 FPGAObject_DyadicMultiply::~FPGAObject_DyadicMultiply() {
-    clSVMFree(context_, operand1_in_svm_);
+    free(operand1_in_svm_, m_q);
     operand1_in_svm_ = nullptr;
-    clSVMFree(context_, operand2_in_svm_);
+    free(operand2_in_svm_, m_q);
     operand2_in_svm_ = nullptr;
-    clSVMFree(context_, moduli_info_);
+    free(moduli_info_, m_q);
     moduli_info_ = nullptr;
-
     if (operands_in_ddr_) {
-        clReleaseMemObject(operands_in_ddr_);
+        free(operands_in_ddr_, m_q);
     }
     if (results_out_ddr_) {
-        clReleaseMemObject(results_out_ddr_);
+        free(results_out_ddr_, m_q);
     }
 }
-
 FPGAObject_NTT::~FPGAObject_NTT() {
-    clSVMFree(context_, coeff_poly_in_svm_);
+    free(coeff_poly_in_svm_, m_q);
     coeff_poly_in_svm_ = nullptr;
-    clSVMFree(context_, root_of_unity_powers_in_svm_);
+    free(root_of_unity_powers_in_svm_, m_q);
     root_of_unity_powers_in_svm_ = nullptr;
-    clSVMFree(context_, precon_root_of_unity_powers_in_svm_);
+    free(precon_root_of_unity_powers_in_svm_, m_q);
     precon_root_of_unity_powers_in_svm_ = nullptr;
-    clSVMFree(context_, coeff_modulus_in_svm_);
+    free(coeff_modulus_in_svm_, m_q);
     coeff_modulus_in_svm_ = nullptr;
 }
 
 FPGAObject_INTT::~FPGAObject_INTT() {
-    clSVMFree(context_, coeff_poly_in_svm_);
+    free(coeff_poly_in_svm_, m_q);
     coeff_poly_in_svm_ = nullptr;
-    clSVMFree(context_, inv_root_of_unity_powers_in_svm_);
+    free(inv_root_of_unity_powers_in_svm_, m_q);
     inv_root_of_unity_powers_in_svm_ = nullptr;
-    clSVMFree(context_, precon_inv_root_of_unity_powers_in_svm_);
+    free(precon_inv_root_of_unity_powers_in_svm_, m_q);
     precon_inv_root_of_unity_powers_in_svm_ = nullptr;
-    clSVMFree(context_, coeff_modulus_in_svm_);
+    free(coeff_modulus_in_svm_, m_q);
     coeff_modulus_in_svm_ = nullptr;
-    clSVMFree(context_, inv_n_in_svm_);
+    free(inv_n_in_svm_, m_q);
     inv_n_in_svm_ = nullptr;
-    clSVMFree(context_, inv_n_w_in_svm_);
+    free(inv_n_w_in_svm_, m_q);
     inv_n_w_in_svm_ = nullptr;
 }
 
@@ -405,25 +376,19 @@ void FPGAObject_DyadicMultiply::fill_in_data(const std::vector<Object*>& objs) {
 
     tag_ = g_tag_++;
 }
-
 void FPGAObject_NTT::fill_in_data(const std::vector<Object*>& objs) {
     uint64_t batch = 0;
     for (const auto& obj_in : objs) {
         Object_NTT* obj = dynamic_cast<Object_NTT*>(obj_in);
         FPGA_ASSERT(obj);
         in_objs_.emplace_back(obj);
-
         n_ = obj->n_;
-
         batch++;
     }
-
     n_batch_ = batch;
-
     uint64_t coeff_count = n_;
     Object_NTT* obj = dynamic_cast<Object_NTT*>(in_objs_.front());
     FPGA_ASSERT(obj);
-
     memcpy(coeff_poly_in_svm_, obj->coeff_poly_,
            n_batch_ * coeff_count * sizeof(uint64_t));
     coeff_modulus_in_svm_[0] = obj->coeff_modulus_;
@@ -431,7 +396,6 @@ void FPGAObject_NTT::fill_in_data(const std::vector<Object*>& objs) {
            coeff_count * sizeof(uint64_t));
     memcpy(precon_root_of_unity_powers_in_svm_,
            obj->precon_root_of_unity_powers_, coeff_count * sizeof(uint64_t));
-
     tag_ = g_tag_++;
 }
 
@@ -441,31 +405,23 @@ void FPGAObject_INTT::fill_in_data(const std::vector<Object*>& objs) {
         Object_INTT* obj = dynamic_cast<Object_INTT*>(obj_in);
         FPGA_ASSERT(obj);
         in_objs_.emplace_back(obj);
-
         n_ = obj->n_;
-
         batch++;
     }
-
     n_batch_ = batch;
-
     uint64_t coeff_count = n_;
     Object_INTT* obj = dynamic_cast<Object_INTT*>(in_objs_.front());
     FPGA_ASSERT(obj);
-
     memcpy(coeff_poly_in_svm_, obj->coeff_poly_,
            n_batch_ * coeff_count * sizeof(uint64_t));
-
     coeff_modulus_in_svm_[0] = obj->coeff_modulus_;
     memcpy(inv_root_of_unity_powers_in_svm_, obj->inv_root_of_unity_powers_,
            coeff_count * sizeof(uint64_t));
     memcpy(precon_inv_root_of_unity_powers_in_svm_,
            obj->precon_inv_root_of_unity_powers_,
            coeff_count * sizeof(uint64_t));
-
     *inv_n_in_svm_ = obj->inv_n_;
     *inv_n_w_in_svm_ = obj->inv_n_w_;
-
     tag_ = g_tag_++;
 }
 
@@ -474,7 +430,6 @@ void FPGAObject_KeySwitch::fill_out_data(uint64_t* output) {
     for (auto& obj : in_objs_) {
         Object_KeySwitch* obj_KeySwitch = dynamic_cast<Object_KeySwitch*>(obj);
         FPGA_ASSERT(obj_KeySwitch);
-
         size_t size_out =
             batch * decomp_modulus_size_ * n_ * key_component_count_;
         FPGA_ASSERT(key_component_count_ == 2);
@@ -483,20 +438,23 @@ void FPGAObject_KeySwitch::fill_out_data(uint64_t* output) {
             for (size_t j = 0; j < n_; j++) {
                 size_t k = i * n_ + j;
                 obj_KeySwitch->result_[k] += output[size_out + 2 * k];
-                if (obj_KeySwitch->result_[k] >= modulus) {
-                    obj_KeySwitch->result_[k] -= modulus;
-                }
+                obj_KeySwitch->result_[k] =
+                    (obj_KeySwitch->result_[k] >= modulus)
+                        ? (obj_KeySwitch->result_[k] - modulus)
+                        : obj_KeySwitch->result_[k];
 
                 obj_KeySwitch->result_[k + n_ * decomp_modulus_size_] +=
                     output[size_out + 2 * k + 1];
-                if (obj_KeySwitch->result_[k + n_ * decomp_modulus_size_] >=
-                    modulus) {
-                    obj_KeySwitch->result_[k + n_ * decomp_modulus_size_] -=
-                        modulus;
-                }
+                obj_KeySwitch->result_[k + n_ * decomp_modulus_size_] =
+                    (obj_KeySwitch->result_[k + n_ * decomp_modulus_size_] >=
+                     modulus)
+                        ? (obj_KeySwitch
+                               ->result_[k + n_ * decomp_modulus_size_] -
+                           modulus)
+                        : (obj_KeySwitch
+                               ->result_[k + n_ * decomp_modulus_size_]);
             }
         }
-
         obj->ready_ = true;
         batch++;
     }
@@ -505,19 +463,17 @@ void FPGAObject_KeySwitch::fill_out_data(uint64_t* output) {
 
 void FPGAObject_DyadicMultiply::fill_out_data(uint64_t* results_in_svm) {
     uint64_t n_data = n_moduli_ * n_ * 3;
-    // assuming the batch of results are in contiguous space
     Object_DyadicMultiply* obj_dyadic_multiply =
         dynamic_cast<Object_DyadicMultiply*>(in_objs_.front());
     FPGA_ASSERT(obj_dyadic_multiply);
     memcpy(obj_dyadic_multiply->results_, results_in_svm,
            n_batch_ * n_data * sizeof(uint64_t));
-
-    uint64_t batch = 0;
+    uint64_t frame_number = 0;
     for (auto& obj : in_objs_) {
         obj->ready_ = true;
-        batch++;
+        frame_number++;
     }
-    FPGA_ASSERT(batch == n_batch_);
+    FPGA_ASSERT(frame_number == n_batch_);
 }
 
 void FPGAObject_NTT::fill_out_data(uint64_t* results_in_svm_) {
@@ -526,7 +482,6 @@ void FPGAObject_NTT::fill_out_data(uint64_t* results_in_svm_) {
     FPGA_ASSERT(obj_NTT);
     memcpy(obj_NTT->coeff_poly_, results_in_svm_,
            n_batch_ * coeff_count * sizeof(uint64_t));
-
     uint64_t batch = 0;
     for (auto& obj : in_objs_) {
         obj->ready_ = true;
@@ -541,7 +496,6 @@ void FPGAObject_INTT::fill_out_data(uint64_t* results_in_svm_) {
     FPGA_ASSERT(obj_INTT);
     memcpy(obj_INTT->coeff_poly_, results_in_svm_,
            n_batch_ * coeff_count * sizeof(uint64_t));
-
     uint64_t batch = 0;
     for (auto& obj : in_objs_) {
         obj->ready_ = true;
@@ -552,7 +506,7 @@ void FPGAObject_INTT::fill_out_data(uint64_t* results_in_svm_) {
 
 int Device::device_id_ = 0;
 
-const std::unordered_map<std::string, kernel_t> Device::kernels =
+const std::unordered_map<std::string, kernel_t> Device::kernels_ =
     std::unordered_map<std::string, kernel_t>{
         {"DYADIC_MULTIPLY", kernel_t::DYADIC_MULTIPLY},
         {"NTT", kernel_t::NTT},
@@ -564,211 +518,210 @@ kernel_t Device::get_kernel_type() {
     kernel_t kernel = kernel_t::DYADIC_MULTIPLY_KEYSWITCH;  // default
     const char* env_kernel = getenv("FPGA_KERNEL");
     if (env_kernel) {
-        auto found = kernels.find(std::string(env_kernel));
-        if (found != kernels.end()) {
+        auto found = kernels_.find(std::string(env_kernel));
+        if (found != kernels_.end()) {
             kernel = found->second;
         }
     }
     return kernel;
 }
 
+void Device::copyKeySwitchBatch(FPGAObject_KeySwitch* fpga_obj, int obj_id) {
+    size_t size_in = fpga_obj->n_ * fpga_obj->decomp_modulus_size_;
+    uint64_t frame_number = 0;
+    sycl::host_accessor host_access_t_target_iter_ptr_(
+        *(fpga_obj->mem_t_target_iter_ptr_));
+    for (const auto& obj : fpga_obj->in_objs_) {
+        Object_KeySwitch* obj_KeySwitch = dynamic_cast<Object_KeySwitch*>(obj);
+        FPGA_ASSERT(obj_KeySwitch);
+        memcpy(host_access_t_target_iter_ptr_.get_pointer() +
+                   (frame_number * size_in),
+               obj_KeySwitch->t_target_iter_ptr_, size_in * sizeof(uint64_t));
+        frame_number++;
+    }
+}
+
 std::string Device::get_bitstream_name() {
     const char* bitstream = getenv("FPGA_BITSTREAM");
     if (bitstream) {
         std::string s(bitstream);
-        // remove postfix .aocx
-        s.erase(s.end() - 5, s.end());
         return s;
     }
 
     switch (kernel_type_) {
     case kernel_t::DYADIC_MULTIPLY:
-        return std::string("dyadic_multiply");
+        return std::string("libdyadic_multiply.so");
     case kernel_t::NTT:
-        return std::string("fwd_ntt");
+        return std::string("libfwd_ntt.so");
     case kernel_t::INTT:
-        return std::string("inv_ntt");
+        return std::string("libinv_ntt.so");
     case kernel_t::KEYSWITCH:
-        return std::string("keyswitch");
+        return std::string("libkeyswitch.so");
     case kernel_t::DYADIC_MULTIPLY_KEYSWITCH:
-        return std::string("dyadic_multiply_keyswitch");
+        return std::string("libdyadic_multiply_keyswitch.so");
     default:
         FPGA_ASSERT(0);
         return std::string("bad");
     }
 }
 
-Device::Device(const cl_device_id& device, Buffer& buffer,
+Device::Device(sycl::device& p_device, Buffer& buffer,
                std::shared_future<bool> exit_signal, uint64_t coeff_size,
                uint32_t modulus_size, uint64_t batch_size_dyadic_multiply,
                uint64_t batch_size_ntt, uint64_t batch_size_intt,
                uint64_t batch_size_KeySwitch, uint32_t debug)
-    : device_(device),
+    : device_(p_device),
       buffer_(buffer),
       credit_(CREDIT),
       future_exit_(exit_signal),
-      dyadic_multiply_input_queue_(nullptr),
-      dyadic_multiply_output_queue_(nullptr),
-      dyadic_multiply_input_fifo_kernel_(nullptr),
-      dyadic_multiply_output_fifo_nb_kernel_(nullptr),
       dyadic_multiply_results_out_svm_(nullptr),
       dyadic_multiply_tag_out_svm_(nullptr),
       dyadic_multiply_results_out_valid_svm_(nullptr),
-      ntt_load_queue_(nullptr),
-      ntt_store_queue_(nullptr),
-      ntt_load_kernel_(nullptr),
-      ntt_store_kernel_(nullptr),
       NTT_coeff_poly_svm_(nullptr),
-      intt_load_queue_(nullptr),
-      intt_store_queue_(nullptr),
-      intt_load_kernel_(nullptr),
-      intt_store_kernel_(nullptr),
       INTT_coeff_poly_svm_(nullptr),
       KeySwitch_mem_root_of_unity_powers_(nullptr),
-      KeySwitch_queues_{nullptr},
-      KeySwitch_kernels_{nullptr},
       KeySwitch_load_once_(false),
       root_of_unity_powers_ptr_(nullptr),
       modulus_meta_{},
       invn_{},
       KeySwitch_id_(0),
-      KeySwitch_events_write_{nullptr},
-      KeySwitch_events_enqueue_{nullptr},
       keys_map_iter_{},
-      debug_(debug) {
+      debug_(debug),
+      ntt_kernel_container_(nullptr),
+      intt_kernel_container_(nullptr),
+      dyadicmult_kernel_container_(nullptr),
+      KeySwitch_kernel_container_(nullptr) {
     id_ = device_id_++;
-    std::cout << "Acquiring Device ... " << id_ << std::endl;
-
+    context_ = sycl::context(p_device);
+    std::cout << "Creating Command Qs/Acquiring Device ... " << id_
+              << std::endl;
     kernel_type_ = get_kernel_type();
     FPGA_ASSERT(kernel_type_ != kernel_t::NONE,
                 "Invalid value of env(FPGA_KERNEL)");
-
-    cl_int status;
-    context_ = clCreateContext(NULL, 1, &device_, NULL, NULL, &status);
-    aocl_utils::checkError(status, "Failed to create context");
-
-    std::string bitstream = get_bitstream_name();
-    std::string binary_file =
-        aocl_utils::getBoardBinaryFile(bitstream.c_str(), device_);
-    std::cout << "Running with FPGA bitstream: " << binary_file << std::endl;
-
-    program_ = aocl_utils::createProgramFromBinary(
-        context_, binary_file.c_str(), &device_, 1);
-    status = clBuildProgram(program_, 0, NULL, "", NULL, NULL);
-    aocl_utils::checkError(status, "Failed to build program");
-
-    // DYADIC_MULTIPLY section
+    load_kernel_symbols();
     if ((kernel_type_ == kernel_t::DYADIC_MULTIPLY_KEYSWITCH) ||
         (kernel_type_ == kernel_t::DYADIC_MULTIPLY)) {
-        cl_queue_properties props[] = {0};
-        dyadic_multiply_input_queue_ = clCreateCommandQueueWithProperties(
-            context_, device_, props, &status);
-        aocl_utils::checkError(status, "Failed to create command input_queue");
-        dyadic_multiply_output_queue_ = clCreateCommandQueueWithProperties(
-            context_, device_, props, &status);
-        aocl_utils::checkError(status, "Failed to create command output_queue");
-
-        dyadic_multiply_input_fifo_kernel_ =
-            clCreateKernel(program_, "input_fifo", &status);
-        aocl_utils::checkError(status, "Failed to create input_fifo_kernel");
-        dyadic_multiply_output_fifo_nb_kernel_ =
-            clCreateKernel(program_, "output_nb_fifo", &status);
-        aocl_utils::checkError(status,
-                               "Failed to create output_nb_fifo_kernel");
-        uint64_t size = batch_size_dyadic_multiply * 3 * modulus_size *
-                        coeff_size * sizeof(uint64_t);
+#ifdef SYCL_DISABLE_PROFILING
+        auto cl_queue_properties = sycl::property_list{};
+#else
+        auto cl_queue_properties =
+            sycl::property_list{sycl::property::queue::enable_profiling()};
+#endif
+        dyadic_multiply_input_queue_ =
+            sycl::queue(context_, device_, cl_queue_properties);
+        dyadic_multiply_output_queue_ =
+            sycl::queue(context_, device_, cl_queue_properties);
+        uint64_t size =
+            batch_size_dyadic_multiply * 3 * modulus_size * coeff_size;
         dyadic_multiply_results_out_svm_ =
-            (uint64_t*)clSVMAlloc(context_, 0, size, 0);
+            sycl::malloc_shared<uint64_t>(size, dyadic_multiply_output_queue_);
         dyadic_multiply_tag_out_svm_ =
-            (int*)clSVMAlloc(context_, 0, sizeof(int), 0);
+            sycl::malloc_shared<int>(1, dyadic_multiply_output_queue_);
         dyadic_multiply_results_out_valid_svm_ =
-            (int*)clSVMAlloc(context_, 0, sizeof(int), 0);
+            sycl::malloc_shared<int>(1, dyadic_multiply_output_queue_);
+        (*(dyadicmult_kernel_container_->submit_autorun_kernels))(
+            dyadic_multiply_input_queue_);
     }
 
-    // INTT section
     if (kernel_type_ == kernel_t::INTT) {
-        cl_queue_properties props[] = {0};
-        intt_load_queue_ = clCreateCommandQueueWithProperties(context_, device_,
-                                                              props, &status);
-        aocl_utils::checkError(status, "Failed to create command load_queue");
-        intt_store_queue_ = clCreateCommandQueueWithProperties(
-            context_, device_, props, &status);
-        aocl_utils::checkError(status, "Failed to create command store_queue");
-
-        intt_load_kernel_ =
-            clCreateKernel(program_, "intt_input_kernel", &status);
-        aocl_utils::checkError(status, "Failed to create intt_input_kernel");
-        intt_store_kernel_ =
-            clCreateKernel(program_, "intt_output_kernel", &status);
-        aocl_utils::checkError(status, "Failed to create intt_output_kernel");
-        uint64_t size = batch_size_intt * 16834 * sizeof(uint64_t);
-        INTT_coeff_poly_svm_ = (uint64_t*)clSVMAlloc(context_, 0, size, 0);
+#ifdef SYCL_ENABLE_PROFILING
+        auto cl_queue_properties =
+            sycl::property_list{sycl::property::queue::enable_profiling()};
+#else
+        auto cl_queue_properties = sycl::property_list{};
+#endif
+        intt_load_queue_ = sycl::queue(context_, context_.get_devices()[0],
+                                       cl_queue_properties);
+        intt_store_queue_ = sycl::queue(context_, context_.get_devices()[0],
+                                        cl_queue_properties);
+        uint64_t size = batch_size_intt * 16834;
+        INTT_coeff_poly_svm_ =
+            sycl::malloc_shared<uint64_t>(size, intt_load_queue_);
+        (*(intt_kernel_container_->inv_ntt))(intt_load_queue_);
     }
-
-    // NTT section
     if (kernel_type_ == kernel_t::NTT) {
-        cl_queue_properties props[] = {0};
-        ntt_load_queue_ = clCreateCommandQueueWithProperties(context_, device_,
-                                                             props, &status);
-        aocl_utils::checkError(status, "Failed to create command load_queue");
-        ntt_store_queue_ = clCreateCommandQueueWithProperties(context_, device_,
-                                                              props, &status);
-        aocl_utils::checkError(status, "Failed to create command store_queue");
-
-        ntt_load_kernel_ =
-            clCreateKernel(program_, "ntt_input_kernel", &status);
-        aocl_utils::checkError(status, "Failed to create ntt_input_kernel");
-        ntt_store_kernel_ =
-            clCreateKernel(program_, "ntt_output_kernel", &status);
-        aocl_utils::checkError(status, "Failed to create ntt_output_kernel");
-        uint64_t size = batch_size_ntt * 16834 * sizeof(uint64_t);
-        NTT_coeff_poly_svm_ = (uint64_t*)clSVMAlloc(context_, 0, size, 0);
+#ifdef SYCL_ENABLE_PROFILING
+        auto cl_queue_properties =
+            sycl::property_list{sycl::property::queue::enable_profiling()};
+#else
+        auto cl_queue_properties = sycl::property_list{};
+#endif
+        ntt_load_queue_ = sycl::queue(context_, context_.get_devices()[0],
+                                      cl_queue_properties);
+        ntt_store_queue_ = sycl::queue(context_, context_.get_devices()[0],
+                                       cl_queue_properties);
+        uint64_t size = batch_size_ntt * 16834;
+        NTT_coeff_poly_svm_ =
+            (uint64_t*)sycl::malloc_shared<uint64_t>(size, ntt_load_queue_);
+        (*(ntt_kernel_container_->fwd_ntt))(ntt_load_queue_);
     }
 
     if ((kernel_type_ == kernel_t::DYADIC_MULTIPLY_KEYSWITCH) ||
         (kernel_type_ == kernel_t::KEYSWITCH)) {
+#ifdef SYCL_ENABLE_PROFILING
+        auto cl_queue_properties =
+            sycl::property_list{sycl::property::queue::enable_profiling()};
+#else
+        auto cl_queue_properties = sycl::property_list{};
+#endif
         for (int k = 0; k < KEYSWITCH_NUM_KERNELS; ++k) {
             // Create the command queue.
-            KeySwitch_queues_[k] = clCreateCommandQueue(
-                context_, device_, CL_QUEUE_PROFILING_ENABLE, &status);
-            aocl_utils::checkError(
-                status, "Failed to create command queue for kernel %s",
-                keyswitch_kernel_name[k]);
-
-            const char* keyswitch_kernel_name1 = keyswitch_kernel_name[k];
-            KeySwitch_kernels_[k] =
-                clCreateKernel(program_, keyswitch_kernel_name1, &status);
-            aocl_utils::checkError(status, "Failed to create kernel %s",
-                                   keyswitch_kernel_name1);
+            keyswitch_queues_[k] = sycl::queue(
+                context_, context_.get_devices()[0], cl_queue_properties);
         }
+
+        (*(KeySwitch_kernel_container_->launchAllAutoRunKernels))(
+            keyswitch_queues_[KEYSWITCH_LOAD]);
     }
     // DYADIC_MULTIPLY: [0, CREDIT)
     for (int i = 0; i < CREDIT; i++) {
-        fpgaObjects_.emplace_back(new FPGAObject_DyadicMultiply(
-            context_, coeff_size, modulus_size, batch_size_dyadic_multiply));
+        fpga_objects_.emplace_back(new FPGAObject_DyadicMultiply(
+            dyadic_multiply_input_queue_, coeff_size, modulus_size,
+            batch_size_dyadic_multiply));
     }
     // INTT: CREDIT
-    fpgaObjects_.emplace_back(
-        new FPGAObject_INTT(context_, 16384, batch_size_intt));
+    fpga_objects_.emplace_back(
+        new FPGAObject_INTT(intt_load_queue_, 16384, batch_size_intt));
     // NTT:  CREDIT + 1
-    fpgaObjects_.emplace_back(
-        new FPGAObject_NTT(context_, 16384, batch_size_ntt));
+    fpga_objects_.emplace_back(
+        new FPGAObject_NTT(ntt_load_queue_, 16384, batch_size_ntt));
     // KEYSWITCH: CREDIT + 2 and CREDIT + 2 + 1
     for (size_t i = 0; i < 2; i++) {
-        fpgaObjects_.emplace_back(
-            new FPGAObject_KeySwitch(context_, batch_size_KeySwitch));
+        fpga_objects_.emplace_back(new FPGAObject_KeySwitch(
+            keyswitch_queues_[KEYSWITCH_LOAD], batch_size_KeySwitch));
+    }
+}
+
+void Device::load_kernel_symbols() {
+    std::string bitstream = get_bitstream_name();
+
+    if (kernel_type_ == kernel_t::NTT) {
+        ntt_kernel_container_ = new NTTDynamicIF(bitstream);
+    } else if (kernel_type_ == kernel_t::INTT) {
+        intt_kernel_container_ = new INTTDynamicIF(bitstream);
+    } else if (kernel_type_ == kernel_t::DYADIC_MULTIPLY) {
+        dyadicmult_kernel_container_ = new DyadicMultDynamicIF(bitstream);
+    } else if (kernel_type_ == kernel_t::KEYSWITCH) {
+        KeySwitch_kernel_container_ = new KeySwitchDynamicIF(bitstream);
+    } else if (kernel_type_ == kernel_t::DYADIC_MULTIPLY_KEYSWITCH) {
+        dyadicmult_kernel_container_ = new DyadicMultDynamicIF(bitstream);
+        KeySwitch_kernel_container_ = new KeySwitchDynamicIF(bitstream);
     }
 }
 
 Device::~Device() {
     device_id_ = 0;
-    for (auto& fpga_obj : fpgaObjects_) {
+    if (ntt_kernel_container_) delete ntt_kernel_container_;
+    if (intt_kernel_container_) delete intt_kernel_container_;
+    if (dyadicmult_kernel_container_) delete dyadicmult_kernel_container_;
+    if (KeySwitch_kernel_container_) delete KeySwitch_kernel_container_;
+    for (auto& fpga_obj : fpga_objects_) {
         if (fpga_obj) {
             delete fpga_obj;
             fpga_obj = nullptr;
         }
     }
-    fpgaObjects_.clear();
+    fpga_objects_.clear();
 
     for (auto& km : keys_map_) {
         delete km.second;
@@ -778,86 +731,31 @@ Device::~Device() {
     // DYADIC_MULTIPLY section
     if ((kernel_type_ == kernel_t::DYADIC_MULTIPLY_KEYSWITCH) ||
         (kernel_type_ == kernel_t::DYADIC_MULTIPLY)) {
-        if (dyadic_multiply_input_fifo_kernel_) {
-            clReleaseKernel(dyadic_multiply_input_fifo_kernel_);
-        }
-        if (dyadic_multiply_input_queue_) {
-            clReleaseCommandQueue(dyadic_multiply_input_queue_);
-        }
-
-        if (dyadic_multiply_output_queue_) {
-            clReleaseCommandQueue(dyadic_multiply_output_queue_);
-        }
-        if (dyadic_multiply_output_fifo_nb_kernel_) {
-            clReleaseKernel(dyadic_multiply_output_fifo_nb_kernel_);
-        }
-        clSVMFree(context_, dyadic_multiply_results_out_valid_svm_);
+        free(dyadic_multiply_results_out_valid_svm_,
+             dyadic_multiply_output_queue_);
         dyadic_multiply_results_out_valid_svm_ = nullptr;
-        clSVMFree(context_, dyadic_multiply_tag_out_svm_);
+        free(dyadic_multiply_tag_out_svm_, dyadic_multiply_output_queue_);
         dyadic_multiply_tag_out_svm_ = nullptr;
-        clSVMFree(context_, dyadic_multiply_results_out_svm_);
+        free(dyadic_multiply_results_out_svm_, dyadic_multiply_output_queue_);
         dyadic_multiply_results_out_svm_ = nullptr;
     }
-
     // NTT section
     if (kernel_type_ == kernel_t::NTT) {
-        if (ntt_load_kernel_) {
-            clReleaseKernel(ntt_load_kernel_);
-        }
-        if (ntt_store_kernel_) {
-            clReleaseKernel(ntt_store_kernel_);
-        }
-
-        if (ntt_load_queue_) {
-            clReleaseCommandQueue(ntt_load_queue_);
-        }
-
-        if (ntt_store_queue_) {
-            clReleaseCommandQueue(ntt_store_queue_);
-        }
-        clSVMFree(context_, NTT_coeff_poly_svm_);
+        free(NTT_coeff_poly_svm_, ntt_load_queue_);
         NTT_coeff_poly_svm_ = nullptr;
     }
-
     // INTT section
     if (kernel_type_ == kernel_t::INTT) {
-        if (intt_load_kernel_) {
-            clReleaseKernel(intt_load_kernel_);
-        }
-        if (intt_store_kernel_) {
-            clReleaseKernel(intt_store_kernel_);
-        }
-
-        if (intt_load_queue_) {
-            clReleaseCommandQueue(intt_load_queue_);
-        }
-
-        if (intt_store_queue_) {
-            clReleaseCommandQueue(intt_store_queue_);
-        }
-        clSVMFree(context_, INTT_coeff_poly_svm_);
+        free(INTT_coeff_poly_svm_, context_);
         INTT_coeff_poly_svm_ = nullptr;
     }
 
     if ((kernel_type_ == kernel_t::DYADIC_MULTIPLY_KEYSWITCH) ||
         (kernel_type_ == kernel_t::KEYSWITCH)) {
         if (root_of_unity_powers_ptr_) {
-            aocl_utils::alignedFree(root_of_unity_powers_ptr_);
+            // free(root_of_unity_powers_ptr_, context_);
+            free(root_of_unity_powers_ptr_);
         }
-        for (int k = 0; k < KEYSWITCH_NUM_KERNELS; ++k) {
-            if (KeySwitch_kernels_[k]) {
-                clReleaseKernel(KeySwitch_kernels_[k]);
-            }
-            if (KeySwitch_queues_[k]) {
-                clReleaseCommandQueue(KeySwitch_queues_[k]);
-            }
-        }
-    }
-    if (context_) {
-        clReleaseContext(context_);
-    }
-    if (program_) {
-        clReleaseProgram(program_);
     }
 }
 
@@ -868,12 +766,12 @@ void Device::process_blocking_api() {
 
 void Device::run() {
     kernel_t processed_type = kernel_t::NONE;
+
     while (future_exit_.wait_for(std::chrono::milliseconds(0)) ==
            std::future_status::timeout) {
         if (buffer_.size()) {
             Object* front = buffer_.front();
             processed_type = front->type_;
-            // Run non-blocking for Dyadic Multiply, blocking for others
             switch (front->type_) {
             case kernel_t::DYADIC_MULTIPLY:
                 if ((credit_ > 0) && process_input(CREDIT - credit_)) {
@@ -892,8 +790,33 @@ void Device::run() {
                 process_output_NTT();
                 break;
             case kernel_t::KEYSWITCH:
+#ifdef __DEBUG_KS_RUNTIME
+                uint64_t lat_start =
+                    std::chrono::duration_cast<std::chrono::nanoseconds>(
+                        std::chrono::system_clock::now().time_since_epoch())
+                        .count();
+#endif
+
                 process_input(CREDIT + 2 + KeySwitch_id_ % 2);
+
+#ifdef __DEBUG_KS_RUNTIME
+                uint64_t lat_in =
+                    std::chrono::duration_cast<std::chrono::nanoseconds>(
+                        std::chrono::system_clock::now().time_since_epoch())
+                        .count();
+#endif
                 process_output_KeySwitch();
+
+#ifdef __DEBUG_KS_RUNTIME
+                uint64_t lat_end =
+                    std::chrono::duration_cast<std::chrono::nanoseconds>(
+                        std::chrono::system_clock::now().time_since_epoch())
+                        .count();
+                std::cout << "KeySwitch output function Latency: "
+                          << (lat_end - lat_in) / 1e6 << std::endl;
+                std::cout << "KeySwitch input function latency: "
+                          << (lat_in - lat_start) / 1e6 << std::endl;
+#endif
                 KeySwitch_id_++;
                 break;
             default:
@@ -909,7 +832,7 @@ void Device::run() {
                 break;
             case kernel_t::KEYSWITCH:
                 if (KeySwitch_id_ > 0) {
-                    FPGAObject* obj = fpgaObjects_[CREDIT + 2];
+                    FPGAObject* obj = fpga_objects_[CREDIT + 2];
                     FPGAObject_KeySwitch* fpga_obj =
                         dynamic_cast<FPGAObject_KeySwitch*>(obj);
                     uint64_t batch = (buffer_.get_worksize_KeySwitch() +
@@ -928,7 +851,6 @@ void Device::run() {
     }
     std::cout << "Releasing Device ... " << device_id() << std::endl;
 }
-
 bool Device::process_input(int credit_id) {
     std::vector<Object*> objs = buffer_.pop();
 
@@ -936,10 +858,10 @@ bool Device::process_input(int credit_id) {
         return false;
     }
 
-    FPGAObject* fpga_obj = fpgaObjects_[credit_id];
+    FPGAObject* fpga_obj = fpga_objects_[credit_id];
 
     const auto& start_io = std::chrono::high_resolution_clock::now();
-    fpga_obj->fill_in_data(objs);
+    fpga_obj->fill_in_data(objs);  // poylmorphic call
     const auto& end_io = std::chrono::high_resolution_clock::now();
 
     enqueue_input_data(fpga_obj);
@@ -1023,37 +945,12 @@ void Device::enqueue_input_data(FPGAObject* fpga_obj) {
 
 void Device::enqueue_input_data_dyadic_multiply(
     FPGAObject_DyadicMultiply* fpga_obj) {
-    int i = 0;
-    const size_t gws = 1;
-    const size_t lws = 1;
-
     const auto& start_ocl = std::chrono::high_resolution_clock::now();
-
-    clSetKernelArgSVMPointer(dyadic_multiply_input_fifo_kernel_, i++,
-                             (void*)fpga_obj->operand1_in_svm_);
-    clSetKernelArgSVMPointer(dyadic_multiply_input_fifo_kernel_, i++,
-                             (void*)fpga_obj->operand2_in_svm_);
-    clSetKernelArg(dyadic_multiply_input_fifo_kernel_, i++, sizeof(uint64_t),
-                   &fpga_obj->n_);
-    clSetKernelArgSVMPointer(dyadic_multiply_input_fifo_kernel_, i++,
-                             (void*)fpga_obj->moduli_info_);
-    clSetKernelArg(dyadic_multiply_input_fifo_kernel_, i++, sizeof(uint64_t),
-                   &fpga_obj->n_moduli_);
-    clSetKernelArg(dyadic_multiply_input_fifo_kernel_, i++, sizeof(int),
-                   &fpga_obj->tag_);
-    clSetKernelArg(dyadic_multiply_input_fifo_kernel_, i++, sizeof(cl_mem),
-                   &fpga_obj->operands_in_ddr_);
-    clSetKernelArg(dyadic_multiply_input_fifo_kernel_, i++, sizeof(cl_mem),
-                   &fpga_obj->results_out_ddr_);
-    clSetKernelArg(dyadic_multiply_input_fifo_kernel_, i++, sizeof(uint64_t),
-                   &fpga_obj->n_batch_);
-
-    cl_int status = clEnqueueNDRangeKernel(dyadic_multiply_input_queue_,
-                                           dyadic_multiply_input_fifo_kernel_,
-                                           1, NULL, &gws, &lws, 0, NULL, NULL);
-    aocl_utils::checkError(status, "Failed to launch input_fifo_kernel");
-    status = clFlush(dyadic_multiply_input_queue_);
-    aocl_utils::checkError(status, "Failed to flush input_queue");
+    auto tempEvent = (*(dyadicmult_kernel_container_->input_fifo_usm))(
+        dyadic_multiply_input_queue_, fpga_obj->operand1_in_svm_,
+        fpga_obj->operand2_in_svm_, fpga_obj->n_, fpga_obj->moduli_info_,
+        fpga_obj->n_moduli_, fpga_obj->tag_, fpga_obj->operands_in_ddr_,
+        fpga_obj->results_out_ddr_, fpga_obj->n_batch_);
 
     if (debug_ == 1) {
         const auto& end_ocl = std::chrono::high_resolution_clock::now();
@@ -1074,77 +971,41 @@ void Device::enqueue_input_data_dyadic_multiply(
 }
 
 void Device::enqueue_input_data_INTT(FPGAObject_INTT* fpga_obj) {
-    int i = 0;
-
-    const size_t gws = 1;
-    const size_t lws = 1;
     unsigned int batch = fpga_obj->n_batch_;
-
     const auto& start_ocl = std::chrono::high_resolution_clock::now();
-
-    clSetKernelArg(intt_load_kernel_, i++, sizeof(unsigned int), &batch);
-    clSetKernelArgSVMPointer(intt_load_kernel_, i++,
-                             (void*)fpga_obj->coeff_poly_in_svm_);
-    clSetKernelArgSVMPointer(intt_load_kernel_, i++,
-                             (void*)&fpga_obj->coeff_modulus_in_svm_[0]);
-    clSetKernelArgSVMPointer(intt_load_kernel_, i++,
-                             (void*)&fpga_obj->inv_n_in_svm_[0]);
-    clSetKernelArgSVMPointer(intt_load_kernel_, i++,
-                             (void*)&fpga_obj->inv_n_w_in_svm_[0]);
-    clSetKernelArgSVMPointer(intt_load_kernel_, i++,
-                             (void*)fpga_obj->inv_root_of_unity_powers_in_svm_);
-    clSetKernelArgSVMPointer(
-        intt_load_kernel_, i++,
-        (void*)fpga_obj->precon_inv_root_of_unity_powers_in_svm_);
-
-    cl_int status = clEnqueueNDRangeKernel(intt_load_queue_, intt_load_kernel_,
-                                           1, NULL, &gws, &lws, 0, NULL, NULL);
-    aocl_utils::checkError(status, "Failed to launch intt_load_kernel");
-
-    if (debug_ == 1) {
+    auto inttLoadEvent = (*(intt_kernel_container_->intt_input))(
+        intt_load_queue_, batch, fpga_obj->coeff_poly_in_svm_,
+        fpga_obj->coeff_modulus_in_svm_, fpga_obj->inv_n_in_svm_,
+        fpga_obj->inv_n_w_in_svm_, fpga_obj->inv_root_of_unity_powers_in_svm_,
+        fpga_obj->precon_inv_root_of_unity_powers_in_svm_);
+    {
         const auto& end_ocl = std::chrono::high_resolution_clock::now();
         const auto& duration_ocl =
             std::chrono::duration_cast<std::chrono::duration<double>>(
                 end_ocl - start_ocl);
         double unit = 1.0e+6;  // microseconds
-        std::cout << "INTT"
-                  << " OCL-in      time taken: " << std::fixed
-                  << std::setprecision(8) << duration_ocl.count() * unit
-                  << " us" << std::endl;
-        std::cout << "INTT"
-                  << " OCL-in avg  time taken: " << std::fixed
-                  << std::setprecision(8)
-                  << duration_ocl.count() / fpga_obj->n_batch_ * unit << " us"
-                  << std::endl;
+        if (debug_) {
+            std::cout << "INTT"
+                      << " OCL-in      time taken: " << std::fixed
+                      << std::setprecision(8) << duration_ocl.count() * unit
+                      << " us" << std::endl;
+            std::cout << "INTT"
+                      << " OCL-in avg  time taken: " << std::fixed
+                      << std::setprecision(8)
+                      << duration_ocl.count() / fpga_obj->n_batch_ * unit
+                      << " us" << std::endl;
+        }
     }
 }
 
 void Device::enqueue_input_data_NTT(FPGAObject_NTT* fpga_obj) {
-    int i = 0;
-
-    const size_t gws = 1;
-    const size_t lws = 1;
     unsigned int batch = fpga_obj->n_batch_;
-
     const auto& start_ocl = std::chrono::high_resolution_clock::now();
-
-    clSetKernelArg(ntt_load_kernel_, i++, sizeof(unsigned int), &batch);
-    clSetKernelArgSVMPointer(ntt_load_kernel_, i++,
-                             (void*)fpga_obj->coeff_poly_in_svm_);
-    clSetKernelArgSVMPointer(ntt_load_kernel_, i++,
-                             (void*)fpga_obj->coeff_poly_in_svm_);
-    clSetKernelArgSVMPointer(ntt_load_kernel_, i++,
-                             (void*)&fpga_obj->coeff_modulus_in_svm_[0]);
-    clSetKernelArgSVMPointer(ntt_load_kernel_, i++,
-                             (void*)fpga_obj->root_of_unity_powers_in_svm_);
-    clSetKernelArgSVMPointer(
-        ntt_load_kernel_, i++,
-        (void*)fpga_obj->precon_root_of_unity_powers_in_svm_);
-
-    cl_int status = clEnqueueNDRangeKernel(ntt_load_queue_, ntt_load_kernel_, 1,
-                                           NULL, &gws, &lws, 0, NULL, NULL);
-    aocl_utils::checkError(status, "Failed to launch ntt_load_kernel");
-
+    auto nttLoadEvent = (*(ntt_kernel_container_->ntt_input))(
+        ntt_load_queue_, batch, fpga_obj->coeff_poly_in_svm_,
+        fpga_obj->coeff_poly_in_svm_, fpga_obj->coeff_modulus_in_svm_,
+        fpga_obj->root_of_unity_powers_in_svm_,
+        fpga_obj->precon_root_of_unity_powers_in_svm_);
     if (debug_ == 1) {
         const auto& end_ocl = std::chrono::high_resolution_clock::now();
         const auto& duration_ocl =
@@ -1162,7 +1023,6 @@ void Device::enqueue_input_data_NTT(FPGAObject_NTT* fpga_obj) {
                   << std::endl;
     }
 }
-
 uint64_t Device::precompute_modulus_k(uint64_t modulus) {
     uint64_t k = 0;
     for (uint64_t i = 64; i > 0; i--) {
@@ -1175,10 +1035,9 @@ uint64_t Device::precompute_modulus_k(uint64_t modulus) {
 
 void Device::build_modulus_meta(FPGAObject_KeySwitch* obj) {
     for (uint64_t i = 0; i < obj->key_modulus_size_; i++) {
-        cl_ulong4 m;
-        m.s[0] = obj->moduli_[i];
-        m.s[1] = MultiplyFactor(1, 64, obj->moduli_[i]).BarrettFactor();
-
+        sycl::ulong4 m;
+        m.s0() = obj->moduli_[i];
+        m.s1() = MultiplyFactor(1, 64, obj->moduli_[i]).BarrettFactor();
         uint64_t modulus = obj->moduli_[i];
         uint64_t twice_modulus = 2 * modulus;
         uint64_t four_times_modulus = 4 * modulus;
@@ -1186,20 +1045,18 @@ void Device::build_modulus_meta(FPGAObject_KeySwitch* obj) {
         const int InputModFactor = 8;
         arg2 = ReduceMod<InputModFactor>(arg2, modulus, &twice_modulus,
                                          &four_times_modulus);
-        m.s[2] = arg2;
-
+        m.s2() = arg2;
         uint64_t k = precompute_modulus_k(obj->moduli_[i]);
         __int128 a = 1;
         uint64_t r = (a << (2 * k)) / obj->moduli_[i];
-        m.s[3] = (r << 8) | k;
-
+        m.s3() = (r << 8) | k;
         modulus_meta_.data[i] = m;
     }
 }
 
 void Device::build_invn_meta(FPGAObject_KeySwitch* obj) {
     for (uint64_t i = 0; i < obj->key_modulus_size_; i++) {
-        cl_ulong4 invn;
+        sycl::ulong4 invn;
         uint64_t inv_n = InverseUIntMod(obj->n_, obj->moduli_[i]);
         uint64_t W_op =
             root_of_unity_powers_ptr_[i * obj->n_ * 4 + obj->n_ - 1];
@@ -1207,23 +1064,21 @@ void Device::build_invn_meta(FPGAObject_KeySwitch* obj) {
         uint64_t y_barrett_n = DivideUInt128UInt64Lo(inv_n, 0, obj->moduli_[i]);
         uint64_t y_barrett_nw =
             DivideUInt128UInt64Lo(inv_nw, 0, obj->moduli_[i]);
-        invn.s[0] = inv_n;
+        invn.s0() = inv_n;
         unsigned long k = precompute_modulus_k(obj->moduli_[i]);
         __int128 a = 1;
         unsigned long r = (a << (2 * k)) / obj->moduli_[i];
-        invn.s[1] = (r << 8) | k;
-        invn.s[2] = y_barrett_n;
-        invn.s[3] = y_barrett_nw;
+        invn.s1() = (r << 8) | k;
+        invn.s2() = y_barrett_n;
+        invn.s3() = y_barrett_nw;
         invn_.data[i] = invn;
     }
 }
 
 void Device::KeySwitch_load_twiddles(FPGAObject_KeySwitch* obj) {
     size_t roots_size = obj->n_ * obj->key_modulus_size_ * 4 * sizeof(uint64_t);
-    // root of unity
     root_of_unity_powers_ptr_ =
-        (uint64_t*)aocl_utils::alignedMalloc(roots_size);
-
+        (uint64_t*)aligned_alloc(HOST_MEM_ALIGNMENT, roots_size);
     if (obj->twiddle_factors_) {
         memcpy(root_of_unity_powers_ptr_, obj->twiddle_factors_, roots_size);
     } else {
@@ -1241,35 +1096,53 @@ void Device::KeySwitch_load_twiddles(FPGAObject_KeySwitch* obj) {
         }
     }
 
-    KeySwitch_mem_root_of_unity_powers_ = clCreateBuffer(
-        context_, CL_MEM_READ_ONLY | CL_CHANNEL_2_INTELFPGA,
-        obj->n_ * obj->key_modulus_size_ * 4 * sizeof(uint64_t), NULL, NULL);
-
-    cl_int status;
-    status = clEnqueueWriteBuffer(
-        KeySwitch_queues_[KEYSWITCH_LOAD], KeySwitch_mem_root_of_unity_powers_,
-        CL_TRUE, 0, obj->n_ * obj->key_modulus_size_ * 4 * sizeof(uint64_t),
-        root_of_unity_powers_ptr_, 0, NULL, NULL);
-    aocl_utils::checkError(
-        status, "Failed to enqueue KeySwitch_queues_[KEYSWITCH_LOAD]");
+    uint64_t key_size = obj->n_ * obj->key_modulus_size_ * 4;
+    KeySwitch_mem_root_of_unity_powers_ = new sycl::buffer<uint64_t>(
+        root_of_unity_powers_ptr_, sycl::range(key_size),
+        {sycl::property::buffer::use_host_ptr{},
+         sycl::property::buffer::mem_channel{MEM_CHANNEL_K2}});
+    KeySwitch_mem_root_of_unity_powers_->set_write_back(false);
+    unsigned reload_twiddle_factors = 1;
+    (*(KeySwitch_kernel_container_->launchConfigurableKernels))(
+        keyswitch_queues_[KEYSWITCH_LOAD], KeySwitch_mem_root_of_unity_powers_,
+        obj->n_, reload_twiddle_factors);
+    KeySwitch_load_once_ = true;
 }
-
-KeySwitchMemKeys::KeySwitchMemKeys(cl_mem k1, cl_mem k2, cl_mem k3)
-    : k_switch_keys_1_(k1), k_switch_keys_2_(k2), k_switch_keys_3_(k3) {}
-
-KeySwitchMemKeys::~KeySwitchMemKeys() {
+template <typename t_type>
+KeySwitchMemKeys<t_type>::KeySwitchMemKeys(sycl::buffer<t_type>* k1,
+                                           sycl::buffer<t_type>* k2,
+                                           sycl::buffer<t_type>* k3,
+                                           t_type* host_k1, t_type* host_k2,
+                                           t_type* host_k3)
+    : k_switch_keys_1_(k1),
+      k_switch_keys_2_(k2),
+      k_switch_keys_3_(k3),
+      host_k_switch_keys_1_(host_k1),
+      host_k_switch_keys_2_(host_k2),
+      host_k_switch_keys_3_(host_k3) {}
+template <typename t_type>
+KeySwitchMemKeys<t_type>::~KeySwitchMemKeys() {
     if (k_switch_keys_1_) {
-        clReleaseMemObject(k_switch_keys_1_);
+        delete k_switch_keys_1_;
     }
     if (k_switch_keys_2_) {
-        clReleaseMemObject(k_switch_keys_2_);
+        delete k_switch_keys_2_;
     }
     if (k_switch_keys_3_) {
-        clReleaseMemObject(k_switch_keys_3_);
+        // delete k_switch_keys_3_;
+    }
+    if (host_k_switch_keys_1_) {
+        delete host_k_switch_keys_1_;
+    }
+    if (host_k_switch_keys_2_) {
+        delete host_k_switch_keys_2_;
+    }
+    if (host_k_switch_keys_3_) {
+        delete host_k_switch_keys_3_;
     }
 }
 
-KeySwitchMemKeys* Device::KeySwitch_check_keys(uint64_t** keys) {
+KeySwitchMemKeys<uint256_t>* Device::KeySwitch_check_keys(uint64_t** keys) {
     keys_map_iter_ = keys_map_.find(keys);
     if (keys_map_iter_ != keys_map_.end()) {
         return keys_map_iter_->second;
@@ -1278,16 +1151,19 @@ KeySwitchMemKeys* Device::KeySwitch_check_keys(uint64_t** keys) {
     }
 }
 
-KeySwitchMemKeys* Device::KeySwitch_load_keys(FPGAObject_KeySwitch* obj) {
-    cl_ulong4* key_vector1 = (cl_ulong4*)aocl_utils::alignedMalloc(
-        sizeof(cl_ulong4) * obj->decomp_modulus_size_ * obj->n_);
-    cl_ulong4* key_vector2 = (cl_ulong4*)aocl_utils::alignedMalloc(
-        sizeof(cl_ulong4) * obj->decomp_modulus_size_ * obj->n_);
-    cl_ulong4* key_vector3 = (cl_ulong4*)aocl_utils::alignedMalloc(
-        sizeof(cl_ulong4) * obj->decomp_modulus_size_ * obj->n_);
+KeySwitchMemKeys<uint256_t>* Device::KeySwitch_load_keys(
+    FPGAObject_KeySwitch* obj) {
+    uint256_t* key_vector1 = (uint256_t*)aligned_alloc(
+        HOST_MEM_ALIGNMENT,
+        sizeof(uint256_t) * obj->decomp_modulus_size_ * obj->n_);
+    uint256_t* key_vector2 = (uint256_t*)aligned_alloc(
+        HOST_MEM_ALIGNMENT,
+        sizeof(uint256_t) * obj->decomp_modulus_size_ * obj->n_);
+    uint256_t* key_vector3 = (uint256_t*)aligned_alloc(
+        HOST_MEM_ALIGNMENT,
+        sizeof(uint256_t) * obj->decomp_modulus_size_ * obj->n_);
 
     size_t key_vector_index = 0;
-
     for (uint64_t k = 0; k < obj->decomp_modulus_size_; k++) {
         for (uint64_t j = 0; j < obj->n_; j++) {
             DyadmultKeys1_t k1 = {};
@@ -1327,57 +1203,42 @@ KeySwitchMemKeys* Device::KeySwitch_load_keys(FPGAObject_KeySwitch* obj) {
                     FPGA_ASSERT(0, "NOT SUPPORTED KEYS");
                 }
             }
-
-            key_vector1[key_vector_index] = *((cl_ulong4*)(&k1));
-            key_vector2[key_vector_index] = *((cl_ulong4*)(&k2));
-            key_vector3[key_vector_index] = *((cl_ulong4*)(&k3));
+            key_vector1[key_vector_index] = *((uint256_t*)(&k1));
+            key_vector2[key_vector_index] = *((uint256_t*)(&k2));
+            key_vector3[key_vector_index] = *((uint256_t*)(&k3));
             key_vector_index++;
         }
     }
-
     size_t key_size = obj->decomp_modulus_size_ * obj->n_;
-    cl_mem k_switch_keys_1 =
-        clCreateBuffer(context_, CL_MEM_READ_ONLY | CL_CHANNEL_2_INTELFPGA,
-                       key_size * sizeof(cl_ulong4), NULL, NULL);
-    cl_mem k_switch_keys_2 =
-        clCreateBuffer(context_, CL_MEM_READ_ONLY | CL_CHANNEL_3_INTELFPGA,
-                       key_size * sizeof(cl_ulong4), NULL, NULL);
-    cl_mem k_switch_keys_3 =
-        clCreateBuffer(context_, CL_MEM_READ_ONLY | CL_CHANNEL_4_INTELFPGA,
-                       key_size * sizeof(cl_ulong4), NULL, NULL);
-    cl_int status;
-    status = clEnqueueWriteBuffer(
-        KeySwitch_queues_[KEYSWITCH_LOAD], k_switch_keys_1, CL_TRUE, 0,
-        key_size * sizeof(cl_ulong4), key_vector1, 0, NULL, NULL);
-    aocl_utils::checkError(
-        status, "Failed to enqueue KeySwitch_queues_[KEYSWITCH_LOAD]");
-    status = clEnqueueWriteBuffer(
-        KeySwitch_queues_[KEYSWITCH_LOAD], k_switch_keys_2, CL_TRUE, 0,
-        key_size * sizeof(cl_ulong4), key_vector2, 0, NULL, NULL);
-    aocl_utils::checkError(
-        status, "Failed to enqueue KeySwitch_queues_[KEYSWITCH_LOAD]");
-    status = clEnqueueWriteBuffer(
-        KeySwitch_queues_[KEYSWITCH_LOAD], k_switch_keys_3, CL_TRUE, 0,
-        key_size * sizeof(cl_ulong4), key_vector3, 0, NULL, NULL);
-    aocl_utils::checkError(
-        status, "Failed to enqueue KeySwitch_queues_[KEYSWITCH_LOAD]");
+    sycl::buffer<uint256_t>* k_switch_keys_1 =
+        new sycl::buffer(key_vector1, sycl::range(key_size),
+                         {sycl::property::buffer::use_host_ptr{},
+                          sycl::property::buffer::mem_channel{MEM_CHANNEL_K2}});
+    k_switch_keys_1->set_write_back(false);
+    sycl::buffer<uint256_t>* k_switch_keys_2 =
+        new sycl::buffer(key_vector2, sycl::range(key_size),
+                         {sycl::property::buffer::use_host_ptr{},
+                          sycl::property::buffer::mem_channel{MEM_CHANNEL_K3}});
+    k_switch_keys_2->set_write_back(false);
+    sycl::buffer<uint256_t>* k_switch_keys_3 =
+        new sycl::buffer(key_vector3, sycl::range(key_size),
+                         {sycl::property::buffer::use_host_ptr{},
+                          sycl::property::buffer::mem_channel{MEM_CHANNEL_K4}});
+    k_switch_keys_3->set_write_back(false);
 
-    aocl_utils::alignedFree(key_vector1);
-    aocl_utils::alignedFree(key_vector2);
-    aocl_utils::alignedFree(key_vector3);
+    KeySwitchMemKeys<uint256_t>* keys = new KeySwitchMemKeys<uint256_t>(
+        k_switch_keys_1, k_switch_keys_2, k_switch_keys_3, key_vector1,
+        key_vector2, key_vector3);
 
-    KeySwitchMemKeys* keys =
-        new KeySwitchMemKeys(k_switch_keys_1, k_switch_keys_2, k_switch_keys_3);
     keys_map_.emplace(obj->k_switch_keys_, keys);
     return keys;
 }
 
 void Device::enqueue_input_data_KeySwitch(FPGAObject_KeySwitch* fpga_obj) {
-    bool load_once = KeySwitch_load_once_;
-
     if (!KeySwitch_load_once_) {
+        // info: compute and store roots of unity in a table
+        // info: also create a sycl buffer
         KeySwitch_load_twiddles(fpga_obj);
-        KeySwitch_load_once_ = true;
     }
 
     if (fpga_obj->fence_) {
@@ -1385,76 +1246,36 @@ void Device::enqueue_input_data_KeySwitch(FPGAObject_KeySwitch* fpga_obj) {
         build_invn_meta(fpga_obj);
     }
 
-    // check cache to see if the keys have been loaded.
-    // load keys once if they have not been loaded.
-    KeySwitchMemKeys* keys = KeySwitch_check_keys(fpga_obj->k_switch_keys_);
+    // info: check if keys are already cached on device
+    KeySwitchMemKeys<uint256_t>* keys =
+        KeySwitch_check_keys(fpga_obj->k_switch_keys_);
     if (!keys) {
         keys = KeySwitch_load_keys(fpga_obj);
     }
     FPGA_ASSERT(keys);
-
+    // info: todo: in latter versions replace with explicit data movement using
+    // malloc/q.cpy info: current versions assumes that a buffer that is already
+    // cached on device will not be moved by runtime again given that it
+    // is marked read only by host run time.
+    (*(KeySwitch_kernel_container_->launchStoreSwitchKeys))(
+        keyswitch_queues_[KEYSWITCH_LOAD], *(keys->k_switch_keys_1_),
+        *(keys->k_switch_keys_2_), *(keys->k_switch_keys_3_),
+        fpga_obj->in_objs_.size());
     const auto& start_ocl = std::chrono::high_resolution_clock::now();
-    size_t size_in = fpga_obj->n_ * fpga_obj->decomp_modulus_size_;
     int obj_id = KeySwitch_id_ % 2;
-    cl_int status;
-    uint64_t batch = 0;
-    for (const auto& obj : fpga_obj->in_objs_) {
-        Object_KeySwitch* obj_KeySwitch = dynamic_cast<Object_KeySwitch*>(obj);
-        FPGA_ASSERT(obj_KeySwitch);
-        status =
-            clEnqueueWriteBuffer(KeySwitch_queues_[KEYSWITCH_LOAD],
-                                 fpga_obj->mem_t_target_iter_ptr_, CL_FALSE,
-                                 batch * size_in * sizeof(uint64_t),  // offset
-                                 size_in * sizeof(uint64_t),          // size
-                                 obj_KeySwitch->t_target_iter_ptr_, 0, NULL,
-                                 &KeySwitch_events_write_[obj_id][batch]);
-        aocl_utils::checkError(
-            status, "Failed to enqueue KeySwitch_queues_[KEYSWITCH_LOAD]");
-        batch++;
-    }
-
-    int i = 0;
-    clSetKernelArg(KeySwitch_kernels_[KEYSWITCH_LOAD], i++, sizeof(cl_mem),
-                   &fpga_obj->mem_t_target_iter_ptr_);
-    clSetKernelArg(KeySwitch_kernels_[KEYSWITCH_LOAD], i++,
-                   sizeof(KeySwitch_modulus_t), (void*)&modulus_meta_);
-    clSetKernelArg(KeySwitch_kernels_[KEYSWITCH_LOAD], i++, sizeof(uint64_t),
-                   (void*)&fpga_obj->n_);
-    clSetKernelArg(KeySwitch_kernels_[KEYSWITCH_LOAD], i++, sizeof(uint64_t),
-                   (void*)&fpga_obj->decomp_modulus_size_);
-    clSetKernelArg(KeySwitch_kernels_[KEYSWITCH_LOAD], i++, sizeof(uint64_t),
-                   (void*)&fpga_obj->n_batch_);
-
-    clSetKernelArg(KeySwitch_kernels_[KEYSWITCH_LOAD], i++, sizeof(cl_mem),
-                   (void*)&keys->k_switch_keys_1_);
-    clSetKernelArg(KeySwitch_kernels_[KEYSWITCH_LOAD], i++, sizeof(cl_mem),
-                   (void*)&keys->k_switch_keys_2_);
-    clSetKernelArg(KeySwitch_kernels_[KEYSWITCH_LOAD], i++, sizeof(cl_mem),
-                   (void*)&keys->k_switch_keys_3_);
-
-    clSetKernelArg(KeySwitch_kernels_[KEYSWITCH_LOAD], i++, sizeof(cl_mem),
-                   (void*)&KeySwitch_mem_root_of_unity_powers_);
-    clSetKernelArg(KeySwitch_kernels_[KEYSWITCH_LOAD], i++,
-                   sizeof(KeySwitch_invn_t), (void*)&invn_);
-
-    unsigned reload_twiddle_factors = 0;
-    if (!load_once) {
-        reload_twiddle_factors = 1;
-    }
-    clSetKernelArg(KeySwitch_kernels_[KEYSWITCH_LOAD], i++, sizeof(unsigned),
-                   (void*)&reload_twiddle_factors);
-
+    copyKeySwitchBatch(fpga_obj, obj_id);
+    // =============== Launch keyswitch kernel ==============================
+    unsigned rmem = 0;
     if (RWMEM_FLAG) {
-        unsigned rmem = 1;
-        clSetKernelArg(KeySwitch_kernels_[KEYSWITCH_LOAD], i++,
-                       sizeof(unsigned), (void*)&rmem);
+        rmem = 1;
     }
-
-    status = clEnqueueTask(KeySwitch_queues_[KEYSWITCH_LOAD],
-                           KeySwitch_kernels_[KEYSWITCH_LOAD],
-                           fpga_obj->n_batch_, KeySwitch_events_write_[obj_id],
-                           &KeySwitch_events_enqueue_[obj_id][0]);
-    aocl_utils::checkError(status, "Failed to launch keyswitch_load_kernel");
+    KeySwitch_events_enqueue_[obj_id][0] =
+        (*(KeySwitch_kernel_container_->load))(
+            keyswitch_queues_[KEYSWITCH_LOAD],
+            nullptr /* KeySwitch_events_write_[obj_id] */,
+            *(fpga_obj->mem_t_target_iter_ptr_), modulus_meta_, fpga_obj->n_,
+            fpga_obj->decomp_modulus_size_, fpga_obj->n_batch_,
+            (*(invn_t*)(void*)&invn_), rmem);
 
     if (debug_ == 1) {
         const auto& end_ocl = std::chrono::high_resolution_clock::now();
@@ -1485,23 +1306,11 @@ bool Device::process_output_dyadic_multiply() {
 
     dyadic_multiply_tag_out_svm_[0] = -1;
     dyadic_multiply_results_out_valid_svm_[0] = 0;
-
-    int idx = 0;
-    const size_t gws = 1;
-    const size_t lws = 1;
-
     const auto& start_ocl = std::chrono::high_resolution_clock::now();
-    clSetKernelArgSVMPointer(dyadic_multiply_output_fifo_nb_kernel_, idx++,
-                             (void*)dyadic_multiply_results_out_svm_);
-    clSetKernelArgSVMPointer(dyadic_multiply_output_fifo_nb_kernel_, idx++,
-                             (void*)dyadic_multiply_tag_out_svm_);
-    clSetKernelArgSVMPointer(dyadic_multiply_output_fifo_nb_kernel_, idx++,
-                             (void*)dyadic_multiply_results_out_valid_svm_);
-    cl_int status = clEnqueueNDRangeKernel(
-        dyadic_multiply_output_queue_, dyadic_multiply_output_fifo_nb_kernel_,
-        1, NULL, &gws, &lws, 0, NULL, NULL);
-    aocl_utils::checkError(status, "Failed to launch output_fifo_nb_kernel");
-    status = clFinish(dyadic_multiply_output_queue_);
+    auto tempEvent = (*(dyadicmult_kernel_container_->output_nb_fifo_usm))(
+        dyadic_multiply_output_queue_, dyadic_multiply_results_out_svm_,
+        dyadic_multiply_tag_out_svm_, dyadic_multiply_results_out_valid_svm_);
+    dyadic_multiply_output_queue_.wait();
     const auto& end_ocl = std::chrono::high_resolution_clock::now();
 
     if (*dyadic_multiply_results_out_valid_svm_ == 1) {
@@ -1510,22 +1319,22 @@ bool Device::process_output_dyadic_multiply() {
         const auto& start_io = std::chrono::high_resolution_clock::now();
         FPGAObject* completed = nullptr;
         for (int credit = 0; credit < CREDIT; credit++) {
-            if (fpgaObjects_[credit]->tag_ == dyadic_multiply_tag_out_svm_[0]) {
-                completed = fpgaObjects_[credit];
+            if (fpga_objects_[credit]->tag_ ==
+                dyadic_multiply_tag_out_svm_[0]) {
+                completed = fpga_objects_[credit];
                 break;
             }
         }
 
         if (completed) {
             completed->fill_out_data(dyadic_multiply_results_out_svm_);
-
             completed->recycle();
             rsl = true;
 
             for (int credit = 0; credit < CREDIT - 1; credit++) {
-                fpgaObjects_[credit] = fpgaObjects_[credit + 1];
+                fpga_objects_[credit] = fpga_objects_[credit + 1];
             }
-            fpgaObjects_[CREDIT - 1] = completed;
+            fpga_objects_[CREDIT - 1] = completed;
 
             if (debug_) {
                 const auto& end_io = std::chrono::high_resolution_clock::now();
@@ -1572,31 +1381,18 @@ bool Device::process_output_dyadic_multiply() {
 }
 
 bool Device::process_output_NTT() {
-    int i = 0;
     unsigned int batch = 1;
     int ntt_instance_index = CREDIT + 1;
-
-    FPGAObject* completed = fpgaObjects_[ntt_instance_index];
+    FPGAObject* completed = fpga_objects_[ntt_instance_index];
     FPGAObject_NTT* kernel_inf = dynamic_cast<FPGAObject_NTT*>(completed);
-
     FPGA_ASSERT(kernel_inf);
-
     batch = kernel_inf->n_batch_;
 
-    const size_t gws = 1;
-    const size_t lws = 1;
-
     const auto& start_ocl = std::chrono::high_resolution_clock::now();
-    clSetKernelArg(ntt_store_kernel_, i++, sizeof(unsigned int), &batch);
-    clSetKernelArgSVMPointer(ntt_store_kernel_, i++,
-                             (void*)NTT_coeff_poly_svm_);
+    auto nttStoreEvent = (*(ntt_kernel_container_->ntt_output))(
+        ntt_store_queue_, batch, NTT_coeff_poly_svm_);
 
-    cl_int status = clEnqueueNDRangeKernel(ntt_store_queue_, ntt_store_kernel_,
-                                           1, NULL, &gws, &lws, 0, NULL, NULL);
-    aocl_utils::checkError(status, "Failed to launch ntt_store_kernel");
-
-    status = clFinish(ntt_store_queue_);
-    aocl_utils::checkError(status, "Failed to finish ntt_store_queue");
+    ntt_store_queue_.wait();
     const auto& end_ocl = std::chrono::high_resolution_clock::now();
 
     const auto& start_io = std::chrono::high_resolution_clock::now();
@@ -1640,36 +1436,25 @@ bool Device::process_output_NTT() {
 }
 
 bool Device::process_output_INTT() {
-    int i = 0;
     unsigned int batch = 1;
     int intt_instance_index = CREDIT;
 
-    FPGAObject* completed = fpgaObjects_[intt_instance_index];
+    FPGAObject* completed = fpga_objects_[intt_instance_index];
     FPGAObject_INTT* kernel_inf = dynamic_cast<FPGAObject_INTT*>(completed);
 
     FPGA_ASSERT(kernel_inf);
 
     batch = kernel_inf->n_batch_;
-    const size_t gws = 1;
-    const size_t lws = 1;
 
     const auto& start_ocl = std::chrono::high_resolution_clock::now();
-    clSetKernelArg(intt_store_kernel_, i++, sizeof(unsigned int), &batch);
-    clSetKernelArgSVMPointer(intt_store_kernel_, i++,
-                             (void*)INTT_coeff_poly_svm_);
 
-    cl_int status =
-        clEnqueueNDRangeKernel(intt_store_queue_, intt_store_kernel_, 1, NULL,
-                               &gws, &lws, 0, NULL, NULL);
-    aocl_utils::checkError(status, "Failed to launch intt_store_kernel");
-    status = clFinish(intt_store_queue_);
+    auto inttLoadEvent = (*(intt_kernel_container_->intt_output))(
+        intt_store_queue_, batch, INTT_coeff_poly_svm_);
+    intt_store_queue_.wait();
     const auto& end_ocl = std::chrono::high_resolution_clock::now();
-    aocl_utils::checkError(status, "Failed to finish intt_store_queue");
-
     const auto& start_io = std::chrono::high_resolution_clock::now();
     completed->fill_out_data(INTT_coeff_poly_svm_);
     completed->recycle();
-
     if (debug_) {
         const auto& end_io = std::chrono::high_resolution_clock::now();
         const auto& duration_io =
@@ -1708,74 +1493,56 @@ bool Device::process_output_INTT() {
 
 void Device::KeySwitch_read_output() {
     int peer_id = (KeySwitch_id_ + 1) % 2;
-    FPGAObject* peer = fpgaObjects_[CREDIT + 2 + peer_id];
+    FPGAObject* peer = fpga_objects_[CREDIT + 2 + peer_id];
     FPGAObject_KeySwitch* peer_obj = dynamic_cast<FPGAObject_KeySwitch*>(peer);
-
     FPGA_ASSERT(peer_obj);
-
     size_t size_in =
         peer_obj->n_batch_ * peer_obj->n_ * peer_obj->decomp_modulus_size_;
     uint64_t size_out = size_in * peer_obj->key_component_count_;
-
     size_t result_size = size_out * sizeof(uint64_t);
-
-    memset(peer_obj->ms_output_, 0, size_out * sizeof(uint64_t));
-    cl_int status = clEnqueueReadBuffer(
-        KeySwitch_queues_[KEYSWITCH_STORE], peer_obj->mem_KeySwitch_results_,
-        CL_TRUE, 0, result_size, peer_obj->ms_output_, 2,
-        KeySwitch_events_enqueue_[peer_id], NULL);
-    aocl_utils::checkError(status, "Failed to finish KeySwitch_store_queue");
-    for (size_t i = 0; i < peer_obj->n_batch_; i++) {
-        clReleaseEvent(KeySwitch_events_write_[peer_id][i]);
-    }
-    clReleaseEvent(KeySwitch_events_enqueue_[peer_id][0]);
-    clReleaseEvent(KeySwitch_events_enqueue_[peer_id][1]);
-
+// exhaust wait list
+#ifdef __DEBUG_KS_RUNTIME
+    auto lat_start = std::chrono::duration_cast<std::chrono::nanoseconds>(
+                         std::chrono::system_clock::now().time_since_epoch())
+                         .count();
+#endif
+    KeySwitch_events_enqueue_[peer_id][0].wait();
+    KeySwitch_events_enqueue_[peer_id][1].wait();
+#ifdef __DEBUG_KS_RUNTIME
+    auto lat_end = std::chrono::duration_cast<std::chrono::nanoseconds>(
+                       std::chrono::system_clock::now().time_since_epoch())
+                       .count();
+    std::cout << "KeySwitch KeySwitch_read_output latency: "
+              << (lat_end - lat_start) / 1e6 << std::endl;
+#endif
+    sycl::host_accessor result_access(*(peer_obj->mem_KeySwitch_results_));
+    memcpy(peer_obj->ms_output_, result_access.get_pointer(), result_size);
     peer->fill_out_data(peer_obj->ms_output_);
     peer->recycle();
 }
-
 bool Device::process_output_KeySwitch() {
     int obj_id = KeySwitch_id_ % 2;
     int KeySwitch_instance_index = CREDIT + 2 + obj_id;
-
-    FPGAObject* completed = fpgaObjects_[KeySwitch_instance_index];
+    FPGAObject* completed = fpga_objects_[KeySwitch_instance_index];
     FPGAObject_KeySwitch* fpga_obj =
         dynamic_cast<FPGAObject_KeySwitch*>(completed);
-
     FPGA_ASSERT(fpga_obj);
-
     const auto& start_ocl = std::chrono::high_resolution_clock::now();
-
-    int argi = 0;
-    clSetKernelArg(KeySwitch_kernels_[KEYSWITCH_STORE], argi++, sizeof(cl_mem),
-                   (void*)&fpga_obj->mem_KeySwitch_results_);
-    clSetKernelArg(KeySwitch_kernels_[KEYSWITCH_STORE], argi++,
-                   sizeof(uint64_t), (void*)&fpga_obj->n_batch_);
-    clSetKernelArg(KeySwitch_kernels_[KEYSWITCH_STORE], argi++,
-                   sizeof(uint64_t), (void*)&fpga_obj->n_);
-    clSetKernelArg(KeySwitch_kernels_[KEYSWITCH_STORE], argi++,
-                   sizeof(uint64_t), (void*)&fpga_obj->decomp_modulus_size_);
-    clSetKernelArg(KeySwitch_kernels_[KEYSWITCH_STORE], argi++,
-                   sizeof(KeySwitch_modulus_t), (void*)&modulus_meta_);
+    unsigned rmem = 0;
+    unsigned wmem = 0;
     if (RWMEM_FLAG) {
-        unsigned rmem = 1;
-        unsigned wmem = 1;
-        clSetKernelArg(KeySwitch_kernels_[KEYSWITCH_STORE], argi++,
-                       sizeof(unsigned), (void*)&rmem);
-        clSetKernelArg(KeySwitch_kernels_[KEYSWITCH_STORE], argi++,
-                       sizeof(unsigned), (void*)&wmem);
+        rmem = 1;
+        wmem = 1;
     }
-    cl_int status = clEnqueueTask(
-        KeySwitch_queues_[KEYSWITCH_STORE], KeySwitch_kernels_[KEYSWITCH_STORE],
-        fpga_obj->n_batch_, KeySwitch_events_write_[obj_id],
-        &KeySwitch_events_enqueue_[obj_id][1]);
+    KeySwitch_events_enqueue_[obj_id][1] =
+        (*(KeySwitch_kernel_container_->store))(
+            keyswitch_queues_[KEYSWITCH_STORE], KeySwitch_events_write_[obj_id],
+            *(fpga_obj->mem_KeySwitch_results_), fpga_obj->n_batch_,
+            fpga_obj->n_, fpga_obj->decomp_modulus_size_, modulus_meta_, rmem,
+            wmem);
 
-    aocl_utils::checkError(status, "Failed to launch KeySwitch_store_kernel");
-    status = clFinish(KeySwitch_queues_[KEYSWITCH_STORE]);
     const auto& end_ocl = std::chrono::high_resolution_clock::now();
-    aocl_utils::checkError(status, "Failed to finish KeySwitch_store_queue");
-
+    keyswitch_queues_[KEYSWITCH_STORE].wait();
     const auto& start_io = std::chrono::high_resolution_clock::now();
     if (KeySwitch_id_ > 0) {
         KeySwitch_read_output();
@@ -1813,8 +1580,44 @@ bool Device::process_output_KeySwitch() {
                       << std::endl;
         }
     }
-
     return 0;
+}
+
+void DevicePool::getDevices(int numDevicesToUse, int choice) {
+    /**
+     * @brief runtime selection of emulator or hardware
+     * when RUN_CHOICE=1, emulator_selector will be used,
+     * when RUN_CHOICE=2 hardware_selector will be used.
+     */
+    sycl::ext::intel::fpga_emulator_selector emulator_selector;
+    sycl::ext::intel::fpga_selector hardware_selector;
+    sycl::device dev;
+    if (choice == 1) {
+        dev = emulator_selector.select_device();
+        std::cout << "Using Emulation mode device selector ..." << std::endl;
+    } else if (choice == 2) {
+        dev = hardware_selector.select_device();
+        std::cout << "Using Hardware mode device selector ..." << std::endl;
+    } else {
+        std::cout << "select the right run mode EMU{1}, FPGA{2}." << std::endl;
+    }
+
+    sycl::platform platform = dev.get_platform();
+    device_list_ = platform.get_devices();
+    std::cout << "Number of devices found: " << device_list_.size()
+              << std::endl;
+
+    for (auto& dev : device_list_) {
+        std::cout << "   FPGA:  " << dev.get_info<sycl::info::device::name>()
+                  << "\n";
+    }
+    if ((numDevicesToUse > device_list_.size()) || (numDevicesToUse < 0)) {
+        std::cout << "   [WARN] Maximal NUM_DEV is " << device_count_
+                  << " on this platform." << std::endl;
+        device_count_ = device_list_.size();
+    } else {
+        device_count_ = numDevicesToUse;
+    }
 }
 
 DevicePool::DevicePool(int choice, Buffer& buffer,
@@ -1823,47 +1626,22 @@ DevicePool::DevicePool(int choice, Buffer& buffer,
                        uint64_t batch_size_dyadic_multiply,
                        uint64_t batch_size_ntt, uint64_t batch_size_intt,
                        uint64_t batch_size_KeySwitch, uint32_t debug) {
-    if (choice == EMU) {
-        platform_ = aocl_utils::findPlatform("Intel(R) FPGA Emulation");
-    } else {
-        platform_ =
-            aocl_utils::findPlatform("Intel(R) FPGA SDK for OpenCL(TM)");
-    }
+    cl_uint dev_count_user = 1;
 
-    if (platform_ == NULL) {
-        printf("ERROR: Unable to find Intel(R) FPGA OpenCL platform.\n");
-        FPGA_ASSERT(0);
+    // Get number of devices user wants to use from environement var
+    const char* n_dev_user = getenv("NUM_DEV");
+    if (n_dev_user) {
+        dev_count_user = atoi(n_dev_user);
     }
-
-    cl_int status =
-        clGetDeviceIDs(platform_, CL_DEVICE_TYPE_ALL, 0, NULL, &device_count_);
-    if (status != CL_SUCCESS) {
-        printf("No Success with clGetDeviceIDs!\n");
-    }
-
-    const char* n_dev = getenv("NUM_DEV");
-    cl_uint dev_count = 1;
-    if (n_dev) {
-        dev_count = atoi(n_dev);
-        if ((dev_count > device_count_) || (dev_count < 0)) {
-            std::cout << "   [WARN] Maximal NUM_DEV is " << device_count_
-                      << " on this platform." << std::endl;
-            dev_count = device_count_;
-        }
-    }
-    device_count_ = dev_count;
+    getDevices(dev_count_user, choice);
     std::cout << "   [INFO] Using " << device_count_ << " FPGA device(s)."
               << std::endl;
-    cl_devices_ = new cl_device_id[device_count_];
-    status = clGetDeviceIDs(platform_, CL_DEVICE_TYPE_ALL, device_count_,
-                            cl_devices_, NULL);
-    aocl_utils::checkError(status, "Failed to create devices");
 
     future_exit_ = exit_signal.share();
     devices_ = new Device*[device_count_];
     for (unsigned int i = 0; i < device_count_; i++) {
         devices_[i] =
-            new Device(cl_devices_[i], buffer, future_exit_, coeff_size,
+            new Device(device_list_[i], buffer, future_exit_, coeff_size,
                        modulus_size, batch_size_dyadic_multiply, batch_size_ntt,
                        batch_size_intt, batch_size_KeySwitch, debug);
         std::thread runner(&Device::run, devices_[i]);
@@ -1881,8 +1659,6 @@ DevicePool::~DevicePool() {
     }
     delete[] devices_;
     devices_ = nullptr;
-    delete[] cl_devices_;
-    cl_devices_ = nullptr;
 }
 
 }  // namespace fpga

@@ -15,8 +15,7 @@ function(test_function kernel)
 
     add_executable(test_${KERNEL} ${SRC})
 
-    target_compile_options(test_${KERNEL} PRIVATE -fPIE -fPIC -fstack-protector -Wformat -Wformat-security)
-    target_compile_options(test_${KERNEL} PRIVATE -z noexecstack -Wl,-z,relro,-z,now -Wl,-Bsymbolic)
+    target_compile_options(test_${KERNEL} PRIVATE -g -fPIE -fPIC -fstack-protector -Wformat -Wformat-security)
     target_include_directories(test_${KERNEL} PRIVATE $<BUILD_INTERFACE:${CMAKE_INSTALL_PREFIX}/inc>)
     target_include_directories(test_${KERNEL} PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
     target_link_directories(test_${KERNEL} PUBLIC ${CMAKE_INSTALL_PREFIX}/lib)
@@ -28,12 +27,23 @@ function(test_function kernel)
     if(ENABLE_FPGA_DEBUG)
         target_compile_options(test_${KERNEL} PRIVATE -DFPGA_DEBUG)
     endif(ENABLE_FPGA_DEBUG)
-    add_custom_command(
-        TARGET test_${KERNEL} POST_BUILD
-        COMMAND rm -f ${KERNEL}.aocx
-        COMMAND ln -s ${CMAKE_INSTALL_PREFIX}/fpga/${KERNEL}.aocx .
-        VERBATIM
-    )
+
+    if (EMULATION_LIB)
+        add_custom_command(
+            TARGET test_${KERNEL} POST_BUILD
+            COMMAND rm -f lib${KERNEL}.so
+            COMMAND ln -s ${CMAKE_INSTALL_PREFIX}/emu/lib${KERNEL}.so .
+            VERBATIM
+        )
+    else()
+        add_custom_command(
+            TARGET test_${KERNEL} POST_BUILD
+            COMMAND rm -f lib${KERNEL}.so
+            COMMAND ln -s ${CMAKE_INSTALL_PREFIX}/fpga/lib${KERNEL}.so .
+            VERBATIM
+        )
+    endif()
+
     file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/micro_${KERNEL}.sh
          DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 endfunction()
@@ -47,10 +57,28 @@ test_function(inv_ntt)
 test_function(keyswitch)
 test_function(dyadic_multiply_keyswitch)
 
+
 add_custom_target(tests
     COMMAND ./micro_dyadic_multiply.sh DEPENDS test_dyadic_multiply
     COMMAND ./micro_fwd_ntt.sh DEPENDS test_fwd_ntt
     COMMAND ./micro_inv_ntt.sh DEPENDS test_inv_ntt
     COMMAND ./micro_keyswitch.sh DEPENDS test_keyswitch
+    #COMMAND ./micro_dyadic_multiply_keyswitch.sh DEPENDS test_dyadic_multiply_keyswitch
+)
+
+add_custom_target(run_test_keyswitch
+    COMMAND ./micro_keyswitch.sh DEPENDS test_keyswitch
+)
+
+add_custom_target(run_test_ntt
+    COMMAND ./micro_fwd_ntt.sh DEPENDS test_fwd_ntt
+)
+add_custom_target(run_test_intt
+    COMMAND ./micro_inv_ntt.sh DEPENDS test_inv_ntt
+)
+add_custom_target(run_test_dyadicmult
+    COMMAND ./micro_dyadic_multiply.sh DEPENDS test_dyadic_multiply
+)
+add_custom_target(run_test_dyadic_keyswitch
     COMMAND ./micro_dyadic_multiply_keyswitch.sh DEPENDS test_dyadic_multiply_keyswitch
 )

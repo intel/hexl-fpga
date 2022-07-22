@@ -8,18 +8,19 @@ set -eo pipefail
 spath=$(dirname $0)
 . ${spath}/bitstream_dir.sh
 
+if [[ -z ${RUN_CHOICE} ]] || [[ ${RUN_CHOICE} -eq 2 ]]
+then
+    aocl initialize acl0 pac_s10_usm
+fi
 ########################################
 # FPGA run with integrated bitstream
 ########################################
-if [[ -z ${RUN_CHOICE} ]] || [[ ${RUN_CHOICE} -eq 2 ]]
-then
-    aocl program acl0 ${bitstream_dir}/dyadic_multiply_keyswitch.aocx
-fi
 
 echo ""
 # batch 1 (default)
-FPGA_BITSTREAM=${bitstream_dir}/dyadic_multiply_keyswitch.aocx ./test_dyadic_multiply_keyswitch
+echo "FPGA_BITSTREAM=${bitstream_dir}/libdyadic_multiply_keyswitch.so FPGA_KERNEL=DYADIC_MULTIPLY_KEYSWITCH BATCH_SIZE_DYADIC_MULTIPLY=1 BATCH_SIZE_KEYSWITCH=1"
+FPGA_BITSTREAM=${bitstream_dir}/libdyadic_multiply_keyswitch.so FPGA_KERNEL=DYADIC_MULTIPLY_KEYSWITCH ./test_dyadic_multiply_keyswitch
 # batch 2
 echo ""
-echo "FPGA_BITSTREAM=${bitstream_dir}/dyadic_multiply_keyswitch.aocx FPGA_KERNEL=DYADIC_MULTIPLY_KEYSWITCH BATCH_SIZE_DYADIC_MULTIPLY=2 BATCH_SIZE_KEYSWITCH=2 "
-FPGA_BITSTREAM=${bitstream_dir}/dyadic_multiply_keyswitch.aocx FPGA_KERNEL=DYADIC_MULTIPLY_KEYSWITCH BATCH_SIZE_DYADIC_MULTIPLY=2 BATCH_SIZE_KEYSWITCH=2 ./test_dyadic_multiply_keyswitch
+echo "FPGA_BITSTREAM=${bitstream_dir}/libdyadic_multiply_keyswitch.so FPGA_KERNEL=DYADIC_MULTIPLY_KEYSWITCH BATCH_SIZE_DYADIC_MULTIPLY=2 BATCH_SIZE_KEYSWITCH=2"
+FPGA_BITSTREAM=${bitstream_dir}/libdyadic_multiply_keyswitch.so FPGA_KERNEL=DYADIC_MULTIPLY_KEYSWITCH BATCH_SIZE_DYADIC_MULTIPLY=2 BATCH_SIZE_KEYSWITCH=2 ./test_dyadic_multiply_keyswitch

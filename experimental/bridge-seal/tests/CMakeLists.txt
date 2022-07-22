@@ -7,7 +7,7 @@ project(seal_bridge_test VERSION 4.0.0 LANGUAGES CXX)
 
 include(cmake/gflags.cmake)
 
-find_package(hexl-fpga 1.1 REQUIRED)
+find_package(hexl-fpga REQUIRED)
 find_package(HEXL 1.2.4 REQUIRED)
 find_package(SEAL 4.0.0 REQUIRED)
 
@@ -45,12 +45,23 @@ file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/bitstream_dir.sh
      DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 list(GET CMAKE_PREFIX_PATH 0 fpga)
-add_custom_command(
-    TARGET keyswitch-example POST_BUILD
-    COMMAND rm -f keyswitch.aocx
-    COMMAND ln -s ${fpga}/fpga/keyswitch.aocx .
-    VERBATIM
-)
+
+option(EMULATION_LIB "Enable using emulation library." OFF)
+message(STATUS "EMULATION_LIB: ${EMULATION_LIB}")
+
+if(EMULATION_LIB)
+    add_custom_command(
+        TARGET keyswitch-example POST_BUILD
+        COMMAND rm -f libkeyswitch_emu.so
+        COMMAND ln -s ${fpga}/emu/libkeyswitch.so .
+        VERBATIM)
+else()
+    add_custom_command(
+        TARGET keyswitch-example POST_BUILD
+        COMMAND rm -f libkeyswitch.so
+        COMMAND ln -s ${fpga}/fpga/libkeyswitch.so .
+        VERBATIM)
+endif()
 
 add_custom_target(seal_test
     COMMAND ./seal_test.sh DEPENDS keyswitch-example

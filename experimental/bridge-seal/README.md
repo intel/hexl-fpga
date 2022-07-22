@@ -18,18 +18,20 @@ After building the SEAL library that is accelerated with Intel HE Acceleration L
 ### Compile the SEAL-based test that accelerated with Intel HE Acceleration Library for FPGAs.
 ```
 pushd tests
-cmake -S . -B build -DCMAKE_CXX_COMPILER=g++ -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(realpath ${PWD}/../../../hexl-fpga-install);$(realpath ${PWD}/../seal-fpga-install)"
+cmake -S . -B build -DCMAKE_CXX_COMPILER=g++ -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(realpath ${PWD}/../../../hexl-fpga-install);$(realpath ${PWD}/../seal-fpga-install)" -DEMULATION_LIB=ON
 cmake --build build -j
 popd
 ```
 
 The compiled executable is located in *tests/build* directory.
+### Setup oneAPI environment
+```
+source /opt/intel/oneapi/setvars.sh
+```
 
 ### Run the test on a FPGA card
 ```
 pushd tests/build
-rm -f keyswitch.aocx
-ln -s /path-to-fpga-bitstreams/keyswitch.aocx .
 RUN_CHOICE=2 make seal_test
 popd
 ```
@@ -37,8 +39,6 @@ popd
 ### Run the test on emulation
 ```
 pushd tests/build
-rm -f keyswitch.aocx
-ln -s /path-to-emulation/keyswitch.aocx .
 RUN_CHOICE=1 make seal_test
 popd
 ```

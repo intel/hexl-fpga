@@ -1,6 +1,5 @@
 // Copyright (C) 2020-2021 Intel Corporation
 // SPDX-License-Identifier: Apache-2.0
-
 #ifndef __FPGA_H__
 #define __FPGA_H__
 
@@ -10,44 +9,28 @@
 #include <future>
 #include <memory>
 #include <mutex>
+#include <string>
 #include <thread>
 #include <unordered_map>
 #include <vector>
+#include <CL/sycl.hpp>
+#include <sycl/ext/intel/fpga_extensions.hpp>
+#include "../../common/types.hpp"
+#include "dl_kernel_interfaces.hpp"
+#include <CL/sycl/INTEL/ac_types/ac_int.hpp>
 
-#include "CL/opencl.h"
+#define HOST_MEM_ALIGNMENT 64
+#define MEM_CHANNEL_K1 1
+#define MEM_CHANNEL_K2 2
+#define MEM_CHANNEL_K3 3
+#define MEM_CHANNEL_K4 4
+#define MEM_CHANNEL_TWIDDLES 4
 
 namespace intel {
 namespace hexl {
 namespace fpga {
 
 __extension__ typedef unsigned __int128 fpga_uint128_t;
-/// @brief
-/// Struct moduli_info_t
-/// @param[in] modulus stores the polynomial modulus
-/// @param[in] len stores the the modulus size in bits
-/// @param[in] barr_lo stores n / modulus where n is the polynomial size
-///
-typedef struct {
-    uint64_t modulus;
-    uint64_t len;
-    uint64_t barr_lo;
-} moduli_info_t;
-
-/// @brief
-/// Struct KeySwitch_moduli_t
-/// @param[in] data stores the KeySwitch modulus data
-///
-typedef struct {
-    cl_ulong4 data[8];
-} KeySwitch_modulus_t;
-
-/// @brief
-/// Struct KeySwitch_invn_t
-/// @param[in] data stores the KeySwitch invn data
-///
-typedef struct {
-    cl_ulong4 data[8];
-} KeySwitch_invn_t;
 
 /// @brief
 /// Struct DyadmultKeys1_t
@@ -89,7 +72,7 @@ typedef struct {
 #define RWMEM_FLAG 1
 
 enum KeySwitch_Kernels {
-    KEYSWITCH_LOAD,
+    KEYSWITCH_LOAD = 0,
     KEYSWITCH_STORE,
     KEYSWITCH_NUM_KERNELS
 };
@@ -110,7 +93,7 @@ enum class kernel_t {
 /// @param[in] id_ Object local identifier
 /// @param[in] g_wid_ Object global identifier
 ///
-struct Object {
+class Object {
 public:
     explicit Object(kernel_t type = kernel_t::NONE, bool fence = false);
     virtual ~Object() = default;
@@ -124,7 +107,7 @@ public:
 };
 
 /// @brief
-/// Struct Object NTT
+/// class Object NTT
 /// Stores the Number Theoretic Transform parameters
 /// @param[in] coeff_poly polynomial coefficients
 /// @param[out] coeff_poly polynomial coefficients
@@ -133,7 +116,8 @@ public:
 /// @param[in] coeff_modulus polynomial coefficients modulus
 /// @param[in] n polynomial size in powers of two
 ///
-struct Object_NTT : public Object {
+class Object_NTT : public Object {
+public:
     explicit Object_NTT(uint64_t* coeff_poly,
                         const uint64_t* root_of_unity_powers,
                         const uint64_t* precon_root_of_unity_powers,
@@ -147,7 +131,7 @@ struct Object_NTT : public Object {
 };
 
 /// @brief
-/// Struct Object INTT
+/// class Object INTT
 /// Stores the Inverse Number Theoretic Transform parameters
 /// @param[in] coeff_poly polynomial coefficients
 /// @param[out] coeff_poly polynomial coefficients
@@ -160,7 +144,8 @@ struct Object_NTT : public Object {
 /// @param[in] inv_n_w normalization factor for the constant factor
 /// @param[in] n polynomial size
 ///
-struct Object_INTT : public Object {
+class Object_INTT : public Object {
+public:
     explicit Object_INTT(uint64_t* coeff_poly,
                          const uint64_t* inv_root_of_unity_powers,
                          const uint64_t* precon_inv_root_of_unity_powers,
@@ -176,7 +161,7 @@ struct Object_INTT : public Object {
     uint64_t n_;
 };
 /// @brief
-/// struct Object_DyadicMultiply
+/// class Object_DyadicMultiply
 /// Stores the parameters for the multiplication
 /// @param[out] result stores the multiplication result
 /// @param[in] operand1 stores the first operand for the multiplication
@@ -185,7 +170,8 @@ struct Object_INTT : public Object {
 /// @param[in] moduli vector of moduli
 /// @param[in] n_moduli size of the vector of moduli
 ///
-struct Object_DyadicMultiply : public Object {
+class Object_DyadicMultiply : public Object {
+public:
     explicit Object_DyadicMultiply(uint64_t* results, const uint64_t* operand1,
                                    const uint64_t* operand2, uint64_t n,
                                    const uint64_t* moduli, uint64_t n_moduli,
@@ -200,7 +186,7 @@ struct Object_DyadicMultiply : public Object {
 };
 
 /// @brief
-/// struct Object_KeySwitch
+/// class Object_KeySwitch
 /// Stores the parameters for the keyswitch
 /// @param[out] results stores the keyswitch results
 /// @param[in]  t_target_iter_ptr stores the input ciphertext data
@@ -215,7 +201,8 @@ struct Object_DyadicMultiply : public Object {
 /// @param[in]  twiddle_factors stores the twiddle factors
 /// @param[in]  fence indicates whether the object is a fenced object or not
 ///
-struct Object_KeySwitch : public Object {
+class Object_KeySwitch : public Object {
+public:
     explicit Object_KeySwitch(
         uint64_t* result, const uint64_t* t_target_iter_ptr, uint64_t n,
         uint64_t decomp_modulus_size, uint64_t key_modulus_size,
@@ -238,7 +225,7 @@ struct Object_KeySwitch : public Object {
 };
 
 /// @brief
-/// Struct Buffer
+/// class Buffer
 /// Structure containing information for the polynomial operations
 /// @param[in] capacity of the buffer
 /// @param[in] n_batch_dyadic_multiply batch size for the multiplication
@@ -372,7 +359,7 @@ private:
     uint64_t num_KeySwitch_;
 };
 /// @brief
-/// Parent Struct FPGAObject stores the blob of objects to be transfered to the
+/// Parent class FPGAObject stores the blob of objects to be transfered to the
 /// FPGA
 ///
 /// @function fill_in_data
@@ -386,8 +373,9 @@ private:
 /// in_objs_ vector of stored objects
 /// g_tag_ stores the global tag identifier
 ///
-struct FPGAObject {
-    FPGAObject(const cl_context& context, uint64_t n_batch,
+class FPGAObject {
+public:
+    FPGAObject(sycl::queue& p_q, uint64_t n_batch,
                kernel_t type = kernel_t::NONE, bool fence = false);
     virtual ~FPGAObject() = default;
     virtual void fill_in_data(const std::vector<Object*>& objs) = 0;
@@ -395,20 +383,19 @@ struct FPGAObject {
 
     void recycle();
 
-    const cl_context& context_;
+    sycl::queue& m_q;
     int tag_;
     uint64_t n_batch_;
     uint64_t batch_size_;
     kernel_t type_;
     bool fence_;
-
     std::vector<Object*> in_objs_;
 
     static std::atomic<int> g_tag_;
 };
 
 /// @brief
-/// Struct FPGAObject_NTT stores the NTT blob of objects to be transfered to the
+/// class FPGAObject_NTT stores the NTT blob of objects to be transfered to the
 /// FPGA
 ///
 /// @function fill_in_data
@@ -422,8 +409,9 @@ struct FPGAObject {
 /// coeff_modulus_in_svm_ polynomial coefficients modulus
 /// n polynomial size
 ///
-struct FPGAObject_NTT : public FPGAObject {
-    explicit FPGAObject_NTT(const cl_context& context, uint64_t coeff_count,
+class FPGAObject_NTT : public FPGAObject {
+public:
+    explicit FPGAObject_NTT(sycl::queue& p_q, uint64_t coeff_count,
                             uint64_t batch_size);
     ~FPGAObject_NTT();
 
@@ -441,7 +429,7 @@ struct FPGAObject_NTT : public FPGAObject {
 };
 
 /// @brief
-/// Struct FPGAObject_INTT stores the INTT blob of objects to be transfered to
+/// class FPGAObject_INTT stores the INTT blob of objects to be transfered to
 /// the FPGA
 ///
 /// @function fill_in_data
@@ -457,8 +445,9 @@ struct FPGAObject_NTT : public FPGAObject {
 /// inv_n_w_in_svm_  normalization factor 1/n for the constant coefficient
 /// n polynomial size
 ///
-struct FPGAObject_INTT : public FPGAObject {
-    explicit FPGAObject_INTT(const cl_context& context, uint64_t coeff_count,
+class FPGAObject_INTT : public FPGAObject {
+public:
+    explicit FPGAObject_INTT(sycl::queue& p_q, uint64_t coeff_count,
                              uint64_t batch_size);
     ~FPGAObject_INTT();
     FPGAObject_INTT(const FPGAObject_INTT&) = delete;
@@ -477,7 +466,7 @@ struct FPGAObject_INTT : public FPGAObject {
 };
 
 /// @brief
-/// Struct FPGAObject_DyadicMultiply
+/// class FPGAObject_DyadicMultiply
 /// Stores the multiplication blob of objects to be transfered to the FPGA
 ///
 /// @function fill_in_data
@@ -493,9 +482,9 @@ struct FPGAObject_INTT : public FPGAObject {
 /// operands_in_ddr_ pointer to operands in DDR memory
 /// results_out_ddr_ pointer to multiplication results in DDR
 ///
-struct FPGAObject_DyadicMultiply : public FPGAObject {
-    explicit FPGAObject_DyadicMultiply(const cl_context& context,
-                                       uint64_t coeff_size,
+class FPGAObject_DyadicMultiply : public FPGAObject {
+public:
+    explicit FPGAObject_DyadicMultiply(sycl::queue& p_q, uint64_t coeff_size,
                                        uint32_t modulus_size,
                                        uint64_t batch_size);
     ~FPGAObject_DyadicMultiply();
@@ -511,12 +500,12 @@ struct FPGAObject_DyadicMultiply : public FPGAObject {
     moduli_info_t* moduli_info_;
     uint64_t n_;
     uint64_t n_moduli_;
-    cl_mem operands_in_ddr_;
-    cl_mem results_out_ddr_;
+    uint64_t* operands_in_ddr_;
+    uint64_t* results_out_ddr_;
 };
 
 /// @brief
-/// Struct FPGAObject_KeySwitch
+/// class FPGAObject_KeySwitch
 /// Stores the keyswitch blob of objects to be transfered to the FPGA
 ///
 /// @function fill_in_data
@@ -535,13 +524,17 @@ struct FPGAObject_DyadicMultiply : public FPGAObject {
 /// modswitch_factors stores the factors for modular switch
 /// twiddle_factors stores the twiddle factors
 ///
-struct FPGAObject_KeySwitch : public FPGAObject {
-    explicit FPGAObject_KeySwitch(const cl_context& context,
-                                  uint64_t batch_size);
+class FPGAObject_KeySwitch : public FPGAObject {
+public:
+    explicit FPGAObject_KeySwitch(sycl::queue& p_q, uint64_t batch_size);
 
     ~FPGAObject_KeySwitch();
+
+    // delete copy and assignment operators ////////////////////////////////
     FPGAObject_KeySwitch(const FPGAObject_KeySwitch&) = delete;
     FPGAObject_KeySwitch& operator=(const FPGAObject_KeySwitch&) = delete;
+    ///////////////////////////////////////////////////////////////////////
+
     void fill_in_data(const std::vector<Object*>& objs) override;
     void fill_out_data(uint64_t* results) override;
 
@@ -556,25 +549,33 @@ struct FPGAObject_KeySwitch : public FPGAObject {
     uint64_t* twiddle_factors_;
     uint64_t* ms_output_;
 
-    cl_mem mem_t_target_iter_ptr_;
-    cl_mem mem_KeySwitch_results_;
+    sycl::buffer<uint64_t>* mem_t_target_iter_ptr_;
+    sycl::buffer<sycl::ulong2>* mem_KeySwitch_results_;
 
 private:
     enum {
-        MAX_KEY_MODULUS_SIZE = 7,
-        MAX_KEY_COMPONENT_SIZE = 2,
-        MAX_COEFF_COUNT = 16384
+        H_MAX_KEY_MODULUS_SIZE = 7,
+        H_MAX_KEY_COMPONENT_SIZE = 2,
+        H_MAX_COEFF_COUNT = 16384
     };
 };
 
+template <class t_type = uint256_t>
 struct KeySwitchMemKeys {
-    explicit KeySwitchMemKeys(cl_mem k1 = nullptr, cl_mem k2 = nullptr,
-                              cl_mem k3 = nullptr);
+    //
+    explicit KeySwitchMemKeys(sycl::buffer<t_type>* k1 = nullptr,
+                              sycl::buffer<t_type>* k2 = nullptr,
+                              sycl::buffer<t_type>* k3 = nullptr,
+                              t_type* host_k1 = nullptr,
+                              t_type* host_k2 = nullptr,
+                              t_type* host_k3 = nullptr);
     ~KeySwitchMemKeys();
-
-    cl_mem k_switch_keys_1_;
-    cl_mem k_switch_keys_2_;
-    cl_mem k_switch_keys_3_;
+    sycl::buffer<t_type>* k_switch_keys_1_;
+    sycl::buffer<t_type>* k_switch_keys_2_;
+    sycl::buffer<t_type>* k_switch_keys_3_;
+    t_type* host_k_switch_keys_1_;
+    t_type* host_k_switch_keys_2_;
+    t_type* host_k_switch_keys_3_;
 };
 
 /// @brief
@@ -602,7 +603,8 @@ typedef enum { NONE = 0, EMU, FPGA } DEV_TYPE;
 ///
 class Device {
 public:
-    Device(const cl_device_id& device, Buffer& buffer,
+    //
+    Device(sycl::device& p_device, Buffer& buffer,
            std::shared_future<bool> exit_signal, uint64_t coeff_size,
            uint32_t modulus_size, uint64_t batch_size_dyadic_multiply,
            uint64_t batch_size_ntt, uint64_t batch_size_intt,
@@ -634,74 +636,63 @@ private:
     int device_id() { return id_; }
 
     void KeySwitch_load_twiddles(FPGAObject_KeySwitch* fpga_obj);
-    KeySwitchMemKeys* KeySwitch_check_keys(uint64_t** keys);
-    KeySwitchMemKeys* KeySwitch_load_keys(FPGAObject_KeySwitch* fpga_obj);
+    KeySwitchMemKeys<uint256_t>* KeySwitch_check_keys(uint64_t** keys);
+    KeySwitchMemKeys<uint256_t>* KeySwitch_load_keys(
+        FPGAObject_KeySwitch* fpga_obj);
     void build_modulus_meta(FPGAObject_KeySwitch* fpga_obj);
     void build_invn_meta(FPGAObject_KeySwitch* fpga_obj);
     void KeySwitch_read_output();
-
     uint64_t precompute_modulus_k(uint64_t modulus);
-
+    void copyKeySwitchBatch(FPGAObject_KeySwitch* fpga_obj, int obj_id);
     kernel_t get_kernel_type();
     std::string get_bitstream_name();
+    void load_kernel_symbols();
 
-    const cl_device_id& device_;
+    sycl::device device_;
     Buffer& buffer_;
     unsigned int credit_;
     std::shared_future<bool> future_exit_;
-    int id_;
-    static int device_id_;
-    kernel_t kernel_type_;
-
-    std::vector<FPGAObject*> fpgaObjects_;
-
-    cl_context context_;
-    cl_program program_;
-
-    // DYADIC_MULTIPLY section
-    cl_command_queue dyadic_multiply_input_queue_;
-    cl_command_queue dyadic_multiply_output_queue_;
-    cl_kernel dyadic_multiply_input_fifo_kernel_;
-    cl_kernel dyadic_multiply_output_fifo_nb_kernel_;
-
     uint64_t* dyadic_multiply_results_out_svm_;
     int* dyadic_multiply_tag_out_svm_;
     int* dyadic_multiply_results_out_valid_svm_;
-    //
-
-    // NTT section
-    cl_command_queue ntt_load_queue_;
-    cl_command_queue ntt_store_queue_;
-    cl_kernel ntt_load_kernel_;
-    cl_kernel ntt_store_kernel_;
-
     uint64_t* NTT_coeff_poly_svm_;
-
-    // INTT section
-    cl_command_queue intt_load_queue_;
-    cl_command_queue intt_store_queue_;
-    cl_kernel intt_load_kernel_;
-    cl_kernel intt_store_kernel_;
-
     uint64_t* INTT_coeff_poly_svm_;
-    //
-
-    // KeySwitch section
-    cl_mem KeySwitch_mem_root_of_unity_powers_;
-    cl_command_queue KeySwitch_queues_[KEYSWITCH_NUM_KERNELS];
-    cl_kernel KeySwitch_kernels_[KEYSWITCH_NUM_KERNELS];
+    sycl::buffer<uint64_t>* KeySwitch_mem_root_of_unity_powers_;
     bool KeySwitch_load_once_;
     uint64_t* root_of_unity_powers_ptr_;
-    KeySwitch_modulus_t modulus_meta_;
-    KeySwitch_invn_t invn_;
+    moduli_t modulus_meta_;
+    invn_t invn_;
     uint64_t KeySwitch_id_;
-    cl_event KeySwitch_events_write_[2][128];
-    cl_event KeySwitch_events_enqueue_[2][2];
-    std::unordered_map<uint64_t**, KeySwitchMemKeys*> keys_map_;
-    std::unordered_map<uint64_t**, KeySwitchMemKeys*>::iterator keys_map_iter_;
-
+    std::unordered_map<uint64_t**, KeySwitchMemKeys<uint256_t>*>::iterator
+        keys_map_iter_;
     uint32_t debug_;
-    static const std::unordered_map<std::string, kernel_t> kernels;
+    NTTDynamicIF* ntt_kernel_container_;
+    INTTDynamicIF* intt_kernel_container_;
+    DyadicMultDynamicIF* dyadicmult_kernel_container_;
+    KeySwitchDynamicIF* KeySwitch_kernel_container_;
+
+    sycl::context context_;
+    sycl::queue dyadic_multiply_input_queue_;
+    sycl::queue dyadic_multiply_output_queue_;
+
+    // NTT section
+    sycl::queue ntt_load_queue_;
+    sycl::queue ntt_store_queue_;
+
+    // INTT section
+    sycl::queue intt_load_queue_;
+    sycl::queue intt_store_queue_;
+
+    // KeySwitch section
+    sycl::queue keyswitch_queues_[KEYSWITCH_NUM_KERNELS];
+    sycl::event KeySwitch_events_write_[2][128];
+    sycl::event KeySwitch_events_enqueue_[2][2];
+    std::unordered_map<uint64_t**, KeySwitchMemKeys<uint256_t>*> keys_map_;
+    static int device_id_;
+    int id_;
+    kernel_t kernel_type_;
+    std::vector<FPGAObject*> fpga_objects_;
+    static const std::unordered_map<std::string, kernel_t> kernels_;
 };
 
 /// @brief
@@ -732,13 +723,11 @@ public:
 private:
     DevicePool(const DevicePool& d) = delete;
     DevicePool& operator=(const DevicePool& d) = delete;
-
-    cl_platform_id platform_;
-    cl_uint device_count_;
-    cl_device_id* cl_devices_;
+    void getDevices(int numDevicesToUse, int choice);
+    sycl::cl_uint device_count_;
+    std::vector<sycl::device> device_list_;
     Device** devices_;
     std::shared_future<bool> future_exit_;
-
     std::vector<std::thread> runners_;
 };
 /// @brief
