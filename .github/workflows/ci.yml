@@ -26,9 +26,8 @@ jobs:
 
     steps:
       - name: checkout_repo
-        uses: actions/checkout@v3
-        with:
-          ref: development
+        uses: actions/checkout@v2
+
 
       - name: pre-commit
         run: pre-commit run --all-files
