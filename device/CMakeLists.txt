@@ -96,7 +96,7 @@ set(AC_TYPES_FLAGS "-qactypes")
 ### FPGA Emulation compile flow
 ###############################################################################
 
-option(EMULATION_LIB "Enable FPGA emulation library build flow" ON)
+option(EMULATION_LIB "Enable FPGA emulation library build flow" OFF)
 message(STATUS "EMULATION_LIB: ${EMULATION_LIB}")
 
 if(EMULATION_LIB)
