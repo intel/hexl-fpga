@@ -26,9 +26,7 @@ DynamicIF::~DynamicIF() {
 void* DynamicIF::loadKernel(const char* kernelName) const {
     void* temp = dlsym(m_lib_handle_, kernelName);
     if (!temp)
-        std::cout << "Cannot load symbol function " << kernelName << std::endl;
-    else
-        std::cout << "Load kernel symbol function " << kernelName << std::endl;
+        std::cerr << "Cannot load symbol function " << kernelName << std::endl;
     return temp;
 }
 std::string DynamicIF::getLibName() const { return m_lib_name_; }

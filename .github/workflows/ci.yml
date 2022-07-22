@@ -94,7 +94,7 @@ jobs:
       - name: build_experimental_bridges
         run: |
           pushd experimental/bridge-seal
-          cmake -S . -B build-seal4.0.0-fpga -DCMAKE_CXX_COMPILER=g++ -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(realpath ${PWD}/../../build/install)" -DCMAKE_INSTALL_PREFIX=seal-fpga-install
+          cmake -S . -B build-seal4.0.0-fpga -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(realpath ${PWD}/../../hexl-fpga-install)" -DCMAKE_INSTALL_PREFIX=seal-fpga-install
           cmake --build build-seal4.0.0-fpga -j
           popd
 
