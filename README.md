@@ -110,10 +110,11 @@ For convenience, they are listed below:
 
 | CMake option                  | Values                 |                                                                            |
 | ------------------------------| ---------------------- | -------------------------------------------------------------------------- |
-| ENABLE_BENCHMARK              | ON / OFF (default OFF) | Set to OFF, enable benchmark suite via Google benchmark                   |
+| ENABLE_BENCHMARK              | ON / OFF (default OFF) | Set to OFF, enable benchmark suite via Google benchmark                    |
 | ENABLE_FPGA_DEBUG             | ON / OFF (default OFF) | Set to OFF, enable debug log at large runtime penalty                      |
 | ENABLE_TESTS                  | ON / OFF (default OFF) | Set to OFF, enable building of unit-tests                                  |
 | ENABLE_DOCS                   | ON / OFF (default OFF) | Set to OFF, enable building of documentation                               |
+| EMULATION_LIB                 | ON / OFF (default OFF) | Set to OFF, enable building of kernel for emulation mode                   |
 
 ### Compiling Intel HE Acceleration Library for FPGAs
 Compiling HE Acceleration Library for FPGAs requires two steps: compiling the C++ host code and compiling the oneAPI kernels. Start by compiling the kernels as they will be needed during the host installation.
