@@ -13,7 +13,6 @@ function(bench_function kernel)
     add_executable(bench_${KERNEL} ${SRC})
 
     target_compile_options(bench_${KERNEL} PRIVATE -fPIE -fPIC -fstack-protector -Wformat -Wformat-security)
-    target_compile_options(bench_${KERNEL} PRIVATE -z noexecstack -Wl,-z,relro,-z,now -Wl,-Bsymbolic)
     target_include_directories(bench_${KERNEL} PRIVATE $<BUILD_INTERFACE:${CMAKE_INSTALL_PREFIX}/inc>)
     target_link_directories(bench_${KERNEL} PUBLIC ${CMAKE_INSTALL_PREFIX}/lib)
     target_link_directories(bench_${KERNEL} PUBLIC ${CMAKE_BINARY_DIR}/hexl-install/lib)
@@ -38,12 +37,22 @@ function(bench_function kernel)
         endif()
     endif(FPGA_USE_INTEL_HEXL)
 
-    add_custom_command(
-        TARGET bench_${KERNEL} POST_BUILD
-        COMMAND rm -f ${KERNEL}.aocx
-        COMMAND ln -s ${CMAKE_INSTALL_PREFIX}/fpga/${KERNEL}.aocx .
-        VERBATIM
-    )
+    if (EMULATION_LIB)
+        add_custom_command(
+            TARGET bench_${KERNEL} POST_BUILD
+            COMMAND rm -f lib${KERNEL}.so
+            COMMAND ln -s ${CMAKE_INSTALL_PREFIX}/emu/lib${KERNEL}.so .
+            VERBATIM
+        )
+    else()
+        add_custom_command(
+            TARGET bench_${KERNEL} POST_BUILD
+            COMMAND rm -f lib${KERNEL}.so
+            COMMAND ln -s ${CMAKE_INSTALL_PREFIX}/fpga/lib${KERNEL}.so .
+            VERBATIM
+        )
+    endif()
+
     file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/micro_${KERNEL}.sh
          DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 endfunction()
@@ -57,8 +66,21 @@ bench_function(fwd_ntt)
 bench_function(inv_ntt)
 
 add_custom_target(bench
-    COMMAND ./micro_keyswitch.sh DEPENDS bench_keyswitch
     COMMAND ./micro_dyadic_multiply.sh DEPENDS bench_dyadic_multiply
     COMMAND ./micro_fwd_ntt.sh DEPENDS bench_fwd_ntt
     COMMAND ./micro_inv_ntt.sh DEPENDS bench_inv_ntt
+    COMMAND ./micro_keyswitch.sh DEPENDS bench_keyswitch
+)
+
+add_custom_target(run_bench_ntt
+    COMMAND ./micro_fwd_ntt.sh DEPENDS bench_fwd_ntt
+)
+add_custom_target(run_bench_intt
+    COMMAND ./micro_inv_ntt.sh DEPENDS bench_inv_ntt
+)
+add_custom_target(run_bench_keyswitch
+    COMMAND ./micro_keyswitch.sh DEPENDS bench_keyswitch
+)
+add_custom_target(run_bench_dyadicmult
+    COMMAND ./micro_dyadic_multiply.sh DEPENDS bench_dyadic_multiply
 )

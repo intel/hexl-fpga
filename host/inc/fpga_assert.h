@@ -12,7 +12,9 @@
 #define FPGA_ASSERT_MACRO_CHOOSER(...) \
     GET_ARG(__VA_ARGS__, FPGA_ASSERT_2_ARGS, FPGA_ASSERT_1_ARGS)
 
-#define FPGA_ASSERT(...) FPGA_ASSERT_MACRO_CHOOSER(__VA_ARGS__)(__VA_ARGS__)
+#define FPGA_ASSERT(...)                   \
+    FPGA_ASSERT_MACRO_CHOOSER(__VA_ARGS__) \
+    (__VA_ARGS__)
 
 #ifdef FPGA_DEBUG
 #include <iostream>

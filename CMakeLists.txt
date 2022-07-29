@@ -2,23 +2,13 @@
 # SPDX-License-Identifier: Apache-2.0
 
 cmake_minimum_required(VERSION 3.5.1)
+project(hexl-fpga)
+set(hexl-fpga_VERSION 2.0)
 
-project(hexl-fpga LANGUAGES C CXX)
-set(hexl-fpga_VERSION 1.1)
-
-set(CMAKE_CONFIGURATION_TYPES Debug Release CACHE STRING INTERNAL FORCE)
-set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build Type: Debug or Release")
-set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS}")
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_FLAGS_DEBUG "-g3 -O0 -Wall")
-set(CMAKE_C_FLAGS_DEBUG "-g3 -O0 -Wall")
-set(CMAKE_CXX_FLAGS_RELEASE "-march=native -O3 -funroll-loops -Wall ")
-set(CMAKE_C_FLAGS_RELEASE "-march=native -O3 -funroll-loops -Wall ")
-
-set(OPENCL_ROOT_PATH $ENV{INTELFPGAOCLSDKROOT})
 set(FPGA_SRC_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
 option(ENABLE_FPGA_DEBUG "Enable FPGA debugging info" OFF)
+message(STATUS "Using Compiler for C++ : ${CMAKE_CXX_COMPILER}")
 message(STATUS "ENABLE_FPGA_DEBUG: ${ENABLE_FPGA_DEBUG}")
 option(ENABLE_TESTS "Enable Tests" OFF)
 message(STATUS "ENABLE_TESTS: ${ENABLE_TESTS}")
@@ -50,6 +40,7 @@ if(FPGA_USE_INTEL_HEXL)
         endif()
     endif()
 endif()
+
 
 add_subdirectory(host)
 add_subdirectory(device)

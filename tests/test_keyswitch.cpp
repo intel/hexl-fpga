@@ -10,7 +10,6 @@
 #include <random>
 #include <string>
 #include <vector>
-
 #include "hexl-fpga.h"
 
 static uint32_t get_n() {
@@ -119,7 +118,6 @@ std::vector<std::string> glob(const char* pattern) {
 
 void test_KeySwitch(const std::vector<std::string>& files) {
     std::vector<KeySwitchTestVector> test_vectors;
-
     for (size_t i = 0; i < files.size(); i++) {
         std::cout << "Constructing Test Vector " << i << " from File ... "
                   << files[i] << std::endl;
@@ -142,7 +140,6 @@ void test_KeySwitch(const std::vector<std::string>& files) {
             test_vectors[0].twiddle_factors.data());
     }
     intel::hexl::KeySwitchCompleted();
-
     for (size_t i = 0; i < files.size(); i++) {
         ASSERT_EQ(test_vectors[i].input, test_vectors[i].expected_output);
     }
@@ -190,6 +187,5 @@ TEST(KeySwitch, batch_5_7_6_2_2) {
             files.push_back(filesx[i]);
         }
     }
-
     test_KeySwitch(files);
 }

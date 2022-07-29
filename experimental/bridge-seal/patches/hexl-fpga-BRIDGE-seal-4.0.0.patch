@@ -1,5 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 03d2b5da..aa368edb 100644
+index 03d2b5da..c33d8299 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -218,15 +218,38 @@ set(SEAL_USE_INTEL_HEXL_OPTION_STR "Use Intel HEXL library")
@@ -32,7 +32,7 @@ index 03d2b5da..aa368edb 100644
          endif()
 +
 +        if(SEAL_USE_INTEL_HEXL_FPGA)
-+            find_package(hexl-fpga 1.1)
++            find_package(hexl-fpga 2.0)
 +            if (NOT TARGET hexl-fpga::hexl-fpga)
 +                message(FATAL_ERROR "Intel HEXL-FPGA: not found")
 +            else()
@@ -98,7 +98,7 @@ index c1b8b420..efffe294 100644
      mark_as_advanced(BUILD_HEXL)
 diff --git a/cmake/ExternalIntelHEXLFPGA.cmake b/cmake/ExternalIntelHEXLFPGA.cmake
 new file mode 100644
-index 00000000..5f327044
+index 00000000..57cfe40f
 --- /dev/null
 +++ b/cmake/ExternalIntelHEXLFPGA.cmake
 @@ -0,0 +1,29 @@
@@ -109,7 +109,7 @@ index 00000000..5f327044
 +    hexl-fpga
 +    PREFIX hexl-fpga
 +    GIT_REPOSITORY https://github.com/intel/hexl-fpga.git
-+    GIT_TAG v1.1
++    GIT_TAG v2.0-rc1
 +)
 +FetchContent_GetProperties(hexl-fpga)
 +
