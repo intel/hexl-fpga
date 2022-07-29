@@ -178,7 +178,6 @@ else()
         COMMENT "Compiling FPGA bitstream"
         DEPENDS fwd_ntt inv_ntt dyadic_multiply keyswitch dyadic_multiply_keyswitch
     )
-    
 
     ## since FPGA hardware bitstream build prcess takes long time, so the fpga bitstream libary installation
     ## should seperate from the default installation.
