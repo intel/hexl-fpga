@@ -32,7 +32,13 @@ set(BOARD_inv_ntt intel_s10sx_pac:pac_s10_usm)
 set(BOARD_keyswitch intel_s10sx_pac:pac_s10)
 set(BOARD_dyadic_multiply_keyswitch intel_s10sx_pac:pac_s10)
 
-set(HW_SEED 745873)
+set(link_options_dyadic_multiply "")
+set(link_options_fwd_ntt "")
+set(link_options_inv_ntt "")
+set(link_options_keyswitch -Xsno-interleaving=DDR;-Xshyper-optimized-handshaking=off)
+set(link_options_dyadic_multiply_keyswitch -Xsno-interleaving=DDR;-Xshyper-optimized-handshaking=off)
+
+set(HW_SEED 789045)
 
 set(GLOBAL_MEM_NAME "DDR")
 set(DISABLE_INTERLEAVING off)
@@ -89,6 +95,8 @@ endif()
 
 set(AC_TYPES_FLAGS "-qactypes")
 
+set(COMPILE_WARNING_OPTIONS -Wno-ignored-attributes -Wno-return-type-c-linkage -Wno-unknown-pragmas)
+
 option(EMULATION_LIB "Enable FPGA emulation library build flow" OFF)
 message(STATUS "EMULATION_LIB: ${EMULATION_LIB}")
 
@@ -97,7 +105,7 @@ if(EMULATION_LIB)
     ### FPGA Emulation compile flow
     ###############################################################################
 
-    set(EMU_COMPILE_FLAGS -fPIC -fintelfpga -c ${AC_TYPES_FLAGS})
+    set(EMU_COMPILE_FLAGS -fPIC -fintelfpga -c ${AC_TYPES_FLAGS} ${COMPILE_WARNING_OPTIONS})
     set(EMU_LINK_FLAGS -fintelfpga)
 
     function(build_standalone_emu_shared_lib kernel)
@@ -136,7 +144,7 @@ else()
     # Build FPGA Hardware shared library
     ##############################################################
 
-    set(HW_COMPILE_FLAGS -fPIC -fintelfpga -c ${AC_TYPES_FLAGS} )
+    set(HW_COMPILE_FLAGS -fPIC -fintelfpga -c ${AC_TYPES_FLAGS} ${COMPILE_WARNING_OPTIONS})
     set(HW_LINK_FLAGS  -fintelfpga -shared -Xshardware ${AC_TYPES_FLAGS}
         ${INTERLEAVING_CONTROL} ${BSP_CHOICE_CONTROL} ${HIGH_EFFORT_COMPILE_CONTROL} ${PROFILING_CONTROL} ${HYPER_OPTIMIZED_HANDSHAKING_SET} ${NOCACHING})
 
@@ -149,9 +157,9 @@ else()
 
         add_library(${KERNEL} EXCLUDE_FROM_ALL SHARED ${SRC})
         target_compile_options(${KERNEL} PRIVATE ${HW_COMPILE_FLAGS} ${config_${KERNEL}} )
-        target_link_options(${KERNEL} PRIVATE ${HW_LINK_FLAGS} -Xsboard=${BOARD_${KERNEL}} -Xsclock=${FMAX_${KERNEL}} -Xsseed=${HW_SEED})
+        target_link_options(${KERNEL} PRIVATE ${HW_LINK_FLAGS} -Xsboard=${BOARD_${KERNEL}} -Xsclock=${FMAX_${KERNEL}} -Xsseed=${HW_SEED} ${link_options_${KERNEL}} )
 
-        message(STATUS "Build ${KERNEL} with target Fmax: ${FMAX_${KERNEL}}, FPGA board: ${BOARD_${KERNEL}}, Seed: ${HW_SEED}")
+        message(STATUS "Build ${KERNEL} with target Fmax: ${FMAX_${KERNEL}}, FPGA board: ${BOARD_${KERNEL}}, Seed: ${HW_SEED}, ${link_options_${KERNEL}}")
     endfunction()
 
     build_standalone_hw_shared_lib(fwd_ntt)
@@ -168,13 +176,14 @@ else()
 
     add_custom_target(fpga
         COMMENT "Compiling FPGA bitstream"
-        DEPENDS dyadic_multiply fwd_ntt inv_ntt keyswitch dyadic_multiply_keyswitch
+        DEPENDS fwd_ntt inv_ntt dyadic_multiply keyswitch dyadic_multiply_keyswitch
     )
+    
 
     ## since FPGA hardware bitstream build prcess takes long time, so the fpga bitstream libary installation
     ## should seperate from the default installation.
     ## run "cmake --install build --component hw_install" to install hw bitstream
-    install(TARGETS  dyadic_multiply fwd_ntt keyswitch dyadic_multiply_keyswitch
+    install(TARGETS  dyadic_multiply fwd_ntt inv_ntt keyswitch dyadic_multiply_keyswitch
         LIBRARY
         DESTINATION fpga
         COMPONENT hw_install
