@@ -103,7 +103,7 @@ jobs:
           export FPGA_KERNEL=DYADIC_MULTIPLY
           export FPGA_BITSTREAM="${FPGA_DATA_DIR}/bitstreams/libdyadic_multiply.so"
           export RUN_CHOICE=2
-          cmake --build build --target examples
+          cmake --build build-examples --target examples
 
       - name: build_experimental_bridges
         run: |
