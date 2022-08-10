@@ -17,7 +17,7 @@ set(DPCPP_VERBOSE "-v" )
 set(config_dyadic_multiply )
 set(config_fwd_ntt -DNUM_NTT_COMPUTE_UNITS=1 -DVEC=8 -DFPGA_NTT_SIZE=16384)
 set(config_inv_ntt -DNUM_INTT_COMPUTE_UNITS=1 -DVEC_INTT=8 -DFPGA_INTT_SIZE=16384)
-set(config_keyswitch -DCORES=1)
+set(config_keyswitch -DCORES=2)
 set(config_dyadic_multiply_keyswitch -DCORES=1)
 
 set(FMAX_dyadic_multiply 400MHz)
@@ -30,15 +30,15 @@ set(BOARD_dyadic_multiply intel_s10sx_pac:pac_s10_usm)
 set(BOARD_fwd_ntt intel_s10sx_pac:pac_s10_usm)
 set(BOARD_inv_ntt intel_s10sx_pac:pac_s10_usm)
 set(BOARD_keyswitch intel_s10sx_pac:pac_s10)
-set(BOARD_dyadic_multiply_keyswitch intel_s10sx_pac:pac_s10)
+set(BOARD_dyadic_multiply_keyswitch intel_s10sx_pac:pac_s10_usm)
 
 set(link_options_dyadic_multiply "")
 set(link_options_fwd_ntt "")
 set(link_options_inv_ntt "")
-set(link_options_keyswitch -Xsno-interleaving=DDR;-Xshyper-optimized-handshaking=off)
-set(link_options_dyadic_multiply_keyswitch -Xsno-interleaving=DDR;-Xshyper-optimized-handshaking=off)
+set(link_options_keyswitch -Xsno-interleaving=DDR)
+set(link_options_dyadic_multiply_keyswitch "")
 
-set(HW_SEED 789045)
+set(HW_SEED 798)
 
 set(GLOBAL_MEM_NAME "DDR")
 set(DISABLE_INTERLEAVING off)
@@ -48,6 +48,7 @@ set(ENABLE_SHARED_PERF_COUNTER on)
 set(HIGH_EFFORT_COMPILE off)
 set(ENABLE_HYPER_OPTIMIZED_HANDSHAKING off)
 set(ENABLE_NO_CACHING on)
+set(ENABLE_DONT_ERROR_IF_LARGE_AREA on)
 
 if(ENABLE_SHARED_PERF_COUNTER)
     set(SHARED_PERF_COUNTER "-Xsprofile-shared-counters")
@@ -94,6 +95,12 @@ else()
 endif()
 
 set(AC_TYPES_FLAGS "-qactypes")
+
+if(ENABLE_DONT_ERROR_IF_LARGE_AREA)
+    set(DONT_ERROR_IF_LARGE_AREA "-Xsdont-error-if-large-area-est")
+else()
+    set(DONT_ERROR_IF_LARGE_AREA "")
+endif()
 
 set(COMPILE_WARNING_OPTIONS -Wno-ignored-attributes -Wno-return-type-c-linkage -Wno-unknown-pragmas)
 
@@ -145,8 +152,8 @@ else()
     ##############################################################
 
     set(HW_COMPILE_FLAGS -fPIC -fintelfpga -c ${AC_TYPES_FLAGS} ${COMPILE_WARNING_OPTIONS})
-    set(HW_LINK_FLAGS  -fintelfpga -shared -Xshardware ${AC_TYPES_FLAGS}
-        ${INTERLEAVING_CONTROL} ${BSP_CHOICE_CONTROL} ${HIGH_EFFORT_COMPILE_CONTROL} ${PROFILING_CONTROL} ${HYPER_OPTIMIZED_HANDSHAKING_SET} ${NOCACHING})
+    set(HW_LINK_FLAGS  -fintelfpga -shared -Xshardware ${AC_TYPES_FLAGS} ${INTERLEAVING_CONTROL} ${BSP_CHOICE_CONTROL} ${HIGH_EFFORT_COMPILE_CONTROL} ${PROFILING_CONTROL}
+        ${HYPER_OPTIMIZED_HANDSHAKING_SET} ${NOCACHING} ${DONT_ERROR_IF_LARGE_AREA})
 
     message(STATUS "Build Hardware shared lib image Compile Flags: ${HW_COMPILE_FLAGS}")
     message(STATUS "Build Hardware shared lib image Link Flags: ${HW_LINK_FLAGS}")

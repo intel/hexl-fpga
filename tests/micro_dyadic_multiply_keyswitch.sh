@@ -20,7 +20,7 @@ fi
 echo ""
 # batch 1 (default)
 echo "FPGA_BITSTREAM=${bitstream_dir}/libdyadic_multiply_keyswitch.so FPGA_KERNEL=DYADIC_MULTIPLY_KEYSWITCH BATCH_SIZE_DYADIC_MULTIPLY=1 BATCH_SIZE_KEYSWITCH=1"
-FPGA_BITSTREAM=${bitstream_dir}/libdyadic_multiply_keyswitch.so FPGA_KERNEL=DYADIC_MULTIPLY_KEYSWITCH ./test_dyadic_multiply_keyswitch
+FPGA_BITSTREAM=${bitstream_dir}/libdyadic_multiply_keyswitch.so FPGA_KERNEL=DYADIC_MULTIPLY_KEYSWITCH BATCH_SIZE_DYADIC_MULTIPLY=1 BATCH_SIZE_KEYSWITCH=1 ./test_dyadic_multiply_keyswitch
 # batch 2
 echo ""
 echo "FPGA_BITSTREAM=${bitstream_dir}/libdyadic_multiply_keyswitch.so FPGA_KERNEL=DYADIC_MULTIPLY_KEYSWITCH BATCH_SIZE_DYADIC_MULTIPLY=2 BATCH_SIZE_KEYSWITCH=2"

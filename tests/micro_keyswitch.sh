@@ -30,5 +30,5 @@ echo ""
 echo "FPGA_BITSTREAM=${bitstream_dir}/libkeyswitch.so N=8192 FPGA_KERNEL=KEYSWITCH BATCH_SIZE_KEYSWITCH=1"
 FPGA_BITSTREAM=${bitstream_dir}/libkeyswitch.so N=8192 FPGA_KERNEL=KEYSWITCH BATCH_SIZE_KEYSWITCH=1 ./test_keyswitch
 echo ""
-echo "FPGA_BITSTREAM=${bitstream_dir}/libkeyswitch.so N=8192 FPGA_KERNEL=KEYSWITCH BATCH_SIZE_KEYSWITCH=1"
+echo "FPGA_BITSTREAM=${bitstream_dir}/libkeyswitch.so N=8192 FPGA_KERNEL=KEYSWITCH BATCH_SIZE_KEYSWITCH=2"
 FPGA_BITSTREAM=${bitstream_dir}/libkeyswitch.so N=8192 FPGA_KERNEL=KEYSWITCH BATCH_SIZE_KEYSWITCH=1 ./test_keyswitch

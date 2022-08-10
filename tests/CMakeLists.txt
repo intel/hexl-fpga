@@ -63,7 +63,7 @@ add_custom_target(tests
     COMMAND ./micro_fwd_ntt.sh DEPENDS test_fwd_ntt
     COMMAND ./micro_inv_ntt.sh DEPENDS test_inv_ntt
     COMMAND ./micro_keyswitch.sh DEPENDS test_keyswitch
-    #COMMAND ./micro_dyadic_multiply_keyswitch.sh DEPENDS test_dyadic_multiply_keyswitch
+    COMMAND ./micro_dyadic_multiply_keyswitch.sh DEPENDS test_dyadic_multiply_keyswitch
 )
 
 add_custom_target(run_test_keyswitch
