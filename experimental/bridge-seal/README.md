@@ -18,7 +18,7 @@ After building the SEAL library that is accelerated with Intel HE Acceleration L
 ### Compile the SEAL-based test that accelerated with Intel HE Acceleration Library for FPGAs.
 ```
 pushd tests
-cmake -S . -B build -DCMAKE_CXX_COMPILER=g++ -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(realpath ${PWD}/../../../hexl-fpga-install);$(realpath ${PWD}/../seal-fpga-install)" -DEMULATION_LIB=ON
+cmake -S . -B build -DCMAKE_CXX_COMPILER=g++ -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(realpath ${PWD}/../../../hexl-fpga-install);$(realpath ${PWD}/../seal-fpga-install)"
 cmake --build build -j
 popd
 ```

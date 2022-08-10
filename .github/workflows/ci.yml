@@ -40,13 +40,17 @@ jobs:
           echo 'hostname'
           hostname
 
-      - name: build_he-fpga
+      - name: prebuild_hexl-fpga
         run: |
           source /opt/intel/oneapi/setvars.sh
           rm -rf build
           rm -rf hexl-fpga-install
           mkdir build
-          cmake -S . -B build -DCMAKE_CXX_COMPILER=dpcpp -DCMAKE_INSTALL_PREFIX=hexl-fpga-install -DCMAKE_BUILD_TYPE=Release  -DENABLE_FPGA_DEBUG=OFF -DENABLE_TESTS=ON -DENABLE_BENCHMARK=ON -DEMULATION_LIB=ON
+          cmake -S . -B build -DCMAKE_CXX_COMPILER=dpcpp -DCMAKE_INSTALL_PREFIX=hexl-fpga-install -DCMAKE_BUILD_TYPE=Release -DENABLE_FPGA_DEBUG=OFF -DENABLE_TESTS=ON -DENABLE_BENCHMARK=ON
+
+      - name: build_host
+        run: |
+          source /opt/intel/oneapi/setvars.sh
           cmake --build build --target hexl-fpga -j
 
       - name: build_emulation
@@ -99,8 +103,7 @@ jobs:
           export FPGA_KERNEL=DYADIC_MULTIPLY
           export FPGA_BITSTREAM="${FPGA_DATA_DIR}/bitstreams/libdyadic_multiply.so"
           export RUN_CHOICE=2
-          cd build-examples
-          make examples
+          cmake --build build --target examples
 
       - name: build_experimental_bridges
         run: |
@@ -113,16 +116,17 @@ jobs:
         run: |
           source /opt/intel/oneapi/setvars.sh
           pushd experimental/bridge-seal/tests
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(realpath ${PWD}/../../../hexl-fpga-install);$(realpath ${PWD}/../seal-fpga-install)" -DEMULATION_LIB=ON
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(realpath ${PWD}/../../../hexl-fpga-install);$(realpath ${PWD}/../seal-fpga-install)"
           cmake --build build -j
           popd
 
       - name: run_experimental_tests
         run: |
           source /opt/intel/oneapi/setvars.sh
-          pushd experimental/bridge-seal/tests/build
+          pushd experimental/bridge-seal/tests
           echo "Run experimental tests with FPGA bitstream"
           export FPGA_DATA_DIR="/disk1/hexl-fpga-data-oneapi"
           export FPGA_BITSTREAM_DIR="${FPGA_DATA_DIR}/bitstreams"
-          RUN_CHOICE=2 make seal_test
+          export RUN_CHOICE=2
+          cmake --build build --target seal_test
           popd

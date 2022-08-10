@@ -46,22 +46,11 @@ file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/bitstream_dir.sh
 
 list(GET CMAKE_PREFIX_PATH 0 fpga)
 
-option(EMULATION_LIB "Enable using emulation library." OFF)
-message(STATUS "EMULATION_LIB: ${EMULATION_LIB}")
-
-if(EMULATION_LIB)
-    add_custom_command(
-        TARGET keyswitch-example POST_BUILD
-        COMMAND rm -f libkeyswitch_emu.so
-        COMMAND ln -s ${fpga}/emu/libkeyswitch.so .
-        VERBATIM)
-else()
-    add_custom_command(
-        TARGET keyswitch-example POST_BUILD
-        COMMAND rm -f libkeyswitch.so
-        COMMAND ln -s ${fpga}/fpga/libkeyswitch.so .
-        VERBATIM)
-endif()
+add_custom_command(
+    TARGET keyswitch-example POST_BUILD
+    COMMAND rm -f libkeyswitch.so
+    COMMAND ln -s ${fpga}/fpga/libkeyswitch.so .
+    VERBATIM)
 
 add_custom_target(seal_test
     COMMAND ./seal_test.sh DEPENDS keyswitch-example

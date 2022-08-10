@@ -28,21 +28,12 @@ function(test_function kernel)
         target_compile_options(test_${KERNEL} PRIVATE -DFPGA_DEBUG)
     endif(ENABLE_FPGA_DEBUG)
 
-    if (EMULATION_LIB)
-        add_custom_command(
-            TARGET test_${KERNEL} POST_BUILD
-            COMMAND rm -f lib${KERNEL}.so
-            COMMAND ln -s ${CMAKE_INSTALL_PREFIX}/emu/lib${KERNEL}.so .
-            VERBATIM
-        )
-    else()
-        add_custom_command(
-            TARGET test_${KERNEL} POST_BUILD
-            COMMAND rm -f lib${KERNEL}.so
-            COMMAND ln -s ${CMAKE_INSTALL_PREFIX}/fpga/lib${KERNEL}.so .
-            VERBATIM
-        )
-    endif()
+    add_custom_command(
+        TARGET test_${KERNEL} POST_BUILD
+        COMMAND rm -f lib${KERNEL}.so
+        COMMAND ln -s ${CMAKE_INSTALL_PREFIX}/fpga/lib${KERNEL}.so .
+        VERBATIM
+    )
 
     file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/micro_${KERNEL}.sh
          DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
@@ -57,7 +48,6 @@ test_function(inv_ntt)
 test_function(keyswitch)
 test_function(dyadic_multiply_keyswitch)
 
-
 add_custom_target(tests
     COMMAND ./micro_dyadic_multiply.sh DEPENDS test_dyadic_multiply
     COMMAND ./micro_fwd_ntt.sh DEPENDS test_fwd_ntt
@@ -69,16 +59,15 @@ add_custom_target(tests
 add_custom_target(run_test_keyswitch
     COMMAND ./micro_keyswitch.sh DEPENDS test_keyswitch
 )
-
-add_custom_target(run_test_ntt
+add_custom_target(run_test_fwd_ntt
     COMMAND ./micro_fwd_ntt.sh DEPENDS test_fwd_ntt
 )
-add_custom_target(run_test_intt
+add_custom_target(run_test_inv_ntt
     COMMAND ./micro_inv_ntt.sh DEPENDS test_inv_ntt
 )
-add_custom_target(run_test_dyadicmult
+add_custom_target(run_test_dyadic_multiply
     COMMAND ./micro_dyadic_multiply.sh DEPENDS test_dyadic_multiply
 )
-add_custom_target(run_test_dyadic_keyswitch
+add_custom_target(run_test_dyadic_multiply_keyswitch
     COMMAND ./micro_dyadic_multiply_keyswitch.sh DEPENDS test_dyadic_multiply_keyswitch
 )

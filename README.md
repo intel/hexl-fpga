@@ -114,7 +114,6 @@ For convenience, they are listed below:
 | ENABLE_FPGA_DEBUG             | ON / OFF (default OFF) | Set to OFF, enable debug log at large runtime penalty                      |
 | ENABLE_TESTS                  | ON / OFF (default OFF) | Set to OFF, enable building of unit-tests                                  |
 | ENABLE_DOCS                   | ON / OFF (default OFF) | Set to OFF, enable building of documentation                               |
-| EMULATION_LIB                 | ON / OFF (default OFF) | Set to OFF, enable building of kernel for emulation mode                   |
 
 ### Compiling Intel HE Acceleration Library for FPGAs
 Compiling HE Acceleration Library for FPGAs requires two steps: compiling the C++ host code and compiling the oneAPI kernels. Start by compiling the kernels as they will be needed during the host installation.
@@ -125,10 +124,9 @@ The kernels can be compiled in two different modes, emulation and FPGA. The emul
 
 
 ##### Compile Kernels for Emulation
-To compile the device kernel for running in emulation mode, create a new directory and set the EMULATION_LIB option to ON during the configuration: <br>
+To compile the device kernel for running in emulation mode: <br>
 ```
-cmake -S . -B emu_build -DCMAKE_CXX_COMPILER=dpcpp -DCMAKE_INSTALL_PREFIX=./hexl-fpga-install -DCMAKE_BUILD_TYPE=Release -DEMULATION_LIB=ON
-cmake --build emu_build --target emulation 
+cmake --build build --target emulation
 ```
 
 This command takes a few minutes to execute.
@@ -138,10 +136,9 @@ This command takes a few minutes to execute.
 
 ##### Compile Kernels for Generating FPGA Bitstream
 
-To compile the device kernel in fpga mode, create a new directory and set the EMULATION_LIB option to OFF during the configuration <br>
+To compile the device kernel in fpga mode: <br>
 ```
-cmake -S . -B hw_build -DCMAKE_CXX_COMPILER=dpcpp -DCMAKE_INSTALL_PREFIX=./hexl-fpga-install -DCMAKE_BUILD_TYPE=Release -DEMULATION_LIB=OFF
-cmake --build hw_build --target fpga 
+cmake --build build --target fpga
 ```
 This command takes a few hours to execute.
 
@@ -149,7 +146,7 @@ The bitstreams will be located in the installation directory specified when call
 
 
 #### Compiling Host Side  
-To build the host application, tests, benchmark, and documentation (depending on the options selected above) run the following command (change the build directory to which you built the emulation or hardware, e.g. emu_build/hw_build):
+To build the host application, tests, benchmark, and documentation (depending on the options selected above) run the following command:
 ```
 cmake --build build 
 ```      
@@ -182,7 +179,7 @@ To run in emulation mode (setting RUN_CHOICE to different values informs host co
 
 ```   
 export RUN_CHOICE=1 
-cmake --build emu_build --target tests
+cmake --build build --target tests
 ```  
 
 ### Run Tests on FPGA Card
@@ -190,7 +187,7 @@ To run using actual FPGA card, run the following command (setting RUN_CHOICE to 
 
 ```
 export RUN_CHOICE=2 
-cmake --build hw_build --target tests
+cmake --build build --target tests
 ```  
 The tests executables are located in `build/tests/` directory <br>
 
@@ -202,13 +199,13 @@ Make sure that the .aocx files have been installed in `<chosen install directory
 To run the benchmark in emulation mode: <br>
 ```
 export RUN_CHOICE=1
-cmake --build emu_build --target bench
+cmake --build build --target bench
 ```
 ### Run Benchmarks on FPGA Card
 To run the benchmark on the fpga, run   <br>
 ```   
 export RUN_CHOICE=2 
-cmake --build hw_build --target bench  
+cmake --build build --target bench
 ```
 The benchmark executables are located in `build/benchmark/` directory <br>
 
@@ -278,10 +275,10 @@ To cite Intel HE Acceleration Library for FPGAs, please use the following BibTeX
 ### Version 2.0
 ```tex
     @misc{IntelHEXLFPGA,
-        author={Meng,Yan and de Souza, Fillipe D. M. and Butt, Shahzad and de Lassus, Hubert and González Aragón, Tomás and Zhou, Yongfa and Wang, Yong and others},
+        author={Meng, Yan and Butt, Shahzad and Wang, Yong and Zhou, Yongfa and Simoni, Steven and others},
         title = {{I}ntel {Homomorphic Encryption Acceleration Library for FPGAs} (Version 2.0)},
         howpublished = {\url{https://github.com/intel/hexl-fpga}},
-        month = July,
+        month = August,
         year = 2022,
         key = {Intel HE Acceleration Library for FPGAs}  
     }
@@ -290,7 +287,7 @@ To cite Intel HE Acceleration Library for FPGAs, please use the following BibTeX
 ### Version 1.1
 ```tex
     @misc{IntelHEXLFPGA,
-        author={Meng,Yan and de Souza, Fillipe D. M. and Butt, Shahzad and de Lassus, Hubert and González Aragón, Tomás and Zhou, Yongfa and Wang, Yong and others},
+        author={Meng, Yan and Zhou, Yongfa and Butt, Shahzad and González Aragón, Tomás and Wang, Yong and others},
         title = {{I}ntel {Homomorphic Encryption Acceleration Library for FPGAs} (Version 1.1)},
         howpublished = {\url{https://github.com/intel/hexl-fpga}},
         month = March,
@@ -302,13 +299,13 @@ To cite Intel HE Acceleration Library for FPGAs, please use the following BibTeX
 ### Version 1.0
 ```tex 
     @misc{IntelHEXLFPGA, 
-        author={Meng,Yan and de Souza, Fillipe D. M. and Butt, Shahzad and de Lassus, Hubert and González Aragón, Tomás and Zhou, Yongfa and Wang, Yong and others}, 
+        author={Meng, Yan and de Souza, Fillipe D. M. and Butt, Shahzad and de Lassus, Hubert and González Aragón, Tomás and Zhou, Yongfa and Wang, Yong and others},
         title = {{I}ntel {Homomorphic Encryption Acceleration Library for FPGAs} (Version 1.0)},
-        howpublished = {\url{https://github.com/intel/hexl-fpga}},  
-        month = December, 
-        year = 2021,  
-        key = {Intel HE Acceleration Library for FPGAs}  
-    } 
+        howpublished = {\url{https://github.com/intel/hexl-fpga}},
+        month = December,
+        year = 2021,
+        key = {Intel HE Acceleration Library for FPGAs}
+    }
 ```
 
 # Contributors
@@ -323,6 +320,7 @@ The Intel contributors to this project, sorted by last name, are
   - [Jingyi Jin](https://www.linkedin.com/in/jingyi-jin-655735/)
   - [Yan Meng](https://www.linkedin.com/in/yan-meng-5832895/) (lead)
   - [Nir Peled](https://www.linkedin.com/in/nir-peled-4a52266/)
+  - [Steven Simoni](https://www.linkedin.com/in/steven-simoni-0745823)
   - [Dennis Calderon Vega](https://www.linkedin.com/in/dennis-calderon-996840a9/)
   - [Yong Wang](https://github.com/wangyon1/)
   - [Yongfa Zhou](https://www.linkedin.com/in/yongfa-zhou-16217166/)

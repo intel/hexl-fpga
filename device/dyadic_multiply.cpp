@@ -6,7 +6,9 @@
 #include "mod_ops.hpp"
 #include "./utils/pipe_def_marcos.hpp"
 #include "../common/types.hpp"
+
 #define DATA_PATH 8
+
 typedef struct {
     ubitwidth_t n;
     ubitwidth_t moduli;
@@ -45,22 +47,6 @@ typedef struct {
     ubitwidth_t n_batch;
     int tag;
 } output_t;
-
-__extension__ typedef unsigned __int128 fpga_uint128_t;
-
-static void generate_moduli_info_t(std::vector<moduli_info_t>& moduli_info_vec,
-                                   uint64_t* moduli, uint64_t n_moduli,
-                                   uint64_t n_batch) {
-    for (uint64_t batch = 0; batch < n_batch; batch++) {
-        for (uint64_t i = 0; i < n_moduli; i++) {
-            uint64_t modulus = moduli[batch * n_moduli + i];
-            uint64_t len = uint64_t(floorl(std::log2l(modulus)) - 1);
-            fpga_uint128_t n = fpga_uint128_t(1) << (len + 64);
-            uint64_t barr_lo = uint64_t(n / modulus);
-            moduli_info_vec.push_back((moduli_info_t){modulus, len, barr_lo});
-        }
-    }
-}
 
 // pipe arrays definitaion using macro.
 defLongPipe(input_pipe, input_t, 16) defLongPipe(output_pipe, output_t, 16);

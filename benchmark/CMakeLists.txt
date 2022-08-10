@@ -37,21 +37,12 @@ function(bench_function kernel)
         endif()
     endif(FPGA_USE_INTEL_HEXL)
 
-    if (EMULATION_LIB)
-        add_custom_command(
-            TARGET bench_${KERNEL} POST_BUILD
-            COMMAND rm -f lib${KERNEL}.so
-            COMMAND ln -s ${CMAKE_INSTALL_PREFIX}/emu/lib${KERNEL}.so .
-            VERBATIM
-        )
-    else()
-        add_custom_command(
-            TARGET bench_${KERNEL} POST_BUILD
-            COMMAND rm -f lib${KERNEL}.so
-            COMMAND ln -s ${CMAKE_INSTALL_PREFIX}/fpga/lib${KERNEL}.so .
-            VERBATIM
-        )
-    endif()
+    add_custom_command(
+        TARGET bench_${KERNEL} POST_BUILD
+        COMMAND rm -f lib${KERNEL}.so
+        COMMAND ln -s ${CMAKE_INSTALL_PREFIX}/fpga/lib${KERNEL}.so .
+        VERBATIM
+    )
 
     file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/micro_${KERNEL}.sh
          DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
