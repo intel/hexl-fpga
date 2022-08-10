@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #pragma once
-
+// class for FPGA context setup, performs setup and teardown
 #include "hexl-fpga.h"
 
 class fpga_context : public ::testing::Environment {

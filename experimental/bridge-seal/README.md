@@ -24,12 +24,14 @@ popd
 ```
 
 The compiled executable is located in *tests/build* directory.
+### Setup oneAPI environment
+```
+source /opt/intel/oneapi/setvars.sh
+```
 
 ### Run the test on a FPGA card
 ```
 pushd tests/build
-rm -f keyswitch.aocx
-ln -s /path-to-fpga-bitstreams/keyswitch.aocx .
 RUN_CHOICE=2 make seal_test
 popd
 ```
@@ -37,8 +39,6 @@ popd
 ### Run the test on emulation
 ```
 pushd tests/build
-rm -f keyswitch.aocx
-ln -s /path-to-emulation/keyswitch.aocx .
 RUN_CHOICE=1 make seal_test
 popd
 ```

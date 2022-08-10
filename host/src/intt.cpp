@@ -22,8 +22,6 @@ void INTT(uint64_t* coeff_poly, const uint64_t* inv_root_of_unity_powers,
     FPGA_ASSERT(precon_inv_root_of_unity_powers,
                 "requires inv_precon_root_of_unity_powers != nullptr");
     FPGA_ASSERT(coeff_modulus > 0, "coeff_modulus must be positive integer");
-    //    FPGA_ASSERT(inv_n > 0, "inv_n must be positive integer");
-    //    FPGA_ASSERT(inv_n_w > 0, "inv_n_w must be positive integer");
     FPGA_ASSERT(n == 16384, "requires n = 16384");
 
     INTT_int(coeff_poly, inv_root_of_unity_powers,
