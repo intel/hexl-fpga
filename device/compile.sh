@@ -17,13 +17,18 @@ compile() {
     bin_dir=$4
     others=${@:5}
 
-    aoc ${device} \
-        ${src_dir}/device/${kernel}.cl \
-        -I ${INTELFPGAOCLSDKROOT}/include/kernel_headers \
-        -I ${src_dir}/device/lib/hls \
-        -L ${bin_dir}/device/lib/hls -l ip.aoclib \
-        -o ${kernel} \
-        ${others}
+    export TMPDIR=${bin_dir}/device/${kernel}
+    mkdir -p ${TMPDIR}
+
+    dpcpp ${device} \
+        -fPIC -O3 -DNDEBUG -fintelfpga -shared -qactypes \
+        -Wno-ignored-attributes -Wno-return-type-c-linkage -Wno-unknown-pragmas \
+        ${others} \
+        -o lib${kernel}.so \
+        ${src_dir}/device/${kernel}.cpp
+
+    rm -rf ${TMPDIR}
+    export TMPDIR=
 }
 
 for kernel in ${kernels}

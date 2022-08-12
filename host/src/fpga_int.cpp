@@ -41,6 +41,11 @@ static DEV_TYPE get_device() {
         FPGA_ASSERT((e >= 1) && (e <= 2));
         d = DEV_TYPE(e);
     }
+    if (d == FPGA)
+        std::cout << "Running using Physical FPGA device accelerator ..."
+                  << std::endl;
+    else
+        std::cout << "Running using FPGA Emulator..." << std::endl;
     return d;
 }
 
@@ -122,7 +127,8 @@ static Buffer fpga_buffer(g_fpga_bufsize, g_batch_size_dyadic_mult,
                           g_batch_size_KeySwitch);
 
 void attach_fpga_pooling() {
-    std::cout << "Running on FPGA ... " << std::endl;
+    std::cout << "Running on FPGA: Creating Static FPGA Device Context ... "
+              << std::endl;
     exit_signal = std::promise<bool>();
     auto f = exit_signal.get_future();
     pool =

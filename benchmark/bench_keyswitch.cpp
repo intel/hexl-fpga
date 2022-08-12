@@ -105,6 +105,8 @@ std::vector<std::string> keyswitch::glob(const char* pattern) {
 
 void keyswitch::setup_keyswitch(const std::vector<std::string>& files) {
     for (size_t i = 0; i < files.size(); i++) {
+        std::cout << "Constructing Test Vector " << i << " from File ... "
+                  << files[i] << std::endl;
         test_vectors_.push_back(KeySwitchTestVector(files[i].c_str()));
     }
 

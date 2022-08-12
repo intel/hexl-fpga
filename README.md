@@ -53,7 +53,7 @@ In sum, Intel HE Acceleration Library for FPGAs implements the following functio
 
 To ensure the correctness of the functions in Intel HE Acceleration Library for FPGAs, the functions support the following configurations.  Dyadic multiplication supports the ciphertext polynomial size of 1024, 2048, 4096, 8192, 16384, and 32768.  Keyswitch supports the ciphertext polynomial size of 1024, 2048, 4096, 8192, and 16384, the decomposed modulus size of no more than seven, and all ciphertext moduli to be no more than 52 bits.  The standalone forward and inverse negacyclic number-theoretic transform functions support the ciphertext polynomial size of 16384.
 
-For each function, the library provides an FPGA implementation using OpenCL.
+For each function, the library provides an FPGA implementation using Intel(R) oneAPI.
 
 > **_NOTE:_**  This distribution aims at allowing researchers, developers, and community access to FPGA kernel source code, to experiment with the basic primitives.
 
@@ -98,7 +98,7 @@ Intel HE Acceleration Library for FPGAs requires the following dependencies:
 After cloning the git repository into your local area, you can use the following commands to set the install path and create a build directory. It will also create cmake cache files and make files that will be used for building host and kernels. Most of the build options described in previous section can be enabled or disabled by modifying the command given below:
 
 ```
-cmake -S . -B build -DCMAKE_INSTALL_PREFIX=./hexl-fpga-install -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc -DENABLE_FPGA_DEBUG=ON -DENABLE_TESTS=ON -DENABLE_DOCS=ON -DENABLE_BENCHMARK=ON
+cmake -S . -B build -DCMAKE_CXX_COMPILER=dpcpp -DCMAKE_INSTALL_PREFIX=./hexl-fpga-install -DCMAKE_BUILD_TYPE=Release -DENABLE_TESTS=ON -DENABLE_BENCHMARK=ON -DENABLE_DOCS=ON -DENABLE_FPGA_DEBUG=ON
 ```
 
 Different cmake options are provided allowing users to configure the overall build process. With these options the user can control if it is required to build tests, benchmark etc. Note that by default all options are off: the user must enable at least a few options to create a useful code. The recommended options can be found below. 
@@ -110,23 +110,23 @@ For convenience, they are listed below:
 
 | CMake option                  | Values                 |                                                                            |
 | ------------------------------| ---------------------- | -------------------------------------------------------------------------- |
-| ENABLE_BENCHMARK              | ON / OFF (default OFF) | Set to OFF, enable benchmark suite via Google benchmark                   |
+| ENABLE_BENCHMARK              | ON / OFF (default OFF) | Set to OFF, enable benchmark suite via Google benchmark                    |
 | ENABLE_FPGA_DEBUG             | ON / OFF (default OFF) | Set to OFF, enable debug log at large runtime penalty                      |
 | ENABLE_TESTS                  | ON / OFF (default OFF) | Set to OFF, enable building of unit-tests                                  |
 | ENABLE_DOCS                   | ON / OFF (default OFF) | Set to OFF, enable building of documentation                               |
 
 ### Compiling Intel HE Acceleration Library for FPGAs
-Compiling HE Acceleration Library for FPGAs requires two steps: compiling the C++ host code and compiling the OpenCL kernels. Start by compiling the kernels as they will be needed during the host installation.
+Compiling HE Acceleration Library for FPGAs requires two steps: compiling the C++ host code and compiling the oneAPI kernels. Start by compiling the kernels as they will be needed during the host installation.
 Before proceeding to the compilations and installation, make sure that your environment variables are set according to the instructions in the Intel PACD5005 Software Package installation guide.
 
 #### Compiling Device Kernels
-The kernels can be compiled in two different modes, emulation and FPGA. The emulation mode runs the kernels on the CPU. Compiling in emulation mode takes only a few minutes. The resulting bitstream can be used to verify the functionality of kernels on the CPU. The FPGA mode builds the kernel bitstream for FGPA card. Compiling the kernels in FPGA mode can take a few hours.
+The kernels can be compiled in two different modes, emulation and FPGA. The emulation mode runs the kernels on the CPU. Compiling in emulation mode takes only a few minutes. The resulting bitstream can be used to verify the functionality of kernels on the CPU. The FPGA mode builds the kernel bitstream for FGPA card. Compiling the kernels in FPGA mode can take a few hours. 
 
 
 ##### Compile Kernels for Emulation
 To compile the device kernel for running in emulation mode: <br>
 ```
-cmake --build build --target emulation 
+cmake --build build --target emulation
 ```
 
 This command takes a few minutes to execute.
@@ -138,7 +138,7 @@ This command takes a few minutes to execute.
 
 To compile the device kernel in fpga mode: <br>
 ```
-cmake --build build --target fpga 
+cmake --build build --target fpga
 ```
 This command takes a few hours to execute.
 
@@ -205,7 +205,7 @@ cmake --build build --target bench
 To run the benchmark on the fpga, run   <br>
 ```   
 export RUN_CHOICE=2 
-cmake --build build --target bench  
+cmake --build build --target bench
 ```
 The benchmark executables are located in `build/benchmark/` directory <br>
 
@@ -272,10 +272,22 @@ Private headers, e.g. those containing fpga code should not be put in this folde
 # Citing Intel HE Acceleration Library for FPGAs
 To cite Intel HE Acceleration Library for FPGAs, please use the following BibTeX entry.
 
+### Version 2.0
+```tex
+    @misc{IntelHEXLFPGA,
+        author={Meng, Yan and Butt, Shahzad and Wang, Yong and Zhou, Yongfa and Simoni, Steven and others},
+        title = {{I}ntel {Homomorphic Encryption Acceleration Library for FPGAs} (Version 2.0)},
+        howpublished = {\url{https://github.com/intel/hexl-fpga}},
+        month = August,
+        year = 2022,
+        key = {Intel HE Acceleration Library for FPGAs}  
+    }
+```
+
 ### Version 1.1
 ```tex
     @misc{IntelHEXLFPGA,
-        author={Meng,Yan and de Souza, Fillipe D. M. and Butt, Shahzad and de Lassus, Hubert and González Aragón, Tomás and Zhou, Yongfa and Wang, Yong and others},
+        author={Meng, Yan and Zhou, Yongfa and Butt, Shahzad and González Aragón, Tomás and Wang, Yong and others},
         title = {{I}ntel {Homomorphic Encryption Acceleration Library for FPGAs} (Version 1.1)},
         howpublished = {\url{https://github.com/intel/hexl-fpga}},
         month = March,
@@ -287,13 +299,13 @@ To cite Intel HE Acceleration Library for FPGAs, please use the following BibTeX
 ### Version 1.0
 ```tex 
     @misc{IntelHEXLFPGA, 
-        author={Meng,Yan and de Souza, Fillipe D. M. and Butt, Shahzad and de Lassus, Hubert and González Aragón, Tomás and Zhou, Yongfa and Wang, Yong and others}, 
+        author={Meng, Yan and de Souza, Fillipe D. M. and Butt, Shahzad and de Lassus, Hubert and González Aragón, Tomás and Zhou, Yongfa and Wang, Yong and others},
         title = {{I}ntel {Homomorphic Encryption Acceleration Library for FPGAs} (Version 1.0)},
-        howpublished = {\url{https://github.com/intel/hexl-fpga}},  
-        month = December, 
-        year = 2021,  
-        key = {Intel HE Acceleration Library for FPGAs}  
-    } 
+        howpublished = {\url{https://github.com/intel/hexl-fpga}},
+        month = December,
+        year = 2021,
+        key = {Intel HE Acceleration Library for FPGAs}
+    }
 ```
 
 # Contributors
@@ -308,6 +320,7 @@ The Intel contributors to this project, sorted by last name, are
   - [Jingyi Jin](https://www.linkedin.com/in/jingyi-jin-655735/)
   - [Yan Meng](https://www.linkedin.com/in/yan-meng-5832895/) (lead)
   - [Nir Peled](https://www.linkedin.com/in/nir-peled-4a52266/)
+  - [Steven Simoni](https://www.linkedin.com/in/steven-simoni-0745823)
   - [Dennis Calderon Vega](https://www.linkedin.com/in/dennis-calderon-996840a9/)
   - [Yong Wang](https://github.com/wangyon1/)
   - [Yongfa Zhou](https://www.linkedin.com/in/yongfa-zhou-16217166/)
