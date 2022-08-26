@@ -18,6 +18,10 @@
 #include "keyswitch_int.h"
 #include "ntt_int.h"
 
+#ifdef FPGA_USE_INTEL_HEXL
+#include "hexl/hexl.hpp"
+#endif
+
 namespace intel {
 namespace hexl {
 namespace fpga {
@@ -38,14 +42,24 @@ static DEV_TYPE get_device() {
     char* env = getenv("RUN_CHOICE");
     if (env) {
         int e = atoi(env);
-        FPGA_ASSERT((e >= 1) && (e <= 2));
+        FPGA_ASSERT((e >= 0) && (e <= 2));
         d = DEV_TYPE(e);
     }
-    if (d == FPGA)
+    switch (d) {
+    case CPU:
+        std::cout << "Running using HEXL CPU ..." << std::endl;
+        break;
+    case EMU:
+        std::cout << "Running using FPGA Emulator ..." << std::endl;
+        break;
+    case FPGA:
         std::cout << "Running using Physical FPGA device accelerator ..."
                   << std::endl;
-    else
-        std::cout << "Running using FPGA Emulator..." << std::endl;
+        break;
+    default:
+        FPGA_ASSERT(0);
+        break;
+    }
     return d;
 }
 
@@ -171,6 +185,20 @@ static void fpga_DyadicMultiply(uint64_t* results, const uint64_t* operand1,
     }
 }
 
+static void cpu_DyadicMultiply(uint64_t* results, const uint64_t* operand1,
+                               const uint64_t* operand2, uint64_t n,
+                               const uint64_t* moduli, uint64_t n_moduli) {
+    FPGA_ASSERT(g_choice == CPU);
+
+#ifdef FPGA_USE_INTEL_HEXL
+    namespace ns = intel::hexl::internal;
+    ns::DyadicMultiply(results, operand1, operand2, n, moduli, n_moduli);
+#else
+    std::cerr << "HEXL CPU version not supported" << std::endl;
+    exit(1);
+#endif
+}
+
 bool DyadicMultiplyCompleted_int() {
     bool all_done = false;
     while (!all_done) {
@@ -200,13 +228,16 @@ void DyadicMultiply_int(uint64_t* results, const uint64_t* operand1,
                         const uint64_t* operand2, uint64_t n,
                         const uint64_t* moduli, uint64_t n_moduli) {
     switch (g_choice) {
+    case CPU:
+        cpu_DyadicMultiply(results, operand1, operand2, n, moduli, n_moduli);
+        break;
     case EMU:
     case FPGA:
         fpga_DyadicMultiply(results, operand1, operand2, n, moduli, n_moduli);
         break;
     default:
         std::cerr << "ERROR: Invalid RUN_CHOICE envvar. Set to a valid "
-                     "value {1, or 2}, where 1:EMU, 2:FPGA."
+                     "value {0, 1, or 2}, where 0:CPU, 1:EMU, 2:FPGA."
                   << std::endl;
         FPGA_ASSERT(0);
         break;
@@ -277,6 +308,10 @@ void INTT_int(uint64_t* coeff_poly, const uint64_t* inv_root_of_unity_powers,
               uint64_t coeff_modulus, uint64_t inv_n, uint64_t inv_n_w,
               uint64_t n) {
     switch (g_choice) {
+    case CPU:
+        std::cerr << "HEXL CPU version not supported" << std::endl;
+        FPGA_ASSERT(0);
+        break;
     case EMU:
     case FPGA:
         fpga_INTT(coeff_poly, inv_root_of_unity_powers,
@@ -285,7 +320,7 @@ void INTT_int(uint64_t* coeff_poly, const uint64_t* inv_root_of_unity_powers,
         break;
     default:
         std::cerr << "ERROR: Invalid RUN_CHOICE envvar. Set to a valid "
-                     "value {1, or 2}, where 1:EMU, 2:FPGA."
+                     "value {0, 1, or 2}, where 0:CPU, 1:EMU, 2:FPGA."
                   << std::endl;
         FPGA_ASSERT(0);
         break;
@@ -353,6 +388,10 @@ void NTT_int(uint64_t* coeff_poly, const uint64_t* root_of_unity_powers,
              const uint64_t* precon_root_of_unity_powers,
              uint64_t coeff_modulus, uint64_t n) {
     switch (g_choice) {
+    case CPU:
+        std::cerr << "HEXL CPU version not supported" << std::endl;
+        FPGA_ASSERT(0);
+        break;
     case EMU:
     case FPGA:
         fpga_NTT(coeff_poly, root_of_unity_powers, precon_root_of_unity_powers,
@@ -360,7 +399,7 @@ void NTT_int(uint64_t* coeff_poly, const uint64_t* root_of_unity_powers,
         break;
     default:
         std::cerr << "ERROR: Invalid RUN_CHOICE envvar. Set to a valid "
-                     "value {0, 1, or 2}, where 1:EMU, 2:FPGA."
+                     "value {0, 1, or 2}, where 0:CPU, 1:EMU, 2:FPGA."
                   << std::endl;
         FPGA_ASSERT(0);
         break;
@@ -417,6 +456,26 @@ static void fpga_KeySwitch(uint64_t* result, const uint64_t* t_target_iter_ptr,
     }
 }
 
+static void cpu_KeySwitch(uint64_t* result, const uint64_t* t_target_iter_ptr,
+                          uint64_t n, uint64_t decomp_modulus_size,
+                          uint64_t key_modulus_size, uint64_t rns_modulus_size,
+                          uint64_t key_component_count, const uint64_t* moduli,
+                          const uint64_t** k_switch_keys,
+                          const uint64_t* modswitch_factors,
+                          const uint64_t* twiddle_factors) {
+    FPGA_ASSERT(g_choice == CPU);
+
+#ifdef FPGA_USE_INTEL_HEXL
+    namespace ns = intel::hexl::internal;
+    ns::Keyswitch(result, t_target_iter_ptr, n, decomp_modulus_size,
+                  key_modulus_size, rns_modulus_size, key_component_count,
+                  moduli, k_switch_keys, modswitch_factors, twiddle_factors);
+#else
+    std::cerr << "HEXL CPU version not supported" << std::endl;
+    exit(1);
+#endif
+}
+
 bool KeySwitchCompleted_int() {
     bool all_done = false;
     while (!all_done) {
@@ -450,6 +509,12 @@ void KeySwitch_int(uint64_t* result, const uint64_t* t_target_iter_ptr,
                    const uint64_t* modswitch_factors,
                    const uint64_t* twiddle_factors) {
     switch (g_choice) {
+    case CPU:
+        cpu_KeySwitch(result, t_target_iter_ptr, n, decomp_modulus_size,
+                      key_modulus_size, rns_modulus_size, key_component_count,
+                      moduli, k_switch_keys, modswitch_factors,
+                      twiddle_factors);
+        break;
     case EMU:
     case FPGA:
         fpga_KeySwitch(result, t_target_iter_ptr, n, decomp_modulus_size,
@@ -459,7 +524,7 @@ void KeySwitch_int(uint64_t* result, const uint64_t* t_target_iter_ptr,
         break;
     default:
         std::cerr << "ERROR: Invalid RUN_CHOICE envvar. Set to a valid "
-                     "value {1, or 2}, where 1:EMU, 2:FPGA."
+                     "value {0, 1, or 2}, where 0:CPU, 1:EMU, 2:FPGA."
                   << std::endl;
         FPGA_ASSERT(0);
         break;
