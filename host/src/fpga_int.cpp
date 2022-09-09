@@ -141,6 +141,9 @@ static Buffer fpga_buffer(g_fpga_bufsize, g_batch_size_dyadic_mult,
                           g_batch_size_KeySwitch);
 
 void attach_fpga_pooling() {
+    if (g_choice == CPU) {
+        return;
+    }
     std::cout << "Running on FPGA: Creating Static FPGA Device Context ... "
               << std::endl;
     exit_signal = std::promise<bool>();
@@ -152,6 +155,9 @@ void attach_fpga_pooling() {
 }
 
 void detach_fpga_pooling() {
+    if (g_choice == CPU) {
+        return;
+    }
     exit_signal.set_value(true);
     delete pool;
     pool = nullptr;
@@ -467,7 +473,7 @@ static void cpu_KeySwitch(uint64_t* result, const uint64_t* t_target_iter_ptr,
 
 #ifdef FPGA_USE_INTEL_HEXL
     namespace ns = intel::hexl::internal;
-    ns::Keyswitch(result, t_target_iter_ptr, n, decomp_modulus_size,
+    ns::KeySwitch(result, t_target_iter_ptr, n, decomp_modulus_size,
                   key_modulus_size, rns_modulus_size, key_component_count,
                   moduli, k_switch_keys, modswitch_factors, twiddle_factors);
 #else

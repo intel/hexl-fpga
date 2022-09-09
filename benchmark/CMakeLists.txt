@@ -20,23 +20,6 @@ function(bench_function kernel)
     target_link_libraries(bench_${KERNEL} PRIVATE benchmark::benchmark)
     target_link_libraries(bench_${KERNEL} PRIVATE nlohmann_json::nlohmann_json)
 
-    if(FPGA_USE_INTEL_HEXL)
-        target_compile_options(bench_${KERNEL} PRIVATE -DFPGA_USE_INTEL_HEXL)
-        if(FPGA_BUILD_INTEL_HEXL)
-            add_dependencies(bench_${KERNEL} ext_intel_hexl)
-            target_include_directories(bench_${KERNEL} PRIVATE ${CMAKE_BINARY_DIR}/hexl-install/${CMAKE_INSTALL_INCLUDEDIR})
-            target_link_directories(bench_${KERNEL} PRIVATE ${CMAKE_BINARY_DIR}/hexl-install/${CMAKE_INSTALL_LIBDIR})
-            target_link_libraries(bench_${KERNEL} PRIVATE ${CMAKE_BINARY_DIR}/hexl-install/${CMAKE_INSTALL_LIBDIR}/libhexl.so)
-        else()
-            get_target_property(
-                HEXL_INCLUDE_DIR
-                HEXL::hexl
-                INTERFACE_INCLUDE_DIRECTORIES)
-            target_include_directories(bench_${KERNEL} PRIVATE ${HEXL_INCLUDE_DIR})
-            target_link_libraries(bench_${KERNEL} PRIVATE HEXL::hexl)
-        endif()
-    endif(FPGA_USE_INTEL_HEXL)
-
     add_custom_command(
         TARGET bench_${KERNEL} POST_BUILD
         COMMAND rm -f lib${KERNEL}.so
