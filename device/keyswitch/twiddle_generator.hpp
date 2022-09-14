@@ -240,7 +240,8 @@ void dispatch_twiddle_factors(sycl::queue& q,
                         typename tt_ch_twiddle_factor_rep::template PipeAt<
                             NTT_ENGINES - 2>;
                     twPipe8::write(tf, success);
-                    if (success) STEP2(ntt2_index, ntt2_decomp_size / VEC);
+                    short max_tmp = ntt2_decomp_size / VEC - 1;
+                    if (success) STEP3(ntt2_index, max_tmp);
                 }
                 // write intt1
                 TwiddleFactor_t intt1_tf;
@@ -253,7 +254,8 @@ void dispatch_twiddle_factors(sycl::queue& q,
                 }
                 if (intt1_index >= 0) {
                     tt_ch_intt1_twiddle_factor_rep::write(intt1_tf, success);
-                    if (success) STEP2(intt1_index, intt1_decomp_size / VEC);
+                    short max_tmp = intt1_decomp_size / VEC - 1;
+                    if (success) STEP3(intt1_index, max_tmp);
                 }
 
                 // write intt2
