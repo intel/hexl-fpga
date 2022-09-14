@@ -580,9 +580,9 @@ struct KeySwitchMemKeys {
 
 /// @brief
 /// enum DEV_TYPE
-/// Lists the available device mode: emulation mode, FPGA
+/// Lists the available device mode: CPU, EMU, FPGA
 ///
-typedef enum { NONE = 0, EMU, FPGA } DEV_TYPE;
+typedef enum { NONE = -1, CPU = 0, EMU, FPGA } DEV_TYPE;
 /// @brief
 /// Class Device
 ///

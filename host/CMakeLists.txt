@@ -56,6 +56,23 @@ if(ENABLE_PROF_KS)
     target_compile_options(hexl-fpga PRIVATE -D__DEBUG_KS_RUNTIME)
 endif(ENABLE_PROF_KS)
 
+if(FPGA_USE_INTEL_HEXL)
+    target_compile_options(hexl-fpga PRIVATE -DFPGA_USE_INTEL_HEXL)
+    if(FPGA_BUILD_INTEL_HEXL)
+        add_dependencies(hexl-fpga ext_intel_hexl)
+        target_include_directories(hexl-fpga PRIVATE ${CMAKE_BINARY_DIR}/hexl-install/${CMAKE_INSTALL_INCLUDEDIR})
+        target_link_directories(hexl-fpga PRIVATE ${CMAKE_BINARY_DIR}/hexl-install/${CMAKE_INSTALL_LIBDIR})
+        target_link_libraries(hexl-fpga PRIVATE ${CMAKE_BINARY_DIR}/hexl-install/${CMAKE_INSTALL_LIBDIR}/libhexl.so)
+    else()
+        get_target_property(
+            HEXL_INCLUDE_DIR
+            HEXL::hexl
+            INTERFACE_INCLUDE_DIRECTORIES)
+        target_include_directories(hexl-fpga PRIVATE ${HEXL_INCLUDE_DIR})
+        target_link_libraries(hexl-fpga PRIVATE HEXL::hexl)
+    endif()
+endif(FPGA_USE_INTEL_HEXL)
+
 list(APPEND incPath "${FPGA_SRC_ROOT_DIR}/host/inc")
 target_include_directories(hexl-fpga PUBLIC "$<BUILD_INTERFACE:${incPath}>")
 target_include_directories(hexl-fpga INTERFACE "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}")

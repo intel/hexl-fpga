@@ -25,11 +25,11 @@ setup_testdata() {
     popd
 }
 
-build_cpu() {
-    rm -rf build-cpu
-    mkdir build-cpu
+build() {
+    rm -rf build
+    mkdir build
 
-    cmake -S . -B build-cpu \
+    cmake -S . -B build \
     -DCMAKE_INSTALL_PREFIX=./hexl-fpga-install \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_COMPILER=dpcpp \
@@ -39,30 +39,13 @@ build_cpu() {
     -DFPGA_USE_INTEL_HEXL=ON \
     -DFPGA_BUILD_INTEL_HEXL=ON
 
-    cmake --build build-cpu -j
-}
-
-build_fpga() {
-    rm -rf build-fpga
-    mkdir build-fpga
-
-    cmake -S . -B build-fpga \
-    -DCMAKE_INSTALL_PREFIX=./hexl-fpga-install \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_CXX_COMPILER=dpcpp \
-    -DCMAKE_C_COMPILER=gcc \
-    -DENABLE_TESTS=ON \
-    -DENABLE_BENCHMARK=ON \
-    -DFPGA_USE_INTEL_HEXL=OFF \
-    -DFPGA_BUILD_INTEL_HEXL=OFF
-
-    cmake --build build-fpga -j
+    cmake --build build -j
 }
 
 run_cpu() {
     iter=$1
     export ITER=${iter}
-    ./bench_keyswitch > ${results}/cpu.iter-${iter}.log
+    RUN_CHOICE=0 ./bench_keyswitch > ${results}/cpu.iter-${iter}.log
 }
 
 run_fpga() {
@@ -70,15 +53,14 @@ run_fpga() {
     batch=$2
     export ITER=${iter}
     export BATCH_SIZE_KEYSWITCH=${batch}
-    ./bench_keyswitch  > ${results}/fpga.iter-${iter}.batch-${batch}.log
+    RUN_CHOICE=2 ./bench_keyswitch  > ${results}/fpga.iter-${iter}.batch-${batch}.log
 }
 
-build_cpu
-build_fpga
+build
 
 setup_testdata
 
-pushd build-cpu/benchmark
+pushd build/benchmark
 for i in 1 1024 4096 16384
 do
     run_cpu $i
@@ -87,7 +69,7 @@ popd
 
 # Initializing FPGA to use non-USM BSP
 aocl initialize acl0 pac_s10
-pushd build-fpga/benchmark
+pushd build/benchmark
 batch=128
 for i in 1 1024 4096 16384
 do

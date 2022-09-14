@@ -10,11 +10,7 @@
 
 #include <benchmark/benchmark.h>
 
-#ifdef FPGA_USE_INTEL_HEXL
-#include "hexl/hexl.hpp"
-#else
 #include "hexl-fpga.h"
-#endif
 
 static uint32_t get_iter() {
     char* env = getenv("ITER");
@@ -115,35 +111,23 @@ void keyswitch::setup_keyswitch(const std::vector<std::string>& files) {
 }
 
 void keyswitch::bench_keyswitch() {
-#ifndef FPGA_USE_INTEL_HEXL
     intel::hexl::set_worksize_KeySwitch(test_vector_size_ * n_iter);
-#endif
-
-#ifndef FPGA_USE_INTEL_HEXL
-    // HEXL-FPGA version of keyswitch
-    namespace ns = intel::hexl;
-#else
-    // HEXL CPU version of keyswitch
-    namespace ns = intel::hexl::internal;
-#endif
 
     for (size_t n = 0; n < n_iter; n++) {
         for (size_t i = 0; i < test_vector_size_; i++) {
-            ns::KeySwitch(test_vectors_[i].input.data(),
-                          test_vectors_[i].t_target_iter_ptr.data(),
-                          test_vectors_[0].coeff_count,
-                          test_vectors_[0].decomp_modulus_size,
-                          test_vectors_[0].key_modulus_size,
-                          test_vectors_[0].rns_modulus_size,
-                          test_vectors_[0].key_component_count,
-                          test_vectors_[0].moduli.data(),
-                          test_vectors_[0].key_vectors.data(),
-                          test_vectors_[0].modswitch_factors.data());
+            intel::hexl::KeySwitch(test_vectors_[i].input.data(),
+                                   test_vectors_[i].t_target_iter_ptr.data(),
+                                   test_vectors_[0].coeff_count,
+                                   test_vectors_[0].decomp_modulus_size,
+                                   test_vectors_[0].key_modulus_size,
+                                   test_vectors_[0].rns_modulus_size,
+                                   test_vectors_[0].key_component_count,
+                                   test_vectors_[0].moduli.data(),
+                                   test_vectors_[0].key_vectors.data(),
+                                   test_vectors_[0].modswitch_factors.data());
         }
     }
-#ifndef FPGA_USE_INTEL_HEXL
     intel::hexl::KeySwitchCompleted();
-#endif
 }
 
 BENCHMARK_F(keyswitch, 16384_6_7_7_2)
