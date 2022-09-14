@@ -64,9 +64,9 @@ INTTDynamicIF::INTTDynamicIF(std::string& lib) : DynamicIF(lib) {
 
 DyadicMultDynamicIF::DyadicMultDynamicIF(std::string& lib) : DynamicIF(lib) {
     input_fifo_usm = (sycl::event(*)(
-        sycl::queue&, uint64_t * __restrict__, uint64_t * __restrict__,
-        uint64_t, moduli_info_t * __restrict__, uint64_t, int, uint64_t*,
-        uint64_t*, uint64_t)) loadKernel("input_fifo_usm");
+        sycl::queue&, uint64_t* __restrict__, uint64_t* __restrict__, uint64_t,
+        moduli_info_t* __restrict__, uint64_t, int, uint64_t*, uint64_t*,
+        uint64_t))loadKernel("input_fifo_usm");
 
     output_nb_fifo_usm = (sycl::event(*)(sycl::queue&, uint64_t*, int*,
                                          int*))loadKernel("output_nb_fifo_usm");
@@ -98,9 +98,9 @@ KeySwitchDynamicIF::KeySwitchDynamicIF(std::string& lib) : DynamicIF(lib) {
 DyadicMultKeySwitchDynamicIF::DyadicMultKeySwitchDynamicIF(std::string& lib)
     : DynamicIF(lib) {
     input_fifo_usm = (sycl::event(*)(
-        sycl::queue&, uint64_t * __restrict__, uint64_t * __restrict__,
-        uint64_t, moduli_info_t * __restrict__, uint64_t, int, uint64_t*,
-        uint64_t*, uint64_t)) loadKernel("input_fifo_usm");
+        sycl::queue&, uint64_t* __restrict__, uint64_t* __restrict__, uint64_t,
+        moduli_info_t* __restrict__, uint64_t, int, uint64_t*, uint64_t*,
+        uint64_t))loadKernel("input_fifo_usm");
 
     output_nb_fifo_usm = (sycl::event(*)(sycl::queue&, uint64_t*, int*,
                                          int*))loadKernel("output_nb_fifo_usm");

@@ -946,11 +946,15 @@ void Device::enqueue_input_data(FPGAObject* fpga_obj) {
 void Device::enqueue_input_data_dyadic_multiply(
     FPGAObject_DyadicMultiply* fpga_obj) {
     const auto& start_ocl = std::chrono::high_resolution_clock::now();
-    auto tempEvent = (*(dyadicmult_kernel_container_->input_fifo_usm))(
-        dyadic_multiply_input_queue_, fpga_obj->operand1_in_svm_,
-        fpga_obj->operand2_in_svm_, fpga_obj->n_, fpga_obj->moduli_info_,
-        fpga_obj->n_moduli_, fpga_obj->tag_, fpga_obj->operands_in_ddr_,
-        fpga_obj->results_out_ddr_, fpga_obj->n_batch_);
+    auto tempEvent =
+        (*(dyadicmult_kernel_container_
+               ->input_fifo_usm))(dyadic_multiply_input_queue_,
+                                  fpga_obj->operand1_in_svm_,
+                                  fpga_obj->operand2_in_svm_, fpga_obj->n_,
+                                  fpga_obj->moduli_info_, fpga_obj->n_moduli_,
+                                  fpga_obj->tag_, fpga_obj->operands_in_ddr_,
+                                  fpga_obj->results_out_ddr_,
+                                  fpga_obj->n_batch_);
 
     if (debug_ == 1) {
         const auto& end_ocl = std::chrono::high_resolution_clock::now();
@@ -973,11 +977,14 @@ void Device::enqueue_input_data_dyadic_multiply(
 void Device::enqueue_input_data_INTT(FPGAObject_INTT* fpga_obj) {
     unsigned int batch = fpga_obj->n_batch_;
     const auto& start_ocl = std::chrono::high_resolution_clock::now();
-    auto inttLoadEvent = (*(intt_kernel_container_->intt_input))(
-        intt_load_queue_, batch, fpga_obj->coeff_poly_in_svm_,
-        fpga_obj->coeff_modulus_in_svm_, fpga_obj->inv_n_in_svm_,
-        fpga_obj->inv_n_w_in_svm_, fpga_obj->inv_root_of_unity_powers_in_svm_,
-        fpga_obj->precon_inv_root_of_unity_powers_in_svm_);
+    auto inttLoadEvent = (*(
+        intt_kernel_container_
+            ->intt_input))(intt_load_queue_, batch,
+                           fpga_obj->coeff_poly_in_svm_,
+                           fpga_obj->coeff_modulus_in_svm_,
+                           fpga_obj->inv_n_in_svm_, fpga_obj->inv_n_w_in_svm_,
+                           fpga_obj->inv_root_of_unity_powers_in_svm_,
+                           fpga_obj->precon_inv_root_of_unity_powers_in_svm_);
     {
         const auto& end_ocl = std::chrono::high_resolution_clock::now();
         const auto& duration_ocl =
@@ -1001,11 +1008,14 @@ void Device::enqueue_input_data_INTT(FPGAObject_INTT* fpga_obj) {
 void Device::enqueue_input_data_NTT(FPGAObject_NTT* fpga_obj) {
     unsigned int batch = fpga_obj->n_batch_;
     const auto& start_ocl = std::chrono::high_resolution_clock::now();
-    auto nttLoadEvent = (*(ntt_kernel_container_->ntt_input))(
-        ntt_load_queue_, batch, fpga_obj->coeff_poly_in_svm_,
-        fpga_obj->coeff_poly_in_svm_, fpga_obj->coeff_modulus_in_svm_,
-        fpga_obj->root_of_unity_powers_in_svm_,
-        fpga_obj->precon_root_of_unity_powers_in_svm_);
+    auto nttLoadEvent =
+        (*(ntt_kernel_container_
+               ->ntt_input))(ntt_load_queue_, batch,
+                             fpga_obj->coeff_poly_in_svm_,
+                             fpga_obj->coeff_poly_in_svm_,
+                             fpga_obj->coeff_modulus_in_svm_,
+                             fpga_obj->root_of_unity_powers_in_svm_,
+                             fpga_obj->precon_root_of_unity_powers_in_svm_);
     if (debug_ == 1) {
         const auto& end_ocl = std::chrono::high_resolution_clock::now();
         const auto& duration_ocl =
@@ -1270,12 +1280,12 @@ void Device::enqueue_input_data_KeySwitch(FPGAObject_KeySwitch* fpga_obj) {
         rmem = 1;
     }
     KeySwitch_events_enqueue_[obj_id][0] =
-        (*(KeySwitch_kernel_container_->load))(
-            keyswitch_queues_[KEYSWITCH_LOAD],
-            nullptr /* KeySwitch_events_write_[obj_id] */,
-            *(fpga_obj->mem_t_target_iter_ptr_), modulus_meta_, fpga_obj->n_,
-            fpga_obj->decomp_modulus_size_, fpga_obj->n_batch_,
-            (*(invn_t*)(void*)&invn_), rmem);
+        (*(KeySwitch_kernel_container_
+               ->load))(keyswitch_queues_[KEYSWITCH_LOAD],
+                        nullptr /* KeySwitch_events_write_[obj_id] */,
+                        *(fpga_obj->mem_t_target_iter_ptr_), modulus_meta_,
+                        fpga_obj->n_, fpga_obj->decomp_modulus_size_,
+                        fpga_obj->n_batch_, (*(invn_t*)(void*)&invn_), rmem);
 
     if (debug_ == 1) {
         const auto& end_ocl = std::chrono::high_resolution_clock::now();
@@ -1307,9 +1317,12 @@ bool Device::process_output_dyadic_multiply() {
     dyadic_multiply_tag_out_svm_[0] = -1;
     dyadic_multiply_results_out_valid_svm_[0] = 0;
     const auto& start_ocl = std::chrono::high_resolution_clock::now();
-    auto tempEvent = (*(dyadicmult_kernel_container_->output_nb_fifo_usm))(
-        dyadic_multiply_output_queue_, dyadic_multiply_results_out_svm_,
-        dyadic_multiply_tag_out_svm_, dyadic_multiply_results_out_valid_svm_);
+    auto tempEvent =
+        (*(dyadicmult_kernel_container_
+               ->output_nb_fifo_usm))(dyadic_multiply_output_queue_,
+                                      dyadic_multiply_results_out_svm_,
+                                      dyadic_multiply_tag_out_svm_,
+                                      dyadic_multiply_results_out_valid_svm_);
     dyadic_multiply_output_queue_.wait();
     const auto& end_ocl = std::chrono::high_resolution_clock::now();
 
@@ -1389,8 +1402,9 @@ bool Device::process_output_NTT() {
     batch = kernel_inf->n_batch_;
 
     const auto& start_ocl = std::chrono::high_resolution_clock::now();
-    auto nttStoreEvent = (*(ntt_kernel_container_->ntt_output))(
-        ntt_store_queue_, batch, NTT_coeff_poly_svm_);
+    auto nttStoreEvent =
+        (*(ntt_kernel_container_->ntt_output))(ntt_store_queue_, batch,
+                                               NTT_coeff_poly_svm_);
 
     ntt_store_queue_.wait();
     const auto& end_ocl = std::chrono::high_resolution_clock::now();
@@ -1448,8 +1462,9 @@ bool Device::process_output_INTT() {
 
     const auto& start_ocl = std::chrono::high_resolution_clock::now();
 
-    auto inttLoadEvent = (*(intt_kernel_container_->intt_output))(
-        intt_store_queue_, batch, INTT_coeff_poly_svm_);
+    auto inttLoadEvent =
+        (*(intt_kernel_container_->intt_output))(intt_store_queue_, batch,
+                                                 INTT_coeff_poly_svm_);
     intt_store_queue_.wait();
     const auto& end_ocl = std::chrono::high_resolution_clock::now();
     const auto& start_io = std::chrono::high_resolution_clock::now();
@@ -1535,11 +1550,13 @@ bool Device::process_output_KeySwitch() {
         wmem = 1;
     }
     KeySwitch_events_enqueue_[obj_id][1] =
-        (*(KeySwitch_kernel_container_->store))(
-            keyswitch_queues_[KEYSWITCH_STORE], KeySwitch_events_write_[obj_id],
-            *(fpga_obj->mem_KeySwitch_results_), fpga_obj->n_batch_,
-            fpga_obj->n_, fpga_obj->decomp_modulus_size_, modulus_meta_, rmem,
-            wmem);
+        (*(KeySwitch_kernel_container_
+               ->store))(keyswitch_queues_[KEYSWITCH_STORE],
+                         KeySwitch_events_write_[obj_id],
+                         *(fpga_obj->mem_KeySwitch_results_),
+                         fpga_obj->n_batch_, fpga_obj->n_,
+                         fpga_obj->decomp_modulus_size_, modulus_meta_, rmem,
+                         wmem);
 
     const auto& end_ocl = std::chrono::high_resolution_clock::now();
     keyswitch_queues_[KEYSWITCH_STORE].wait();

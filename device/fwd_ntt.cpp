@@ -82,15 +82,15 @@ template <size_t id>
 void fwd_ntt_kernel(sycl::queue& q) {
     q.submit([&](sycl::handler& h) {
         h.single_task<FWD_NTT<id>>([=]() [[intel::kernel_args_restrict]] {
-            [[intel::fpga_memory("BLOCK_RAM")]] [[intel::numbanks(VEC)]] [
-                [intel::max_replicates(
-                    2)]] unsigned long X[FPGA_NTT_SIZE / VEC][VEC];
-            [[intel::fpga_memory("BLOCK_RAM")]] [[intel::numbanks(VEC)]] [
-                [intel::max_replicates(
-                    2)]] unsigned long X2[FPGA_NTT_SIZE / VEC][VEC];
-            [[intel::fpga_memory("BLOCK_RAM")]] [[intel::numbanks(VEC)]] [
-                [intel::max_replicates(
-                    2)]] unsigned char Xm[FPGA_NTT_SIZE / VEC][VEC];
+            [[intel::fpga_memory("BLOCK_RAM")]] [[intel::numbanks(
+                VEC)]] [[intel::max_replicates(2)]] unsigned long
+                X[FPGA_NTT_SIZE / VEC][VEC];
+            [[intel::fpga_memory("BLOCK_RAM")]] [[intel::numbanks(
+                VEC)]] [[intel::max_replicates(2)]] unsigned long
+                X2[FPGA_NTT_SIZE / VEC][VEC];
+            [[intel::fpga_memory("BLOCK_RAM")]] [[intel::numbanks(
+                VEC)]] [[intel::max_replicates(2)]] unsigned char
+                Xm[FPGA_NTT_SIZE / VEC][VEC];
 
             unsigned long local_roots[FPGA_NTT_SIZE];
             unsigned long local_precons[FPGA_NTT_SIZE];
