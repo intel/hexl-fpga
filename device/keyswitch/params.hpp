@@ -42,3 +42,4 @@
 
 #define STEP(n, max) n = n == (max - 1) ? 0 : n + 1
 #define STEP2(n, max) n = n == ((max)-1) ? -1 : n + 1
+#define STEP3(n, max) n = n == (max) ? -1 : n + 1

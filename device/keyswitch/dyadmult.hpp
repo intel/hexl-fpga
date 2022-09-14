@@ -26,7 +26,7 @@ void broadcast_keys(sycl::queue& q,
         const unsigned int KEYS_LEN = tp_MAX_RNS_MODULUS_SIZE * 2;
         auto kernelLambda = [=]()
             [[intel::kernel_args_restrict]] [[intel::max_global_work_dim(0)]] {
-            for (size_t i = 0; i < batch_size; i++) {
+            for (int i = 0; i < batch_size; i++) {
                 unsigned params_size = tt_ch_keyswitch_params::read();
                 for (int i = 0; i < params_size; i++) {
                     uint256_t keys1 = k_switch_keys1[i];

@@ -110,8 +110,8 @@ sycl::event load(sycl::queue& q, sycl::event* inDepsEv,
                     temp_pipe::write(cur_moduli);
                 });
                 STEP(decomp_index, decomp_modulus_size);
-
-                for (int n = 0; n < coeff_count; n++) {
+                uint coeff_count_tmp = coeff_count;
+                for (uint n = 0; n < coeff_count_tmp; n++) {
                     Unroller<0, NUM_CORES>::Step([&](auto COREID) {
                         using temp_pipe =
                             typename ch_intt_elements_in::template PipeAt<
