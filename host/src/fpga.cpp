@@ -257,10 +257,10 @@ FPGAObject_KeySwitch::FPGAObject_KeySwitch(sycl::queue& p_q,
         aligned_alloc(HOST_MEM_ALIGNMENT, size_out * sizeof(uint64_t)));
     mem_t_target_iter_ptr_ = new sycl::buffer<uint64_t>(
         sycl::range(size_in),
-        {sycl::property::buffer::mem_channel{MEM_CHANNEL_K2}});
+        {sycl::property::buffer::mem_channel{MEM_CHANNEL_K1}});
     mem_KeySwitch_results_ = new sycl::buffer<sycl::ulong2>(
         sycl::range(size_out / 2),
-        {sycl::property::buffer::mem_channel{MEM_CHANNEL_K2}});
+        {sycl::property::buffer::mem_channel{MEM_CHANNEL_K1}});
     mem_t_target_iter_ptr_->set_write_back(false);
     mem_KeySwitch_results_->set_write_back(false);
 }
