@@ -14,6 +14,20 @@
 namespace intel {
 namespace hexl {
 namespace fpga {
+
+// helper function to explicitly copy host data to device.
+static sycl::event copy_buffer_to_device(sycl::queue &q,
+                                        sycl::buffer<uint64_t> &buf)
+{
+    sycl::accessor host_buf(buf);
+    uint64_t *host_ptr = host_buf.get_pointer();
+    sycl::event e = q.submit([&] (sycl::handler &h) {
+        auto dev_buf = buf.get_access<sycl::access::mode::discard_write>(h);
+        h.copy(host_ptr, dev_buf);
+    });
+    return e;
+}
+
 // utility function for copying input data batch for KeySwitch
 
 const char* keyswitch_kernel_name[] = {"load", "store"};
@@ -1271,18 +1285,22 @@ void Device::enqueue_input_data_KeySwitch(FPGAObject_KeySwitch* fpga_obj) {
         keyswitch_queues_[KEYSWITCH_LOAD], *(keys->k_switch_keys_1_),
         *(keys->k_switch_keys_2_), *(keys->k_switch_keys_3_),
         fpga_obj->in_objs_.size());
-    const auto& start_ocl = std::chrono::high_resolution_clock::now();
+    
     int obj_id = KeySwitch_id_ % 2;
     copyKeySwitchBatch(fpga_obj, obj_id);
+    KeySwitch_events_write_[obj_id][0] = copy_buffer_to_device(keyswitch_queues_[KEYSWITCH_LOAD], 
+        *(fpga_obj->mem_t_target_iter_ptr_));
+    KeySwitch_events_write_[obj_id][0].wait();
     // =============== Launch keyswitch kernel ==============================
     unsigned rmem = 0;
     if (RWMEM_FLAG) {
         rmem = 1;
     }
+    const auto& start_ocl = std::chrono::high_resolution_clock::now();
     KeySwitch_events_enqueue_[obj_id][0] =
         (*(KeySwitch_kernel_container_
                ->load))(keyswitch_queues_[KEYSWITCH_LOAD],
-                        nullptr /* KeySwitch_events_write_[obj_id] */,
+                        nullptr,
                         *(fpga_obj->mem_t_target_iter_ptr_), modulus_meta_,
                         fpga_obj->n_, fpga_obj->decomp_modulus_size_,
                         fpga_obj->n_batch_, (*(invn_t*)(void*)&invn_), rmem);
