@@ -17,13 +17,13 @@ namespace fpga {
 
 // helper function to explicitly copy host data to device.
 static sycl::event copy_buffer_to_device(sycl::queue &q,
-                                        sycl::buffer<uint64_t> &buf)
-{
-    sycl::accessor host_buf(buf);
-    uint64_t *host_ptr = host_buf.get_pointer();
+                           sycl::buffer<uint64_t> &buf)
+{   
+    sycl::host_accessor host_acc(buf);
+    uint64_t *host_ptr = host_acc.get_pointer();
     sycl::event e = q.submit([&] (sycl::handler &h) {
-        auto dev_buf = buf.get_access<sycl::access::mode::discard_write>(h);
-        h.copy(host_ptr, dev_buf);
+         auto acc_dev = buf.get_access<sycl::access::mode::discard_write>(h);
+        h.copy(host_ptr, acc_dev);
     });
     return e;
 }
