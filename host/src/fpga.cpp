@@ -1575,9 +1575,9 @@ bool Device::process_output_KeySwitch() {
                          fpga_obj->n_batch_, fpga_obj->n_,
                          fpga_obj->decomp_modulus_size_, modulus_meta_, rmem,
                          wmem);
-
-    const auto& end_ocl = std::chrono::high_resolution_clock::now();
     keyswitch_queues_[KEYSWITCH_STORE].wait();
+    const auto& end_ocl = std::chrono::high_resolution_clock::now();
+    
     const auto& start_io = std::chrono::high_resolution_clock::now();
     if (KeySwitch_id_ > 0) {
         KeySwitch_read_output();
