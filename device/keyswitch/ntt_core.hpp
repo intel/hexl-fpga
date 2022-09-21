@@ -95,9 +95,10 @@ void _ntt_internal(sycl::queue& q) {
                     unsigned rw_x_group_size_log =
                         get_ntt_log(fpga_ntt_size) - 1 - VEC_LOG - mlog;
                     unsigned Xm_group_log = rw_x_group_size_log;
-                    [[intel::ivdep(X)]] [[intel::ivdep(
-                        X2)]] for (unsigned int k = 0;
-                                   k < fpga_ntt_size / 2 / VEC; k++) {
+                    [[intel::ivdep(X)]] [
+                        [intel::ivdep(X2)]] for (unsigned int k = 0;
+                                                 k < fpga_ntt_size / 2 / VEC;
+                                                 k++) {
                         [[intel::fpga_register]] unsigned long curX[VEC * 2];
                         [[intel::fpga_register]] unsigned long
                             curX_rep[VEC * 2];
