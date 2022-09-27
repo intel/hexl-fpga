@@ -685,7 +685,7 @@ private:
 
     // KeySwitch section
     sycl::queue keyswitch_queues_[KEYSWITCH_NUM_KERNELS];
-    sycl::event KeySwitch_events_write_[2][128];
+    sycl::event KeySwitch_events_write_[2][1024];
     sycl::event KeySwitch_events_enqueue_[2][2];
     std::unordered_map<uint64_t**, KeySwitchMemKeys<uint256_t>*> keys_map_;
     static int device_id_;

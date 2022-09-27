@@ -109,9 +109,9 @@ static uint64_t g_batch_size_intt = get_batch_size_intt();
 static uint64_t get_batch_size_KeySwitch() {
     char* env = getenv("BATCH_SIZE_KEYSWITCH");
     uint64_t size = env ? strtoul(env, NULL, 10) : 1;
-    if (size > 128) {
+    if (size > 1024) {
         std::cerr << "Error: BATCH_SIZE_KEYSWITCH is " << size << std::endl;
-        std::cerr << "       Maxiaml supported BATCH_SIZE_KEYSWITCH is 128."
+        std::cerr << "       Maxiaml supported BATCH_SIZE_KEYSWITCH is 1024."
                   << std::endl;
         exit(1);
     }
