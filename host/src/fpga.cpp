@@ -1277,14 +1277,16 @@ void Device::enqueue_input_data_KeySwitch(FPGAObject_KeySwitch* fpga_obj) {
 
     int obj_id = KeySwitch_id_ % 2;
     copyKeySwitchBatch(fpga_obj, obj_id);
-#if 0
+
     // copy_buffer_to_device() and wait() is a utility to force blocked write,
     // and to facilitate performance measure on FPGA.
-    // The release is to support streaming, and blocking write will slow things down.
-    KeySwitch_events_write_[obj_id][0] = copy_buffer_to_device(
-        keyswitch_queues_[KEYSWITCH_LOAD], *(fpga_obj->mem_t_target_iter_ptr_));
-    KeySwitch_events_write_[obj_id][0].wait();
-#endif
+    // The release is to support streaming, and blocking write will slow things
+    // down.
+    // KeySwitch_events_write_[obj_id][0] = copy_buffer_to_device(
+    //     keyswitch_queues_[KEYSWITCH_LOAD],
+    //     *(fpga_obj->mem_t_target_iter_ptr_));
+    // KeySwitch_events_write_[obj_id][0].wait();
+
     // =============== Launch keyswitch kernel ==============================
     unsigned rmem = 0;
     if (RWMEM_FLAG) {
