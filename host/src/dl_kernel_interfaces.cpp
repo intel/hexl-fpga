@@ -16,7 +16,8 @@ DynamicIF::DynamicIF(const std::string& libName) : m_lib_name_(libName) {
         std::cout << "dlopen error: " << dlerror() << std::endl;
         exit(-1);
     } else {
-        std::cout << "Successfully opened library: " << m_lib_name_ << std::endl;
+        std::cout << "Successfully opened library: " << m_lib_name_
+                  << std::endl;
     }
 }
 DynamicIF::~DynamicIF() {
