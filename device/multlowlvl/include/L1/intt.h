@@ -1,10 +1,10 @@
 #pragma once
-#include <L0/intt.hpp>
-#include <L0/load.hpp>
-#include <L0/ntt.hpp>
-#include <L0/scale.hpp>
-#include <L0/store.hpp>
-#include <L0/twiddle_factors.hpp>
+#include "../../src/L0/intt.hpp"
+#include "../../src/L0/load.hpp"
+#include "../../src/L0/ntt.hpp"
+#include "../../src/L0/scale.hpp"
+#include "../../src/L0/store.hpp"
+#include "../../src/L0/twiddle_factors.hpp"
 
 namespace L1 {
 namespace helib {

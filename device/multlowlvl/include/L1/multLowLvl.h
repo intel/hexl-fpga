@@ -1,7 +1,12 @@
 #pragma once
-#include <L1/intt.h>
-#include <L1/ntt.h>
-#include <L1/pipes.h>
+// #include <L1/intt.h>
+// #include <L1/ntt.h>
+// #include <L1/pipes.h>
+
+#include "intt.h"
+#include "ntt.h"
+#include "pipes.h"
+#include "common.h"
 
 namespace L1 {
 namespace helib {

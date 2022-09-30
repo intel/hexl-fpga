@@ -1,14 +1,18 @@
 # Copyright (C) 2020-2021 Intel Corporation
 # SPDX-License-Identifier: Apache-2.0
 
+include_directories(multlowlvl/include)
+include_directories(multlowlvl/src)
+include_directories(multlowlvl)
+
 add_custom_target(emulation
     COMMENT "Compiling for emulation"
-    COMMAND ${CMAKE_SOURCE_DIR}/device/compile.sh -DFPGA_EMULATOR ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR}
+    COMMAND bash ${CMAKE_SOURCE_DIR}/device/compile.sh -DFPGA_EMULATOR ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR}
 )
 
 add_custom_target(fpga
     COMMENT "Compiling FPGA bitstream"
-    COMMAND ${CMAKE_SOURCE_DIR}/device/compile.sh -Xshardware ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR}
+    COMMAND bash ${CMAKE_SOURCE_DIR}/device/compile.sh -Xshardware ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR}
 )
 
 install(FILES
