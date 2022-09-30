@@ -9,6 +9,7 @@ kernels+=" fwd_ntt"
 kernels+=" inv_ntt"
 kernels+=" keyswitch"
 kernels+=" dyadic_multiply_keyswitch"
+kernels+=" multlowlvl"
 
 config_dyadic_multiply=""
 config_dyadic_multiply+=" -Xsboard=intel_s10sx_pac:pac_s10_usm"
@@ -35,6 +36,14 @@ config_keyswitch+=" -Xsclock=240MHz"
 
 config_dyadic_multiply_keyswitch=${config_dyadic_multiply}
 config_dyadic_multiply_keyswitch+=" -DCORES=1"
+
+config_multlowlvl=""
+config_multlowlvl+=" -Xshyper-optimized-handshaking=off"
+config_multlowlvl+=" -Xstiming-failure-mode=ignore"
+config_multlowlvl+=" -Xsopt-arg=-nocaching"
+config_multlowlvl+=" -Xsboard=de10_agilex:B2E2_8GBx4"
+config_multlowlvl+=" -Xsclock=520MHz"
+
 
 fpga_args=""
 fpga_args+=" -Xsbsp-flow=flat"

@@ -2,12 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include <CL/sycl.hpp>
-#include <L0/load.hpp>
-#include <L0/scale.hpp>
-#include <L0/store.hpp>
-#include <L0/tensorProduct.hpp>
-#include <L1/tensorProduct.h>
-#include <L1/helib_bgv.h>
+#include "multlowlvl/src/L0/load.hpp"
+#include "multlowlvl/src/L0/scale.hpp"
+#include "multlowlvl/src/L0/store.hpp"
+#include "multlowlvl/src/L0/tensorProduct.hpp"
+// #include "multlowlvl/L1/tensorProduct.h"
+// #include "multlowlvl/L1/helib_bgv.h"
 
 // This file is the interface of the BGV multLowLvl operation. 
 // This file is a rewritten version of L1/ folder of the hexl-fpga-helib repo.
