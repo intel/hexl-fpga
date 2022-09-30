@@ -442,9 +442,7 @@ static void fpga_KeySwitch(uint64_t* result, const uint64_t* t_target_iter_ptr,
             fence |= (rns_modulus_size != obj_KeySwitch->rns_modulus_size_);
             fence |=
                 (key_component_count != obj_KeySwitch->key_component_count_);
-            fence |= (moduli != obj_KeySwitch->moduli_);
             fence |= (k_switch_keys != obj_KeySwitch->k_switch_keys_);
-            fence |= (modswitch_factors != obj_KeySwitch->modswitch_factors_);
         }
     }
 

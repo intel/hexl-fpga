@@ -28,6 +28,10 @@ void KeySwitch(uint64_t* result, const uint64_t* t_target_iter_ptr, uint64_t n,
     FPGA_ASSERT(rns_modulus_size > 0, "requires rns_modulus_size > 0");
     FPGA_ASSERT(key_component_count == 2, "requires key_component_count = 2");
     FPGA_ASSERT(moduli, "requires moduli != nullptr");
+    for (uint64_t i = 0; i < decomp_modulus_size; ++i) {
+        FPGA_ASSERT((moduli[i] >= (1UL << 16)) && (moduli[i] <= (1UL << 52)),
+                    "requires each modulus to be in the range of [2^16, 2^52]");
+    }
     FPGA_ASSERT(k_switch_keys, "requires k_switch_keys != nullptr");
     FPGA_ASSERT(modswitch_factors, "requires modswitch_factors != nullptr");
 
