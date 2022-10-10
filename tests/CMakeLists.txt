@@ -42,32 +42,38 @@ endfunction()
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/bitstream_dir.sh
      DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
-test_function(dyadic_multiply)
-test_function(fwd_ntt)
-test_function(inv_ntt)
-test_function(keyswitch)
-test_function(dyadic_multiply_keyswitch)
+# test_function(dyadic_multiply)
+# test_function(fwd_ntt)
+# test_function(inv_ntt)
+# test_function(keyswitch)
+# test_function(dyadic_multiply_keyswitch)
+
+test_function(multLowLvl)
 
 add_custom_target(tests
-    COMMAND ./micro_dyadic_multiply.sh DEPENDS test_dyadic_multiply
-    COMMAND ./micro_fwd_ntt.sh DEPENDS test_fwd_ntt
-    COMMAND ./micro_inv_ntt.sh DEPENDS test_inv_ntt
-    COMMAND ./micro_keyswitch.sh DEPENDS test_keyswitch
-    COMMAND ./micro_dyadic_multiply_keyswitch.sh DEPENDS test_dyadic_multiply_keyswitch
+    # COMMAND ./micro_dyadic_multiply.sh DEPENDS test_dyadic_multiply
+    # COMMAND ./micro_fwd_ntt.sh DEPENDS test_fwd_ntt
+    # COMMAND ./micro_inv_ntt.sh DEPENDS test_inv_ntt
+    # COMMAND ./micro_keyswitch.sh DEPENDS test_keyswitch
+    # COMMAND ./micro_dyadic_multiply_keyswitch.sh DEPENDS test_dyadic_multiply_keyswitch
+    COMMAND ./micro_multLowlvl.sh DEPENDS test_multLowLvl
 )
 
-add_custom_target(run_test_keyswitch
-    COMMAND ./micro_keyswitch.sh DEPENDS test_keyswitch
+add_custom_target(run_test_multLowLvl
+    COMMAND ./micro_multLowLvl.sh DEPENDS test_multLowLvl
 )
-add_custom_target(run_test_fwd_ntt
-    COMMAND ./micro_fwd_ntt.sh DEPENDS test_fwd_ntt
-)
-add_custom_target(run_test_inv_ntt
-    COMMAND ./micro_inv_ntt.sh DEPENDS test_inv_ntt
-)
-add_custom_target(run_test_dyadic_multiply
-    COMMAND ./micro_dyadic_multiply.sh DEPENDS test_dyadic_multiply
-)
-add_custom_target(run_test_dyadic_multiply_keyswitch
-    COMMAND ./micro_dyadic_multiply_keyswitch.sh DEPENDS test_dyadic_multiply_keyswitch
-)
+# add_custom_target(run_test_keyswitch
+#     COMMAND ./micro_keyswitch.sh DEPENDS test_keyswitch
+# )
+# add_custom_target(run_test_fwd_ntt
+#     COMMAND ./micro_fwd_ntt.sh DEPENDS test_fwd_ntt
+# )
+# add_custom_target(run_test_inv_ntt
+#     COMMAND ./micro_inv_ntt.sh DEPENDS test_inv_ntt
+# )
+# add_custom_target(run_test_dyadic_multiply
+#     COMMAND ./micro_dyadic_multiply.sh DEPENDS test_dyadic_multiply
+# )
+# add_custom_target(run_test_dyadic_multiply_keyswitch
+#     COMMAND ./micro_dyadic_multiply_keyswitch.sh DEPENDS test_dyadic_multiply_keyswitch
+# )

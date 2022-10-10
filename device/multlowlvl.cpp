@@ -11,6 +11,7 @@
 
 // This file is the interface of the BGV multLowLvl operation. 
 // This file is a rewritten version of L1/ folder of the hexl-fpga-helib repo.
+// All the sycl::pipe should be determined at compile-time. 
 
 extern "C" {
 // multLowLvl "load" interface exposed to runtime
@@ -34,7 +35,7 @@ sycl::event BringToSetLoad2(sycl::queue &q, sycl::event &depends,
 
 
 // multLowLvl "store" interface exposed to runtime
-// The pipes in the template parameter will be determined at compile time at this time.
+// The pipes in the template parameter must be determined at compile time.
 
 sycl::event TensorProductStore0(sycl::queue &q,
                                 sycl::buffer<ulong> &output_c0) {
