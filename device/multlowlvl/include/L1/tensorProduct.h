@@ -19,7 +19,7 @@ using tensor_product_ntt2_t =
     ntt<11, 8, COEFF_COUNT, pipe_scale_output2,
         pipe_tensor_product_prime_index2, pipe_tensor_product_input2>;
 
-#if 0
+#if 1
 
 /**
  * @brief Get the tensor_product_ntt1_t instance

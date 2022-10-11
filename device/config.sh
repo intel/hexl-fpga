@@ -9,7 +9,7 @@ kernels=""
 #kernels+=" inv_ntt"
 #kernels+=" keyswitch"
 #kernels+=" dyadic_multiply_keyswitch"
-kernels+=" multlowlvl"
+kernels+=" multlowlvl_top"
 
 config_dyadic_multiply=""
 config_dyadic_multiply+=" -Xsboard=intel_s10sx_pac:pac_s10_usm"

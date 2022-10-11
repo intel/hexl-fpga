@@ -7,6 +7,7 @@
 #include "multlowlvl/src/L0/store.hpp"
 #include "multlowlvl/src/L0/tensorProduct.hpp"
 #include "multlowlvl/include/L1/multLowLvl.h"
+#include "multlowlvl/include/L1/tensorProduct.h"
 
 
 // This file is the interface of the BGV multLowLvl operation. 
@@ -104,27 +105,40 @@ sycl::event TensorProduct(sycl::queue &q, sycl::buffer<ulong4> &primes) {
 // using intt2_t = intt<2, 8, COEFF_COUNT, pipe_intt2_input,
 //                      pipe_intt2_primes_index, pipe_scale_input2>;
 
-L1::helib::bgv::intt1_t &GetINTT1() {
-  static L1::helib::bgv::intt1_t intt;
-  return intt;
+L1::helib::bgv::intt1_t &GetINTT1_IF() {
+  return L1::helib::bgv::GetINTT1();
+  // static L1::helib::bgv::intt1_t intt;
+  // return intt;
 }
 
-L1::helib::bgv::intt2_t &GetINTT2() {
-  static L1::helib::bgv::intt2_t intt;
-  return intt;
+L1::helib::bgv::intt2_t &GetINTT2_IF() {
+  return L1::helib::bgv::GetINTT2();
+  // static L1::helib::bgv::intt2_t intt;
+  // return intt;
 }
 
 
 // launch "tensor_product_ntt" kernels. see src/L1/tensorProduct.cpp file.
 
-L1::helib::bgv::tensor_product_ntt1_t &GetTensorProductNTT1() {
-  static tensor_product_ntt1_t ntt;
-  return ntt;
+// using tensor_product_ntt1_t =
+//     ntt<10, 8, COEFF_COUNT, pipe_scale_output, pipe_tensor_product_prime_index1,
+//         pipe_tensor_product_input1>;
+
+// using tensor_product_ntt2_t =
+//     ntt<11, 8, COEFF_COUNT, pipe_scale_output2,
+//         pipe_tensor_product_prime_index2, pipe_tensor_product_input2>;
+
+
+L1::helib::bgv::tensor_product_ntt1_t &GetTensorProductNTT1_IF() {
+  return L1::helib::bgv::GetTensorProductNTT1();
+  // static L1::helib::bgv::tensor_product_ntt1_t ntt;
+  // return ntt;
 }
 
-L1::helib::bgv::tensor_product_ntt2_t &GetTensorProductNTT2() {
-  static tensor_product_ntt2_t ntt;
-  return ntt;
+L1::helib::bgv::tensor_product_ntt2_t &GetTensorProductNTT2_IF() {
+  return L1::helib::bgv::GetTensorProductNTT2();
+  // static L1::helib::bgv::tensor_product_ntt2_t ntt;
+  // return ntt;
 }
 
 }
