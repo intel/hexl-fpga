@@ -10,12 +10,13 @@ function(test_function kernel)
     set (SRC
         ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test_utils/ntt.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/dynamic_loading_kernel_IF.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test_${KERNEL}.cpp
     )
 
     add_executable(test_${KERNEL} ${SRC})
 
-    target_compile_options(test_${KERNEL} PRIVATE -g -fPIE -fPIC -fstack-protector -Wformat -Wformat-security)
+    target_compile_options(test_${KERNEL} PRIVATE -g -fPIE -fPIC -fstack-protector -Wformat -Wformat-security -qactypes)
     target_include_directories(test_${KERNEL} PRIVATE $<BUILD_INTERFACE:${CMAKE_INSTALL_PREFIX}/inc>)
     target_include_directories(test_${KERNEL} PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
     target_link_directories(test_${KERNEL} PUBLIC ${CMAKE_INSTALL_PREFIX}/lib)
@@ -23,6 +24,10 @@ function(test_function kernel)
     target_link_libraries(test_${KERNEL} PUBLIC hexl-fpga)
     target_link_libraries(test_${KERNEL} PRIVATE gtest)
     target_link_libraries(test_${KERNEL} PRIVATE nlohmann_json::nlohmann_json)
+    
+    #if(${KERNEL} EQUAL "multlowlvl")
+        target_link_libraries(test_${KERNEL} PRIVATE ntl gmp m pthread hexl)
+    #endif()
 
     if(ENABLE_FPGA_DEBUG)
         target_compile_options(test_${KERNEL} PRIVATE -DFPGA_DEBUG)

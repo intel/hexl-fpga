@@ -1,10 +1,13 @@
 // Copyright (C) 2020-2021 Intel Corporation
 // SPDX-License-Identifier: Apache-2.0
-#include <L2/helib_bgv.h>
+//#include <L2/helib_bgv.h>
 #include <chrono>
 #include <fstream>
 #include <gtest/gtest.h>
 #include <nlohmann/json.hpp>
+
+#include "multLowLvl_runtime.hpp"
+
 using json = nlohmann::json;
 
 template <class T>
@@ -119,10 +122,10 @@ TEST(HELIBBGV, MultLowLvl) {
   std::vector<uint64_t> output3(expected_output3.size());
 
   std::cout << "Init" << std::endl;
-  L2::helib::bgv::Init(data_loader1.all_primes);
+  Init(data_loader1.all_primes);
 
   L2::helib::bgv::Timer timer("MultLowLvl");
-  L2::helib::bgv::MultLowLvl(data_loader1.input, data_loader2.input,
+  MultLowLvl(data_loader1.input, data_loader2.input,
                              data_loader1.primes_index, data_loader3.input,
                              data_loader4.input, data_loader3.primes_index,
                              data_loader1.t, output1, output2, output3,

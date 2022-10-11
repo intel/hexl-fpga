@@ -1,8 +1,8 @@
 #pragma once
-#include <L1/intt.h>
-#include <L1/ntt.h>
-#include <L1/common.h>
-#include <L1/pipes.h>
+#include "intt.h"
+#include "ntt.h"
+#include "common.h"
+#include "pipes.h"
 
 namespace L1 {
 namespace helib {
@@ -18,6 +18,8 @@ using tensor_product_ntt1_t =
 using tensor_product_ntt2_t =
     ntt<11, 8, COEFF_COUNT, pipe_scale_output2,
         pipe_tensor_product_prime_index2, pipe_tensor_product_input2>;
+
+#if 0
 
 /**
  * @brief Get the tensor_product_ntt1_t instance
@@ -70,7 +72,7 @@ event TensorProduct(sycl::queue &q, sycl::buffer<ulong4> &primes);
 sycl::event TensorProductStore0(sycl::queue &q, sycl::buffer<ulong> &output_c0);
 sycl::event TensorProductStore12(sycl::queue &q, sycl::buffer<ulong> &output_c1,
                                  sycl::buffer<ulong> &output_c2);
-#if 0
+
 /**
  * @brief TensorProductLoad1
  *

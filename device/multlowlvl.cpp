@@ -115,5 +115,17 @@ L1::helib::bgv::intt2_t &GetINTT2() {
 }
 
 
+// launch "tensor_product_ntt" kernels. see src/L1/tensorProduct.cpp file.
+
+L1::helib::bgv::tensor_product_ntt1_t &GetTensorProductNTT1() {
+  static tensor_product_ntt1_t ntt;
+  return ntt;
+}
+
+L1::helib::bgv::tensor_product_ntt2_t &GetTensorProductNTT2() {
+  static tensor_product_ntt2_t ntt;
+  return ntt;
+}
+
 }
 

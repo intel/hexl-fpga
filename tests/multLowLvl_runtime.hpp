@@ -3,7 +3,10 @@
 
 #include <sycl/ext/intel/fpga_extensions.hpp>
 
-#include "dynamic_loading_kernel_IF.hpp"
+#include "dynamic_loading_kernel_IF.h"
+#include "../device/multlowlvl/include/L2/intt.hpp"
+#include "../device/multlowlvl/include/L2/ntt.hpp"
+#include "../device/multlowlvl/include/L2/utils.h"
 
 static MultLowLvlDynaimcIF* g_multlowlvl = new MultLowLvlDynaimcIF("multlowlvl.so");
 
@@ -13,12 +16,12 @@ static MultLowLvlDynaimcIF* g_multlowlvl = new MultLowLvlDynaimcIF("multlowlvl.s
 
 void LaunchINTT1(std::vector<uint64_t> &primes) {
   // launch iNTT
-  launch_intt(g_multlowlvl->GetINTT1(), primes, COEFF_COUNT);
+  L2::helib::bgv::launch_intt(g_multlowlvl->GetINTT1(), primes, COEFF_COUNT);
 }
 
 void LaunchINTT2(std::vector<uint64_t> &primes) {
   // launch iNTT
-  launch_intt(g_multlowlvl->GetINTT1(), primes, COEFF_COUNT);
+  L2::helib::bgv::launch_intt(g_multlowlvl->GetINTT1(), primes, COEFF_COUNT);
 }
 
 struct Context {
@@ -67,8 +70,8 @@ void Init(std::vector<uint64_t> &primes) {
 
   // launch NTT
   // Todo: expose GetTensorProductNTT1 like GetINTT1/GetINTT2
-  launch_ntt(L1::helib::bgv::GetTensorProductNTT1(), primes, COEFF_COUNT);
-  launch_ntt(L1::helib::bgv::GetTensorProductNTT2(), primes, COEFF_COUNT);
+  L2::helib::bgv::launch_ntt(g_multlowlvl->GetTensorProductNTT1(), primes, COEFF_COUNT);
+  L2::helib::bgv::launch_ntt(g_multlowlvl->GetTensorProductNTT2(), primes, COEFF_COUNT);
 }
 
 
@@ -111,20 +114,20 @@ void LaunchBringToSet(std::vector<uint8_t> &pi_primes_index,
   size_t P, Q, I;
   std::vector<sycl::ulong2> scale_param_set;
   std::vector<uint64_t> empty_vec;
-  PreComputeScaleParamSet<false, false>(pi, qj, qj_prime_index, plainText,
+  L2::helib::bgv::PreComputeScaleParamSet<false, false>(pi, qj, qj_prime_index, plainText,
                                         empty_vec, P, Q, I, scale_param_set);
 
   auto scale_param_set_buf = new buffer<sycl::ulong2>(scale_param_set.size());
 
   assert(engine == 1 || engine == 2);
   if (engine == 1) {
-    Timer timer("g_multlowlvl->BringToSet");
-    queue_copy(*ctxt.q_scale1, scale_param_set, scale_param_set_buf);
+    L2::helib::bgv::Timer timer("g_multlowlvl->BringToSet");
+    L2::helib::bgv::queue_copy(*ctxt.q_scale1, scale_param_set, scale_param_set_buf);
     g_multlowlvl->BringToSet(*ctxt.q_scale1, COEFF_COUNT,
                                *scale_param_set_buf, P, Q, I, plainText);
   } else {
-    Timer timer("g_multlowlvl->BringToSet2");
-    queue_copy(*ctxt.q_scale2, scale_param_set, scale_param_set_buf);
+    L2::helib::bgv::Timer timer("g_multlowlvl->BringToSet2");
+    L2::helib::bgv::queue_copy(*ctxt.q_scale2, scale_param_set, scale_param_set_buf);
     g_multlowlvl->BringToSet2(*ctxt.q_scale2, COEFF_COUNT,
                                 *scale_param_set_buf, P, Q, I, plainText);
   }
@@ -133,7 +136,7 @@ void LaunchBringToSet(std::vector<uint8_t> &pi_primes_index,
 void LaunchBringToSet1(std::vector<uint8_t> &pi_primes_index,
                        std::vector<uint8_t> &qj_prime_index, uint64_t plainText,
                        std::vector<uint8_t> &pi_reorder_primes_index) {
-  Timer timer("LaunchBringToSet1");
+  L2::helib::bgv::Timer timer("LaunchBringToSet1");
   LaunchBringToSet<1>(pi_primes_index, qj_prime_index, plainText,
                       pi_reorder_primes_index);
 }
@@ -141,27 +144,27 @@ void LaunchBringToSet1(std::vector<uint8_t> &pi_primes_index,
 void LaunchBringToSet2(std::vector<uint8_t> &pi_primes_index,
                        std::vector<uint8_t> &qj_prime_index, uint64_t plainText,
                        std::vector<uint8_t> &pi_reorder_primes_index) {
-  Timer timer("LaunchBringToSet2");
+  L2::helib::bgv::Timer timer("LaunchBringToSet2");
   LaunchBringToSet<2>(pi_primes_index, qj_prime_index, plainText,
                       pi_reorder_primes_index);
 }
 
 void TensorProduct(std::vector<uint64_t> &primes,
                    std::vector<uint8_t> &primes_index) {
-  Timer timer("TensorProduct");
+  L2::helib::bgv::Timer timer("TensorProduct");
   std::vector<ulong4> primes_mulmod;
   // primes have all primes including the small primes and special primes
   for (auto prime_index : primes_index) {
     auto prime = primes[prime_index];
     primes_mulmod.push_back(
-        {prime, precompute_modulus_r(prime), precompute_modulus_k(prime), 0});
+        {prime, L2::helib::bgv::precompute_modulus_r(prime), L2::helib::bgv::precompute_modulus_k(prime), 0});
   }
 
   struct Context &ctxt = GetContext();
   sycl::queue &q = *ctxt.q_tensor_product;
 
   auto primes_mulmod_buf = new buffer<ulong4>(primes_mulmod.size());
-  queue_copy(q, primes_mulmod, primes_mulmod_buf);
+  L2::helib::bgv::queue_copy(q, primes_mulmod, primes_mulmod_buf);
 
   // launch TensorProduct
   g_multlowlvl->TensorProduct(q, *primes_mulmod_buf);
@@ -175,9 +178,9 @@ void Load(std::vector<uint64_t> &input, std::vector<uint8_t> &primes_index) {
   // do not static
   Context &ctxt = GetContext();
 
-  queue_copy_async(*ctxt.q_load_data_copy, input, input_buff);
+  L2::helib::bgv::queue_copy_async(*ctxt.q_load_data_copy, input, input_buff);
   auto copy_event =
-      queue_copy_async(*ctxt.q_load_data_copy, primes_index, primes_index_buf);
+      L2::helib::bgv::queue_copy_async(*ctxt.q_load_data_copy, primes_index, primes_index_buf);
 
   assert(engine == 1 || engine == 2);
   if (engine == 1) {
@@ -191,25 +194,25 @@ void Load(std::vector<uint64_t> &input, std::vector<uint8_t> &primes_index) {
 
 
 void Load1(std::vector<uint64_t> &input, std::vector<uint8_t> &primes_index) {
-  Timer timer("Load1");
+  L2::helib::bgv::Timer timer("Load1");
   Load<1>(input, primes_index);
 }
 
 void Load2(std::vector<uint64_t> &input, std::vector<uint8_t> &primes_index) {
-  Timer timer("Load2");
+  L2::helib::bgv::Timer timer("Load2");
   Load<2>(input, primes_index);
 }
 
 
 void Store(std::vector<uint64_t> &output1, std::vector<uint64_t> &output2,
            std::vector<uint64_t> &output3, size_t BATCH = 1) {
-  Timer timer("Store");
+  L2::helib::bgv::Timer timer("Store");
   struct Context &ctxt = GetContext();
   sycl::queue &q_tensor_product_store0 = *ctxt.q_tensor_product_store0;
   sycl::queue &q_tensor_product_store12 = *ctxt.q_tensor_product_store12;
   sycl::queue &q_tensor_product_memcpy = *ctxt.q_tensor_product_memcpy;
 
-  Timer timer1("Buffer");
+  L2::helib::bgv::Timer timer1("Buffer");
   sycl::buffer<uint64_t> output1_buf(output1.size());
   timer1.stop();
   auto kernel_store0_event =
@@ -233,7 +236,7 @@ void Store(std::vector<uint64_t> &output1, std::vector<uint64_t> &output2,
 
   sycl::event kernel_event[2];
 
-  Timer timer_launch_kernels("LaunchKernels");
+  L2::helib::bgv::Timer timer_launch_kernels("LaunchKernels");
   kernel_event[0] = g_multlowlvl->TensorProductStore12(
       q_tensor_product_store12, output2_buf[0], output3_buf[0]);
 

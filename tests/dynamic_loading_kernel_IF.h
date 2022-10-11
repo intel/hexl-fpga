@@ -1,14 +1,15 @@
 // Copyright (C) 2020-2022 Intel Corporation
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef __DL_KERNEL_INTERFACES_H__
-#define __DL_KERNEL_INTERFACES_H__
+#ifndef __DL_KERNEL_INTERFACES_IF__
+#define __DL_KERNEL_INTERFACES_IF__
 
 #include <CL/sycl.hpp>
 #include <dlfcn.h>
 #include <string>
 
 #include "../device/multlowlvl/include/L1/multLowLvl.h"
+#include "../device/multlowlvl/include/L1/tensorProduct.h"
 
 /// @brief
 /// class Dynamic Interface
@@ -29,9 +30,10 @@ private:
 };
 
 
-class MultLowLvlDynaimcIF : public DyanmicIF {
+
+class MultLowLvlDynaimcIF : public DynamicIF {
 public:
-    explicit MultLowLvlDynaimcIF(const std::string & lib);
+    explicit MultLowLvlDynaimcIF(const std::string& lib);
 
     /**
      * see device/multlowlvl.cpp for kernel library interface.
@@ -84,9 +86,9 @@ public:
 
 
     /**
-     * intt1_t and intt2_t are class/struct, not functions.
+     * intt1_t and intt2_t are user defined class/struct, not functions.
      * Let's try to use dynamic loading machanism load an object.
-     * from shared library
+     * from shared library.
      */
 
     L1::helib::bgv::intt1_t& (*GetINTT1)();
@@ -94,6 +96,15 @@ public:
     L1::helib::bgv::intt2_t& (*GetINTT2)();
 
 
+    /**
+     * like intt1_t & intt2_t, let's try to dynamic loading an user-defined object
+     * from shared library.
+     */
+
+    L1::helib::bgv::tensor_product_ntt1_t &(*GetTensorProductNTT1)();
+    L1::helib::bgv::tensor_product_ntt2_t &(*GetTensorProductNTT2)();
+
 };
+
 
 #endif

@@ -1,9 +1,10 @@
 // Copyright (C) 2020-2022 Intel Corporation
 // SPDX-License-Identifier: Apache-2.0
 
-#include "dynamic_loading_kernel_IF.hpp"
+#include "dynamic_loading_kernel_IF.h"
 
-DynamicIF::DynamicIF(const std::string& libName) : m_lib_name_(libName) {
+DynamicIF::DynamicIF(const std::string& libName) 
+    : m_lib_name_(libName) {
     std::cout << "Using FPGA shared library: " << m_lib_name_ << std::endl;
     m_lib_handle_ = dlopen(m_lib_name_.c_str(), RTLD_NOW | RTLD_GLOBAL);
     if (!m_lib_handle_) {
@@ -20,7 +21,6 @@ DynamicIF::~DynamicIF() {
     if (m_lib_handle_) dlclose(m_lib_handle_);
 }
 
-
 void* DynamicIF::loadKernel(const char* kernelName) const {
     void* temp = dlsym(m_lib_handle_, kernelName);
     if (!temp)
@@ -30,17 +30,17 @@ void* DynamicIF::loadKernel(const char* kernelName) const {
 
 std::string DynamicIF::getLibName() const { return m_lib_name_; }
 
-MultLowLvlDynaimcIF::MultLowLvlDynaimcIF(const std::string &lib) 
+MultLowLvlDynaimcIF::MultLowLvlDynaimcIF(const std::string& lib) 
     : DynamicIF(lib),
-    : BringToSetLoad(nullptr),
-    : BringToSetLoad2(nullptr),
-    : TensorProductStore0(nullptr),
-    : TensorProductStore12(nullptr),
-    : BringToSet(nullptr),
-    : BringToSet2(nullptr),
-    : TensorProduct(nullptr),
-    : GetINTT1(nullptr),
-    : GetINTT2(nullptr) {
+      BringToSetLoad(nullptr),
+      BringToSetLoad2(nullptr),
+      TensorProductStore0(nullptr),
+      TensorProductStore12(nullptr),
+      BringToSet(nullptr),
+      BringToSet2(nullptr),
+      TensorProduct(nullptr),
+      GetINTT1(nullptr),
+      GetINTT2(nullptr) {
     
     BringToSetLoad = (sycl::event (*)(sycl::queue&, sycl::event&, 
                                  sycl::buffer<uint64_t>&,
@@ -72,5 +72,8 @@ MultLowLvlDynaimcIF::MultLowLvlDynaimcIF(const std::string &lib)
 
     GetINTT2 = (L1::helib::bgv::intt2_t& (*)())loadKernel("GetINTT2");
 
+    GetTensorProductNTT1 = (L1::helib::bgv::tensor_product_ntt1_t &(*)())loadKernel("GetTensorProductNTT1");
+
+    GetTensorProductNTT2 = (L1::helib::bgv::tensor_product_ntt2_t &(*)())loadKernel("GetTensorProductNTT2");
 
 }
