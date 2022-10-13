@@ -4,6 +4,9 @@
 cmake_minimum_required(VERSION 3.5.1)
 include(../cmake/json/json.cmake)
 
+
+set(CMAKE_CXX_COMPILER dpcpp)
+
 function(test_function kernel)
 
     set (KERNEL ${kernel})
@@ -16,12 +19,12 @@ function(test_function kernel)
 
     add_executable(test_${KERNEL} ${SRC})
 
-    target_compile_options(test_${KERNEL} PRIVATE -g -fPIE -fPIC -fstack-protector -Wformat -Wformat-security -qactypes -DFPGA_EMULATOR
+    target_compile_options(test_${KERNEL} PRIVATE -g -fPIE -fPIC -fstack-protector -Wformat -Wformat-security -qactypes -DFPGA_EMULATOR)
     target_include_directories(test_${KERNEL} PRIVATE $<BUILD_INTERFACE:${CMAKE_INSTALL_PREFIX}/inc>)
     target_include_directories(test_${KERNEL} PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
     target_link_directories(test_${KERNEL} PUBLIC ${CMAKE_INSTALL_PREFIX}/lib)
     target_link_directories(test_${KERNEL} PUBLIC ${CMAKE_BINARY_DIR}/hexl-install/lib)
-    target_link_libraries(test_${KERNEL} PUBLIC hexl-fpga)
+    #target_link_libraries(test_${KERNEL} PUBLIC hexl-fpga)
     target_link_libraries(test_${KERNEL} PRIVATE gtest)
     target_link_libraries(test_${KERNEL} PRIVATE nlohmann_json::nlohmann_json)
     
@@ -53,7 +56,7 @@ file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/bitstream_dir.sh
 # test_function(keyswitch)
 # test_function(dyadic_multiply_keyswitch)
 
-test_function(multLowLvl)
+test_function(multlowlvl)
 
 add_custom_target(tests
     # COMMAND ./micro_dyadic_multiply.sh DEPENDS test_dyadic_multiply
@@ -61,11 +64,11 @@ add_custom_target(tests
     # COMMAND ./micro_inv_ntt.sh DEPENDS test_inv_ntt
     # COMMAND ./micro_keyswitch.sh DEPENDS test_keyswitch
     # COMMAND ./micro_dyadic_multiply_keyswitch.sh DEPENDS test_dyadic_multiply_keyswitch
-    COMMAND ./micro_multLowlvl.sh DEPENDS test_multLowLvl
+    COMMAND bash ./micro_multlowlvl.sh DEPENDS test_multlowlvl
 )
 
-add_custom_target(run_test_multLowLvl
-    COMMAND ./micro_multLowLvl.sh DEPENDS test_multLowLvl
+add_custom_target(run_test_multlowlvl
+    COMMAND bash ./micro_multlowlvl.sh DEPENDS test_multlowlvl
 )
 # add_custom_target(run_test_keyswitch
 #     COMMAND ./micro_keyswitch.sh DEPENDS test_keyswitch

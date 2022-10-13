@@ -32,48 +32,49 @@ std::string DynamicIF::getLibName() const { return m_lib_name_; }
 
 MultLowLvlDynaimcIF::MultLowLvlDynaimcIF(const std::string& lib) 
     : DynamicIF(lib),
+      launch_intt1(nullptr),
+      launch_intt2(nullptr),
+      launch_ntt1(nullptr),
+      launch_ntt2(nullptr),
       BringToSetLoad(nullptr),
       BringToSetLoad2(nullptr),
       TensorProductStore0(nullptr),
       TensorProductStore12(nullptr),
       BringToSet(nullptr),
       BringToSet2(nullptr),
-      TensorProduct(nullptr),
-      GetINTT1(nullptr),
-      GetINTT2(nullptr) {
+      TensorProduct(nullptr) {
     
+    launch_intt1 = (void (*)(std::vector<uint64_t> &primes))loadKernel("launch_intt1_IF");
+
+    launch_intt2 = (void (*)(std::vector<uint64_t> &primes))loadKernel("launch_intt2_IF");
+
+    launch_ntt1 = (void (*)(std::vector<uint64_t> &primes))loadKernel("launch_ntt1_IF");
+
+    launch_ntt2 = (void (*)(std::vector<uint64_t> &primes))loadKernel("launch_ntt2_IF");
+
     BringToSetLoad = (sycl::event (*)(sycl::queue&, sycl::event&, 
                                  sycl::buffer<uint64_t>&,
-                                 sycl::buffer<uint8_t>&))loadKernel("BringToSetLoad");
+                                 sycl::buffer<uint8_t>&))loadKernel("BringToSetLoad_IF");
     
     BringToSetLoad2 = (sycl::event (*)(sycl::queue&, sycl::event&, 
                                  sycl::buffer<uint64_t>&,
-                                 sycl::buffer<uint8_t>&))loadKernel("BringToSetLoad2");
+                                 sycl::buffer<uint8_t>&))loadKernel("BringToSetLoad2_IF");
 
     TensorProductStore0 = (sycl::event (*)(sycl::queue&,
-                                       sycl::buffer<ulong>&))loadKernel("TensorProductStore0");
+                                       sycl::buffer<ulong>&))loadKernel("TensorProductStore0_IF");
     
     TensorProductStore12 = (sycl::event (*)(sycl::queue&,
                                         sycl::buffer<ulong>&,
-                                        sycl::buffer<ulong>&))loadKernel("TensorProductStore12");
+                                        sycl::buffer<ulong>&))loadKernel("TensorProductStore12_IF");
     
     BringToSet = (sycl::event (*)(sycl::queue&, uint32_t,
                              sycl::buffer<ulong2>&, uint32_t,
-                             uint32_t, uint, uint64_t))loadKernel("BringToSet");
+                             uint32_t, uint, uint64_t))loadKernel("BringToSet_IF");
     
     BringToSet2 = (sycl::event (*)(sycl::queue&, uint32_t,
                                sycl::buffer<ulong2>&, uint32_t,
-                               uint32_t, uint, uint64_t))loadKernel("BringToSet2");
+                               uint32_t, uint, uint64_t))loadKernel("BringToSet2_IF");
     
-    TensorProduct = (sycl::event (*)(sycl::queue&, sycl::buffer<ulong4>&))loadKernel("TensorProduct");
-
-
-    GetINTT1 = (L1::helib::bgv::intt1_t& (*)())loadKernel("GetINTT1");
-
-    GetINTT2 = (L1::helib::bgv::intt2_t& (*)())loadKernel("GetINTT2");
-
-    GetTensorProductNTT1 = (L1::helib::bgv::tensor_product_ntt1_t &(*)())loadKernel("GetTensorProductNTT1");
-
-    GetTensorProductNTT2 = (L1::helib::bgv::tensor_product_ntt2_t &(*)())loadKernel("GetTensorProductNTT2");
+    TensorProduct = (sycl::event (*)(sycl::queue&, sycl::buffer<ulong4>&))loadKernel("TensorProduct_IF");
 
 }

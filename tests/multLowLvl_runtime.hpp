@@ -16,12 +16,24 @@ static MultLowLvlDynaimcIF* g_multlowlvl = new MultLowLvlDynaimcIF("multlowlvl.s
 
 void LaunchINTT1(std::vector<uint64_t> &primes) {
   // launch iNTT
-  L2::helib::bgv::launch_intt(g_multlowlvl->GetINTT1(), primes, COEFF_COUNT);
+  //L2::helib::bgv::launch_intt(g_multlowlvl->GetINTT1(), primes, COEFF_COUNT);
+  g_multlowlvl->launch_intt1(primes);
 }
 
 void LaunchINTT2(std::vector<uint64_t> &primes) {
   // launch iNTT
-  L2::helib::bgv::launch_intt(g_multlowlvl->GetINTT1(), primes, COEFF_COUNT);
+  //L2::helib::bgv::launch_intt(g_multlowlvl->GetINTT1(), primes, COEFF_COUNT);
+  g_multlowlvl->launch_intt2(primes);
+}
+
+void LaunchNTT1(std::vector<uint64_t> &primes) {
+  // launch NTT
+  g_multlowlvl->launch_ntt1(primes);
+}
+
+void LaunchNTT2(std::vector<uint64_t> &primes) {
+  // launch iNTT
+  g_multlowlvl->launch_ntt2(primes);
 }
 
 struct Context {
@@ -70,8 +82,11 @@ void Init(std::vector<uint64_t> &primes) {
 
   // launch NTT
   // Todo: expose GetTensorProductNTT1 like GetINTT1/GetINTT2
-  L2::helib::bgv::launch_ntt(g_multlowlvl->GetTensorProductNTT1(), primes, COEFF_COUNT);
-  L2::helib::bgv::launch_ntt(g_multlowlvl->GetTensorProductNTT2(), primes, COEFF_COUNT);
+  // L2::helib::bgv::launch_ntt(g_multlowlvl->GetTensorProductNTT1(), primes, COEFF_COUNT);
+  // L2::helib::bgv::launch_ntt(g_multlowlvl->GetTensorProductNTT2(), primes, COEFF_COUNT);
+
+  LaunchNTT1(primes);
+  LaunchNTT2(primes);
 }
 
 

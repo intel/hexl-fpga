@@ -53,6 +53,7 @@ void launch_ntt2_IF(std::vector<uint64_t> &primes) {
 // declare and define a new interface, this interface call functions defined in L1/multlowlovl.cpp
 // and L1/tensorProduct.cpp, this interface will be exposed to runtime, loaded by dynamic loading 
 // C library function call (e.g. dlopen(), dlsym() ).
+
 sycl::event BringToSetLoad_IF(sycl::queue &q, sycl::event &depends,
                            sycl::buffer<uint64_t> &c,
                            sycl::buffer<uint8_t> &prime_index_set_buf) {

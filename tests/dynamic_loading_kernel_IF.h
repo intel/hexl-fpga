@@ -37,7 +37,19 @@ public:
 
     /**
      * see device/multlowlvl.cpp for kernel library interface.
+     * 11 functions in total.
      */
+
+
+    /**
+     * launch ntt and intt interfaces
+     */
+
+    void (*launch_intt1)(std::vector<uint64_t> &primes);
+    void (*launch_intt2)(std::vector<uint64_t> &primes);
+
+    void (*launch_ntt1)(std::vector<uint64_t> &primes);
+    void (*launch_ntt2)(std::vector<uint64_t> &primes);
 
 
     /**
@@ -85,24 +97,6 @@ public:
     sycl::event (*TensorProduct)(sycl::queue&, sycl::buffer<ulong4>&);
 
 
-    /**
-     * intt1_t and intt2_t are user defined class/struct, not functions.
-     * Let's try to use dynamic loading machanism load an object.
-     * from shared library.
-     */
-
-    L1::helib::bgv::intt1_t& (*GetINTT1)();
-
-    L1::helib::bgv::intt2_t& (*GetINTT2)();
-
-
-    /**
-     * like intt1_t & intt2_t, let's try to dynamic loading an user-defined object
-     * from shared library.
-     */
-
-    L1::helib::bgv::tensor_product_ntt1_t &(*GetTensorProductNTT1)();
-    L1::helib::bgv::tensor_product_ntt2_t &(*GetTensorProductNTT2)();
 
 };
 
