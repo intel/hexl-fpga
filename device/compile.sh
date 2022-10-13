@@ -25,7 +25,9 @@ compile() {
         -Wno-ignored-attributes -Wno-return-type-c-linkage -Wno-unknown-pragmas \
         ${others} \
         -o lib${kernel}.so \
-        ${src_dir}/device/${kernel}.cpp
+        ${src_dir}/device/${kernel}.cpp \
+        ${src_dir}/device/multlowlvl/src/L1/multLowLvl.cpp \
+        ${src_dir}/device/multlowlvl/src/L1/tensorProduct.cpp
 
     rm -rf ${TMPDIR}
     export TMPDIR=

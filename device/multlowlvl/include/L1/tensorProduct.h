@@ -19,8 +19,6 @@ using tensor_product_ntt2_t =
     ntt<11, 8, COEFF_COUNT, pipe_scale_output2,
         pipe_tensor_product_prime_index2, pipe_tensor_product_input2>;
 
-#if 1
-
 /**
  * @brief Get the tensor_product_ntt1_t instance
  *
@@ -34,6 +32,7 @@ tensor_product_ntt1_t &GetTensorProductNTT1();
  * @return tensor_product_ntt2_t&
  */
 tensor_product_ntt2_t &GetTensorProductNTT2();
+
 
 #if 0
 /**
@@ -67,11 +66,13 @@ sycl::event TensorProductNTT2LoadPrimeIndex(
  * @param output_c2
  * @return event
  */
-event TensorProduct(sycl::queue &q, sycl::buffer<ulong4> &primes);
+sycl::event TensorProduct(sycl::queue &q, sycl::buffer<ulong4> &primes);
 
 sycl::event TensorProductStore0(sycl::queue &q, sycl::buffer<ulong> &output_c0);
 sycl::event TensorProductStore12(sycl::queue &q, sycl::buffer<ulong> &output_c1,
                                  sycl::buffer<ulong> &output_c2);
+
+#if 0
 
 /**
  * @brief TensorProductLoad1
@@ -90,7 +91,9 @@ sycl::event TensorProductLoad1(sycl::queue &q, sycl::buffer<uint64_t> &c);
  * @return sycl::event
  */
 sycl::event TensorProductLoad2(sycl::queue &q, sycl::buffer<uint64_t> &c);
+
 #endif
+
 }  // namespace bgv
 }  // namespace helib
 }  // namespace L1

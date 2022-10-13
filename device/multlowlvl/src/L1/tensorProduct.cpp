@@ -1,8 +1,8 @@
-#include <L0/load.hpp>
-#include <L0/scale.hpp>
-#include <L0/store.hpp>
-#include <L0/tensorProduct.hpp>
-#include <L1/tensorProduct.h>
+#include "../L0/load.hpp"
+#include "../L0/scale.hpp"
+#include "../L0/store.hpp"
+#include "../L0/tensorProduct.hpp"
+#include "../../include/L1/tensorProduct.h"
 
 namespace L1 {
 namespace helib {

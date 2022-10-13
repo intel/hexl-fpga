@@ -1,21 +1,21 @@
-#include <L0/load.hpp>
-#include <L0/scale.hpp>
-#include <L0/store.hpp>
-#include <L1/helib_bgv.h>
+#include "../L0/load.hpp"
+#include "../L0/scale.hpp"
+#include "../L0/store.hpp"
+#include "../../include/L1/helib_bgv.h"
 
 namespace L1 {
 namespace helib {
 namespace bgv {
 
-// intt1_t &GetINTT1() {
-//   static intt1_t intt;
-//   return intt;
-// }
+intt1_t &GetINTT1() {
+  static intt1_t intt;
+  return intt;
+}
 
-// intt2_t &GetINTT2() {
-//   static intt2_t intt;
-//   return intt;
-// }
+intt2_t &GetINTT2() {
+  static intt2_t intt;
+  return intt;
+}
 
 /*
 sycl::event INTT1LoadPrimesIndex(sycl::queue &q,

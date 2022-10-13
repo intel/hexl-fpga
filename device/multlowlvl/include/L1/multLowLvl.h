@@ -44,15 +44,15 @@ intt1_t &GetINTT1();
  */
 intt2_t &GetINTT2();
 
-intt1_t &GetINTT1() {
-  static intt1_t intt;
-  return intt;
-}
+// intt1_t &GetINTT1() {
+//   static intt1_t intt;
+//   return intt;
+// }
 
-intt2_t &GetINTT2() {
-  static intt2_t intt;
-  return intt;
-}
+// intt2_t &GetINTT2() {
+//   static intt2_t intt;
+//   return intt;
+// }
 
 /**
  * @brief INTT1LoadPrimesIndex
@@ -86,9 +86,11 @@ sycl::event INTT2LoadPrimesIndex(sycl::queue &q,
  * @param t
  * @return event
  */
-event BringToSet(sycl::queue &q, uint32_t coeff_count,
+sycl::event BringToSet(sycl::queue &q, uint32_t coeff_count,
                  sycl::buffer<ulong2> &scale_param_set_buf, uint32_t P,
                  uint32_t Q, uint I, uint64_t t);
+
+
 
 /**
  * @brief Load the input for bringToSet
@@ -100,6 +102,7 @@ event BringToSet(sycl::queue &q, uint32_t coeff_count,
 sycl::event BringToSetLoad(sycl::queue &q, sycl::event &depends,
                            sycl::buffer<uint64_t> &c,
                            sycl::buffer<uint8_t> &prime_index_set_buf);
+
 
 /**
  * @brief store the output for bringToSet
@@ -122,9 +125,11 @@ sycl::event BringToSetStore(sycl::queue &q, sycl::buffer<uint64_t> &c);
  * @param t
  * @return event
  */
-event BringToSet2(sycl::queue &q, uint32_t coeff_count,
+sycl::event BringToSet2(sycl::queue &q, uint32_t coeff_count,
                   sycl::buffer<ulong2> &scale_param_set_buf, uint32_t P,
                   uint32_t Q, uint I, uint64_t t);
+
+
 
 /**
  * @brief Load the input for bringToSet
@@ -136,6 +141,8 @@ event BringToSet2(sycl::queue &q, uint32_t coeff_count,
 sycl::event BringToSetLoad2(sycl::queue &q, sycl::event &depends,
                             sycl::buffer<uint64_t> &c,
                             sycl::buffer<uint8_t> &prime_index_set_buf);
+
+
 
 /**
  * @brief store the output for bringToSet
