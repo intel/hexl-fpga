@@ -25,6 +25,10 @@ void* DynamicIF::loadKernel(const char* kernelName) const {
     void* temp = dlsym(m_lib_handle_, kernelName);
     if (!temp)
         std::cerr << "Cannot load symbol function " << kernelName << std::endl;
+#if defined(FPGA_EMULATOR)
+    std::cout << "load function " << kernelName << " successfully.\n";
+#endif
+
     return temp;
 }
 

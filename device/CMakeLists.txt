@@ -1,4 +1,4 @@
-
+set(CMAKE_CXX_COMPILER dpcpp)
 set(KERNEL multlowlvl_top)
 set(SRC 
             ./multlowlvl/src/L1/multLowLvl.cpp
@@ -9,16 +9,19 @@ set(AC_TYPES_FLAGS "-qactypes")
 set(FPGA_BOARD "de10_agilex:B2E2_8GBx4")
 
 if(DEFINED EMU_ENABLE_DEBUG)
-    set(EMU_COMPILE_FLAGS -fPIC -fintelfpga -c -O0 -g ${AC_TYPES_FLAGS})
+    set(EMU_COMPILE_FLAGS -fPIC -fintelfpga -c -O0 -g ${AC_TYPES_FLAGS} -DFPGA_EMULATOR)
     set(EMU_LINK_FLAGS -fintelfpga -O0 -g)
 else()
-    set(EMU_COMPILE_FLAGS  -fPIC -fintelfpga -c ${AC_TYPES_FLAGS})
+    set(EMU_COMPILE_FLAGS  -fPIC -fintelfpga -c ${AC_TYPES_FLAGS} -DFPGA_EMULATOR)
     set(EMU_LINK_FLAGS -fintelfpga -O0)
 endif()
 
 add_library(${KERNEL}_emu  SHARED ${SRC})
 target_compile_options(${KERNEL}_emu PRIVATE ${EMU_COMPILE_FLAGS} ${config_${kernel}})
 target_link_options(${KERNEL}_emu PRIVATE ${EMU_LINK_FLAGS})
+target_link_libraries(${KERNEL}_emu PRIVATE hexl)
+
+add_custom_target(emu DEPENDS ${KERNEL}_emu)
 
 ########################################################################################################
 

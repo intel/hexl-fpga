@@ -8,7 +8,7 @@
 #include "../device/multlowlvl/include/L2/ntt.hpp"
 #include "../device/multlowlvl/include/L2/utils.h"
 
-static MultLowLvlDynaimcIF* g_multlowlvl = new MultLowLvlDynaimcIF("multlowlvl.so");
+static MultLowLvlDynaimcIF* g_multlowlvl = new MultLowLvlDynaimcIF("./libmultLowLvl.so");
 
 /**
  * runtime functions, comes from src/L2/multLowLvl.cpp file.
