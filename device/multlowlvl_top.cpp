@@ -11,9 +11,19 @@
 #include "multlowlvl/include/L1/tensorProduct.h"
 #include "multlowlvl/include/L1/helib_bgv.h"
 
+// TODO:
+// In general, L2/ files should not be include in
+// this file, because L2 is for runtime, let's try to only include
+// L1/ files in this file, and remove link hexl to the shared library.
+
 #include "multlowlvl/include/L2/utils.h"
 #include "multlowlvl/include/L2/ntt.hpp"
 #include "multlowlvl/include/L2/intt.hpp"
+
+#include "multlowlvl/include/L2/utils.h"
+#include "multlowlvl/include/L1/ntt.h"
+#include "multlowlvl/include/L1/intt.h"
+#include "multlowlvl/include/L1/tensorProduct.h"
 
 using namespace L1::helib::bgv;
 
@@ -23,20 +33,45 @@ using namespace L1::helib::bgv;
 
 extern "C" {
 
-void launch_intt1_IF(std::vector<uint64_t> &primes) {
-    L2::helib::bgv::launch_intt(L1::helib::bgv::GetINTT1(), primes, COEFF_COUNT);
+//L2 interfaces for intt and ntt
+
+// void launch_intt1_IF(std::vector<uint64_t> &primes) {
+//     L2::helib::bgv::launch_intt(L1::helib::bgv::GetINTT1(), primes, COEFF_COUNT);
+// }
+
+// void launch_intt2_IF(std::vector<uint64_t> &primes) {
+//     L2::helib::bgv::launch_intt(L1::helib::bgv::GetINTT2(), primes, COEFF_COUNT);
+// }
+
+// void launch_ntt1_IF(std::vector<uint64_t> &primes) {
+//     L2::helib::bgv::launch_ntt(L1::helib::bgv::GetTensorProductNTT1(), primes, COEFF_COUNT);
+// }
+
+// void launch_ntt2_IF(std::vector<uint64_t> &primes) {
+//     L2::helib::bgv::launch_ntt(L1::helib::bgv::GetTensorProductNTT2(), primes, COEFF_COUNT);
+// }
+
+
+
+
+intt1_t& launch_intt1_IF() {
+    return L1::helib::bgv::GetINTT1();
+    //L2::helib::bgv::launch_intt(, primes, COEFF_COUNT);
 }
 
-void launch_intt2_IF(std::vector<uint64_t> &primes) {
-    L2::helib::bgv::launch_intt(L1::helib::bgv::GetINTT2(), primes, COEFF_COUNT);
+intt2_t& launch_intt2_IF() {
+    return L1::helib::bgv::GetINTT2();
+    //L2::helib::bgv::launch_intt(L1::helib::bgv::GetINTT2(), primes, COEFF_COUNT);
 }
 
-void launch_ntt1_IF(std::vector<uint64_t> &primes) {
-    L2::helib::bgv::launch_ntt(L1::helib::bgv::GetTensorProductNTT1(), primes, COEFF_COUNT);
+tensor_product_ntt1_t& launch_ntt1_IF() {
+    return L1::helib::bgv::GetTensorProductNTT1();
+    //L2::helib::bgv::launch_ntt(L1::helib::bgv::GetTensorProductNTT1(), primes, COEFF_COUNT);
 }
 
-void launch_ntt2_IF(std::vector<uint64_t> &primes) {
-    L2::helib::bgv::launch_ntt(L1::helib::bgv::GetTensorProductNTT2(), primes, COEFF_COUNT);
+tensor_product_ntt2_t& launch_ntt2_IF() {
+    return L1::helib::bgv::GetTensorProductNTT2();
+    //L2::helib::bgv::launch_ntt(L1::helib::bgv::GetTensorProductNTT2(), primes, COEFF_COUNT);
 }
 
 

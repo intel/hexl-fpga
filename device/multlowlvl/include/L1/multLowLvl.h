@@ -30,6 +30,12 @@ using intt1_t = intt<1, 8, COEFF_COUNT, pipe_intt1_input,
 using intt2_t = intt<2, 8, COEFF_COUNT, pipe_intt2_input,
                      pipe_intt2_primes_index, pipe_scale_input2>;
 
+template class ntt<1, 8, COEFF_COUNT, pipe_intt1_input,
+                    pipe_intt1_primes_index, pipe_scale_input>;
+
+template class ntt<2, 8, COEFF_COUNT, pipe_intt2_input,
+                     pipe_intt2_primes_index, pipe_scale_input2>;
+
 /**
  * @brief GetINTT1
  *

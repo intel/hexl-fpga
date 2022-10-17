@@ -19,6 +19,12 @@ using tensor_product_ntt2_t =
     ntt<11, 8, COEFF_COUNT, pipe_scale_output2,
         pipe_tensor_product_prime_index2, pipe_tensor_product_input2>;
 
+template class ntt<10, 8, COEFF_COUNT, pipe_scale_output, pipe_tensor_product_prime_index1,
+        pipe_tensor_product_input1>;
+
+template class ntt<11, 8, COEFF_COUNT, pipe_scale_output2,
+        pipe_tensor_product_prime_index2, pipe_tensor_product_input2>;
+
 /**
  * @brief Get the tensor_product_ntt1_t instance
  *
