@@ -33,5 +33,6 @@ set(HW_LINK_FLAGS -fintelfpga  -Xshardware ${AC_TYPES_FLAGS} -Xsboard=${FPGA_BOA
 add_library(${KERNEL}_hw EXCLUDE_FROM_ALL SHARED ${SRC})
 target_compile_options(${KERNEL}_hw PRIVATE ${HW_COMPILE_FLAGS} )
 target_link_options(${KERNEL}_hw PRIVATE ${HW_LINK_FLAGS})
+target_link_libraries(${KERNEL}_hw PRIVATE hexl)
 
 add_custom_target(fpga DEPENDS ${KERNEL}_hw)
