@@ -63,7 +63,7 @@ static DEV_TYPE get_device() {
     return d;
 }
 
-static int g_choice = get_device();
+static int g_choice = FPGA;
 
 // DYADIC_MULTIPLY section
 static uint64_t get_coeff_size() {
@@ -141,6 +141,7 @@ static Buffer fpga_buffer(g_fpga_bufsize, g_batch_size_dyadic_mult,
                           g_batch_size_KeySwitch);
 
 void attach_fpga_pooling() {
+    g_choice = get_device();
     if (g_choice == CPU) {
         return;
     }
