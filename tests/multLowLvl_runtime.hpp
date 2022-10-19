@@ -9,7 +9,7 @@
 #include "../device/multlowlvl/include/L2/ntt.hpp"
 #include "../device/multlowlvl/include/L2/utils.h"
 
-static MultLowLvlDynaimcIF* g_multlowlvl = new MultLowLvlDynaimcIF("./libmultLowLvl.so");
+static MultLowLvlDynaimcIF* g_multlowlvl = new MultLowLvlDynaimcIF("./libmultlowlvl.so");
 
 /**
  * runtime functions, comes from src/L2/multLowLvl.cpp file.
@@ -17,26 +17,26 @@ static MultLowLvlDynaimcIF* g_multlowlvl = new MultLowLvlDynaimcIF("./libmultLow
 
 void LaunchINTT1(std::vector<uint64_t> &primes) {
   // launch iNTT
-  L2::helib::bgv::launch_intt<intt1_t>(g_multlowlvl->GetINTT1(), primes, COEFF_COUNT);
-  //g_multlowlvl->launch_intt1(primes);
+  //L2::helib::bgv::launch_intt<intt1_t>(g_multlowlvl->GetINTT1(), primes, COEFF_COUNT);
+  g_multlowlvl->launch_intt1(primes);
 }
 
 void LaunchINTT2(std::vector<uint64_t> &primes) {
   // launch iNTT
-  L2::helib::bgv::launch_intt<intt2_t>(g_multlowlvl->GetINTT2(), primes, COEFF_COUNT);
-  //g_multlowlvl->launch_intt2(primes);
+  //L2::helib::bgv::launch_intt<intt2_t>(g_multlowlvl->GetINTT2(), primes, COEFF_COUNT);
+  g_multlowlvl->launch_intt2(primes);
 }
 
 void LaunchNTT1(std::vector<uint64_t> &primes) {
   // launch NTT
-  L2::helib::bgv::launch_ntt<tensor_product_ntt1_t>(g_multlowlvl->GetTensorProductNTT1(), primes, COEFF_COUNT);
-  //g_multlowlvl->launch_ntt1(primes);
+  //L2::helib::bgv::launch_ntt<tensor_product_ntt1_t>(g_multlowlvl->GetTensorProductNTT1(), primes, COEFF_COUNT);
+  g_multlowlvl->launch_ntt1(primes);
 }
 
 void LaunchNTT2(std::vector<uint64_t> &primes) {
   // launch iNTT
-  L2::helib::bgv::launch_ntt<tensor_product_ntt2_t>(g_multlowlvl->GetTensorProductNTT2(), primes, COEFF_COUNT);
-  //g_multlowlvl->launch_ntt2(primes);
+  //L2::helib::bgv::launch_ntt<tensor_product_ntt2_t>(g_multlowlvl->GetTensorProductNTT2(), primes, COEFF_COUNT);
+  g_multlowlvl->launch_ntt2(primes);
 }
 
 struct Context {
@@ -72,11 +72,7 @@ void Init(std::vector<uint64_t> &primes) {
   //auto prop_list = property_list{property::queue::enable_profiling()};
   auto prop_list = property_list{};
   ctxt.q_scale1 = new sycl::queue(device_selector, prop_list);
-#if 1
-  std::cout << ctxt.q_scale1->get_device().get_info<sycl::info::device::name>() << std::endl;
-#endif
   ctxt.q_scale2 = new sycl::queue(device_selector, prop_list);
-  std::cout << ctxt.q_scale2->get_device().get_info<sycl::info::device::name>() << std::endl;
   ctxt.q_load_data_copy = new sycl::queue(device_selector, prop_list);
   ctxt.q_load1 = new sycl::queue(device_selector, prop_list);
   ctxt.q_load2 = new sycl::queue(device_selector, prop_list);
@@ -84,6 +80,7 @@ void Init(std::vector<uint64_t> &primes) {
   ctxt.q_tensor_product_store0 = new sycl::queue(device_selector, prop_list);
   ctxt.q_tensor_product_store12 = new sycl::queue(device_selector, prop_list);
   ctxt.q_tensor_product_memcpy = new sycl::queue(device_selector, prop_list);
+  
   std::cout << ctxt.q_tensor_product_memcpy->get_device().get_info<sycl::info::device::name>() << std::endl;
 
   LaunchINTT1(primes);

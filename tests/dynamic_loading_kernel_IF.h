@@ -51,6 +51,12 @@ public:
      * header files of shared library.
      */
 
+    void (*launch_intt1)(std::vector<uint64_t> &primes);
+    void (*launch_intt2)(std::vector<uint64_t> &primes);
+
+    void (*launch_ntt1)(std::vector<uint64_t> &primes);
+    void (*launch_ntt2)(std::vector<uint64_t> &primes);
+
     intt1_t& (*GetINTT1)();
     intt2_t& (*GetINTT2)();
 

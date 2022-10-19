@@ -35,6 +35,10 @@ std::string DynamicIF::getLibName() const { return m_lib_name_; }
 
 MultLowLvlDynaimcIF::MultLowLvlDynaimcIF(const std::string& lib) 
     : DynamicIF(lib),
+      launch_intt1(nullptr),
+      launch_intt2(nullptr),
+      launch_ntt1(nullptr),
+      launch_ntt2(nullptr),
       GetINTT1(nullptr),
       GetINTT2(nullptr),
       GetTensorProductNTT1(nullptr),
@@ -46,6 +50,14 @@ MultLowLvlDynaimcIF::MultLowLvlDynaimcIF(const std::string& lib)
       BringToSet(nullptr),
       BringToSet2(nullptr),
       TensorProduct(nullptr) {
+
+    launch_intt1 = (void (*)(std::vector<uint64_t> &primes))loadKernel("launch_intt1_IF_L2");
+
+    launch_intt2 = (void (*)(std::vector<uint64_t> &primes))loadKernel("launch_intt2_IF_L2");
+
+    launch_ntt1 = (void (*)(std::vector<uint64_t> &primes))loadKernel("launch_ntt1_IF_L2");
+
+    launch_ntt2 = (void (*)(std::vector<uint64_t> &primes))loadKernel("launch_ntt2_IF_L2");
     
     GetINTT1 = (intt1_t& (*)())loadKernel("launch_intt1_IF");
 
