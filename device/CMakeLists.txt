@@ -10,10 +10,10 @@ set(FPGA_BOARD "de10_agilex:B2E2_8GBx4")
 
 if(DEFINED EMU_ENABLE_DEBUG)
     set(EMU_COMPILE_FLAGS -fPIC -fintelfpga -c -O0 -g ${AC_TYPES_FLAGS} -DFPGA_EMULATOR)
-    set(EMU_LINK_FLAGS -fintelfpga -O0 -g)
+    set(EMU_LINK_FLAGS -fintelfpga -O0 -g -fPIC)
 else()
     set(EMU_COMPILE_FLAGS  -fPIC -fintelfpga -c ${AC_TYPES_FLAGS} -DFPGA_EMULATOR)
-    set(EMU_LINK_FLAGS -fintelfpga -O0)
+    set(EMU_LINK_FLAGS -fintelfpga -O0 -fPIC)
 endif()
 
 add_library(${KERNEL}_emu  SHARED ${SRC})
@@ -27,7 +27,7 @@ add_custom_target(emu DEPENDS ${KERNEL}_emu)
 
 
 set(HW_COMPILE_FLAGS -fintelfpga -c -fPIC ${AC_TYPES_FLAGS} )
-set(HW_LINK_FLAGS -fintelfpga  -Xshardware ${AC_TYPES_FLAGS} -Xsboard=${FPGA_BOARD} -Xsseed=789145 
+set(HW_LINK_FLAGS -fintelfpga -fPIC -Xshardware ${AC_TYPES_FLAGS} -Xsboard=${FPGA_BOARD} -Xsseed=789145 
     -Xshyper-optimized-handshaking=off -Xsbsp-flow=flat -Xstiming-failure-mode=ignore -Xsopt-arg=-nocaching)
 
 add_library(${KERNEL}_hw EXCLUDE_FROM_ALL SHARED ${SRC})
