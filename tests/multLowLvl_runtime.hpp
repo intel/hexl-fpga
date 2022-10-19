@@ -17,25 +17,38 @@ static MultLowLvlDynaimcIF* g_multlowlvl = new MultLowLvlDynaimcIF("./libmultlow
 
 void LaunchINTT1(std::vector<uint64_t> &primes) {
   // launch iNTT
-  //L2::helib::bgv::launch_intt<intt1_t>(g_multlowlvl->GetINTT1(), primes, COEFF_COUNT);
-  g_multlowlvl->launch_intt1(primes);
+  L2::helib::bgv::launch_intt(g_multlowlvl->GetINTT1(), primes, COEFF_COUNT);
+  //g_multlowlvl->launch_intt1(primes);
 }
 
 void LaunchINTT2(std::vector<uint64_t> &primes) {
   // launch iNTT
-  //L2::helib::bgv::launch_intt<intt2_t>(g_multlowlvl->GetINTT2(), primes, COEFF_COUNT);
-  g_multlowlvl->launch_intt2(primes);
+  L2::helib::bgv::launch_intt(g_multlowlvl->GetINTT2(), primes, COEFF_COUNT);
+  //g_multlowlvl->launch_intt2(primes);
 }
 
 void LaunchNTT1(std::vector<uint64_t> &primes) {
   // launch NTT
-  //L2::helib::bgv::launch_ntt<tensor_product_ntt1_t>(g_multlowlvl->GetTensorProductNTT1(), primes, COEFF_COUNT);
-  g_multlowlvl->launch_ntt1(primes);
+  L2::helib::bgv::launch_ntt(g_multlowlvl->GetTensorProductNTT1(), primes, COEFF_COUNT);
+  //g_multlowlvl->launch_ntt1(primes);
 }
 
 void LaunchNTT2(std::vector<uint64_t> &primes) {
   // launch iNTT
-  //L2::helib::bgv::launch_ntt<tensor_product_ntt2_t>(g_multlowlvl->GetTensorProductNTT2(), primes, COEFF_COUNT);
+  L2::helib::bgv::launch_ntt(g_multlowlvl->GetTensorProductNTT2(), primes, COEFF_COUNT);
+  //g_multlowlvl->launch_ntt2(primes);
+}
+
+void launch_intt_and_ntt(std::vector<uint64_t> &primes) {
+  
+  // L2::helib::bgv::launch_intt(g_multlowlvl->GetINTT1(), primes, COEFF_COUNT);
+  // L2::helib::bgv::launch_intt(g_multlowlvl->GetINTT2(), primes, COEFF_COUNT);
+  // L2::helib::bgv::launch_ntt(g_multlowlvl->GetTensorProductNTT1(), primes, COEFF_COUNT);
+  // L2::helib::bgv::launch_ntt(g_multlowlvl->GetTensorProductNTT2(), primes, COEFF_COUNT);
+
+  g_multlowlvl->launch_intt1(primes);
+  g_multlowlvl->launch_intt2(primes);
+  g_multlowlvl->launch_ntt1(primes);  
   g_multlowlvl->launch_ntt2(primes);
 }
 
@@ -83,16 +96,18 @@ void Init(std::vector<uint64_t> &primes) {
   
   std::cout << ctxt.q_tensor_product_memcpy->get_device().get_info<sycl::info::device::name>() << std::endl;
 
-  LaunchINTT1(primes);
-  LaunchINTT2(primes);
+  launch_intt_and_ntt(primes);
+
+  // LaunchINTT1(primes);
+  // LaunchINTT2(primes);
 
   // launch NTT
   // Todo: expose GetTensorProductNTT1 like GetINTT1/GetINTT2
   // L2::helib::bgv::launch_ntt(g_multlowlvl->GetTensorProductNTT1(), primes, COEFF_COUNT);
   // L2::helib::bgv::launch_ntt(g_multlowlvl->GetTensorProductNTT2(), primes, COEFF_COUNT);
 
-  LaunchNTT1(primes);
-  LaunchNTT2(primes);
+  // LaunchNTT1(primes);
+  // LaunchNTT2(primes);
 }
 
 

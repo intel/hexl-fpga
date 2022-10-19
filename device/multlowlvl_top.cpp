@@ -52,8 +52,6 @@ void launch_ntt2_IF_L2(std::vector<uint64_t> &primes) {
 }
 
 
-
-
 intt1_t& launch_intt1_IF() {
     return L1::helib::bgv::GetINTT1();
     //L2::helib::bgv::launch_intt(, primes, COEFF_COUNT);
