@@ -16,9 +16,9 @@
 // this file, because L2 is for runtime, let's try to only include
 // L1/ files in this file, and remove link hexl to the shared library.
 
-#include "multlowlvl/include/L2/utils.h"
-#include "multlowlvl/include/L2/ntt.hpp"
-#include "multlowlvl/include/L2/intt.hpp"
+// #include "multlowlvl/include/L2/utils.h"
+// #include "multlowlvl/include/L2/ntt.hpp"
+// #include "multlowlvl/include/L2/intt.hpp"
 
 #include "multlowlvl/include/L2/utils.h"
 #include "multlowlvl/include/L1/ntt.h"

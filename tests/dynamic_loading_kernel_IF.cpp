@@ -25,9 +25,8 @@ void* DynamicIF::loadKernel(const char* kernelName) const {
     void* temp = dlsym(m_lib_handle_, kernelName);
     if (!temp)
         std::cerr << "Cannot load symbol function " << kernelName << std::endl;
-#if defined(FPGA_EMULATOR)
+
     std::cout << "load function " << kernelName << " successfully.\n";
-#endif
 
     return temp;
 }
@@ -36,10 +35,10 @@ std::string DynamicIF::getLibName() const { return m_lib_name_; }
 
 MultLowLvlDynaimcIF::MultLowLvlDynaimcIF(const std::string& lib) 
     : DynamicIF(lib),
-      launch_intt1(nullptr),
-      launch_intt2(nullptr),
-      launch_ntt1(nullptr),
-      launch_ntt2(nullptr),
+      GetINTT1(nullptr),
+      GetINTT2(nullptr),
+      GetTensorProductNTT1(nullptr),
+      GetTensorProductNTT2(nullptr),
       BringToSetLoad(nullptr),
       BringToSetLoad2(nullptr),
       TensorProductStore0(nullptr),
@@ -48,13 +47,13 @@ MultLowLvlDynaimcIF::MultLowLvlDynaimcIF(const std::string& lib)
       BringToSet2(nullptr),
       TensorProduct(nullptr) {
     
-    launch_intt1 = (void (*)(std::vector<uint64_t> &primes))loadKernel("launch_intt1_IF");
+    GetINTT1 = (intt1_t& (*)())loadKernel("launch_intt1_IF");
 
-    launch_intt2 = (void (*)(std::vector<uint64_t> &primes))loadKernel("launch_intt2_IF");
+    GetINTT2 = (intt2_t& (*)())loadKernel("launch_intt2_IF");
 
-    launch_ntt1 = (void (*)(std::vector<uint64_t> &primes))loadKernel("launch_ntt1_IF");
+    GetTensorProductNTT1 = (tensor_product_ntt1_t& (*)())loadKernel("launch_ntt1_IF");
 
-    launch_ntt2 = (void (*)(std::vector<uint64_t> &primes))loadKernel("launch_ntt2_IF");
+    GetTensorProductNTT2 = (tensor_product_ntt2_t& (*)())loadKernel("launch_ntt2_IF");
 
     BringToSetLoad = (sycl::event (*)(sycl::queue&, sycl::event&, 
                                  sycl::buffer<uint64_t>&,

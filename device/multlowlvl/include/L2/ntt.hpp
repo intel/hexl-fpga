@@ -118,6 +118,8 @@ void launch_ntt(ntt_t &ntt, const std::vector<uint64_t> &primes,
     launch_compute_forward(ntt, degree, primes);
   }
 }
+
+
 }  // namespace bgv
 }  // namespace helib
 }  // namespace L2
