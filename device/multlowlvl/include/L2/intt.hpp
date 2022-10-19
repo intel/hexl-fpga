@@ -88,9 +88,9 @@ void launch_compute_inverse(intt_t &intt, unsigned long degree,
   sycl::ext::intel::fpga_selector device_selector;
 #endif
   static sycl::queue q_compute_inverse(device_selector);
-  // std::cout << "launching q_compute_inverse " << std::flush;
+  std::cout << "launching q_compute_inverse " << std::flush;
   intt.compute_inverse(q_compute_inverse, intt_configs);
-  // std::cout << "Done" << std::endl;
+  std::cout << "Done" << std::endl;
 }
 
 template <class intt_t>

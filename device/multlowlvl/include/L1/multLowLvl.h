@@ -30,10 +30,10 @@ using intt1_t = intt<1, 8, COEFF_COUNT, pipe_intt1_input,
 using intt2_t = intt<2, 8, COEFF_COUNT, pipe_intt2_input,
                      pipe_intt2_primes_index, pipe_scale_input2>;
 
-template class ntt<1, 8, COEFF_COUNT, pipe_intt1_input,
+template class intt<1, 8, COEFF_COUNT, pipe_intt1_input,
                     pipe_intt1_primes_index, pipe_scale_input>;
 
-template class ntt<2, 8, COEFF_COUNT, pipe_intt2_input,
+template class intt<2, 8, COEFF_COUNT, pipe_intt2_input,
                      pipe_intt2_primes_index, pipe_scale_input2>;
 
 /**
@@ -49,16 +49,6 @@ intt1_t &GetINTT1();
  * @return intt2_t&
  */
 intt2_t &GetINTT2();
-
-// intt1_t &GetINTT1() {
-//   static intt1_t intt;
-//   return intt;
-// }
-
-// intt2_t &GetINTT2() {
-//   static intt2_t intt;
-//   return intt;
-// }
 
 /**
  * @brief INTT1LoadPrimesIndex
