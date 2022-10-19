@@ -1,7 +1,7 @@
 *.aoclib
 *.aocx
 *.pdf
-*build/
+*build*/
 build-examples/
 hexl-fpga-install/
 test_data_dir/
