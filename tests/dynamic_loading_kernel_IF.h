@@ -11,6 +11,7 @@
 #include "../device/multlowlvl/include/L1/multLowLvl.h"
 #include "../device/multlowlvl/include/L1/tensorProduct.h"
 
+
 /// @brief
 /// class Dynamic Interface
 /// Parent Interface class for loading fpga bitstreams
@@ -29,7 +30,10 @@ private:
     std::string m_lib_name_;
 };
 
-
+using intt1_t = L1::helib::bgv::intt1_t;
+using intt2_t = L1::helib::bgv::intt2_t;
+using tensor_product_ntt1_t = L1::helib::bgv::tensor_product_ntt1_t;
+using tensor_product_ntt2_t = L1::helib::bgv::tensor_product_ntt2_t;
 
 class MultLowLvlDynaimcIF : public DynamicIF {
 public:
@@ -42,14 +46,16 @@ public:
 
 
     /**
-     * launch ntt and intt interfaces
+     * Get intt and ntt class objects from shared library.
+     * intt{1/2}_t and tensor_product_ntt{1/2}_t declared in
+     * header files of shared library.
      */
 
-    void (*launch_intt1)(std::vector<uint64_t> &primes);
-    void (*launch_intt2)(std::vector<uint64_t> &primes);
+    intt1_t& (*GetINTT1)();
+    intt2_t& (*GetINTT2)();
 
-    void (*launch_ntt1)(std::vector<uint64_t> &primes);
-    void (*launch_ntt2)(std::vector<uint64_t> &primes);
+    tensor_product_ntt1_t& (*GetTensorProductNTT1)();
+    tensor_product_ntt2_t& (*GetTensorProductNTT2)();
 
 
     /**
