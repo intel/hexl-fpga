@@ -40,7 +40,7 @@ class INTTNormPipeId;
 template <int id, int VEC, int coeff_count, class pipe_intt_read_in,
           class pipe_intt_prime_index, class pipe_intt_write_out>
 class intt {
- private:
+ public:
   // internal pipes
   using pipe_intt_read_out =
       ext::intel::pipe<INTTReadOutPipeId<id>, L0::WideVector_t<VEC>,
@@ -82,6 +82,29 @@ class intt {
                              coeff_count>(q, tf_set);
   }
 };
+
+
+template <int id, int VEC, int coeff_count>
+struct intt_pipe_generator {
+  using pipe_intt_read_out =
+      ext::intel::pipe<INTTReadOutPipeId<id>, L0::WideVector_t<VEC>,
+                       coeff_count / 2 / VEC>;
+  using pipe_intt_inter = ext::intel::pipe<INTTInterPipeId<id>, uint64_t, 4>;
+  using pipe_intt_write_in =
+      ext::intel::pipe<INTTWriteInPipeId<id>, L0::WideVector_t<VEC>,
+                       coeff_count / 2 / VEC>;
+  using pipe_intt_tf =
+      ext::intel::pipe<INTTTFPipeId<id>, L0::TwiddleFactor_t<VEC>, 4>;
+  using pipe_intt_norm = ext::intel::pipe<INTTNormPipeId<id>, ulong4, 4>;
+  using pipe_prime_index_inverse =
+      ext::intel::pipe<INTTPrimeIndexPipeId2<id>, uint8_t, 4>;
+
+  int vec = VEC;
+
+};
+
+
+
 }  // namespace bgv
 }  // namespace helib
 }  // namespace L1

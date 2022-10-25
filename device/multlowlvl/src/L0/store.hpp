@@ -13,6 +13,7 @@ event store(sycl::queue &q, sycl::buffer<uint64_t> &data) {
     accessor acc(data, h, sycl::write_only, sycl::no_init);
     h.single_task<kernelNameClass>([=]() [[intel::kernel_args_restrict]] {
       for (unsigned i = 0; i < size; i++) {
+        //PRINTF("store kernel: read %d\n", i);
         acc[i] = pipe_store::read();
       }
     });
@@ -30,6 +31,7 @@ event store2(sycl::queue &q, sycl::buffer<uint64_t> &data1,
     accessor acc2(data2, h, sycl::write_only, sycl::no_init);
     h.single_task<kernelNameClass>([=]() [[intel::kernel_args_restrict]] {
       for (unsigned i = 0; i < size; i++) {
+        //PRINTF("store2 kernel: read %d\n", i);
         ulong2 tmp = pipe_store::read();
         acc1[i] = tmp.s0();
         acc2[i] = tmp.s1();

@@ -9,7 +9,7 @@ set(AC_TYPES_FLAGS "-qactypes")
 set(FPGA_BOARD "de10_agilex:B2E2_8GBx4")
 
 if(DEFINED EMU_ENABLE_DEBUG)
-    set(EMU_COMPILE_FLAGS -fPIC -fintelfpga -c -O0 -g ${AC_TYPES_FLAGS} -DFPGA_EMULATOR)
+    set(EMU_COMPILE_FLAGS -fPIC -fintelfpga -c -O0 -g ${AC_TYPES_FLAGS})
     set(EMU_LINK_FLAGS -fintelfpga -O0 -g -fPIC)
 else()
     set(EMU_COMPILE_FLAGS  -fPIC -fintelfpga -c ${AC_TYPES_FLAGS} -DFPGA_EMULATOR)

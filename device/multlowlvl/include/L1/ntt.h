@@ -36,7 +36,7 @@ class NTTTF;
 template <int id, int VEC, int coeff_count, class pipe_NTT_read_in,
           class pipe_ntt_prime_index, class pipe_NTT_write_out>
 class ntt {
- private:
+ public:
   // internal pipes
   using pipe_NTT_read_out =
       ext::intel::pipe<NTTReadOutPipeId<id>, L0::WideVector_t<VEC>,
@@ -71,6 +71,25 @@ class ntt {
                                  coeff_count>(q, tf_set);
   }
 };
+
+template <int id, int VEC, int coeff_count>
+class ntt_pipe_generator {
+public:
+  using pipe_NTT_read_out =
+      ext::intel::pipe<NTTReadOutPipeId<id>, L0::WideVector_t<VEC>,
+                       coeff_count / 2 / VEC>;
+  using pipe_NTT_write_in =
+      ext::intel::pipe<NTTWriteInPipeId<id>, L0::WideVector_t<VEC>,
+                       coeff_count / 2 / VEC>;
+  using pipe_NTT_tf =
+      ext::intel::pipe<NTTTFPipeId<id>, L0::TwiddleFactor_t<VEC>, 4>;
+  using pipe_ntt_prime_index_forward =
+      ext::intel::pipe<NTTPrimeIndexPipeId2<id>, unsigned char, 4>;
+};
+
+
+
+
 }  // namespace bgv
 }  // namespace helib
 }  // namespace L1

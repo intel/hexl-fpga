@@ -18,6 +18,7 @@ event read(sycl::queue &q) {
       int data_index = 0;
       WideVector_t<VEC> elements;
       while (true) {
+        //PRINTF("ntt read\n")
 #pragma unroll
         for (int i = 0; i < VEC * 2 - 1; i++) {
           elements.data[i] = elements.data[i + 1];

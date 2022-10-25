@@ -49,7 +49,8 @@ MultLowLvlDynaimcIF::MultLowLvlDynaimcIF(const std::string& lib)
       TensorProductStore12(nullptr),
       BringToSet(nullptr),
       BringToSet2(nullptr),
-      TensorProduct(nullptr) {
+      TensorProduct(nullptr),
+      BringToSet_ops(nullptr) {
 
     launch_intt1 = (void (*)(std::vector<uint64_t> &primes))loadKernel("launch_intt1_IF_L2");
 
@@ -91,5 +92,15 @@ MultLowLvlDynaimcIF::MultLowLvlDynaimcIF(const std::string& lib)
                                uint32_t, uint, uint64_t))loadKernel("BringToSet2_IF");
     
     TensorProduct = (sycl::event (*)(sycl::queue&, sycl::buffer<ulong4>&))loadKernel("TensorProduct_IF");
+
+    BringToSet_ops = (BringToSet_t& (*)())loadKernel("BringToSet_struct_IF");
+
+    intt1_method_ops = (INTT_Method& (*)())loadKernel("intt1_method_IF");
+
+    intt2_method_ops = (INTT_Method& (*)())loadKernel("intt2_method_IF");
+
+    ntt1_method_ops = (NTT_Method& (*)())loadKernel("ntt1_method_IF");
+    ntt2_method_ops = (NTT_Method& (*)())loadKernel("ntt2_method_IF");
+
 
 }

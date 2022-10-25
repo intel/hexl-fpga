@@ -16,6 +16,13 @@ namespace bgv {
 #define MAX_MULT_LOW_LVL_BRING_TO_SET_P_BANKS 8
 #define MAX_MULT_LOW_LVL_BRING_TO_SET_Q 23
 
+
+// template class intt<1, 8, COEFF_COUNT, pipe_intt1_input,
+//                     pipe_intt1_primes_index, pipe_scale_input>;
+
+// template class intt<2, 8, COEFF_COUNT, pipe_intt2_input,
+//                      pipe_intt2_primes_index, pipe_scale_input2>;
+
 /**
  * @brief instance the intt template
  *
@@ -30,11 +37,7 @@ using intt1_t = intt<1, 8, COEFF_COUNT, pipe_intt1_input,
 using intt2_t = intt<2, 8, COEFF_COUNT, pipe_intt2_input,
                      pipe_intt2_primes_index, pipe_scale_input2>;
 
-template class intt<1, 8, COEFF_COUNT, pipe_intt1_input,
-                    pipe_intt1_primes_index, pipe_scale_input>;
 
-template class intt<2, 8, COEFF_COUNT, pipe_intt2_input,
-                     pipe_intt2_primes_index, pipe_scale_input2>;
 
 /**
  * @brief GetINTT1
@@ -49,6 +52,8 @@ intt1_t &GetINTT1();
  * @return intt2_t&
  */
 intt2_t &GetINTT2();
+
+
 
 /**
  * @brief INTT1LoadPrimesIndex
@@ -85,6 +90,9 @@ sycl::event INTT2LoadPrimesIndex(sycl::queue &q,
 sycl::event BringToSet(sycl::queue &q, uint32_t coeff_count,
                  sycl::buffer<ulong2> &scale_param_set_buf, uint32_t P,
                  uint32_t Q, uint I, uint64_t t);
+
+
+
 
 
 
@@ -148,6 +156,45 @@ sycl::event BringToSetLoad2(sycl::queue &q, sycl::event &depends,
  * @return sycl::event
  */
 sycl::event BringToSetStore2(sycl::queue &q, sycl::buffer<uint64_t> &c);
+
+
+
+typedef struct BringToSet_interface{
+  sycl::event (*BringToSet)(sycl::queue &q, uint32_t coeff_count,
+                 sycl::buffer<ulong2> &scale_param_set_buf, uint32_t P,
+                 uint32_t Q, uint I, uint64_t t);
+  
+  sycl::event (*BringToSetLoad)(sycl::queue &q, sycl::event &depends,
+                           sycl::buffer<uint64_t> &c,
+                           sycl::buffer<uint8_t> &prime_index_set_buf);
+  
+  sycl::event (*BringToSet2)(sycl::queue &q, uint32_t coeff_count,
+                  sycl::buffer<ulong2> &scale_param_set_buf, uint32_t P,
+                  uint32_t Q, uint I, uint64_t t);
+  
+  sycl::event (*BringToSetLoad2)(sycl::queue &q, sycl::event &depends,
+                            sycl::buffer<uint64_t> &c,
+                            sycl::buffer<uint8_t> &prime_index_set_buf);
+  
+} BringToSet_t;
+
+BringToSet_t& BringToSet_struct();
+
+
+struct INTT_Method {
+    int (*get_VEC)();
+    sycl::event (*read)(sycl::queue &q);
+    sycl::event (*write)(sycl::queue &q);
+    sycl::event (*compute_inverse)(sycl::queue &q,
+                              const std::vector<ulong4> &configs);
+    sycl::event (*norm)(sycl::queue &q);
+    sycl::event (*config_tf)(sycl::queue &q, const std::vector<uint64_t> &tf_set);
+};
+
+INTT_Method& intt1_method();
+INTT_Method& intt2_method();
+
+
 }  // namespace bgv
 }  // namespace helib
 }  // namespace L1

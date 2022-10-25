@@ -7,23 +7,26 @@
 namespace L1 {
 namespace helib {
 namespace bgv {
+
+// template class ntt<10, 8, COEFF_COUNT, pipe_scale_output, 
+//         pipe_tensor_product_prime_index1, pipe_tensor_product_input1>;
+
+// template class ntt<11, 8, COEFF_COUNT, pipe_scale_output2,
+//         pipe_tensor_product_prime_index2, pipe_tensor_product_input2>;
+
 /**
  * @brief instance the ntt template
  *
  */
 using tensor_product_ntt1_t =
-    ntt<10, 8, COEFF_COUNT, pipe_scale_output, pipe_tensor_product_prime_index1,
-        pipe_tensor_product_input1>;
+    ntt<10, 8, COEFF_COUNT, pipe_scale_output, 
+    pipe_tensor_product_prime_index1, pipe_tensor_product_input1>;
 
 using tensor_product_ntt2_t =
     ntt<11, 8, COEFF_COUNT, pipe_scale_output2,
-        pipe_tensor_product_prime_index2, pipe_tensor_product_input2>;
+    pipe_tensor_product_prime_index2, pipe_tensor_product_input2>;
 
-template class ntt<10, 8, COEFF_COUNT, pipe_scale_output, pipe_tensor_product_prime_index1,
-        pipe_tensor_product_input1>;
 
-template class ntt<11, 8, COEFF_COUNT, pipe_scale_output2,
-        pipe_tensor_product_prime_index2, pipe_tensor_product_input2>;
 
 /**
  * @brief Get the tensor_product_ntt1_t instance
@@ -99,6 +102,18 @@ sycl::event TensorProductLoad1(sycl::queue &q, sycl::buffer<uint64_t> &c);
 sycl::event TensorProductLoad2(sycl::queue &q, sycl::buffer<uint64_t> &c);
 
 #endif
+
+struct NTT_Method {
+    int (*get_VEC)();
+    sycl::event (*read)(sycl::queue &q);
+    sycl::event (*write)(sycl::queue &q);
+    sycl::event (*compute_forward)(sycl::queue &q,
+                              const std::vector<ulong4> &config);
+    sycl::event (*config_tf)(sycl::queue &q, const std::vector<uint64_t> &tf_set);
+};
+
+NTT_Method& ntt1_method();
+NTT_Method& ntt2_method();
 
 }  // namespace bgv
 }  // namespace helib

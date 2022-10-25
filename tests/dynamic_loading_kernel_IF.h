@@ -30,10 +30,13 @@ private:
     std::string m_lib_name_;
 };
 
-using intt1_t = L1::helib::bgv::intt1_t;
-using intt2_t = L1::helib::bgv::intt2_t;
-using tensor_product_ntt1_t = L1::helib::bgv::tensor_product_ntt1_t;
-using tensor_product_ntt2_t = L1::helib::bgv::tensor_product_ntt2_t;
+// using intt1_t = L1::helib::bgv::intt1_t;
+// using intt2_t = L1::helib::bgv::intt2_t;
+// using tensor_product_ntt1_t = L1::helib::bgv::tensor_product_ntt1_t;
+// using tensor_product_ntt2_t = L1::helib::bgv::tensor_product_ntt2_t;
+// using BringToSet_t = L1::helib::bgv::BringToSet_t;
+
+using namespace L1::helib::bgv;
 
 class MultLowLvlDynaimcIF : public DynamicIF {
 public:
@@ -109,6 +112,14 @@ public:
     sycl::event (*TensorProduct)(sycl::queue&, sycl::buffer<ulong4>&);
 
 
+
+    BringToSet_t& (*BringToSet_ops)();
+
+    INTT_Method& (*intt1_method_ops)();
+    INTT_Method& (*intt2_method_ops)();
+
+    NTT_Method& (*ntt1_method_ops)();
+    NTT_Method& (*ntt2_method_ops)();
 
 };
 

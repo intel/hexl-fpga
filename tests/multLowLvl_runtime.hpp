@@ -9,7 +9,7 @@
 #include "../device/multlowlvl/include/L2/ntt.hpp"
 #include "../device/multlowlvl/include/L2/utils.h"
 
-static MultLowLvlDynaimcIF* g_multlowlvl = new MultLowLvlDynaimcIF("./libmultlowlvl.so");
+MultLowLvlDynaimcIF* g_multlowlvl = new MultLowLvlDynaimcIF("./libmultlowlvl.so");
 
 /**
  * runtime functions, comes from src/L2/multLowLvl.cpp file.
@@ -17,39 +17,53 @@ static MultLowLvlDynaimcIF* g_multlowlvl = new MultLowLvlDynaimcIF("./libmultlow
 
 void LaunchINTT1(std::vector<uint64_t> &primes) {
   // launch iNTT
-  L2::helib::bgv::launch_intt(g_multlowlvl->GetINTT1(), primes, COEFF_COUNT);
-  //g_multlowlvl->launch_intt1(primes);
+  std::cout << "INTT1 VEC = " << g_multlowlvl->GetINTT1().get_VEC() << std::endl;
+  //L2::helib::bgv::launch_intt<intt1_t>(g_multlowlvl->GetINTT1(), primes, COEFF_COUNT);
+  g_multlowlvl->launch_intt1(primes);
 }
 
 void LaunchINTT2(std::vector<uint64_t> &primes) {
   // launch iNTT
-  L2::helib::bgv::launch_intt(g_multlowlvl->GetINTT2(), primes, COEFF_COUNT);
-  //g_multlowlvl->launch_intt2(primes);
+  std::cout << "INTT2 VEC = " << g_multlowlvl->GetINTT2().get_VEC() << std::endl;
+  //L2::helib::bgv::launch_intt<intt2_t>(g_multlowlvl->GetINTT2(), primes, COEFF_COUNT);
+  g_multlowlvl->launch_intt2(primes);
 }
 
 void LaunchNTT1(std::vector<uint64_t> &primes) {
   // launch NTT
-  L2::helib::bgv::launch_ntt(g_multlowlvl->GetTensorProductNTT1(), primes, COEFF_COUNT);
-  //g_multlowlvl->launch_ntt1(primes);
+  //L2::helib::bgv::launch_ntt<tensor_product_ntt1_t>(g_multlowlvl->GetTensorProductNTT1(), primes, COEFF_COUNT);
+  g_multlowlvl->launch_ntt1(primes);
 }
 
 void LaunchNTT2(std::vector<uint64_t> &primes) {
   // launch iNTT
-  L2::helib::bgv::launch_ntt(g_multlowlvl->GetTensorProductNTT2(), primes, COEFF_COUNT);
-  //g_multlowlvl->launch_ntt2(primes);
+  //L2::helib::bgv::launch_ntt<tensor_product_ntt2_t>(g_multlowlvl->GetTensorProductNTT2(), primes, COEFF_COUNT);
+  g_multlowlvl->launch_ntt2(primes);
 }
 
 void launch_intt_and_ntt(std::vector<uint64_t> &primes) {
   
-  // L2::helib::bgv::launch_intt(g_multlowlvl->GetINTT1(), primes, COEFF_COUNT);
-  // L2::helib::bgv::launch_intt(g_multlowlvl->GetINTT2(), primes, COEFF_COUNT);
-  // L2::helib::bgv::launch_ntt(g_multlowlvl->GetTensorProductNTT1(), primes, COEFF_COUNT);
-  // L2::helib::bgv::launch_ntt(g_multlowlvl->GetTensorProductNTT2(), primes, COEFF_COUNT);
+  std::cout << "g_multlowlvl->GetINTT1() address: " << &g_multlowlvl->GetINTT1() << std::endl;
+  std::cout << "g_multlowlvl->GetINTT2() address: " << &g_multlowlvl->GetINTT2() << std::endl;
+  std::cout << "g_multlowlvl->GetTensorProductNTT1() address: " << &g_multlowlvl->GetTensorProductNTT1() << std::endl;
+  std::cout << "g_multlowlvl->GetTensorProductNTT2() address: " << &g_multlowlvl->GetTensorProductNTT2() << std::endl;
 
-  g_multlowlvl->launch_intt1(primes);
-  g_multlowlvl->launch_intt2(primes);
-  g_multlowlvl->launch_ntt1(primes);  
-  g_multlowlvl->launch_ntt2(primes);
+  // g_multlowlvl->launch_intt1(primes);
+  // g_multlowlvl->launch_intt2(primes);
+  // g_multlowlvl->launch_ntt1(primes);
+  // g_multlowlvl->launch_ntt2(primes);
+
+  L2::helib::bgv::launch_intt<1>(g_multlowlvl->intt1_method_ops(), primes, COEFF_COUNT);
+  L2::helib::bgv::launch_intt<2>(g_multlowlvl->intt2_method_ops(), primes, COEFF_COUNT);
+  L2::helib::bgv::launch_ntt<1>(g_multlowlvl->ntt1_method_ops(), primes, COEFF_COUNT);
+  L2::helib::bgv::launch_ntt<2>(g_multlowlvl->ntt2_method_ops(), primes, COEFF_COUNT);
+
+  // L2::helib::bgv::launch_intt<intt1_t, 1>(g_multlowlvl->GetINTT1(), primes, COEFF_COUNT);
+  // L2::helib::bgv::launch_intt<intt2_t, 2>(g_multlowlvl->GetINTT2(), primes, COEFF_COUNT);
+  // L2::helib::bgv::launch_ntt<tensor_product_ntt1_t, 1>(g_multlowlvl->GetTensorProductNTT1(), primes, COEFF_COUNT);
+  // L2::helib::bgv::launch_ntt<tensor_product_ntt2_t, 2>(g_multlowlvl->GetTensorProductNTT2(), primes, COEFF_COUNT);
+
+ 
 }
 
 struct Context {
@@ -101,13 +115,9 @@ void Init(std::vector<uint64_t> &primes) {
   // LaunchINTT1(primes);
   // LaunchINTT2(primes);
 
-  // launch NTT
-  // Todo: expose GetTensorProductNTT1 like GetINTT1/GetINTT2
-  // L2::helib::bgv::launch_ntt(g_multlowlvl->GetTensorProductNTT1(), primes, COEFF_COUNT);
-  // L2::helib::bgv::launch_ntt(g_multlowlvl->GetTensorProductNTT2(), primes, COEFF_COUNT);
-
   // LaunchNTT1(primes);
   // LaunchNTT2(primes);
+ 
 }
 
 
@@ -159,12 +169,16 @@ void LaunchBringToSet(std::vector<uint8_t> &pi_primes_index,
   if (engine == 1) {
     L2::helib::bgv::Timer timer("g_multlowlvl->BringToSet");
     L2::helib::bgv::queue_copy(*ctxt.q_scale1, scale_param_set, scale_param_set_buf);
-    g_multlowlvl->BringToSet(*ctxt.q_scale1, COEFF_COUNT,
+    // g_multlowlvl->BringToSet(*ctxt.q_scale1, COEFF_COUNT,
+    //                            *scale_param_set_buf, P, Q, I, plainText);
+    g_multlowlvl->BringToSet_ops().BringToSet(*ctxt.q_scale1, COEFF_COUNT,
                                *scale_param_set_buf, P, Q, I, plainText);
   } else {
     L2::helib::bgv::Timer timer("g_multlowlvl->BringToSet2");
     L2::helib::bgv::queue_copy(*ctxt.q_scale2, scale_param_set, scale_param_set_buf);
-    g_multlowlvl->BringToSet2(*ctxt.q_scale2, COEFF_COUNT,
+    // g_multlowlvl->BringToSet2(*ctxt.q_scale2, COEFF_COUNT,
+    //                             *scale_param_set_buf, P, Q, I, plainText);
+    g_multlowlvl->BringToSet_ops().BringToSet2(*ctxt.q_scale2, COEFF_COUNT,
                                 *scale_param_set_buf, P, Q, I, plainText);
   }
 }
@@ -220,10 +234,14 @@ void Load(std::vector<uint64_t> &input, std::vector<uint8_t> &primes_index) {
 
   assert(engine == 1 || engine == 2);
   if (engine == 1) {
-    g_multlowlvl->BringToSetLoad(*ctxt.q_load1, copy_event, *input_buff,
+    // g_multlowlvl->BringToSetLoad(*ctxt.q_load1, copy_event, *input_buff,
+    //                                *primes_index_buf);
+    g_multlowlvl->BringToSet_ops().BringToSetLoad(*ctxt.q_load1, copy_event, *input_buff,
                                    *primes_index_buf);
   } else {
-    g_multlowlvl->BringToSetLoad2(*ctxt.q_load2, copy_event, *input_buff,
+    // g_multlowlvl->BringToSetLoad2(*ctxt.q_load2, copy_event, *input_buff,
+    //                                 *primes_index_buf);
+    g_multlowlvl->BringToSet_ops().BringToSetLoad2(*ctxt.q_load2, copy_event, *input_buff,
                                     *primes_index_buf);
   }
 }
