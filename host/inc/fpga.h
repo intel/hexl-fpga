@@ -83,7 +83,8 @@ enum class kernel_t {
     NTT,
     INTT,
     KEYSWITCH,
-    DYADIC_MULTIPLY_KEYSWITCH
+    DYADIC_MULTIPLY_KEYSWITCH,
+    MULTLOWLVL
 };
 
 /// @brief
@@ -223,6 +224,28 @@ public:
     const uint64_t* modswitch_factors_;
     const uint64_t* twiddle_factors_;
 };
+
+
+class Object_MultLowLvl : public Object {
+public:
+    explicit Object_MultLowLvl(uint64_t* a0, uint64_t* a1, uint8_t* a_primes_index, 
+                               uint64_t* b0, uint64_t* b1, uint8_t* b_primes_index,
+                               uint64_t plainText, uint64_t* c0, uint64_t* c1, 
+                               uint8_t* output_primes_index, bool fence = false);
+    uint64_t* a0_;
+    uint64_t* a1_;
+    uint8_t* a_primes_index_;
+    uint64_t* b0_;
+    uint64_t* b1_;
+    uint8_t*  b_primes_index_;
+    uint64_t plainText_;
+    uint64_t* c0_;
+    uint64_t* c1_;
+    uint8_t* output_primes_index_;
+};
+
+
+
 
 /// @brief
 /// class Buffer
@@ -560,6 +583,54 @@ private:
     };
 };
 
+
+class FPGAObject_MultLowLvl : public FPGAObject {
+public:
+    explicit FPGAObject_MultLowLvl(sycl::queue& p_q, uint64_t batch_size);
+    ~FPGAObject_MultLowLvl();
+
+    // delete copy and assignment operators ////////////////////////////////
+    FPGAObject_MultLowLvl(const FPGAObject_MultLowLvl&) = delete;
+    FPGAObject_MultLowLvl& operator=(const FPGAObject_MultLowLvl&) = delete;
+    ///////////////////////////////////////////////////////////////////////
+    
+    void fill_in_data(const std::vector<Object*>& objs) override;
+    void fill_out_data(uint64_t* results) override;
+
+    uint64_t* a0_;
+    uint64_t* a1_;
+    uint8_t* a_primes_index_;
+    uint64_t* b0_;
+    uint64_t* b1_;
+    uint8_t*  b_primes_index_;
+    uint64_t plainText_;
+    uint64_t* c0_;
+    uint64_t* c1_;
+    uint8_t* output_primes_index_;
+
+    uint64_t* ms_output;
+
+    // the sycl::buffer are used to pass data into/out kernels.
+    // declare sycl::buffer pointer here.
+
+    // LaunchBringToSet kernel.
+    sycl::buffer<sycl::ulong2>* mem_scale_para_set_buf_;
+
+    // TensorProduct.
+    sycl::buffer<sycl::ulong4>* mem_primes_mulmod_buf_;
+
+    // Load kernel.
+    sycl::buffer<uint64_t>* mem_input_buf_;
+    sycl::buffer<uint8_t>* mem_primes_index_buf_;
+
+    // store kernel.
+    sycl::buffer<uint64_t>* mem_output1_buf_;
+    sycl::buffer<uint64_t>* mem_output2_buf_[2];
+    sycl::buffer<uint64_t>* mem_output3_buf_[2];
+
+};
+
+
 template <class t_type = uint256_t>
 struct KeySwitchMemKeys {
     //
@@ -625,6 +696,7 @@ private:
     bool process_output_NTT();
     bool process_output_INTT();
     bool process_output_KeySwitch();
+    bool process_output_MultLowLvl();
 
     void enqueue_input_data(FPGAObject* fpga_obj);
     void enqueue_input_data_dyadic_multiply(
@@ -632,6 +704,7 @@ private:
     void enqueue_input_data_NTT(FPGAObject_NTT* fpga_obj);
     void enqueue_input_data_INTT(FPGAObject_INTT* fpga_obj);
     void enqueue_input_data_KeySwitch(FPGAObject_KeySwitch* fpga_obj);
+    void enqueue_input_data_MultLowLvl(FPGAObject_MultLowLvl* fpga_obj);
 
     int device_id() { return id_; }
 
@@ -647,6 +720,11 @@ private:
     kernel_t get_kernel_type();
     std::string get_bitstream_name();
     void load_kernel_symbols();
+
+    // MultLowlvl heler functions, added by need.
+    void MultLowLvl_Init(uint64_t* primes, uint64_t primes_size);
+    void copyMultLowlvlBatch(FPGAObject_MultLowLvl* fpga_obj, int obj_id);
+    void MultLowLvl_read_output();
 
     sycl::device device_;
     Buffer& buffer_;
@@ -670,6 +748,7 @@ private:
     INTTDynamicIF* intt_kernel_container_;
     DyadicMultDynamicIF* dyadicmult_kernel_container_;
     KeySwitchDynamicIF* KeySwitch_kernel_container_;
+    MultLowLvlDynamicIF* MultLowLvl_kernel_container_;
 
     sycl::context context_;
     sycl::queue dyadic_multiply_input_queue_;
@@ -693,6 +772,10 @@ private:
     kernel_t kernel_type_;
     std::vector<FPGAObject*> fpga_objects_;
     static const std::unordered_map<std::string, kernel_t> kernels_;
+
+    // MultLowLvl section
+    sycl::event multlowlvl_queues_[MULTLOWLVL_NUM_KERNELS];
+    
 };
 
 /// @brief
