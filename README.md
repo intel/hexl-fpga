@@ -278,7 +278,7 @@ To cite Intel HE Acceleration Library for FPGAs, please use the following BibTeX
         author={Meng, Yan and Butt, Shahzad and Wang, Yong and Zhou, Yongfa and Simoni, Steven and others},
         title = {{I}ntel {Homomorphic Encryption Acceleration Library for FPGAs} (Version 2.0)},
         howpublished = {\url{https://github.com/intel/hexl-fpga}},
-        month = August,
+        month = November,
         year = 2022,
         key = {Intel HE Acceleration Library for FPGAs}  
     }

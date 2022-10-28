@@ -1,5 +1,19 @@
 # Changes
 
+## Version 2.0
+- Migrated the HEXL-FPGA library from OpenCL to oneAPI (first time oneAPI release).
+- Added optimization for Agilex FPGAs.
+- Added experimental bridge to Microsoft SEAL v4.0.0.
+- Added framework for comparing performance between HEXL-FPGA and HEXL.
+- Enabled the selection of target devices (CPU or FPGA) inside the same run.
+- Bug fixes.
+- Updated related documents.
+
+Co-Authored-by: @[shahzadATintel](https://github.com/shahzadATintel) <br/>
+Co-Authored-by: @[wangyon1](https://github.com/wangyon1) <br/>
+Co-Authored-by: @[ymeng-git](https://github.com/ymeng-git) <br/>
+Co-Authored-by: @[yzhou79](https://github.com/yzhou79) <br/>
+
 ## Version 2.0-rc1
 - Migrated the HEXL-FPGA library from OpenCL to oneAPI.
 - Added experimental bridge to Microsoft SEAL v4.0.0.
