@@ -333,6 +333,30 @@ void MultLowLvl(std::vector<uint64_t> &a0, std::vector<uint64_t> &a1,
                 uint64_t plainText, std::vector<uint64_t> &c0,
                 std::vector<uint64_t> &c1, std::vector<uint64_t> &c2,
                 std::vector<uint8_t> &output_primes_index) {
+#define DEBUG_SZ 1
+
+#ifdef DEBUG_SZ
+  std::cout << "a0.size(): " << a0.size() << std::endl;
+  std::cout << "a1.size(): " << a1.size() << std::endl;
+  std::cout << "a_primes_index.size(): " << a_primes_index.size() << std::endl;
+  std::cout << "65536 * a_primes_size.size(): " << 65536 * a_primes_index.size() << std::endl;
+
+  std::cout << "b0.size(): " << b0.size() << std::endl;
+  std::cout << "b1.size(): " << b1.size() << std::endl;
+  std::cout << "b_primes_index.size(): " << b_primes_index.size() << std::endl;
+  std::cout << "65536 * b_primes_size.size(): " << 65536 * b_primes_index.size() << std::endl;
+
+  std::cout << "c0.size(): " << c0.size() << std::endl;
+  std::cout << "c1.size(): " << c1.size() << std::endl;
+  std::cout << "c2.size(): " << c2.size() << std::endl;
+  std::cout << "output_primes_index.size(): " << output_primes_index.size() << std::endl;
+  std::cout << "65536 * output_primes_index.size(): " << 65536 * output_primes_index.size() << std::endl;
+
+
+#endif
+
+
+
   struct Context &ctxt = GetContext();
   std::vector<uint8_t> pi_reorder_primes_index1;
   std::vector<uint8_t> pi_reorder_primes_index2;

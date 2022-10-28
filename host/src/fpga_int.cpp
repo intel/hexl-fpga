@@ -17,6 +17,7 @@
 #include "intt_int.h"
 #include "keyswitch_int.h"
 #include "ntt_int.h"
+#include "multlowlvl_int.h"
 
 #ifdef FPGA_USE_INTEL_HEXL
 #include "hexl/hexl.hpp"
@@ -30,10 +31,12 @@ static std::mutex muNTT;
 static std::mutex muINTT;
 static std::mutex muDyadicMultiply;
 static std::mutex muKeySwitch;
+static std::mutex muMultLowLvl;
 static std::unordered_set<Object*> outstanding_objects_DyadicMultiply;
 static std::unordered_set<Object*> outstanding_objects_NTT;
 static std::unordered_set<Object*> outstanding_objects_INTT;
 static std::unordered_set<Object*> outstanding_objects_KeySwitch;
+static std::unordered_set<Object*> outstanding_objects_MultLowLvl;
 static DevicePool* pool;
 static std::promise<bool> exit_signal;
 
@@ -536,6 +539,114 @@ void KeySwitch_int(uint64_t* result, const uint64_t* t_target_iter_ptr,
         break;
     }
 }
+
+
+static void fpga_MultLowLvl(uint64_t* a0, uint64_t* a1, uint64_t a_primes_size, uint8_t* a_primes_index,
+                            uint64_t* b0, uint64_t* b1, uint64_t b_primes_size, uint8_t* b_primes_index,
+                            uint64_t plainText, uint64_t coeff_count, 
+                            uint64_t* c0, uint64_t* c1, uint64_t* c2, uint64_t c_primes_size, 
+                            uint8_t* output_primes_index) {
+    bool fence = (fpga_buffer.size() == 0);
+    
+    if (!fence) {
+        Object* obj = fpga_buffer.back();
+        FPGA_ASSERT(obj);
+        fence |= (obj->type_ != kernel_t::MULTLOWLVL);
+        if (!fence) {
+            FPGA_ASSERT(obj->type_ == kernel_t::MULTLOWLVL);
+            Object_MultLowLvl* Object_MultLowLvl = dynamic_cast<Object_MultLowLvl*>(obj);
+            // todo: add fence assert.
+
+        }
+    }
+
+    Object* obj = new Object_MultLowLvl(a0, a1, a_primes_size, a_primes_index,
+                                        b0, b1, b_primes_size, b_primes_index,
+                                        plainText, coeff_count,
+                                        c0, c1, c2, c_primes_size, output_primes_index, fence);
+    
+    fpga_buffer.push(obj);
+
+    outstanding_objects_MultLowLvl.insert(obj);
+
+    if (fpga_buffer.get_worksize_MultLowLvl() == 1) {
+        MultLowLvlCompleted_int();
+    }
+
+} 
+
+static void cpu_MultLowLvl(uint64_t* a0, uint64_t* a1, uint64_t a_primes_size, uint8_t* a_primes_index,
+                            uint64_t* b0, uint64_t* b1, uint64_t b_primes_size, uint8_t* b_primes_index,
+                            uint64_t plainText, uint64_t coeff_count, 
+                            uint64_t* c0, uint64_t* c1, uint64_t* c2, uint64_t c_primes_size, 
+                            uint8_t* output_primes_index) {
+    FPGA_ASSERT(g_choice == CPU);
+
+    // todo, confirm CPU version existed.
+    std::cerr << "CPU VERSION not supported!" << std::endl;
+    exit(-1);
+}
+
+
+
+void set_worksize_MultLowLvl_int(uint64_t n) {
+    fpga_buffer.set_worksize_MultLowLvl(n);
+}
+
+bool MultLowLvlCompleted_int() {
+    bool all_done = false;
+    while (!all_done) {
+        bool done = true;
+        auto iter = outstanding_objects_MultLowLvl.begin();
+        while (iter != outstanding_objects_MultLowLvl.end()) {
+            Object* obj = *iter;
+            if (obj->ready_) {
+                delete obj;
+                obj = nullptr;
+                iter = outstanding_objects_MultLowLvl.erase(iter);
+            } else {
+                done = false;
+                iter++;
+            }
+        }
+        all_done = done;
+    }
+
+    outstanding_objects_MultLowLvl.clear();
+    fpga_buffer.set_worksize_MultLowLvl(1);
+
+    return all_done;
+}
+
+
+void MultLowLvl_int(uint64_t* a0, uint64_t* a1, uint64_t a_primes_size, uint8_t* a_primes_index,
+                    uint64_t* b0, uint64_t* b1, uint64_t b_primes_size, uint8_t* b_primes_index,
+                    uint64_t plainText, uint64_t coeff_count, 
+                    uint64_t* c0, uint64_t* c1, uint64_t* c2, 
+                    uint64_t c_primes_size, uint8_t* output_primes_index) {
+    switch (g_choice) {
+    case CPU:
+        cpu_MultLowLvl(a0, a1, a_primes_size, a_primes_index,
+                       b0, b1, b_primes_size, b_primes_index,
+                       plainText, coeff_count,
+                       c0, c1, c2, c_primes_size, output_primes_index);
+        break;
+    case EMU:
+    case FPGA:
+        fpga_MultLowLvl(a0, a1, a_primes_size, a_primes_index,
+                       b0, b1, b_primes_size, b_primes_index,
+                       plainText, coeff_count,
+                       c0, c1, c2, c_primes_size, output_primes_index);
+        break;
+    default:
+        std::cerr << "ERROR: Invalid RUN_CHOICE envvar. Set to a valid 
+                      value {0, 1, 2}, where 0:CPU, 1:EMU, 2:FPGA." 
+                  << std::endl;
+        break;
+    }
+}
+
+
 
 }  // namespace fpga
 }  // namespace hexl

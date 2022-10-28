@@ -284,12 +284,13 @@ class Buffer {
 public:
     Buffer(uint64_t capacity, uint64_t n_batch_dyadic_multiply,
            uint64_t n_batch_ntt, uint64_t n_batch_intt,
-           uint64_t n_batch_KeySwitch)
+           uint64_t n_batch_KeySwitch, uint64_t n_batch_MultLowLvl)
         : capacity_(capacity),
           n_batch_dyadic_multiply_(n_batch_dyadic_multiply),
           n_batch_ntt_(n_batch_ntt),
           n_batch_intt_(n_batch_intt),
           n_batch_KeySwitch_(n_batch_KeySwitch),
+          n_batch_MultLowLvl_(n_batch_MultLowLvl),
           total_worksize_DyadicMultiply_(1),
           num_DyadicMultiply_(0),
           total_worksize_NTT_(1),
@@ -297,7 +298,9 @@ public:
           total_worksize_INTT_(1),
           num_INTT_(0),
           total_worksize_KeySwitch_(1),
-          num_KeySwitch_(0) {}
+          num_KeySwitch_(0),
+          total_worksize_MultLowLvl_(1),
+          num_MultLowLvl_(0) {}
 
     void push(Object* obj);
     Object* front() const;
@@ -313,6 +316,9 @@ public:
     uint64_t get_worksize_INTT() const { return total_worksize_INTT_; }
     uint64_t get_worksize_KeySwitch() const {
         return total_worksize_KeySwitch_;
+    }
+    uint64_t get_worksize_MultLowLvl() const {
+        return total_worksize_MultLowLvl_;
     }
 
     void set_worksize_DyadicMultiply(uint64_t ws) {
@@ -330,6 +336,11 @@ public:
     void set_worksize_KeySwitch(uint64_t ws) {
         total_worksize_KeySwitch_ = ws;
         num_KeySwitch_ = total_worksize_KeySwitch_;
+    }
+
+    void set_worksize_MultLowLvl(uint64_t ws) {
+        total_worksize_MultLowLvl_ = ws;
+        num_MultLowLvl_ = total_worksize_MultLowLvl;
     }
 
 private:
@@ -352,12 +363,18 @@ private:
                                                       : num_KeySwitch_);
     }
 
+    uint64_t get_worksize_int_MultLowLvl() const {
+        return ((num_MultLowLvl_ > n_batch_MultLowLvl_) ? n_batch_MultLowLvl_
+                                                        : num_MultLowLvl_);
+    }
+
     void update_DyadicMultiply_work_size(uint64_t ws) {
         num_DyadicMultiply_ -= ws;
     }
     void update_NTT_work_size(uint64_t ws) { num_NTT_ -= ws; }
     void update_INTT_work_size(uint64_t ws) { num_INTT_ -= ws; }
     void update_KeySwitch_work_size(uint64_t ws) { num_KeySwitch_ -= ws; }
+    void update_MultLowLvl_work_size(uint64_t ws) { num_MultLowLvl_ -= ws;}
 
     std::mutex mu_;
     std::mutex mu_size_;
@@ -368,6 +385,7 @@ private:
     const uint64_t n_batch_ntt_;
     const uint64_t n_batch_intt_;
     const uint64_t n_batch_KeySwitch_;
+    const uint64_t n_batch_MultLowLvl_ = 1;
 
     uint64_t total_worksize_DyadicMultiply_;
     uint64_t num_DyadicMultiply_;
@@ -380,6 +398,11 @@ private:
 
     uint64_t total_worksize_KeySwitch_;
     uint64_t num_KeySwitch_;
+
+
+    uint64_t total_worksize_MultLowLvl_;
+    uint64_t num_MultLowLvl_;
+
 };
 /// @brief
 /// Parent class FPGAObject stores the blob of objects to be transfered to the
