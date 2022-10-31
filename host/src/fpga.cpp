@@ -1318,6 +1318,200 @@ void Device::enqueue_input_data_KeySwitch(FPGAObject_KeySwitch* fpga_obj) {
     }
 }
 
+template <int id>
+void Device::launch_ntt_config_tf(sycl::queue &q, uint64_t degree, 
+                                  const std::vector<uint64_t> &primes) {
+    
+    // twiddle factors should be statis as the kernel need to access it
+    static std::vector<uint64_t> rootOfUnityPowers;
+    for (long prime : primes) {
+        // create a HEXL ntt instance to get the twiddle factors
+        ::intel::hexl::NTT ntt_hexl(degree, prime);
+
+        auto tfdata = ntt_hexl.GetRootOfUnityPowers();
+
+        // push w^N/2, w^N/4, w^N/8, w^N/16 at index 1,2,4,8
+        rootOfUnityPowers.push_back(tfdata[1]);
+        rootOfUnityPowers.push_back(get_y_barret(tfdata[1], prime));
+        rootOfUnityPowers.push_back(tfdata[2]);
+        rootOfUnityPowers.push_back(get_y_barret(tfdata[2], prime));
+        rootOfUnityPowers.push_back(tfdata[4]);
+        rootOfUnityPowers.push_back(get_y_barret(tfdata[4], prime));
+        rootOfUnityPowers.push_back(tfdata[8]);
+        rootOfUnityPowers.push_back(get_y_barret(tfdata[8], prime));
+
+        // ntt doesn't need to remove the first element as
+        // the first VEC of NTT operation only relies on just one element
+        // so that the first un-used element can be shifted out
+        rootOfUnityPowers.push_back(prime);
+        for (uint64_t i = 1; i < tfdata.size() / ntt.get_VEC(); i++) {
+        rootOfUnityPowers.push_back(tfdata[i * ntt.get_VEC()]);
+        }
+    }
+
+    FPGA_ASSERT(rootOfUnityPowers.size() == (degree / 
+        MultLowLvl_kernel_container_->ntt_ops_obj[id].get_VEC() + 8) * primes.size());
+
+#ifdef DEBUG_MULT
+    std::cout << "launching ntt_config_tf, id = " << id << std::endl;
+#endif
+
+    MultLowLvl_kernel_container_->ntt_ops_obj[id].config_tf(q, rootOfUnityPowers);
+
+}
+
+
+template <int id>
+void Device::launch_compute_forward(sycl::queue &q, uint64_t degree, 
+                            const std::vector<uint64_t> &primes) {
+    FPGA_ASSERT(primes.size() > 0);
+    static std::vector<sycl::ulong4> ntt_configs;
+    for (uint64_t prime : primes) {
+        sycl::ulong4 config;
+        config[0] = prime;
+        __int128 a = 1;
+        unsigned long k = precompute_modulus_k(prime);
+        unsigned long r = (a << (2 * k)) / prime;
+        config[1] = r;
+        // compute N^{-1} mod prime
+        config[2] = ::intel::hexl::InverseMod(degree, prime);
+        config[3] = k;
+        // std::cout << "r = " << r << ", k = " << k << std::endl;
+        ntt_configs.push_back(config);
+    }
+
+    FPGA_ASSERT(ntt_configs.size() == primes.size(), "ntt_configs.size() must equals primes.size()");
+#ifdef DEBUG_MULT
+    std::cout << "launching ntt_compute_forward, id = " << id << std::endl;
+#endif
+
+    MultLowLvl_kernel_container_->ntt_ops_obj[id].compute_forward(q, ntt_configs);
+
+}
+
+
+template <int id>
+void Device::launch_ntt(sycl::queue &q, uint64_t degree, 
+                        const std::vector<uint64_t> &primes) {
+    static bool b_initialized = false;
+
+    if (!b_initialized) [
+        b_initialized = true;
+
+        // config the twiddle factor factory kernel
+        launch_ntt_config_tf<id>(q, degree, primes);
+#ifdef DEBUG_MULT
+        std::cout << "launch ntt read in function "<< __FUNCTION__ << ", id = " << id << std::endl; 
+#endif
+        MultLowLvl_kernel_container_->ntt_ops_obj[id].read(q);
+
+        MultLowLvl_kernel_container_->ntt_ops_obj[id].write(q);
+
+        launch_compute_forward<id>(q, degree, primes);
+    ]
+}
+
+
+template <int id>
+void Device::launch_intt_config_tf(sycl::queue &q, uint64_t degree, 
+                                   const std::vector<uint64_t> &primes) {
+    static std::vector<uint64_t> invRootOfUnityPowers;
+    int VEC = MultLowLvl_kernel_container_->ntt_ops_obj[id].get_VEC();
+    for (long prime : primes) {
+        // create a HEXL ntt instance to get the twiddle factors
+        ::intel::hexl::NTT ntt_hexl(degree, prime);
+
+        // intt needs to remove the first ununsed element as the first VEC of the
+        // twiddle factors needs all the elements, while ntt only use just one
+        // elements so that it can be shifted out without removing the first unused
+        // elements
+        auto tmp = ntt_hexl.GetInvRootOfUnityPowers();
+
+        // ignore the first one
+        for (int i = 0; i < VEC - 1; i++) {
+        auto val = tmp[tmp.size() - VEC + 1 + i];
+        invRootOfUnityPowers.push_back(val);
+        invRootOfUnityPowers.push_back(get_y_barret(val, prime));
+        }
+        // append the prime as the size of the twiddle factors should be N
+        invRootOfUnityPowers.push_back(prime);
+        // no y berrett needed
+        invRootOfUnityPowers.push_back(prime);
+
+        for (long i = 0; i < tmp.size() / VEC; i++) {
+        invRootOfUnityPowers.push_back(tmp[1 + i * VEC]);
+        }
+
+        // The last group: 8,9,10,11,12,13,14,15,4,5,6,7,2,3,1,0
+        // w^N/2, w^N/4, w^N/8, w^N/16 at index 1,2,4,8 -> 14,12,8,0
+    }
+
+    FPGA_ASSERT(invRootOfUnityPowers.size() == 
+        (degree / VEC + VEC * 2) * primes.size(), "invRootOfUnityPowers.size() 
+                        must equals (degree / VEC + VEC * 2) * primes.size()");
+    
+    MultLowLvl_kernel_container_->ntt_ops_obj[id].config_tf(q, invRootOfUnityPowers);
+
+}
+
+
+template <int id>
+void Device::launch_compute_inverse(sycl::queue &q, uint64_t &degree, 
+                                    const std::vector<uint64_t> &primes) {
+    static std::vector<sycl::ulong4> intt_configs;
+    for (uint64_t prime : primes) {
+        sycl::ulong4 intt_config;
+        intt_config[0] = prime;
+        __int128 a = 1;
+        unsigned long k = precompute_modulus_k(prime);
+        unsigned long r = (a << (2 * k)) / prime;
+        intt_config[1] = r;
+        // compute N^{-1} mod prime
+        intt_config[2] = ::intel::hexl::InverseMod(degree, prime);
+        intt_config[3] = k;
+        // std::cout << "r = " << r << ", k = " << k << std::endl;
+        intt_configs.push_back(intt_config);
+    }
+
+    FPGA_ASSERT(intt_configs.size() == primes.size(), "intt_configs.size() == primes.size()");
+
+    MultLowLvl_kernel_container_->ntt_ops_obj[id].compute_inverse(q, intt_configs);
+}
+
+template <int id>
+void Device::launch_intt(sycl::queue &q, uint64_t degree, 
+                         const std::vector<uint64_t> &primes) {
+    static bool b_initialized = false;
+
+    if (!b_initialized) {
+        b_initialized = true;
+
+        // config the twiddle factor factory kernel
+        launch_intt_config_tf(q, degree, primes);
+
+        MultLowLvl_kernel_container_->ntt_ops_obj[id].read(q);
+        MultLowLvl_kernel_container_->ntt_ops_obj[id].write(q);
+        MultLowLvl_kernel_container_->ntt_ops_obj[id].norm(q);
+
+        launch_compute_inverse<id>(q, degree, primes);
+    }
+}
+
+
+uint64_t Device::precompute_modulus_r(uint64_t modulus) {
+    __int128 a = 1;
+  unsigned long k = precompute_modulus_k(modulus);
+  unsigned long r = (a << (2 * k)) / modulus;
+  return r;
+}
+
+
+void Device::enqueue_input_data_MultLowLvl(FPGAObject_MultLowLvl* fpga_obj) {
+    
+
+}
+
+
 bool Device::process_output() {
     bool rsl = false;
     rsl |= process_output_dyadic_multiply();

@@ -174,6 +174,11 @@ public:
     void (*launchAllAutoRunKernels)(sycl::queue&);
 };
 
+
+
+
+
+
 }  // namespace fpga
 }  // namespace hexl
 }  // namespace intel

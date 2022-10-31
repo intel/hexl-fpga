@@ -228,22 +228,27 @@ public:
 
 class Object_MultLowLvl : public Object {
 public:
-    explicit Object_MultLowLvl(uint64_t* a0, uint64_t* a1, uint8_t* a_primes_index, 
-                               uint64_t* b0, uint64_t* b1, uint8_t* b_primes_index,
-                               uint64_t plainText, uint64_t* c0, uint64_t* c1, 
+    explicit Object_MultLowLvl(uint64_t* a0, uint64_t* a1, uint64_t a_primes_size, uint8_t* a_primes_index, 
+                               uint64_t* b0, uint64_t* b1, uint64_t b_primes_size, uint8_t* b_primes_index,
+                               uint64_t plainText, uint64_t coeff_count, 
+                               uint64_t* c0, uint64_t* c1, uint64_t* c2, uint64_t c_primes_size,
                                uint8_t* output_primes_index, bool fence = false);
     uint64_t* a0_;
     uint64_t* a1_;
+    uint64_t a_primes_size_;
     uint8_t* a_primes_index_;
     uint64_t* b0_;
     uint64_t* b1_;
+    uint64_t b_primes_size_;
     uint8_t*  b_primes_index_;
     uint64_t plainText_;
+    uint64_t coeff_count_;
     uint64_t* c0_;
     uint64_t* c1_;
+    uint64_t* c2_;
+    uint64_t c_primes_size_;
     uint8_t* output_primes_index_;
 };
-
 
 
 
@@ -385,7 +390,7 @@ private:
     const uint64_t n_batch_ntt_;
     const uint64_t n_batch_intt_;
     const uint64_t n_batch_KeySwitch_;
-    const uint64_t n_batch_MultLowLvl_ = 1;
+    const uint64_t n_batch_MultLowLvl_;
 
     uint64_t total_worksize_DyadicMultiply_;
     uint64_t num_DyadicMultiply_;
@@ -622,13 +627,18 @@ public:
 
     uint64_t* a0_;
     uint64_t* a1_;
+    uint64_t* a_primes_size_;
     uint8_t* a_primes_index_;
     uint64_t* b0_;
     uint64_t* b1_;
+    uint64_t b_primes_size_;
     uint8_t*  b_primes_index_;
     uint64_t plainText_;
+    uint64_t coeff_count_;
     uint64_t* c0_;
     uint64_t* c1_;
+    uint64_t* c2_;
+    uint64_t  c_primes_size_;
     uint8_t* output_primes_index_;
 
     uint64_t* ms_output;
@@ -702,7 +712,7 @@ public:
            std::shared_future<bool> exit_signal, uint64_t coeff_size,
            uint32_t modulus_size, uint64_t batch_size_dyadic_multiply,
            uint64_t batch_size_ntt, uint64_t batch_size_intt,
-           uint64_t batch_size_KeySwitch, uint32_t debug);
+           uint64_t batch_size_KeySwitch, uint64_t batch_size_MultLowLvl, uint32_t debug);
     ~Device();
     Device(const Device&) = delete;
     Device& operator=(const Device&) = delete;
@@ -740,14 +750,39 @@ private:
     void KeySwitch_read_output();
     uint64_t precompute_modulus_k(uint64_t modulus);
     void copyKeySwitchBatch(FPGAObject_KeySwitch* fpga_obj, int obj_id);
-    kernel_t get_kernel_type();
-    std::string get_bitstream_name();
-    void load_kernel_symbols();
-
+    
     // MultLowlvl heler functions, added by need.
+
+    template <int id>
+    void launch_ntt_config_tf(sycl::queue& q, uint64_t degree, const std::vector<uint64_t> &primes);
+
+    template <int id>
+    void launch_compute_forward(sycl::queue &q, uint64_t degree, const std::vector<uint64_t> &primes);
+
+    template <int id>
+    void launch_ntt(sycl::queue &q, uint64_t degree, const std::vector<uint64_t> &primes);
+
+
+    template <int id>
+    void launch_intt_config_tf(sycl::queue &q, uint64_t degree, const std::vector<uint64_t> &primes);
+
+    template <int id>
+    void launch_compute_inverse(sycl::queue &q, uint64_t degree, const std::vector<uint64_t> &primes);
+
+    template <int id>
+    void launch_intt(sycl::queue &q, uint64_t degree, const std::vector<uint64_t> &primes);
+
+
+
+    uint64_t precompute_modulus_r(uint64_t modulus);
     void MultLowLvl_Init(uint64_t* primes, uint64_t primes_size);
     void copyMultLowlvlBatch(FPGAObject_MultLowLvl* fpga_obj, int obj_id);
     void MultLowLvl_read_output();
+    
+    // dynamic loading functions.
+    kernel_t get_kernel_type();
+    std::string get_bitstream_name();
+    void load_kernel_symbols();
 
     sycl::device device_;
     Buffer& buffer_;
@@ -790,14 +825,17 @@ private:
     sycl::event KeySwitch_events_write_[2][1024];
     sycl::event KeySwitch_events_enqueue_[2][2];
     std::unordered_map<uint64_t**, KeySwitchMemKeys<uint256_t>*> keys_map_;
+
+    // MultLowLvl section
+    sycl::queue multlowlvl_queues_[MULTLOWLVL_NUM_KERNELS];
+    sycl::queue multlowlvl_init_ntt_queues_[2];
+    sycl::queue multlowlvl_init_intt_queues_[2];
+
     static int device_id_;
     int id_;
     kernel_t kernel_type_;
     std::vector<FPGAObject*> fpga_objects_;
     static const std::unordered_map<std::string, kernel_t> kernels_;
-
-    // MultLowLvl section
-    sycl::event multlowlvl_queues_[MULTLOWLVL_NUM_KERNELS];
     
 };
 
