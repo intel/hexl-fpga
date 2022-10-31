@@ -8,6 +8,12 @@
 #include <dlfcn.h>
 #include <string>
 #include "../../common/types.hpp"
+
+#include "../device/multlowlvl/include/L1/multLowLvl.h"
+#include "../device/multlowlvl/include/L1/tensorProduct.h"
+
+using namespace L1::helib::bgv;
+
 namespace intel {
 namespace hexl {
 namespace fpga {
@@ -175,6 +181,62 @@ public:
 };
 
 
+class MultLowLvlDynamicIF : public DynamicIF {
+public:
+    explicit MultLowLvlDynamicIF(const std::string& lib);
+
+    /**
+     * multlowlvl "load functions" interface.
+     */
+    sycl::event (*BringToSetLoad)(sycl::queue&, sycl::event&, 
+                                 sycl::buffer<uint64_t>&,
+                                 sycl::buffer<uint8_t>&);
+    
+    sycl::event (*BringToSetLoad2)(sycl::queue&, sycl::event&, 
+                                 sycl::buffer<uint64_t>&,
+                                 sycl::buffer<uint8_t>&);
+    
+    /**
+     * multlowlvl "store functions" interface.
+     */
+
+    sycl::event (*TensorProductStore0)(sycl::queue&,
+                                       sycl::buffer<ulong>&);
+    
+    sycl::event (*TensorProductStore12)(sycl::queue&,
+                                        sycl::buffer<ulong>&,
+                                        sycl::buffer<ulong>&);
+    
+
+    /**
+     * BringToSet kernel interfaces
+     */
+
+    sycl::event (*BringToSet)(sycl::queue&, uint32_t,
+                             sycl::buffer<ulong2>&, uint32_t,
+                             uint32_t, uint, uint64_t);
+    
+    sycl::event (*BringToSet2)(sycl::queue&, uint32_t,
+                               sycl::buffer<ulong2>&, uint32_t,
+                               uint32_t, uint, uint64_t);
+    
+
+    /**
+     * "TensorProduct" kernel interface.
+     */
+
+    sycl::event (*TensorProduct)(sycl::queue&, sycl::buffer<ulong4>&);
+
+    INTT_Method& (*intt1_method_ops)();
+    INTT_Method& (*intt2_method_ops)();
+
+    NTT_Method& (*ntt1_method_ops)();
+    NTT_Method& (*ntt2_method_ops)();
+
+    std::vector<INTT_Method*> intt_ops_obj[2];
+    std::vector<NTT_Method*> ntt_ops_obj[2];
+
+};
 
 
 

@@ -1324,6 +1324,7 @@ void Device::launch_ntt_config_tf(sycl::queue &q, uint64_t degree,
     
     // twiddle factors should be statis as the kernel need to access it
     static std::vector<uint64_t> rootOfUnityPowers;
+    uint64_t VEC = MultLowLvl_kernel_container_->ntt_ops_obj[id]->get_VEC();
     for (long prime : primes) {
         // create a HEXL ntt instance to get the twiddle factors
         ::intel::hexl::NTT ntt_hexl(degree, prime);
@@ -1344,19 +1345,18 @@ void Device::launch_ntt_config_tf(sycl::queue &q, uint64_t degree,
         // the first VEC of NTT operation only relies on just one element
         // so that the first un-used element can be shifted out
         rootOfUnityPowers.push_back(prime);
-        for (uint64_t i = 1; i < tfdata.size() / ntt.get_VEC(); i++) {
-        rootOfUnityPowers.push_back(tfdata[i * ntt.get_VEC()]);
+        for (uint64_t i = 1; i < tfdata.size() / VEC; i++) {
+            rootOfUnityPowers.push_back(tfdata[i * VEC]);
         }
     }
 
-    FPGA_ASSERT(rootOfUnityPowers.size() == (degree / 
-        MultLowLvl_kernel_container_->ntt_ops_obj[id].get_VEC() + 8) * primes.size());
+    FPGA_ASSERT(rootOfUnityPowers.size() == (degree / VEC + 8) * primes.size());
 
 #ifdef DEBUG_MULT
     std::cout << "launching ntt_config_tf, id = " << id << std::endl;
 #endif
 
-    MultLowLvl_kernel_container_->ntt_ops_obj[id].config_tf(q, rootOfUnityPowers);
+    MultLowLvl_kernel_container_->ntt_ops_obj[id]->config_tf(q, rootOfUnityPowers);
 
 }
 
@@ -1385,7 +1385,7 @@ void Device::launch_compute_forward(sycl::queue &q, uint64_t degree,
     std::cout << "launching ntt_compute_forward, id = " << id << std::endl;
 #endif
 
-    MultLowLvl_kernel_container_->ntt_ops_obj[id].compute_forward(q, ntt_configs);
+    MultLowLvl_kernel_container_->ntt_ops_obj[id]->compute_forward(q, ntt_configs);
 
 }
 
@@ -1403,9 +1403,9 @@ void Device::launch_ntt(sycl::queue &q, uint64_t degree,
 #ifdef DEBUG_MULT
         std::cout << "launch ntt read in function "<< __FUNCTION__ << ", id = " << id << std::endl; 
 #endif
-        MultLowLvl_kernel_container_->ntt_ops_obj[id].read(q);
+        MultLowLvl_kernel_container_->ntt_ops_obj[id]->read(q);
 
-        MultLowLvl_kernel_container_->ntt_ops_obj[id].write(q);
+        MultLowLvl_kernel_container_->ntt_ops_obj[id]->write(q);
 
         launch_compute_forward<id>(q, degree, primes);
     ]
@@ -1450,7 +1450,7 @@ void Device::launch_intt_config_tf(sycl::queue &q, uint64_t degree,
         (degree / VEC + VEC * 2) * primes.size(), "invRootOfUnityPowers.size() 
                         must equals (degree / VEC + VEC * 2) * primes.size()");
     
-    MultLowLvl_kernel_container_->ntt_ops_obj[id].config_tf(q, invRootOfUnityPowers);
+    MultLowLvl_kernel_container_->intt_ops_obj[id]->config_tf(q, invRootOfUnityPowers);
 
 }
 
@@ -1475,7 +1475,7 @@ void Device::launch_compute_inverse(sycl::queue &q, uint64_t &degree,
 
     FPGA_ASSERT(intt_configs.size() == primes.size(), "intt_configs.size() == primes.size()");
 
-    MultLowLvl_kernel_container_->ntt_ops_obj[id].compute_inverse(q, intt_configs);
+    MultLowLvl_kernel_container_->intt_ops_obj[id]->compute_inverse(q, intt_configs);
 }
 
 template <int id>
@@ -1489,9 +1489,9 @@ void Device::launch_intt(sycl::queue &q, uint64_t degree,
         // config the twiddle factor factory kernel
         launch_intt_config_tf(q, degree, primes);
 
-        MultLowLvl_kernel_container_->ntt_ops_obj[id].read(q);
-        MultLowLvl_kernel_container_->ntt_ops_obj[id].write(q);
-        MultLowLvl_kernel_container_->ntt_ops_obj[id].norm(q);
+        MultLowLvl_kernel_container_->intt_ops_obj[id]->read(q);
+        MultLowLvl_kernel_container_->intt_ops_obj[id]->write(q);
+        MultLowLvl_kernel_container_->intt_ops_obj[id]->norm(q);
 
         launch_compute_inverse<id>(q, degree, primes);
     }

@@ -128,6 +128,46 @@ DyadicMultKeySwitchDynamicIF::DyadicMultKeySwitchDynamicIF(std::string& lib)
         (void (*)(sycl::queue&))loadKernel("launchAllAutoRunKernels");
 }
 
+MultLowLvlDynamicIF::MultLowLvlDynamicIF(const std::string& lib) : DynamicIF(lib) {
+    BringToSetLoad = (sycl::event (*)(sycl::queue&, sycl::event&, 
+                                 sycl::buffer<uint64_t>&,
+                                 sycl::buffer<uint8_t>&))loadKernel("BringToSetLoad_IF");
+    
+    BringToSetLoad2 = (sycl::event (*)(sycl::queue&, sycl::event&, 
+                                 sycl::buffer<uint64_t>&,
+                                 sycl::buffer<uint8_t>&))loadKernel("BringToSetLoad2_IF");
+    
+    TensorProductStore0 = (sycl::event (*)(sycl::queue&,
+                                       sycl::buffer<ulong>&))loadKernel("TensorProductStore0_IF");
+    
+    TensorProductStore12 = (sycl::event (*)(sycl::queue&,
+                                        sycl::buffer<ulong>&,
+                                        sycl::buffer<ulong>&))loadKernel("TensorProductStore12_IF");
+    BringToSet = (sycl::event (*)(sycl::queue&, uint32_t,
+                             sycl::buffer<ulong2>&, uint32_t,
+                             uint32_t, uint, uint64_t))loadKernel("BringToSet_IF");
+    
+    BringToSet2 = (sycl::event (*)(sycl::queue&, uint32_t,
+                               sycl::buffer<ulong2>&, uint32_t,
+                               uint32_t, uint, uint64_t))loadKernel("BringToSet2_IF");
+    
+    TensorProduct = (sycl::event (*)(sycl::queue&, sycl::buffer<ulong4>&))loadKernel("TensorProduct_IF");
+
+    intt1_method_ops = (INTT_Method& (*)())loadKernel("intt1_method_IF");
+    intt2_method_ops = (INTT_Method& (*)())loadKernel("intt2_method_IF");
+
+    ntt1_method_ops = (NTT_Method& (*)())loadKernel("ntt1_method_IF");
+    ntt2_method_ops = (NTT_Method& (*)())loadKernel("ntt2_method_IF");
+
+    intt_ops_obj[0] = &intt1_method_ops();
+    intt_ops_obj[1] = &intt2_method_ops();
+
+    ntt_ops_obj[0] = &ntt1_method_ops();
+    ntt_ops_obj[1] = &ntt2_method_ops();
+
+}
+
+
 }  // namespace fpga
 }  // namespace hexl
 }  // namespace intel
