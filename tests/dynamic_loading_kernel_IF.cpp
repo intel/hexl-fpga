@@ -96,11 +96,9 @@ MultLowLvlDynaimcIF::MultLowLvlDynaimcIF(const std::string& lib)
     BringToSet_ops = (BringToSet_t& (*)())loadKernel("BringToSet_struct_IF");
 
     intt1_method_ops = (INTT_Method& (*)())loadKernel("intt1_method_IF");
-
     intt2_method_ops = (INTT_Method& (*)())loadKernel("intt2_method_IF");
 
     ntt1_method_ops = (NTT_Method& (*)())loadKernel("ntt1_method_IF");
     ntt2_method_ops = (NTT_Method& (*)())loadKernel("ntt2_method_IF");
-
 
 }

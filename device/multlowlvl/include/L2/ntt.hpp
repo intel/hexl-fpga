@@ -169,7 +169,7 @@ void launch_ntt_config_tf(NTT_Method &ntt, unsigned long degree,
 
 template <int id>
 void launch_compute_forward(NTT_Method &ntt, unsigned long degree,
-                            const std::vector<uint64_t> primes) {
+                            const std::vector<uint64_t> &primes) {
   assert(primes.size() > 0);
   // generate intt configurations
   static std::vector<sycl::ulong4> ntt_configs;

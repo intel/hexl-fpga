@@ -85,6 +85,10 @@ struct Context &GetContext() {
 };
 
 void Init(std::vector<uint64_t> &primes) {
+
+  std::cout << "function: " << __func__ << ", primes.size(): " << primes.size() << std::endl; 
+
+
   // Create queue, get platform and device
 #if defined(FPGA_EMULATOR)
   sycl::ext::intel::fpga_emulator_selector device_selector;
@@ -93,7 +97,6 @@ void Init(std::vector<uint64_t> &primes) {
 #endif
 
   struct Context &ctxt = GetContext();
-
   ctxt.primes = primes;
 
   //auto prop_list = property_list{property::queue::enable_profiling()};
