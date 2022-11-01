@@ -628,57 +628,19 @@ public:
     // use buffer to store input data.
     sycl::buffer<uint64_t>* a0_buf_;
     sycl::buffer<uint64_t>* a1_buf_;
-    //sycl::buffer<uint8_t>* a_primes_index_buf_;
+    std::vector<uint8_t> *a_primes_index_;
     uint64_t a_primes_size_;
 
     sycl::buffer<uint64_t>* b0_buf_;
     sycl::buffer<uint64_t>* b1_buf_;
-    //sycl::buffer<uint8_t>* b_primes_index_buf_;
+    std::vector<uint8_t> *b_primes_index_;
     uint64_t b_primes_size_;
 
     uint64_t plainText_;
     uint64_t coeff_count_;
 
-    sycl::buffer<uint64_t>* c0_buf_;
-    sycl::buffer<uint64_t>* c1_buf_;
-    sycl::buffer<uint64_t>* c2_buf_;
-    uint64_t c_primes_size_;
-    uint64_t 
-
-    
-    
-    // uint64_t* a0_;
-    // uint64_t* a1_;
-    // uint64_t* a_primes_size_;
-    // uint8_t* a_primes_index_;
-    // uint64_t* b0_;
-    // uint64_t* b1_;
-    // uint64_t b_primes_size_;
-    // uint8_t*  b_primes_index_;
-    // uint64_t plainText_;
-    // uint64_t coeff_count_;
-    // uint64_t* c0_;
-    // uint64_t* c1_;
-    // uint64_t* c2_;
-    // uint64_t  c_primes_size_;
-    // uint8_t* output_primes_index_;
-
-    uint64_t* ms_output;
-
-    // the sycl::buffer are used to pass data into/out kernels.
-    // declare sycl::buffer pointer here.
-
-    // LaunchBringToSet kernel.
-    sycl::buffer<sycl::ulong2>* mem_scale_para_set_buf_;
-
-    // TensorProduct.
-    sycl::buffer<sycl::ulong4>* mem_primes_mulmod_buf_;
-
-    // Load kernel.
-    sycl::buffer<uint64_t>* mem_input_buf_;
-    sycl::buffer<uint8_t>* mem_primes_index_buf_;
-
     // store kernel.
+    uint64_t c_primes_size_;
     sycl::buffer<uint64_t>* mem_output1_buf_;
     sycl::buffer<uint64_t>* mem_output2_buf_[2];
     sycl::buffer<uint64_t>* mem_output3_buf_[2];
@@ -855,6 +817,14 @@ private:
     sycl::queue multlowlvl_init_ntt_queues_[2];
     sycl::queue multlowlvl_init_intt_queues_[2];
     std::vector<std::vector<uint8_t>*> *pi_reorder_primes_index;
+
+    // LaunchBringToSet dynamically allocated sycl::buffer.
+    sycl::buffer<sycl::ulong2>* scale_param_set_buf_[2];
+
+    // TensorProduct dynamiclly allocated sycl::buffer.
+    sycl::buffer<sycl::ulong4>* primes_mulmod_buf_;
+
+    // 
 
     static int device_id_;
     int id_;
