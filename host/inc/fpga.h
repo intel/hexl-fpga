@@ -625,21 +625,43 @@ public:
     void fill_in_data(const std::vector<Object*>& objs) override;
     void fill_out_data(uint64_t* results) override;
 
-    uint64_t* a0_;
-    uint64_t* a1_;
-    uint64_t* a_primes_size_;
-    uint8_t* a_primes_index_;
-    uint64_t* b0_;
-    uint64_t* b1_;
+    // use buffer to store input data.
+    sycl::buffer<uint64_t>* a0_buf_;
+    sycl::buffer<uint64_t>* a1_buf_;
+    //sycl::buffer<uint8_t>* a_primes_index_buf_;
+    uint64_t a_primes_size_;
+
+    sycl::buffer<uint64_t>* b0_buf_;
+    sycl::buffer<uint64_t>* b1_buf_;
+    //sycl::buffer<uint8_t>* b_primes_index_buf_;
     uint64_t b_primes_size_;
-    uint8_t*  b_primes_index_;
+
     uint64_t plainText_;
     uint64_t coeff_count_;
-    uint64_t* c0_;
-    uint64_t* c1_;
-    uint64_t* c2_;
-    uint64_t  c_primes_size_;
-    uint8_t* output_primes_index_;
+
+    sycl::buffer<uint64_t>* c0_buf_;
+    sycl::buffer<uint64_t>* c1_buf_;
+    sycl::buffer<uint64_t>* c2_buf_;
+    uint64_t c_primes_size_;
+    uint64_t 
+
+    
+    
+    // uint64_t* a0_;
+    // uint64_t* a1_;
+    // uint64_t* a_primes_size_;
+    // uint8_t* a_primes_index_;
+    // uint64_t* b0_;
+    // uint64_t* b1_;
+    // uint64_t b_primes_size_;
+    // uint8_t*  b_primes_index_;
+    // uint64_t plainText_;
+    // uint64_t coeff_count_;
+    // uint64_t* c0_;
+    // uint64_t* c1_;
+    // uint64_t* c2_;
+    // uint64_t  c_primes_size_;
+    // uint8_t* output_primes_index_;
 
     uint64_t* ms_output;
 
@@ -802,6 +824,8 @@ private:
     std::unordered_map<uint64_t**, KeySwitchMemKeys<uint256_t>*>::iterator
         keys_map_iter_;
     uint32_t debug_;
+
+    // dynamic loading objects
     NTTDynamicIF* ntt_kernel_container_;
     INTTDynamicIF* intt_kernel_container_;
     DyadicMultDynamicIF* dyadicmult_kernel_container_;
@@ -830,6 +854,7 @@ private:
     sycl::queue multlowlvl_queues_[MULTLOWLVL_NUM_KERNELS];
     sycl::queue multlowlvl_init_ntt_queues_[2];
     sycl::queue multlowlvl_init_intt_queues_[2];
+    std::vector<std::vector<uint8_t>*> *pi_reorder_primes_index;
 
     static int device_id_;
     int id_;

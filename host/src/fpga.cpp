@@ -572,6 +572,8 @@ std::string Device::get_bitstream_name() {
         return std::string("libkeyswitch.so");
     case kernel_t::DYADIC_MULTIPLY_KEYSWITCH:
         return std::string("libdyadic_multiply_keyswitch.so");
+    case kernel_t::MULTLOWLVL:
+        return std::string("libmultlowlvl.so");
     default:
         FPGA_ASSERT(0);
         return std::string("bad");
@@ -719,6 +721,8 @@ void Device::load_kernel_symbols() {
     } else if (kernel_type_ == kernel_t::DYADIC_MULTIPLY_KEYSWITCH) {
         dyadicmult_kernel_container_ = new DyadicMultDynamicIF(bitstream);
         KeySwitch_kernel_container_ = new KeySwitchDynamicIF(bitstream);
+    } else if (kernel_type_ == kernel_t::MULTLOWLVL) {
+        MultLowLvl_kernel_container_ = new MultLowLvlDynamicIF(bitstream);
     }
 }
 

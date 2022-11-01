@@ -338,7 +338,7 @@ void MultLowLvl(std::vector<uint64_t> &a0, std::vector<uint64_t> &a1,
                 std::vector<uint8_t> &output_primes_index) {
 #define DEBUG_SZ 1
 
-#ifdef DEBUG_SZ
+#if defined(DEBUG_SZ)
   std::cout << "a0.size(): " << a0.size() << std::endl;
   std::cout << "a1.size(): " << a1.size() << std::endl;
   std::cout << "a_primes_index.size(): " << a_primes_index.size() << std::endl;
