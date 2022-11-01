@@ -85,6 +85,18 @@ void KeySwitch(uint64_t* result, const uint64_t* t_target_iter_ptr, uint64_t n,
 /// Executed after KeySwitch to sync up the outstanding KeySwitch tasks
 bool KeySwitchCompleted();
 
+
+// MultLowLvl Section
+void set_worksize_MultLowLvl(uint64_t ws);
+
+void MultLowLvl(uint64_t* a0, uint64_t* a1, uint64_t a_primes_size, uint8_t* a_primes_index,
+                uint64_t* b0, uint64_t* b1, uint64_t b_primes_size, uint8_t* b_primes_index,
+                uint64_t plainText, uint64_t coeff_count, 
+                uint64_t* c0, uint64_t* c1, uint64_t* c2, uint64_t c_primes_size, 
+                uint8_t* output_primes_index);
+
+bool MultLowLvlCompleted();
+
 ////////////////////////////////////////////////////////////////////////////////////////
 //
 // WARNING: The following NTT and INTT related APIs are deprecated since
