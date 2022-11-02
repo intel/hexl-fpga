@@ -628,12 +628,14 @@ public:
     // use buffer to store input data.
     sycl::buffer<uint64_t>* a0_buf_;
     sycl::buffer<uint64_t>* a1_buf_;
-    std::vector<uint8_t> *a_primes_index_;
+    uint8_t *a_primes_index_;
+    std::vector<uint8_t> a_primes_index_vec_;
     uint64_t a_primes_size_;
 
     sycl::buffer<uint64_t>* b0_buf_;
     sycl::buffer<uint64_t>* b1_buf_;
-    std::vector<uint8_t> *b_primes_index_;
+    uint8_t *b_primes_index_;
+    std::vector<uint8_t> b_primes_index_vec_;
     uint64_t b_primes_size_;
 
     uint64_t plainText_;
@@ -641,9 +643,14 @@ public:
 
     // store kernel.
     uint64_t c_primes_size_;
-    sycl::buffer<uint64_t>* mem_output1_buf_;
-    sycl::buffer<uint64_t>* mem_output2_buf_[2];
-    sycl::buffer<uint64_t>* mem_output3_buf_[2];
+    // sycl::buffer<uint64_t>* mem_output1_buf_;
+    // sycl::buffer<uint64_t>* mem_output2_buf_[2];
+    // sycl::buffer<uint64_t>* mem_output3_buf_[2];
+    uint8_t* output_primes_index_;
+    std::vector<uint8_t> c_primes_index_vec_;
+    uint64_t* mem_output1_;
+    uint64_t* mem_output2_;
+    uint64_t* mem_output3_;
 
 };
 
@@ -760,7 +767,8 @@ private:
 
     uint64_t precompute_modulus_r(uint64_t modulus);
     void MultLowLvl_Init(uint64_t* primes, uint64_t primes_size);
-    void copyMultLowlvlBatch(FPGAObject_MultLowLvl* fpga_obj, int obj_id);
+    template <int id>
+    void LaunchBringToSet(FPGAObject_MultLowLvl* fpga_obj);
     void MultLowLvl_read_output();
     
     // dynamic loading functions.
@@ -818,13 +826,19 @@ private:
     sycl::queue multlowlvl_init_intt_queues_[2];
     std::vector<std::vector<uint8_t>*> *pi_reorder_primes_index;
 
-    // LaunchBringToSet dynamically allocated sycl::buffer.
+    // below buffer are dynamiclly allocated by L2/ layer functions,
+    // we put it here to avoid memory leak.
+
+    // LaunchBringToSet dynamically allocated sycl::buffer. 
     sycl::buffer<sycl::ulong2>* scale_param_set_buf_[2];
 
     // TensorProduct dynamiclly allocated sycl::buffer.
     sycl::buffer<sycl::ulong4>* primes_mulmod_buf_;
 
-    // 
+    // store kernel dynamiclly allocated sycl::buffer.
+    sycl::buffer<uint64_t>* output1_buf_;
+    sycl::buffer<uint64_t>* output2_buf_[2];
+    sycl::buffer<uint64_t>* output3_buf_[2];
 
     static int device_id_;
     int id_;

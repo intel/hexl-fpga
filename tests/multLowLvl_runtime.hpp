@@ -355,6 +355,24 @@ void MultLowLvl(std::vector<uint64_t> &a0, std::vector<uint64_t> &a1,
   std::cout << "output_primes_index.size(): " << output_primes_index.size() << std::endl;
   std::cout << "65536 * output_primes_index.size(): " << 65536 * output_primes_index.size() << std::endl;
 
+  std::cout << "a_primes_index: ";
+  for (auto &a : a_primes_index) {
+    std::cout << (uint)a << " ";
+  }
+  std::cout << std::endl;
+
+  std::cout << "b_primes_index: ";
+  for (auto &b : b_primes_index) {
+    std::cout << (uint)b << " ";
+  }
+  std::cout << std::endl;
+
+  std::cout << "output_primes_index: ";
+  for (auto &c : output_primes_index) {
+    std::cout << (uint)c << " ";
+  }
+  std::cout << std::endl;
+
 
 #endif
 
