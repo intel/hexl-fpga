@@ -85,6 +85,27 @@ void KeySwitch(uint64_t* result, const uint64_t* t_target_iter_ptr, uint64_t n,
 /// Executed after KeySwitch to sync up the outstanding KeySwitch tasks
 bool KeySwitchCompleted();
 
+// add two new interfaces, multiplyby and relinearize.
+struct DoubleCRT {
+    uint64_t* c0;
+    uint64_t* c1;
+    uint64_t* c2;
+    long num_primes;
+    long coeff_count;
+    long plainText;
+    uint8_t* primes_index;
+};
+
+/**
+ * Perform c = a * b
+*/
+void MultBy(DoubleCRT a, DoubleCRT b, DoubleCRT c);
+
+/**
+ * relinearize the c2 part
+*/
+void Relinearize(DoubleCRT c);
+
 
 // MultLowLvl Section
 void set_worksize_MultLowLvl(uint64_t ws);
