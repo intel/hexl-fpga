@@ -19,8 +19,9 @@
 //#include "multlowlvl/include/L2/utils.h"
 // #include "multlowlvl/include/L2/ntt.hpp"
 // #include "multlowlvl/include/L2/intt.hpp"
+// #include "multlowlvl/include/L2/utils.h"
 
-#include "multlowlvl/include/L2/utils.h"
+
 #include "multlowlvl/include/L1/ntt.h"
 #include "multlowlvl/include/L1/intt.h"
 #include "multlowlvl/include/L1/tensorProduct.h"
