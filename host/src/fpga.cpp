@@ -701,7 +701,8 @@ Device::Device(sycl::device& p_device, Buffer& buffer,
                std::shared_future<bool> exit_signal, uint64_t coeff_size,
                uint32_t modulus_size, uint64_t batch_size_dyadic_multiply,
                uint64_t batch_size_ntt, uint64_t batch_size_intt,
-               uint64_t batch_size_KeySwitch, uint32_t debug)
+               uint64_t batch_size_KeySwitch, uint64_t batch_size_MultLowLvl,
+               uint32_t debug)
     : device_(p_device),
       buffer_(buffer),
       credit_(CREDIT),
@@ -1075,6 +1076,13 @@ void Device::enqueue_input_data(FPGAObject* fpga_obj) {
             dynamic_cast<FPGAObject_KeySwitch*>(fpga_obj);
         if (fpga_obj_KeySwitch) {
             enqueue_input_data_KeySwitch(fpga_obj_KeySwitch);
+        }
+    } break;
+    case kernel_t::MULTLOWLVL: {
+        FPGAObject_MultLowLvl* fpga_obj_MultLowLvl = 
+            dynamic_cast<FPGAObject_MultLowLvl*>(fpga_obj);
+        if (fpga_obj_MultLowLvl) {
+            enqueue_input_data_MultLowLvl(fpga_obj_MultLowLvl);
         }
     } break;
     default:
