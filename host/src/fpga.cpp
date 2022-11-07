@@ -438,6 +438,29 @@ void FPGAObject_MultLowLvl::fill_in_data(const std::vector<Object*>& objs) {
         batch++;
     }
 
+    a0_buf_ = new sycl::buffer<uint64_t>(n_batch_ * coeff_count_ * a_primes_size_);
+    b0_buf_ = new sycl::buffer<uint64_t>(n_batch_ * coeff_count_ * b_primes_size_);
+    a1_buf_ = new sycl::buffer<uint64_t>(n_batch_ * coeff_count_ * a_primes_size_);
+    b1_buf_ = new sycl::buffer<uint64_t>(n_batch_ * coeff_count_ * b_primes_size_);
+
+    int frame = 0;
+    sycl::host_accessor a0_acc(*a0_buf_);
+    sycl::host_accessor b0_acc(*b0_buf_);
+    sycl::host_accessor a1_acc(*a1_buf_);
+    sycl::host_accessor b1_acc(*b1_buf_);
+    for (const auto& obj_in : objs) {
+        Object_MultLowLvl* obj = dynamic_cast<Object_MultLowLvl*>(obj_in);
+        memcpy(a0_acc.get_pointer() + frame * coeff_count_ * a_primes_size_, obj->a0_,
+                coeff_count_ * a_primes_size_ * sizeof(uint64_t));
+        memcpy(a1_acc.get_pointer() + frame * coeff_count_ * a_primes_size_, obj->a1_,
+                coeff_count_ * a_primes_size_ * sizeof(uint64_t));
+        memcpy(b0_acc.get_pointer() + frame * coeff_count_ * a_primes_size_, obj->b0_,
+                coeff_count_ * a_primes_size_ * sizeof(uint64_t));
+        memcpy(b1_acc.get_pointer() + frame * coeff_count_ * a_primes_size_, obj->b1_,
+                coeff_count_ * a_primes_size_ * sizeof(uint64_t));
+        frame++;
+    }
+
     n_batch_ = batch;
     tag_ = g_tag_++;
 }
@@ -1453,7 +1476,7 @@ void Device::enqueue_input_data_KeySwitch(FPGAObject_KeySwitch* fpga_obj) {
     }
 }
 
-template <int id>
+template <int engine>
 void Device::LaunchBringToSet(FPGAObject_MultLowLvl* fpga_obj) {
 
     std::vector<uint64_t> pi;
@@ -1465,27 +1488,116 @@ void Device::LaunchBringToSet(FPGAObject_MultLowLvl* fpga_obj) {
     std::vector<uint8_t> pi_primes_index;
     FPGA_ASSERT(id == 1 || id == 2);
     if (id == 1) {
-        pi_primes_index = std::move((fpga->))
+        pi_primes_index = std::move(std::vector<uint8_t>(fpga_obj->a_primes_index_, 
+                fpga_obj->a_primes_index_ + fpga_obj->n_batch_ * a_primes_size_));
     } else {
-
+        pi_primes_index = std::move(std::vector<uint8_t>(fpga_obj->b_primes_index_, 
+                fpga_obj->b_primes_index_ + fpga_obj->n_batch_ * b_primes_size_));
     }
 
     int num_dropped_primes = 0;
+    for (auto prime_index : pi_primes_index) {
+        num_dropped_primes += (std::find(qj_prime_index.begin(), qj_prime_index.end(), prime_index) ==
+         qj_prime_index.end());
+    }
 
+    // reoder pi, put the dropped primes to the beginning
+    for (size_t i = pi_primes_index.size() - num_dropped_primes;
+        i < pi_primes_index.size(); i++) {
+        pi_reorder_primes_index[engine - 1].push_back(pi_primes_index[i]);
+        pi.push_back(ctxt.primes[pi_primes_index[i]]);
+    }
+    for (size_t i = 0; i < pi_primes_index.size() - num_dropped_primes; i++) {
+        pi_reorder_primes_index[engine - 1].push_back(pi_primes_index[i]);
+        pi.push_back(ctxt.primes[pi_primes_index[i]]);
+    }
 
+    // fill qj
+    for (size_t i = 0; i < qj_prime_index.size(); i++) {
+        qj.push_back(ctxt.primes[qj_prime_index[i]]);
+    }
+
+    assert(pi_reorder_primes_index[engine - 1].size() == pi_primes_index.size());
+
+    size_t P, Q, I;
+    std::vector<sycl::ulong2> scale_param_set;
+    std::vector<uint64_t> empty_vec;
+    PreComputeScaleParamSet<false, false>(pi, qj, qj_prime_index, plainText,
+                                            empty_vec, P, Q, I, scale_param_set);
+    
+    auto scale_param_set_buf = new buffer<sycl::ulong2>(scale_param_set.size());
+    assert(engine == 1 || engine == 2);
+
+    if (engine == 1 || engine == 2);
+    if (engine == 1) {
+        std::cout << "launching BringToSet.\n";
+        queue_copy(*ctxt.q_scale1, scale_param_set, scale_param_set_buf);
+        MultLowLvl_kernel_container_->BringToSet(*ctxt.q_scale1, COEFF_COUNT,
+                               *scale_param_set_buf, P, Q, I, plainText);
+    } else {
+        std::cout << "launching BringToSet2.\n";
+        queue_copy(*ctxt.q_scale2, scale_param_set, scale_param_set_buf);
+        MultLowLvl_kernel_container_->BringToSet2(*ctxt.q_scale2, COEFF_COUNT,
+                                *scale_param_set_buf, P, Q, I, plainText);
+    }
 }
+
+
+template <int engine>
+void Device::Load(FPGAObject_MultLowLvl* fpga_obj, sycl::buffer<uint64_t>* input_buf) {
+    auto primes_index_buf = new sycl::buffer<uint8_t>(pi_reorder_primes_index[engine].size());
+
+    // explicitly copy data from host to device.
+    copy_buffer_to_device(multlowlvl_queues_[MULTLOWLVL_LOAD], *input_buf).wait();
+
+    // copy primes index into device.
+    auto e_copy = queue_copy_async(multlowlvl_queues_[MULTLOWLVL_LOAD], pi_reorder_primes_index[engine - 1], primes_index_buf);
+
+    assert(engine == 1 || engine == 2);
+    if (engine == 1) {
+        MultLowLvl_kernel_container_->BringToSetLoad(multlowlvl_queues_[MULTLOWLVL_LOAD], e_copy, 
+            *input_buf, *primes_index_buf);
+    } else {
+        MultLowLvl_kernel_container_->BringToSetLoad2(multlowlvl_queues_[MULTLOWLVL_LOAD], e_copy, 
+            *input_buf, *primes_index_buf);
+    }
+}
+
+void Device::TensorProduct(FPGAObject_MultLowLvl* fpga_obj) {
+    std::vector<uint8_t> output_primes_index(fpga_obj->output_primes_index_, 
+        fpga_obj->output_primes_index_ + fpga_obj->n_batch_ * fpga_obj->c_primes_size_);
+    
+    std::vector<sycl::ulong4> primes_mulmod;
+    for (auto prime_index : output_primes_index) {
+        auto prime = fpga_obj->primes_[prime_index];
+        primes_mulmod.push_back({prime, precompute_modulus_r(prime), precompute_modulus_k(prime), 0});
+    }
+
+    primes_mulmod_buf_ = new sycl::buffer<sycl::ulong4>(primes_mulmod.size());
+    queue_copy(multlowlvl_queues_[MULTLOWLVL_TENSORPRODUCT], primes_mulmod, primes_mulmod_buf_);
+
+    MultLowLvl_kernel_container_->TensorProduct(multlowlvl_queues_[MULTLOWLVL_TENSORPRODUCT],
+                                                *primes_mulmod_buf_);
+}
+
+
+
 
 void Device::enqueue_input_data_MultLowLvl(FPGAObject_MultLowLvl* fpga_obj) {
     // LaunchBringToSet
-
+    LaunchBringToSet<1>(fpga_obj);
+    LaunchBringToSet<2>(fpga_obj);
 
     // Load, a0, b0.
-
+    Load<1>(fpga_obj, fpga_obj->a0_buf_);
+    Load<2>(fpga_obj, fpga_obj->b0_buf_);
 
     // TensorProduct
-
+    TensorProduct(fpga_obj);
 
     // Load a1, b1.
+    Load<1>(fpga_obj, fpga_obj->a1_buf_);
+    Load<2>(fpga_obj, fpga_obj->b1_buf_);
 }
 
 

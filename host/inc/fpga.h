@@ -753,7 +753,6 @@ private:
     template <int id>
     void launch_ntt(sycl::queue &q, uint64_t degree, const std::vector<uint64_t> &primes);
 
-
     template <int id>
     void launch_intt_config_tf(sycl::queue &q, uint64_t degree, const std::vector<uint64_t> &primes);
 
@@ -763,7 +762,8 @@ private:
     template <int id>
     void launch_intt(sycl::queue &q, uint64_t degree, const std::vector<uint64_t> &primes);
 
-
+    template <int engine>
+    void Load(FPGAObject_MultLowLvl* fpga_obj);
 
     uint64_t precompute_modulus_r(uint64_t modulus);
     void MultLowLvl_Init(uint64_t* primes, uint64_t primes_size);
@@ -824,10 +824,13 @@ private:
     sycl::queue multlowlvl_queues_[MULTLOWLVL_NUM_KERNELS];
     sycl::queue multlowlvl_init_ntt_queues_[2];
     sycl::queue multlowlvl_init_intt_queues_[2];
-    std::vector<std::vector<uint8_t>*> *pi_reorder_primes_index;
+    std::vector<std::vector<uint8_t>> pi_reorder_primes_index;
 
     // below buffer are dynamiclly allocated by L2/ layer functions,
     // we put it here to avoid memory leak.
+
+    // Load function dynamically allocated sycl::buffers.
+    //std::vector<sycl::buffer<uint64_t>*> input_bufs_;
 
     // LaunchBringToSet dynamically allocated sycl::buffer. 
     sycl::buffer<sycl::ulong2>* scale_param_set_buf_[2];
