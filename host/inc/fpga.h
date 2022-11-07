@@ -766,7 +766,7 @@ private:
     void Load(FPGAObject_MultLowLvl* fpga_obj);
 
     uint64_t precompute_modulus_r(uint64_t modulus);
-    void MultLowLvl_Init(uint64_t* primes, uint64_t primes_size);
+    void MultLowLvl_Init(FPGAObject_MultLowLvl* fpga_obj);
     template <int id>
     void LaunchBringToSet(FPGAObject_MultLowLvl* fpga_obj);
     void MultLowLvl_read_output();

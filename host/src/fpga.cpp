@@ -1580,10 +1580,25 @@ void Device::TensorProduct(FPGAObject_MultLowLvl* fpga_obj) {
                                                 *primes_mulmod_buf_);
 }
 
+void Device::MultLowLvl_Init(FPGAObject_MultLowLvl* fpga_obj) {
+    std::vector<uint64_t> primes(fpga_obj->primes_, fpga_obj->primes_ + fpga_obj->prime_size);
+    
+    // launch intt.
+    launch_intt<1>(multlowlvl_queues_[MULTLOWLVL_INTT], fpga_obj->coeff_count_, primes);
+    launch_intt<2>(multlowlvl_queues_[MULTLOWLVL_INTT], fpga_obj->coeff_count_, primes);
+
+    // launch ntt.
+    launch_ntt<1>(multlowlvl_queues_[MULTLOWLVL_NTT], fpga_obj->coeff_count_, primes);
+    launch_ntt<2>(multlowlvl_queues_[MULTLOWLVL_NTT], fpga_obj->coeff_count_, primes);
+
+}
 
 
 
 void Device::enqueue_input_data_MultLowLvl(FPGAObject_MultLowLvl* fpga_obj) {
+    // launch ntt and intt.
+    MultLowLvl_Init(fpga_obj);
+
     // LaunchBringToSet
     LaunchBringToSet<1>(fpga_obj);
     LaunchBringToSet<2>(fpga_obj);
@@ -1786,12 +1801,6 @@ uint64_t Device::precompute_modulus_r(uint64_t modulus) {
   unsigned long k = precompute_modulus_k(modulus);
   unsigned long r = (a << (2 * k)) / modulus;
   return r;
-}
-
-
-void Device::enqueue_input_data_MultLowLvl(FPGAObject_MultLowLvl* fpga_obj) {
-    
-
 }
 
 
@@ -2081,6 +2090,11 @@ bool Device::process_output_KeySwitch() {
         }
     }
     return 0;
+}
+
+
+void Device::process_output_MultLowLvl() {
+    
 }
 
 void DevicePool::getDevices(int numDevicesToUse, int choice) {
