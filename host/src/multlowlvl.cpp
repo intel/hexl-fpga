@@ -17,7 +17,7 @@ void MultLowLvl(uint64_t* a0, uint64_t* a1, uint64_t a_primes_size, uint8_t* a_p
                 uint64_t* b0, uint64_t* b1, uint64_t b_primes_size, uint8_t* b_primes_index,
                 uint64_t plainText, uint64_t coeff_count, 
                 uint64_t* c0, uint64_t* c1, uint64_t* c2, uint64_t c_primes_size, 
-                uint8_t* output_primes_index) {
+                uint8_t* output_primes_index, uint64_t* primes, uint64_t primes_size) {
     
     FPGA_ASSERT(a0, "requires a0 != nullptr");
     FPGA_ASSERT(a1, "requires a1 != nullptr");
@@ -35,7 +35,8 @@ void MultLowLvl(uint64_t* a0, uint64_t* a1, uint64_t a_primes_size, uint8_t* a_p
     MultLowLvl_int(a0, a1, a_primes_size, a_primes_index,
                    b0, b1, b_primes_size, b_primes_index,
                    plainText, coeff_count,
-                   c0, c1, c2, c_primes_size, output_primes_index);
+                   c0, c1, c2, c_primes_size, output_primes_index, 
+                   primes, primes_size);
     
 } 
 

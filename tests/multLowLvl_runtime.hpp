@@ -298,6 +298,7 @@ void Store(std::vector<uint64_t> &output1, std::vector<uint64_t> &output2,
       q_tensor_product_store12, output2_buf[0], output3_buf[0]);
 
   size_t iters = (output2.size() - 1) / batch_size + 1;
+  std::cout << __func__ << " iters = " << iters << std::endl;
   for (size_t i = 1; i < iters + 1; i++) {
     size_t j = i % 2;
     size_t last = (i - 1) % 2;

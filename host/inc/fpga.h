@@ -77,6 +77,22 @@ enum KeySwitch_Kernels {
     KEYSWITCH_NUM_KERNELS
 };
 
+enum MultLowLvl_Kernels {
+    MULTLOWLVL_NTT1 = 0,
+    MULTLOWLVL_NTT2,
+    MULTLOWLVL_INTT1,
+    MULTLOWLVL_INTT2,
+    MULTLOWLVL_LOAD_A0,
+    MULTLOWLVL_LOAD_A1,
+    MULTLOWLVL_LOAD_B0,
+    MULTLOWLVL_LOAD_B1,
+    MULTLOWLVL_BRINGTOSET1,
+    MULTLOWLVL_BRINGTOSET2,
+    MULTLOWLVL_TENSORPRODUCT,
+    MULTLOWLVL_STORE,
+    MULTLOWLVL_NUM_KERNELS
+}
+
 enum class kernel_t {
     NONE,
     DYADIC_MULTIPLY,
@@ -232,7 +248,8 @@ public:
                                uint64_t* b0, uint64_t* b1, uint64_t b_primes_size, uint8_t* b_primes_index,
                                uint64_t plainText, uint64_t coeff_count, 
                                uint64_t* c0, uint64_t* c1, uint64_t* c2, uint64_t c_primes_size,
-                               uint8_t* output_primes_index, bool fence = false);
+                               uint8_t* output_primes_index, uint64_t* primes, uint64_t primes_size,
+                               bool fence = false);
     uint64_t* a0_;
     uint64_t* a1_;
     uint64_t a_primes_size_;
@@ -248,6 +265,8 @@ public:
     uint64_t* c2_;
     uint64_t c_primes_size_;
     uint8_t* output_primes_index_;
+    uint64_t* primes_;
+    uint64_t primes_size_;
 };
 
 
@@ -641,6 +660,9 @@ public:
     uint64_t plainText_;
     uint64_t coeff_count_;
 
+    uint64_t* primes_;
+    uint64_t primes_size_;
+
     // store kernel.
     uint64_t c_primes_size_;
     // sycl::buffer<uint64_t>* mem_output1_buf_;
@@ -651,6 +673,15 @@ public:
     uint64_t* mem_output1_;
     uint64_t* mem_output2_;
     uint64_t* mem_output3_;
+
+private:
+    enum {
+        H_COEFF_COUNT = 65536,
+        H_A_PRIMES_INDEX_SIZE = 20,
+        H_B_PRIMES_INDEX_SIZE = 20,
+        H_C_PRIMES_INDEX_SIZE = 16,
+        H_PRIMES_SIZE = 26 
+    };
 
 };
 
