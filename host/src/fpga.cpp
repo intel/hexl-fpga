@@ -11,6 +11,13 @@
 #include "fpga.h"
 #include "fpga_assert.h"
 #include "number_theory_util.h"
+#include <NTL/ZZ.h>
+#include <hexl/hexl.hpp>
+#include <hexl/ntt/ntt.hpp>
+#include "../../device/multlowlvl/include/L2/utils.h"
+
+using namespace L2::helib::bgv;
+
 namespace intel {
 namespace hexl {
 namespace fpga {
@@ -591,19 +598,20 @@ void FPGAObject_INTT::fill_in_data(const std::vector<Object*>& objs) {
 }
 
 
-void FPGAObject_MultLowLvl::fill_out_data(uint64_t** output) {
+
+void FPGAObject_MultLowLvl::fill_out_data(uint64_t* output) {
     uint64_t batch = 0;
     for (auto &obj : in_objs_) {
-        Object_MultLowLvl* obj_MutLowLvl = dynamic_cast<Object_MultLowLvl*>(obj);
+        Object_MultLowLvl* obj_MultLowLvl = dynamic_cast<Object_MultLowLvl*>(obj);
         FPGA_ASSERT(obj_MultLowLvl);
         memcpy(obj_MultLowLvl->c0_, 
-                output[0] + batch * coeff_count_ * c_primes_size_,
+                mem_output1_ + batch * coeff_count_ * c_primes_size_,
                 coeff_count_ * c_primes_size_ * sizeof(uint64_t));
         memcpy(obj_MultLowLvl->c1_, 
-                output[1] + batch * coeff_count_ * c_primes_size_,
+                mem_output2_ + batch  * coeff_count_ * c_primes_size_,
                 coeff_count_ * c_primes_size_ * sizeof(uint64_t));
         memcpy(obj_MultLowLvl->c2_, 
-                output[2] + batch * coeff_count_ * c_primes_size_,
+                mem_output3_ + batch * coeff_count_ * c_primes_size_,
                 coeff_count_ * c_primes_size_ * sizeof(uint64_t));
         batch++;
         obj->ready_= true;
@@ -864,7 +872,7 @@ Device::Device(sycl::device& p_device, Buffer& buffer,
             keyswitch_queues_[KEYSWITCH_LOAD]);
     }
 
-    if (kernel_type == kernel_t::MULTLOWLVL) {
+    if (kernel_type_ == kernel_t::MULTLOWLVL) {
 #ifdef SYCL_ENABLE_PROFILING
         auto cl_queue_properties =
             sycl::property_list{sycl::property::queue::enable_profiling()};
@@ -1036,8 +1044,8 @@ void Device::run() {
 #endif
                 KeySwitch_id_++;
                 break;
-            case: kernel_t::MULTLOWLVL:
-                process_intput();
+            case kernel_t::MULTLOWLVL:
+                process_input(CREDIT);
                 process_output_MultLowLvl();
                 break;
             default:
@@ -1549,35 +1557,35 @@ void Device::LaunchBringToSet(FPGAObject_MultLowLvl* fpga_obj) {
         fpga_obj->output_primes_index_ + fpga_obj->n_batch_ * fpga_obj->c_primes_size_);
     
     std::vector<uint8_t> pi_primes_index;
-    FPGA_ASSERT(id == 1 || id == 2);
-    if (id == 1) {
+    FPGA_ASSERT(engine == 1 || engine == 2);
+    if (engine == 1) {
         pi_primes_index = std::move(std::vector<uint8_t>(fpga_obj->a_primes_index_, 
-                fpga_obj->a_primes_index_ + fpga_obj->n_batch_ * a_primes_size_));
+                fpga_obj->a_primes_index_ + fpga_obj->n_batch_ * fpga_obj->a_primes_size_));
     } else {
         pi_primes_index = std::move(std::vector<uint8_t>(fpga_obj->b_primes_index_, 
-                fpga_obj->b_primes_index_ + fpga_obj->n_batch_ * b_primes_size_));
+                fpga_obj->b_primes_index_ + fpga_obj->n_batch_ * fpga_obj->b_primes_size_));
     }
 
     int num_dropped_primes = 0;
     for (auto prime_index : pi_primes_index) {
-        num_dropped_primes += (std::find(qj_prime_index.begin(), qj_prime_index.end(), prime_index) ==
-         qj_prime_index.end());
+        num_dropped_primes += (std::find(qj_primes_index.begin(), qj_primes_index.end(), prime_index) ==
+         qj_primes_index.end());
     }
 
     // reoder pi, put the dropped primes to the beginning
     for (size_t i = pi_primes_index.size() - num_dropped_primes;
         i < pi_primes_index.size(); i++) {
         pi_reorder_primes_index[engine - 1].push_back(pi_primes_index[i]);
-        pi.push_back(ctxt.primes[pi_primes_index[i]]);
+        pi.push_back(fpga_obj->primes_[pi_primes_index[i]]);
     }
     for (size_t i = 0; i < pi_primes_index.size() - num_dropped_primes; i++) {
         pi_reorder_primes_index[engine - 1].push_back(pi_primes_index[i]);
-        pi.push_back(ctxt.primes[pi_primes_index[i]]);
+        pi.push_back(fpga_obj->primes_[pi_primes_index[i]]);
     }
 
     // fill qj
-    for (size_t i = 0; i < qj_prime_index.size(); i++) {
-        qj.push_back(ctxt.primes[qj_prime_index[i]]);
+    for (size_t i = 0; i < qj_primes_index.size(); i++) {
+        qj.push_back(fpga_obj->primes_[qj_primes_index[i]]);
     }
 
     assert(pi_reorder_primes_index[engine - 1].size() == pi_primes_index.size());
@@ -1585,23 +1593,22 @@ void Device::LaunchBringToSet(FPGAObject_MultLowLvl* fpga_obj) {
     size_t P, Q, I;
     std::vector<sycl::ulong2> scale_param_set;
     std::vector<uint64_t> empty_vec;
-    PreComputeScaleParamSet<false, false>(pi, qj, qj_prime_index, plainText,
+    PreComputeScaleParamSet<false, false>(pi, qj, qj_primes_index, fpga_obj->plainText_,
                                             empty_vec, P, Q, I, scale_param_set);
     
     auto scale_param_set_buf = new buffer<sycl::ulong2>(scale_param_set.size());
     assert(engine == 1 || engine == 2);
 
-    if (engine == 1 || engine == 2);
     if (engine == 1) {
         std::cout << "launching BringToSet.\n";
-        queue_copy(*ctxt.q_scale1, scale_param_set, scale_param_set_buf);
-        MultLowLvl_kernel_container_->BringToSet(*ctxt.q_scale1, COEFF_COUNT,
-                               *scale_param_set_buf, P, Q, I, plainText);
+        queue_copy(multlowlvl_queues_[MULTLOWLVL_BRINGTOSET1],scale_param_set, scale_param_set_buf);
+        MultLowLvl_kernel_container_->BringToSet(multlowlvl_queues_[MULTLOWLVL_BRINGTOSET1], COEFF_COUNT,
+                               *scale_param_set_buf, P, Q, I, fpga_obj->plainText_);
     } else {
         std::cout << "launching BringToSet2.\n";
-        queue_copy(*ctxt.q_scale2, scale_param_set, scale_param_set_buf);
-        MultLowLvl_kernel_container_->BringToSet2(*ctxt.q_scale2, COEFF_COUNT,
-                                *scale_param_set_buf, P, Q, I, plainText);
+        queue_copy(multlowlvl_queues_[MULTLOWLVL_BRINGTOSET2], scale_param_set, scale_param_set_buf);
+        MultLowLvl_kernel_container_->BringToSet2(multlowlvl_queues_[MULTLOWLVL_BRINGTOSET2], COEFF_COUNT,
+                                *scale_param_set_buf, P, Q, I, fpga_obj->plainText_);
     }
 }
 
@@ -1614,14 +1621,14 @@ void Device::Load(FPGAObject_MultLowLvl* fpga_obj, sycl::buffer<uint64_t>* input
     //copy_buffer_to_device(multlowlvl_queues_[MULTLOWLVL_LOAD], *input_buf).wait();
 
     // copy primes index into device.
-    auto e_copy = queue_copy_async(multlowlvl_queues_[MULTLOWLVL_LOAD], pi_reorder_primes_index[engine - 1], primes_index_buf);
+    auto e_copy = queue_copy_async(multlowlvl_queues_[MULTLOWLVL_LOAD_A0], pi_reorder_primes_index[engine - 1], primes_index_buf);
 
     assert(engine == 1 || engine == 2);
     if (engine == 1) {
-        MultLowLvl_kernel_container_->BringToSetLoad(multlowlvl_queues_[MULTLOWLVL_LOAD], e_copy, 
+        MultLowLvl_kernel_container_->BringToSetLoad(multlowlvl_queues_[MULTLOWLVL_LOAD_B0], e_copy, 
             *input_buf, *primes_index_buf);
     } else {
-        MultLowLvl_kernel_container_->BringToSetLoad2(multlowlvl_queues_[MULTLOWLVL_LOAD], e_copy, 
+        MultLowLvl_kernel_container_->BringToSetLoad2(multlowlvl_queues_[MULTLOWLVL_LOAD_B1], e_copy, 
             *input_buf, *primes_index_buf);
     }
 }
@@ -1644,28 +1651,52 @@ void Device::TensorProduct(FPGAObject_MultLowLvl* fpga_obj) {
 }
 
 void Device::MultLowLvl_Init(FPGAObject_MultLowLvl* fpga_obj) {
-    std::vector<uint64_t> primes(fpga_obj->primes_, fpga_obj->primes_ + fpga_obj->prime_size_);
+    std::vector<uint64_t> primes(fpga_obj->primes_, fpga_obj->primes_ + fpga_obj->primes_size_);
     
     // launch intt.
-    launch_intt<1>(multlowlvl_queues_[MULTLOWLVL_INTT], fpga_obj->coeff_count_, primes);
-    launch_intt<2>(multlowlvl_queues_[MULTLOWLVL_INTT], fpga_obj->coeff_count_, primes);
+    launch_intt<1>(multlowlvl_queues_[MULTLOWLVL_INTT1], fpga_obj->coeff_count_, primes);
+    launch_intt<2>(multlowlvl_queues_[MULTLOWLVL_INTT2], fpga_obj->coeff_count_, primes);
 
     // launch ntt.
-    launch_ntt<1>(multlowlvl_queues_[MULTLOWLVL_NTT], fpga_obj->coeff_count_, primes);
-    launch_ntt<2>(multlowlvl_queues_[MULTLOWLVL_NTT], fpga_obj->coeff_count_, primes);
+    launch_ntt<1>(multlowlvl_queues_[MULTLOWLVL_NTT1], fpga_obj->coeff_count_, primes);
+    launch_ntt<2>(multlowlvl_queues_[MULTLOWLVL_NTT2], fpga_obj->coeff_count_, primes);
 
 }
 
 
 void Device::MultLowLvl_Store(FPGAObject_MultLowLvl* fpga_obj) {
-    output1_buf = new sycl::buffer<uint64_t>(fpga_obj->n_batch_ * fpga_obj->coeff_count_ * fpga_obj->c_primes_size_);
+    output1_buf_ = new sycl::buffer<uint64_t>(fpga_obj->n_batch_ * fpga_obj->coeff_count_ * fpga_obj->c_primes_size_);
     for (uint i = 0; i < 2; i++) {
-        output2_buf[i] = new sycl::buffer<uint64_t>(fpga_obj->n_batch_ * fpga_obj->coeff_count_ * fpga_obj->c_primes_size_);
-        output3_buf[i] = new sycl::buffer<uint64_t>(fpga_obj->n_batch_ * fpga_obj->coeff_count_ * fpga_obj->c_primes_size_);
+        output2_buf_[i] = new sycl::buffer<uint64_t>(fpga_obj->n_batch_ * fpga_obj->coeff_count_ * fpga_obj->c_primes_size_);
+        output3_buf_[i] = new sycl::buffer<uint64_t>(fpga_obj->n_batch_ * fpga_obj->coeff_count_ * fpga_obj->c_primes_size_);
     }
 
-    MultLowLvl_kernel_container_->TensorProductStore0(multlowlvl_queues_[MULTLOWLVL_STORE], *output1_buf);
+    auto kernel_store0_event = MultLowLvl_kernel_container_->TensorProductStore0(multlowlvl_queues_[MULTLOWLVL_STORE], *output1_buf_);
+    auto copy0_event = multlowlvl_queues_[MULTLOWLVL_STORE_COPY].submit([&](sycl::handler &h) {
+        // copy
+        h.depends_on(kernel_store0_event);
+        h.copy(output1_buf_->template get_access<sycl::access::mode::read>(h),
+            fpga_obj->mem_output1_);
+    });
 
+    sycl::event kernel_event[2];
+    kernel_event[0] = MultLowLvl_kernel_container_->TensorProductStore12(
+      multlowlvl_queues_[MULTLOWLVL_STORE], *output2_buf_[0], *output3_buf_[0]);
+    
+    int last = 0;
+    multlowlvl_queues_[MULTLOWLVL_STORE_COPY].submit([&](sycl::handler &h) {
+      // copy
+      h.depends_on(kernel_event[last]);
+      h.copy(output2_buf_[last]->template get_access<sycl::access::mode::read>(h),
+             fpga_obj->mem_output2_);
+    });
+    multlowlvl_queues_[MULTLOWLVL_STORE_COPY].submit([&](sycl::handler &h) {
+      // copy
+      h.copy(output3_buf_[last]->template get_access<sycl::access::mode::read>(h),
+             fpga_obj->mem_output3_);
+    });
+
+    kernel_event[0].wait();
     
 }
 
@@ -1690,7 +1721,7 @@ void Device::enqueue_input_data_MultLowLvl(FPGAObject_MultLowLvl* fpga_obj) {
     Load<2>(fpga_obj, fpga_obj->b1_buf_);
 
     // Store.
-
+    MultLowLvl_Store(fpga_obj);
 }
 
 
@@ -1761,7 +1792,7 @@ void Device::launch_compute_forward(sycl::queue &q, uint64_t degree,
     std::cout << "launching ntt_compute_forward, id = " << id << std::endl;
 #endif
 
-    MultLowLvl_kernel_container_->ntt_ops_obj[id]->compute_forward(q, ntt_configs);
+    MultLowLvl_kernel_container_->ntt_ops_obj[id-1]->compute_forward(q, ntt_configs);
 
 }
 
@@ -1771,7 +1802,7 @@ void Device::launch_ntt(sycl::queue &q, uint64_t degree,
                         const std::vector<uint64_t> &primes) {
     static bool b_initialized = false;
 
-    if (!b_initialized) [
+    if (!b_initialized) {
         b_initialized = true;
 
         // config the twiddle factor factory kernel
@@ -1784,7 +1815,7 @@ void Device::launch_ntt(sycl::queue &q, uint64_t degree,
         MultLowLvl_kernel_container_->ntt_ops_obj[id]->write(q);
 
         launch_compute_forward<id>(q, degree, primes);
-    ]
+    }
 }
 
 
@@ -1792,7 +1823,7 @@ template <int id>
 void Device::launch_intt_config_tf(sycl::queue &q, uint64_t degree, 
                                    const std::vector<uint64_t> &primes) {
     static std::vector<uint64_t> invRootOfUnityPowers;
-    int VEC = MultLowLvl_kernel_container_->ntt_ops_obj[id].get_VEC();
+    int VEC = MultLowLvl_kernel_container_->ntt_ops_obj[id-1]->get_VEC();
     for (long prime : primes) {
         // create a HEXL ntt instance to get the twiddle factors
         ::intel::hexl::NTT ntt_hexl(degree, prime);
@@ -1823,16 +1854,16 @@ void Device::launch_intt_config_tf(sycl::queue &q, uint64_t degree,
     }
 
     FPGA_ASSERT(invRootOfUnityPowers.size() == 
-        (degree / VEC + VEC * 2) * primes.size(), "invRootOfUnityPowers.size() 
+        (degree / VEC + VEC * 2) * primes.size(), "invRootOfUnityPowers.size() \
                         must equals (degree / VEC + VEC * 2) * primes.size()");
     
-    MultLowLvl_kernel_container_->intt_ops_obj[id]->config_tf(q, invRootOfUnityPowers);
+    MultLowLvl_kernel_container_->intt_ops_obj[id-1]->config_tf(q, invRootOfUnityPowers);
 
 }
 
 
 template <int id>
-void Device::launch_compute_inverse(sycl::queue &q, uint64_t &degree, 
+void Device::launch_compute_inverse(sycl::queue &q, uint64_t degree, 
                                     const std::vector<uint64_t> &primes) {
     static std::vector<sycl::ulong4> intt_configs;
     for (uint64_t prime : primes) {
@@ -1851,7 +1882,7 @@ void Device::launch_compute_inverse(sycl::queue &q, uint64_t &degree,
 
     FPGA_ASSERT(intt_configs.size() == primes.size(), "intt_configs.size() == primes.size()");
 
-    MultLowLvl_kernel_container_->intt_ops_obj[id]->compute_inverse(q, intt_configs);
+    MultLowLvl_kernel_container_->intt_ops_obj[id-1]->compute_inverse(q, intt_configs);
 }
 
 template <int id>
@@ -1863,7 +1894,7 @@ void Device::launch_intt(sycl::queue &q, uint64_t degree,
         b_initialized = true;
 
         // config the twiddle factor factory kernel
-        launch_intt_config_tf(q, degree, primes);
+        launch_intt_config_tf<id>(q, degree, primes);
 
         MultLowLvl_kernel_container_->intt_ops_obj[id]->read(q);
         MultLowLvl_kernel_container_->intt_ops_obj[id]->write(q);
@@ -2170,9 +2201,33 @@ bool Device::process_output_KeySwitch() {
     return 0;
 }
 
+void Device::MultLowLvl_read_output(FPGAObject_MultLowLvl* fpga_obj) {
+    sycl::host_accessor output1_acc(*output1_buf_);
+    sycl::host_accessor output2_acc(*output2_buf_[0]);
+    sycl::host_accessor output3_acc(*output3_buf_[0]);
 
-void Device::process_output_MultLowLvl() {
-    
+    memcpy(fpga_obj->mem_output1_, output1_acc.get_pointer(), fpga_obj->n_batch_ * fpga_obj->coeff_count_ *
+            fpga_obj->c_primes_size_ * sizeof(uint64_t));
+    memcpy(fpga_obj->mem_output2_, output2_acc.get_pointer(), fpga_obj->n_batch_ * fpga_obj->coeff_count_ *
+            fpga_obj->c_primes_size_ * sizeof(uint64_t));
+    memcpy(fpga_obj->mem_output3_, output3_acc.get_pointer(), fpga_obj->n_batch_ * fpga_obj->coeff_count_ *
+            fpga_obj->c_primes_size_ * sizeof(uint64_t));
+}
+
+
+bool Device::process_output_MultLowLvl() {
+    int multlowlvl_index = CREDIT;
+
+    FPGAObject* completed = fpga_objects_[multlowlvl_index];
+    FPGAObject_MultLowLvl* kernel_inf = dynamic_cast<FPGAObject_MultLowLvl*>(completed);
+
+    FPGA_ASSERT(kernel_inf);
+
+    int batch = kernel_inf->n_batch_;
+    MultLowLvl_read_output(kernel_inf);
+    completed->fill_out_data(nullptr);
+    completed->recycle();
+
 }
 
 void DevicePool::getDevices(int numDevicesToUse, int choice) {
@@ -2235,7 +2290,7 @@ DevicePool::DevicePool(int choice, Buffer& buffer,
         devices_[i] =
             new Device(device_list_[i], buffer, future_exit_, coeff_size,
                        modulus_size, batch_size_dyadic_multiply, batch_size_ntt,
-                       batch_size_intt, batch_size_KeySwitch, debug);
+                       batch_size_intt, batch_size_KeySwitch, 1, debug);
         std::thread runner(&Device::run, devices_[i]);
         runners_.emplace_back(std::move(runner));
     }

@@ -303,6 +303,7 @@ void Store(std::vector<uint64_t> &output1, std::vector<uint64_t> &output2,
     size_t j = i % 2;
     size_t last = (i - 1) % 2;
     if (i < iters) {
+      std::cout << "__func__ " << "call TensorProductStore12.\n";
       kernel_event[j] = g_multlowlvl->TensorProductStore12(
           q_tensor_product_store12, output2_buf[j], output3_buf[j]);
     }

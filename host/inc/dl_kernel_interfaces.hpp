@@ -9,8 +9,8 @@
 #include <string>
 #include "../../common/types.hpp"
 
-#include "../device/multlowlvl/include/L1/multLowLvl.h"
-#include "../device/multlowlvl/include/L1/tensorProduct.h"
+#include "../../device/multlowlvl/include/L1/multLowLvl.h"
+#include "../../device/multlowlvl/include/L1/tensorProduct.h"
 
 using namespace L1::helib::bgv;
 
@@ -233,8 +233,8 @@ public:
     NTT_Method& (*ntt1_method_ops)();
     NTT_Method& (*ntt2_method_ops)();
 
-    std::vector<INTT_Method*> intt_ops_obj[2];
-    std::vector<NTT_Method*> ntt_ops_obj[2];
+    std::vector<INTT_Method*> intt_ops_obj;
+    std::vector<NTT_Method*> ntt_ops_obj;
 
 };
 

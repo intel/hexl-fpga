@@ -26,6 +26,7 @@ set(CMAKE_CXX_FLAGS_RELEASE "-march=native -O3 -funroll-loops -Wall ")
 set(CMAKE_C_FLAGS_RELEASE "-march=native -O3 -funroll-loops -Wall ")
 
 set(KERNELS_SRCS
+    ${FPGA_SRC_ROOT_DIR}/host/src/multlowlvl.cpp
     ${FPGA_SRC_ROOT_DIR}/host/src/dyadic_multiply.cpp
     ${FPGA_SRC_ROOT_DIR}/host/src/dl_kernel_interfaces.cpp
     ${FPGA_SRC_ROOT_DIR}/host/src/intt.cpp

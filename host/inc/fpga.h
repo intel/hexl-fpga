@@ -90,8 +90,9 @@ enum MultLowLvl_Kernels {
     MULTLOWLVL_BRINGTOSET2,
     MULTLOWLVL_TENSORPRODUCT,
     MULTLOWLVL_STORE,
+    MULTLOWLVL_STORE_COPY,
     MULTLOWLVL_NUM_KERNELS
-}
+};
 
 enum class kernel_t {
     NONE,
@@ -364,7 +365,7 @@ public:
 
     void set_worksize_MultLowLvl(uint64_t ws) {
         total_worksize_MultLowLvl_ = ws;
-        num_MultLowLvl_ = total_worksize_MultLowLvl;
+        num_MultLowLvl_ = total_worksize_MultLowLvl_;
     }
 
 private:
@@ -633,7 +634,14 @@ private:
 
 class FPGAObject_MultLowLvl : public FPGAObject {
 public:
-    explicit FPGAObject_MultLowLvl(sycl::queue& p_q, uint64_t batch_size);
+    //explicit FPGAObject_MultLowLvl(sycl::queue& p_q, uint64_t batch_size);
+    explicit FPGAObject_MultLowLvl(sycl::queue& p_q, 
+                            uint64_t batch_size,
+                            uint64_t coeff_count,
+                            uint64_t a_primes_size,
+                            uint64_t b_primes_size,
+                            uint64_t c_primes_size,
+                            uint64_t primes_size);
     ~FPGAObject_MultLowLvl();
 
     // delete copy and assignment operators ////////////////////////////////
@@ -643,6 +651,8 @@ public:
     
     void fill_in_data(const std::vector<Object*>& objs) override;
     void fill_out_data(uint64_t* results) override;
+
+    void fill_out_data_new(uint64_t** output);
 
     // use buffer to store input data.
     sycl::buffer<uint64_t>* a0_buf_;
@@ -794,13 +804,15 @@ private:
     void launch_intt(sycl::queue &q, uint64_t degree, const std::vector<uint64_t> &primes);
 
     template <int engine>
-    void Load(FPGAObject_MultLowLvl* fpga_obj);
+    void Load(FPGAObject_MultLowLvl* fpga_obj, sycl::buffer<uint64_t> *input_buf);
 
     uint64_t precompute_modulus_r(uint64_t modulus);
     void MultLowLvl_Init(FPGAObject_MultLowLvl* fpga_obj);
     template <int id>
     void LaunchBringToSet(FPGAObject_MultLowLvl* fpga_obj);
-    void MultLowLvl_read_output();
+    void MultLowLvl_read_output(FPGAObject_MultLowLvl* fpga_obj);
+    void TensorProduct(FPGAObject_MultLowLvl* fpga_obj);
+    void MultLowLvl_Store(FPGAObject_MultLowLvl* fpga_obj);
     
     // dynamic loading functions.
     kernel_t get_kernel_type();

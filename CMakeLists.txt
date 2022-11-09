@@ -22,7 +22,7 @@ message(STATUS "FPGA_USE_INTEL_HEXL: ${FPGA_USE_INTEL_HEXL}")
 option(FPGA_BUILD_INTEL_HEXL "Build INTEL HEXL" OFF)
 message(STATUS "FPGA_BUILD_INTEL_HEXL: ${FPGA_BUILD_INTEL_HEXL}")
 
-#set(CMAKE_CXX_COMPILER dpcpp)
+set(CMAKE_CXX_COMPILER dpcpp)
 
 if (LINUX)
     include(GNUInstallDirs)
@@ -44,7 +44,7 @@ if(FPGA_USE_INTEL_HEXL)
 endif()
 
 
-#add_subdirectory(host)
+add_subdirectory(host)
 add_subdirectory(device)
 include_directories(device/multlowlvl/include)
 include_directories(device/multlowlvl/src)
