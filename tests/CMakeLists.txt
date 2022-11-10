@@ -12,8 +12,8 @@ function(test_function kernel)
     set (KERNEL ${kernel})
     set (SRC
         ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/test_utils/ntt.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/dynamic_loading_kernel_IF.cpp
+        #${CMAKE_CURRENT_SOURCE_DIR}/test_utils/ntt.cpp
+        #${CMAKE_CURRENT_SOURCE_DIR}/dynamic_loading_kernel_IF.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test_${KERNEL}.cpp
     )
 

@@ -5,8 +5,9 @@
 #include <fstream>
 #include <gtest/gtest.h>
 #include <nlohmann/json.hpp>
+#include "hexl-fpga.h"
 
-#include "multLowLvl_runtime.hpp"
+//#include "multLowLvl_runtime.hpp"
 
 using json = nlohmann::json;
 
@@ -122,15 +123,24 @@ TEST(HELIBBGV, MultLowLvl) {
   std::vector<uint64_t> output3(expected_output3.size());
 
   std::cout << "Init" << std::endl;
-  Init(data_loader1.all_primes);
+  //Init(data_loader1.all_primes);
 
-  L2::helib::bgv::Timer timer("MultLowLvl");
-  MultLowLvl(data_loader1.input, data_loader2.input,
-                             data_loader1.primes_index, data_loader3.input,
-                             data_loader4.input, data_loader3.primes_index,
-                             data_loader1.t, output1, output2, output3,
-                             tensor_product_loader.primes_index);
-  timer.stop();
+  //L2::helib::bgv::Timer timer("MultLowLvl");
+  // MultLowLvl(data_loader1.input, data_loader2.input,
+  //                            data_loader1.primes_index, data_loader3.input,
+  //                            data_loader4.input, data_loader3.primes_index,
+  //                            data_loader1.t, output1, output2, output3,
+  //                            tensor_product_loader.primes_index);
+  
+  intel::hexl::MultLowLvl(data_loader1.input.data(), data_loader2.input.data(),
+                             data_loader1.primes_index.size(), data_loader1.primes_index.data(),
+                             data_loader3.input.data(), data_loader4.input.data(), 
+                             data_loader3.primes_index.size(), data_loader3.primes_index.data(),
+                             data_loader1.t, 65536,
+                             output1.data(), output2.data(), output3.data(),
+                             tensor_product_loader.primes_index.size(), tensor_product_loader.primes_index.data(),
+                             data_loader1.all_primes.data(), data_loader1.all_primes.size());
+  //timer.stop();
 
   for (int i = 0; i < expected_output1.size(); i++) {
     ASSERT_EQ(output1[i], expected_output1[i]) << "at " << i;

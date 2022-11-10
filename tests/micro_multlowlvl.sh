@@ -11,7 +11,7 @@ spath=$(dirname $0)
 ########################################
 
 echo ""
-echo "FPGA_BITSTREAM=${bitstream_dir}/libmultlowlvl.so FPGA_KERNEL=MultLowLvl"
+echo "FPGA_BITSTREAM=${bitstream_dir}/libmultlowlvl.so FPGA_KERNEL=MULTLOWLVL"
 # batch 1 (default)
-FPGA_BITSTREAM=${bitstream_dir}/libmultlowlvl.so FPGA_KERNEL=MultLowLvl ./test_multlowlvl
+FPGA_BITSTREAM=${bitstream_dir}/libmultlowlvl.so FPGA_KERNEL=MULTLOWLVL ./test_multlowlvl
 

@@ -436,6 +436,9 @@ FPGAObject_INTT::~FPGAObject_INTT() {
 
 
 void FPGAObject_MultLowLvl::fill_in_data(const std::vector<Object*>& objs) {
+
+    std::cout << __func__ << "objs.size(): " << objs.size() << std::endl;
+
     uint64_t batch = 0;
     fence_ = false;
     for (const auto& obj_in : objs) {
@@ -707,7 +710,8 @@ const std::unordered_map<std::string, kernel_t> Device::kernels_ =
         {"NTT", kernel_t::NTT},
         {"INTT", kernel_t::INTT},
         {"KEYSWITCH", kernel_t::KEYSWITCH},
-        {"DYADIC_MULTIPLY_KEYSWITCH", kernel_t::DYADIC_MULTIPLY_KEYSWITCH}};
+        {"DYADIC_MULTIPLY_KEYSWITCH", kernel_t::DYADIC_MULTIPLY_KEYSWITCH},
+        {"MULTLOWLVL", kernel_t::MULTLOWLVL}};
 
 kernel_t Device::get_kernel_type() {
     kernel_t kernel = kernel_t::DYADIC_MULTIPLY_KEYSWITCH;  // default
@@ -873,6 +877,7 @@ Device::Device(sycl::device& p_device, Buffer& buffer,
     }
 
     if (kernel_type_ == kernel_t::MULTLOWLVL) {
+        std::cout << __func__ << " creating queues for multlowlvl,\n";
 #ifdef SYCL_ENABLE_PROFILING
         auto cl_queue_properties =
             sycl::property_list{sycl::property::queue::enable_profiling()};
@@ -999,6 +1004,7 @@ void Device::run() {
             processed_type = front->type_;
             switch (front->type_) {
             case kernel_t::DYADIC_MULTIPLY:
+                std::cout << "FPGA kernel dyadmultply.\n";
                 if ((credit_ > 0) && process_input(CREDIT - credit_)) {
                     credit_ -= 1;
                 }
@@ -1007,14 +1013,17 @@ void Device::run() {
                 }
                 break;
             case kernel_t::INTT:
+                std::cout << "FPGA kernel INTT.\n";
                 process_input(CREDIT);
                 process_output_INTT();
                 break;
             case kernel_t::NTT:
+                std::cout << "FPGA kernel NTT.\n";
                 process_input(CREDIT + 1);
                 process_output_NTT();
                 break;
             case kernel_t::KEYSWITCH:
+                std::cout << "FPGA kernel keyswitch.\n";
 #ifdef __DEBUG_KS_RUNTIME
                 uint64_t lat_start =
                     std::chrono::duration_cast<std::chrono::nanoseconds>(
@@ -1045,7 +1054,8 @@ void Device::run() {
                 KeySwitch_id_++;
                 break;
             case kernel_t::MULTLOWLVL:
-                process_input(CREDIT);
+                std::cout << "FPGA kernel multlowlvl.\n";
+                process_input(CREDIT + 3);
                 process_output_MultLowLvl();
                 break;
             default:
@@ -1080,10 +1090,16 @@ void Device::run() {
     }
     std::cout << "Releasing Device ... " << device_id() << std::endl;
 }
+
+
 bool Device::process_input(int credit_id) {
+
+    std::cout << __func__ << " credit_id: " << credit_id << std::endl;
+
     std::vector<Object*> objs = buffer_.pop();
 
     if (objs.empty()) {
+        std::cout << "objs empty true.\n";
         return false;
     }
 
@@ -1093,6 +1109,7 @@ bool Device::process_input(int credit_id) {
     fpga_obj->fill_in_data(objs);  // poylmorphic call
     const auto& end_io = std::chrono::high_resolution_clock::now();
 
+    std::cout << __func__ << " enquque_input data.\n " << std::endl;
     enqueue_input_data(fpga_obj);
 
     if (debug_ == 2) {
@@ -1665,6 +1682,10 @@ void Device::MultLowLvl_Init(FPGAObject_MultLowLvl* fpga_obj) {
 
 
 void Device::MultLowLvl_Store(FPGAObject_MultLowLvl* fpga_obj) {
+
+    std::cout << __func__ << "n_batch_: " << fpga_obj->n_batch_ << "\n" <<
+        "count_count_ " << fpga_obj->coeff_count_ << ", c_primes_size_ " << fpga_obj->c_primes_size_ << std::endl;
+
     output1_buf_ = new sycl::buffer<uint64_t>(fpga_obj->n_batch_ * fpga_obj->coeff_count_ * fpga_obj->c_primes_size_);
     for (uint i = 0; i < 2; i++) {
         output2_buf_[i] = new sycl::buffer<uint64_t>(fpga_obj->n_batch_ * fpga_obj->coeff_count_ * fpga_obj->c_primes_size_);
@@ -2202,6 +2223,7 @@ bool Device::process_output_KeySwitch() {
 }
 
 void Device::MultLowLvl_read_output(FPGAObject_MultLowLvl* fpga_obj) {
+#if 0
     sycl::host_accessor output1_acc(*output1_buf_);
     sycl::host_accessor output2_acc(*output2_buf_[0]);
     sycl::host_accessor output3_acc(*output3_buf_[0]);
@@ -2212,11 +2234,12 @@ void Device::MultLowLvl_read_output(FPGAObject_MultLowLvl* fpga_obj) {
             fpga_obj->c_primes_size_ * sizeof(uint64_t));
     memcpy(fpga_obj->mem_output3_, output3_acc.get_pointer(), fpga_obj->n_batch_ * fpga_obj->coeff_count_ *
             fpga_obj->c_primes_size_ * sizeof(uint64_t));
+#endif
 }
 
 
 bool Device::process_output_MultLowLvl() {
-    int multlowlvl_index = CREDIT;
+    int multlowlvl_index = CREDIT - 2;
 
     FPGAObject* completed = fpga_objects_[multlowlvl_index];
     FPGAObject_MultLowLvl* kernel_inf = dynamic_cast<FPGAObject_MultLowLvl*>(completed);
@@ -2272,7 +2295,8 @@ DevicePool::DevicePool(int choice, Buffer& buffer,
                        uint32_t modulus_size,
                        uint64_t batch_size_dyadic_multiply,
                        uint64_t batch_size_ntt, uint64_t batch_size_intt,
-                       uint64_t batch_size_KeySwitch, uint32_t debug) {
+                       uint64_t batch_size_KeySwitch, 
+                       uint64_t batch_size_MultLowLvl,uint32_t debug) {
     cl_uint dev_count_user = 1;
 
     // Get number of devices user wants to use from environement var

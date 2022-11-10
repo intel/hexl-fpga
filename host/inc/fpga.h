@@ -916,7 +916,7 @@ public:
                uint64_t coeff_size, uint32_t modulus_size,
                uint64_t batch_size_dyadic_multiply, uint64_t batch_size_ntt,
                uint64_t batch_size_intt, uint64_t batch_size_KeySwitch,
-               uint32_t debug);
+               uint64_t batch_size_multlowlvl, uint32_t debug);
     ~DevicePool();
 
 private:

@@ -154,7 +154,7 @@ void attach_fpga_pooling() {
     pool =
         new DevicePool(g_choice, fpga_buffer, f, g_coeff_size, g_modulus_size,
                        g_batch_size_dyadic_mult, g_batch_size_ntt,
-                       g_batch_size_intt, g_batch_size_KeySwitch, g_fpga_debug);
+                       g_batch_size_intt, g_batch_size_KeySwitch, 1, g_fpga_debug);
 }
 
 void detach_fpga_pooling() {
@@ -552,6 +552,7 @@ static void fpga_MultLowLvl(uint64_t* a0, uint64_t* a1, uint64_t a_primes_size, 
         Object* obj = fpga_buffer.back();
         FPGA_ASSERT(obj);
         fence |= (obj->type_ != kernel_t::MULTLOWLVL);
+        std::cout << "kernel type = " << (unsigned long)kernel_t::MULTLOWLVL << std::endl;;
         if (!fence) {
             FPGA_ASSERT(obj->type_ == kernel_t::MULTLOWLVL);
             Object_MultLowLvl* object_MultLowLvl = dynamic_cast<Object_MultLowLvl*>(obj);
@@ -579,10 +580,15 @@ static void fpga_MultLowLvl(uint64_t* a0, uint64_t* a1, uint64_t a_primes_size, 
                                         plainText, coeff_count,
                                         c0, c1, c2, c_primes_size, output_primes_index, 
                                         primes, primes_size, fence);
+    std::cout << "Object_multlowlvl construct successfully.\n";
     
     fpga_buffer.push(obj);
 
+    std::cout << "push Object_multlowlvl construct successfully.\n";
+
     outstanding_objects_MultLowLvl.insert(obj);
+
+    std::cout << "insert Object_multlowlvl construct successfully.\n";
 
     if (fpga_buffer.get_worksize_MultLowLvl() == 1) {
         MultLowLvlCompleted_int();
@@ -640,6 +646,7 @@ void MultLowLvl_int(uint64_t* a0, uint64_t* a1, uint64_t a_primes_size, uint8_t*
                     uint64_t* c0, uint64_t* c1, uint64_t* c2, 
                     uint64_t c_primes_size, uint8_t* output_primes_index,
                     uint64_t* primes, uint64_t primes_size) {
+    std::cout << __func__ << ", g_choice = " << g_choice << std::endl;
     switch (g_choice) {
     case CPU:
         cpu_MultLowLvl(a0, a1, a_primes_size, a_primes_index,
