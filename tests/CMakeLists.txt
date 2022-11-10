@@ -24,7 +24,7 @@ function(test_function kernel)
     target_include_directories(test_${KERNEL} PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
     target_link_directories(test_${KERNEL} PUBLIC ${CMAKE_INSTALL_PREFIX}/lib)
     target_link_directories(test_${KERNEL} PUBLIC ${CMAKE_BINARY_DIR}/hexl-install/lib)
-    #target_link_libraries(test_${KERNEL} PUBLIC hexl-fpga)
+    target_link_libraries(test_${KERNEL} PUBLIC hexl-fpga)
     target_link_libraries(test_${KERNEL} PRIVATE gtest)
     target_link_libraries(test_${KERNEL} PRIVATE nlohmann_json::nlohmann_json)
     

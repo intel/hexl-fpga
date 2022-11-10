@@ -16,6 +16,8 @@ if(DEFINED CHECK_BUILD_HOST)
     endif()
 endif()
 
+set(CMAKE_CXX_COMPILER dpcpp)
+
 set(CMAKE_CONFIGURATION_TYPES Debug Release CACHE STRING INTERNAL FORCE)
 set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build Type: Debug or Release")
 set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS}")
