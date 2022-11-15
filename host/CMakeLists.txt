@@ -49,7 +49,7 @@ add_library(hexl-fpga SHARED ${KERNELS_SRCS})
 set_property(TARGET hexl-fpga PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 target_compile_options(hexl-fpga PRIVATE -fintelfpga -qactypes -Xsv -fPIE -fPIC -fstack-protector -Wformat -Wformat-security)
-target_compile_options(hexl-fpga PRIVATE -Wno-address-of-packed-member -Wno-strict-aliasing -Wno-deprecated-declarations)
+target_compile_options(hexl-fpga PRIVATE -Wno-address-of-packed-member -Wno-strict-aliasing -Wno-deprecated-declarations -gdwarf-4 -g3 -O0 -Wall)
 
 if(ENABLE_FPGA_DEBUG)
     target_compile_options(hexl-fpga PRIVATE -DFPGA_DEBUG)

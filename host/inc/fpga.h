@@ -638,6 +638,7 @@ public:
     explicit FPGAObject_MultLowLvl(sycl::queue& p_q, 
                             uint64_t batch_size,
                             uint64_t coeff_count,
+                            uint64_t plainText,
                             uint64_t a_primes_size,
                             uint64_t b_primes_size,
                             uint64_t c_primes_size,
@@ -867,7 +868,7 @@ private:
     sycl::queue multlowlvl_queues_[MULTLOWLVL_NUM_KERNELS];
     sycl::queue multlowlvl_init_ntt_queues_[2];
     sycl::queue multlowlvl_init_intt_queues_[2];
-    std::vector<std::vector<uint8_t>> pi_reorder_primes_index;
+    std::vector<std::vector<uint8_t>> pi_reorder_primes_index_;
 
     // below buffer are dynamiclly allocated by L2/ layer functions,
     // we put it here to avoid memory leak.

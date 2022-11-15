@@ -19,7 +19,7 @@ function(test_function kernel)
 
     add_executable(test_${KERNEL} ${SRC})
 
-    target_compile_options(test_${KERNEL} PRIVATE -g -fPIE -fPIC -fstack-protector -Wformat -Wformat-security -qactypes -DFPGA_EMULATOR)
+    target_compile_options(test_${KERNEL} PRIVATE -gdwarf-4 -g3 -O0 -fPIE -fPIC -fstack-protector -Wformat -Wformat-security -qactypes -DFPGA_EMULATOR)
     target_include_directories(test_${KERNEL} PRIVATE $<BUILD_INTERFACE:${CMAKE_INSTALL_PREFIX}/inc>)
     target_include_directories(test_${KERNEL} PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
     target_link_directories(test_${KERNEL} PUBLIC ${CMAKE_INSTALL_PREFIX}/lib)

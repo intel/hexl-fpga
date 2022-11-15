@@ -71,7 +71,8 @@ static int g_choice = get_device();
 // DYADIC_MULTIPLY section
 static uint64_t get_coeff_size() {
     char* env = getenv("COEFF_SIZE");
-    uint64_t size = env ? strtoul(env, NULL, 10) : 16384;
+    // uint64_t size = env ? strtoul(env, NULL, 10) : 16384;
+    uint64_t size = env ? strtoul(env, NULL, 10) : 65536;
     return size;
 }
 

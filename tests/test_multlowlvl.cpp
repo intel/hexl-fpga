@@ -131,7 +131,8 @@ TEST(HELIBBGV, MultLowLvl) {
   //                            data_loader4.input, data_loader3.primes_index,
   //                            data_loader1.t, output1, output2, output3,
   //                            tensor_product_loader.primes_index);
-  
+  intel::hexl::set_worksize_MultLowLvl(1);
+  std::cout << "plainText: " << data_loader1.t << std::endl;
   intel::hexl::MultLowLvl(data_loader1.input.data(), data_loader2.input.data(),
                              data_loader1.primes_index.size(), data_loader1.primes_index.data(),
                              data_loader3.input.data(), data_loader4.input.data(), 
@@ -140,15 +141,16 @@ TEST(HELIBBGV, MultLowLvl) {
                              output1.data(), output2.data(), output3.data(),
                              tensor_product_loader.primes_index.size(), tensor_product_loader.primes_index.data(),
                              data_loader1.all_primes.data(), data_loader1.all_primes.size());
+  intel::hexl::MultLowLvlCompleted();
   //timer.stop();
 
   for (int i = 0; i < expected_output1.size(); i++) {
-    ASSERT_EQ(output1[i], expected_output1[i]) << "at " << i;
+    ASSERT_EQ(output1[i], expected_output1[i]) << "output 1 at " << i;
   }
   for (int i = 0; i < expected_output2.size(); i++) {
-    ASSERT_EQ(output2[i], expected_output2[i]) << "at " << i;
+    ASSERT_EQ(output2[i], expected_output2[i]) << "output 2 at " << i;
   }
   for (int i = 0; i < expected_output3.size(); i++) {
-    ASSERT_EQ(output3[i], expected_output3[i]) << "at " << i;
+    ASSERT_EQ(output3[i], expected_output3[i]) << "output 3 at " << i;
   }
 }

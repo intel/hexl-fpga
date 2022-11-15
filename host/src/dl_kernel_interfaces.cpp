@@ -163,10 +163,6 @@ MultLowLvlDynamicIF::MultLowLvlDynamicIF(const std::string& lib) : DynamicIF(lib
     intt_ops_obj.push_back(&intt2_method_ops());
     ntt_ops_obj.push_back(&ntt1_method_ops());
     ntt_ops_obj.push_back(&ntt2_method_ops());
-
-    //ntt_ops_obj[0] = &ntt1_method_ops();
-    //ntt_ops_obj[1] = &ntt2_method_ops();
-
 }
 
 
