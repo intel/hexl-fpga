@@ -140,7 +140,7 @@ TEST(HELIBBGV, MultLowLvl) {
                              data_loader1.t, 65536,
                              output1.data(), output2.data(), output3.data(),
                              tensor_product_loader.primes_index.size(), tensor_product_loader.primes_index.data(),
-                             data_loader1.all_primes.data(), data_loader1.all_primes.size());
+                             data_loader1.all_primes.size(), data_loader1.all_primes.data());
   intel::hexl::MultLowLvlCompleted();
   //timer.stop();
 

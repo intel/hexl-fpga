@@ -542,11 +542,13 @@ void KeySwitch_int(uint64_t* result, const uint64_t* t_target_iter_ptr,
 }
 
 
-static void fpga_MultLowLvl(uint64_t* a0, uint64_t* a1, uint64_t a_primes_size, uint8_t* a_primes_index,
-                            uint64_t* b0, uint64_t* b1, uint64_t b_primes_size, uint8_t* b_primes_index,
+static void fpga_MultLowLvl(uint64_t* a0, uint64_t* a1, uint64_t a_primes_len, uint8_t* a_primes_index,
+                            uint64_t* b0, uint64_t* b1, uint64_t b_primes_len, uint8_t* b_primes_index,
                             uint64_t plainText, uint64_t coeff_count, 
-                            uint64_t* c0, uint64_t* c1, uint64_t* c2, uint64_t c_primes_size, 
-                            uint8_t* output_primes_index, uint64_t* primes, uint64_t primes_size) {
+                            uint64_t* c0, uint64_t* c1, uint64_t* c2, 
+                            uint64_t c_primes_len, uint8_t* output_primes_index, 
+                            uint64_t all_primes_len, uint64_t* all_primes) {
+    
     bool fence = (fpga_buffer.size() == 0);
     
     if (!fence) {
@@ -561,26 +563,26 @@ static void fpga_MultLowLvl(uint64_t* a0, uint64_t* a1, uint64_t a_primes_size, 
             fence |= (a1 != object_MultLowLvl->a1_);
             fence |= (b0 != object_MultLowLvl->b0_);
             fence |= (b1 != object_MultLowLvl->b1_);
-            fence |= (a_primes_size != object_MultLowLvl->a_primes_size_);
+            fence |= (a_primes_len != object_MultLowLvl->a_primes_len_);
             fence |= (a_primes_index != object_MultLowLvl->a_primes_index_);
-            fence |= (b_primes_size != object_MultLowLvl->b_primes_size_);
+            fence |= (b_primes_len != object_MultLowLvl->b_primes_len_);
             fence |= (b_primes_index != object_MultLowLvl->b_primes_index_);
-            fence |= (c_primes_size != object_MultLowLvl->c_primes_size_);
+            fence |= (c_primes_len != object_MultLowLvl->c_primes_len_);
             fence |= (output_primes_index != object_MultLowLvl->output_primes_index_);
             fence |= (c0 != object_MultLowLvl->c0_);
             fence |= (c1 != object_MultLowLvl->c1_);
             fence |= (c2 != object_MultLowLvl->c2_);
-            fence |= (primes != object_MultLowLvl->primes_);
-            fence |= (primes_size != object_MultLowLvl->primes_size_);
+            fence |= (all_primes != object_MultLowLvl->all_primes_);
+            fence |= (all_primes_len != object_MultLowLvl->all_primes_len_);
 
         }
     }
 
-    Object* obj = new Object_MultLowLvl(a0, a1, a_primes_size, a_primes_index,
-                                        b0, b1, b_primes_size, b_primes_index,
+    Object* obj = new Object_MultLowLvl(a0, a1, a_primes_len, a_primes_index,
+                                        b0, b1, b_primes_len, b_primes_index,
                                         plainText, coeff_count,
-                                        c0, c1, c2, c_primes_size, output_primes_index, 
-                                        primes, primes_size, fence);
+                                        c0, c1, c2, c_primes_len, output_primes_index, 
+                                        all_primes_len, all_primes, fence);
     std::cout << "Object_multlowlvl construct successfully.\n";
     
     fpga_buffer.push(obj);
@@ -597,11 +599,11 @@ static void fpga_MultLowLvl(uint64_t* a0, uint64_t* a1, uint64_t a_primes_size, 
 
 } 
 
-static void cpu_MultLowLvl(uint64_t* a0, uint64_t* a1, uint64_t a_primes_size, uint8_t* a_primes_index,
-                            uint64_t* b0, uint64_t* b1, uint64_t b_primes_size, uint8_t* b_primes_index,
+static void cpu_MultLowLvl(uint64_t* a0, uint64_t* a1, uint64_t a_primes_len, uint8_t* a_primes_index,
+                            uint64_t* b0, uint64_t* b1, uint64_t b_primes_len, uint8_t* b_primes_index,
                             uint64_t plainText, uint64_t coeff_count, 
-                            uint64_t* c0, uint64_t* c1, uint64_t* c2, uint64_t c_primes_size, 
-                            uint8_t* output_primes_index, uint64_t* primes, uint64_t primes_size) {
+                            uint64_t* c0, uint64_t* c1, uint64_t* c2, uint64_t c_primes_len, 
+                            uint8_t* output_primes_index, uint64_t all_primes_len, uint64_t* all_primes) {
     FPGA_ASSERT(g_choice == CPU);
 
     // todo, confirm CPU version existed.
@@ -641,28 +643,29 @@ bool MultLowLvlCompleted_int() {
 }
 
 
-void MultLowLvl_int(uint64_t* a0, uint64_t* a1, uint64_t a_primes_size, uint8_t* a_primes_index,
-                    uint64_t* b0, uint64_t* b1, uint64_t b_primes_size, uint8_t* b_primes_index,
+void MultLowLvl_int(uint64_t* a0, uint64_t* a1, uint64_t a_primes_len, uint8_t* a_primes_index,
+                    uint64_t* b0, uint64_t* b1, uint64_t b_primes_len, uint8_t* b_primes_index,
                     uint64_t plainText, uint64_t coeff_count, 
                     uint64_t* c0, uint64_t* c1, uint64_t* c2, 
-                    uint64_t c_primes_size, uint8_t* output_primes_index,
-                    uint64_t* primes, uint64_t primes_size) {
+                    uint64_t c_primes_len, uint8_t* output_primes_index,
+                    uint64_t all_primes_len, uint64_t* all_primes) {
+
     std::cout << __func__ << ", g_choice = " << g_choice << std::endl;
     switch (g_choice) {
     case CPU:
-        cpu_MultLowLvl(a0, a1, a_primes_size, a_primes_index,
-                       b0, b1, b_primes_size, b_primes_index,
+        cpu_MultLowLvl(a0, a1, a_primes_len, a_primes_index,
+                       b0, b1, b_primes_len, b_primes_index,
                        plainText, coeff_count,
-                       c0, c1, c2, c_primes_size, output_primes_index, 
-                       primes, primes_size);
+                       c0, c1, c2, c_primes_len, output_primes_index, 
+                       all_primes_len, all_primes);
         break;
     case EMU:
     case FPGA:
-        fpga_MultLowLvl(a0, a1, a_primes_size, a_primes_index,
-                       b0, b1, b_primes_size, b_primes_index,
+        fpga_MultLowLvl(a0, a1, a_primes_len, a_primes_index,
+                       b0, b1, b_primes_len, b_primes_index,
                        plainText, coeff_count,
-                       c0, c1, c2, c_primes_size, output_primes_index,
-                       primes, primes_size );
+                       c0, c1, c2, c_primes_len, output_primes_index,
+                       all_primes_len, all_primes);
         break;
     default:
         std::cerr << "ERROR: Invalid RUN_CHOICE envvar. Set to a valid value {0, 1, 2}, \

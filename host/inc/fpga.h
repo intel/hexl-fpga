@@ -245,29 +245,30 @@ public:
 
 class Object_MultLowLvl : public Object {
 public:
-    explicit Object_MultLowLvl(uint64_t* a0, uint64_t* a1, uint64_t a_primes_size, uint8_t* a_primes_index, 
-                               uint64_t* b0, uint64_t* b1, uint64_t b_primes_size, uint8_t* b_primes_index,
+    explicit Object_MultLowLvl(uint64_t* a0, uint64_t* a1, uint64_t a_primes_len, uint8_t* a_primes_index, 
+                               uint64_t* b0, uint64_t* b1, uint64_t b_primes_len, uint8_t* b_primes_index,
                                uint64_t plainText, uint64_t coeff_count, 
-                               uint64_t* c0, uint64_t* c1, uint64_t* c2, uint64_t c_primes_size,
-                               uint8_t* output_primes_index, uint64_t* primes, uint64_t primes_size,
+                               uint64_t* c0, uint64_t* c1, uint64_t* c2, uint64_t c_primes_len,
+                               uint8_t* output_primes_index, uint64_t all_primes_len, uint64_t* all_primes,
                                bool fence = false);
     uint64_t* a0_;
     uint64_t* a1_;
-    uint64_t a_primes_size_;
+    uint64_t a_primes_len_;
     uint8_t* a_primes_index_;
     uint64_t* b0_;
     uint64_t* b1_;
-    uint64_t b_primes_size_;
+    uint64_t b_primes_len_;
     uint8_t*  b_primes_index_;
     uint64_t plainText_;
     uint64_t coeff_count_;
     uint64_t* c0_;
     uint64_t* c1_;
     uint64_t* c2_;
-    uint64_t c_primes_size_;
+    uint64_t c_primes_len_;
     uint8_t* output_primes_index_;
-    uint64_t* primes_;
-    uint64_t primes_size_;
+    uint64_t all_primes_len_;
+    uint64_t* all_primes_;
+    
 };
 
 
@@ -639,10 +640,10 @@ public:
                             uint64_t batch_size,
                             uint64_t coeff_count,
                             uint64_t plainText,
-                            uint64_t a_primes_size,
-                            uint64_t b_primes_size,
-                            uint64_t c_primes_size,
-                            uint64_t primes_size);
+                            uint64_t a_primes_len,
+                            uint64_t b_primes_len,
+                            uint64_t c_primes_len,
+                            uint64_t all_primes_len);
     ~FPGAObject_MultLowLvl();
 
     // delete copy and assignment operators ////////////////////////////////
@@ -660,25 +661,22 @@ public:
     sycl::buffer<uint64_t>* a1_buf_;
     uint8_t *a_primes_index_;
     std::vector<uint8_t> a_primes_index_vec_;
-    uint64_t a_primes_size_;
+    uint64_t a_primes_len_;
 
     sycl::buffer<uint64_t>* b0_buf_;
     sycl::buffer<uint64_t>* b1_buf_;
     uint8_t *b_primes_index_;
     std::vector<uint8_t> b_primes_index_vec_;
-    uint64_t b_primes_size_;
+    uint64_t b_primes_len_;
 
     uint64_t plainText_;
     uint64_t coeff_count_;
 
-    uint64_t* primes_;
-    uint64_t primes_size_;
+    uint64_t* all_primes_;
+    uint64_t all_primes_len_;
 
     // store kernel.
-    uint64_t c_primes_size_;
-    // sycl::buffer<uint64_t>* mem_output1_buf_;
-    // sycl::buffer<uint64_t>* mem_output2_buf_[2];
-    // sycl::buffer<uint64_t>* mem_output3_buf_[2];
+    uint64_t c_primes_len_;
     uint8_t* output_primes_index_;
     std::vector<uint8_t> c_primes_index_vec_;
     uint64_t* mem_output1_;
@@ -688,10 +686,10 @@ public:
 private:
     enum {
         H_COEFF_COUNT = 65536,
-        H_A_PRIMES_INDEX_SIZE = 20,
-        H_B_PRIMES_INDEX_SIZE = 20,
-        H_C_PRIMES_INDEX_SIZE = 16,
-        H_PRIMES_SIZE = 26 
+        H_A_PRIMES_INDEX_LEN = 20,
+        H_B_PRIMES_INDEX_LEN = 20,
+        H_C_PRIMES_INDEX_LEN = 16,
+        H_ALL_PRIMES_LEN = 26 
     };
 
 };

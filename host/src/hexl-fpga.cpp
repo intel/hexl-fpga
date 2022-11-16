@@ -56,16 +56,19 @@ void set_worksize_KeySwitch(uint64_t ws) {
 bool KeySwitchCompleted() { return intel::hexl::fpga::KeySwitchCompleted(); }
 
 // MultLowLvl Section
-void MultLowLvl(uint64_t* a0, uint64_t* a1, uint64_t a_primes_size, uint8_t* a_primes_index,
-                uint64_t* b0, uint64_t* b1, uint64_t b_primes_size, uint8_t* b_primes_index,
+void MultLowLvl(uint64_t* a0, uint64_t* a1, uint64_t a_primes_len, uint8_t* a_primes_index,
+                uint64_t* b0, uint64_t* b1, uint64_t b_primes_len, uint8_t* b_primes_index,
                 uint64_t plainText, uint64_t coeff_count, 
-                uint64_t* c0, uint64_t* c1, uint64_t* c2, uint64_t c_primes_size, 
-                uint8_t* output_primes_index, uint64_t* primes, uint64_t primes_size) {
-    intel::hexl::fpga::MultLowLvl(a0, a1, a_primes_size, a_primes_index,
-                                  b0, b1, b_primes_size, b_primes_index,
+                uint64_t* c0, uint64_t* c1, uint64_t* c2, 
+                uint64_t c_primes_len, uint8_t* output_primes_index, 
+                uint64_t all_primes_len, uint64_t* all_primes) {
+    
+    intel::hexl::fpga::MultLowLvl(a0, a1, a_primes_len, a_primes_index,
+                                  b0, b1, b_primes_len, b_primes_index,
                                   plainText, coeff_count, 
-                                  c0, c1, c2, c_primes_size,
-                                  output_primes_index, primes, primes_size);
+                                  c0, c1, c2, c_primes_len,
+                                  output_primes_index, 
+                                  all_primes_len, all_primes);
 }
 
 void set_worksize_MultLowLvl(uint64_t ws) {
