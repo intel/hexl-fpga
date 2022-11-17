@@ -1,13 +1,12 @@
 // Copyright (C) 2020-2021 Intel Corporation
 // SPDX-License-Identifier: Apache-2.0
-//#include <L2/helib_bgv.h>
+
 #include <chrono>
 #include <fstream>
 #include <gtest/gtest.h>
 #include <nlohmann/json.hpp>
 #include "hexl-fpga.h"
 
-//#include "multLowLvl_runtime.hpp"
 
 using json = nlohmann::json;
 

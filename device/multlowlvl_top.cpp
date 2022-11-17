@@ -11,17 +11,6 @@
 #include "multlowlvl/include/L1/tensorProduct.h"
 #include "multlowlvl/include/L1/helib_bgv.h"
 
-// TODO:
-// In general, L2/ files should not be include in
-// this file, because L2 is for runtime, let's try to only include
-// L1/ files in this file, and remove link hexl to the shared library.
-
-//#include "multlowlvl/include/L2/utils.h"
-// #include "multlowlvl/include/L2/ntt.hpp"
-// #include "multlowlvl/include/L2/intt.hpp"
-// #include "multlowlvl/include/L2/utils.h"
-
-
 #include "multlowlvl/include/L1/ntt.h"
 #include "multlowlvl/include/L1/intt.h"
 #include "multlowlvl/include/L1/tensorProduct.h"
@@ -99,7 +88,6 @@ sycl::event BringToSetLoad2_IF(sycl::queue &q, sycl::event &depends,
                             sycl::buffer<uint8_t> &prime_index_set_buf) {
     return BringToSetLoad2(q, depends, c, prime_index_set_buf);
 }
-
 
 
 // multLowLvl "store" interface exposed to runtime

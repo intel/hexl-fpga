@@ -12,14 +12,13 @@ function(test_function kernel)
     set (KERNEL ${kernel})
     set (SRC
         ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
-        #${CMAKE_CURRENT_SOURCE_DIR}/test_utils/ntt.cpp
-        #${CMAKE_CURRENT_SOURCE_DIR}/dynamic_loading_kernel_IF.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/test_utils/ntt.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/test_${KERNEL}.cpp
     )
 
     add_executable(test_${KERNEL} ${SRC})
 
-    target_compile_options(test_${KERNEL} PRIVATE -gdwarf-4 -g3 -O0 -fPIE -fPIC -fstack-protector -Wformat -Wformat-security -qactypes -DFPGA_EMULATOR)
+    target_compile_options(test_${KERNEL} PRIVATE -gdwarf-4 -g3 -O0 -fPIE -fPIC -fstack-protector -Wformat -Wformat-security)
     target_include_directories(test_${KERNEL} PRIVATE $<BUILD_INTERFACE:${CMAKE_INSTALL_PREFIX}/inc>)
     target_include_directories(test_${KERNEL} PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
     target_link_directories(test_${KERNEL} PUBLIC ${CMAKE_INSTALL_PREFIX}/lib)
@@ -27,10 +26,6 @@ function(test_function kernel)
     target_link_libraries(test_${KERNEL} PUBLIC hexl-fpga)
     target_link_libraries(test_${KERNEL} PRIVATE gtest)
     target_link_libraries(test_${KERNEL} PRIVATE nlohmann_json::nlohmann_json)
-    
-    #if(${KERNEL} EQUAL "multlowlvl")
-        target_link_libraries(test_${KERNEL} PRIVATE ntl gmp m pthread hexl)
-    #endif()
 
     if(ENABLE_FPGA_DEBUG)
         target_compile_options(test_${KERNEL} PRIVATE -DFPGA_DEBUG)
@@ -38,8 +33,8 @@ function(test_function kernel)
 
     add_custom_command(
         TARGET test_${KERNEL} POST_BUILD
-        #COMMAND rm -f lib${KERNEL}.so
-        #COMMAND ln -s ${CMAKE_INSTALL_PREFIX}/fpga/lib${KERNEL}.so .
+        COMMAND rm -f lib${KERNEL}.so
+        COMMAND ln -s ${CMAKE_INSTALL_PREFIX}/fpga/lib${KERNEL}.so .
         VERBATIM
     )
 
@@ -50,38 +45,37 @@ endfunction()
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/bitstream_dir.sh
      DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
-# test_function(dyadic_multiply)
-# test_function(fwd_ntt)
-# test_function(inv_ntt)
-# test_function(keyswitch)
-# test_function(dyadic_multiply_keyswitch)
-
+test_function(dyadic_multiply)
+test_function(fwd_ntt)
+test_function(inv_ntt)
+test_function(keyswitch)
+test_function(dyadic_multiply_keyswitch)
 test_function(multlowlvl)
 
 add_custom_target(tests
-    # COMMAND ./micro_dyadic_multiply.sh DEPENDS test_dyadic_multiply
-    # COMMAND ./micro_fwd_ntt.sh DEPENDS test_fwd_ntt
-    # COMMAND ./micro_inv_ntt.sh DEPENDS test_inv_ntt
-    # COMMAND ./micro_keyswitch.sh DEPENDS test_keyswitch
-    # COMMAND ./micro_dyadic_multiply_keyswitch.sh DEPENDS test_dyadic_multiply_keyswitch
+    COMMAND bash ./micro_dyadic_multiply.sh DEPENDS test_dyadic_multiply
+    COMMAND bash ./micro_fwd_ntt.sh DEPENDS test_fwd_ntt
+    COMMAND bash ./micro_inv_ntt.sh DEPENDS test_inv_ntt
+    COMMAND bash ./micro_keyswitch.sh DEPENDS test_keyswitch
+    COMMAND bash ./micro_dyadic_multiply_keyswitch.sh DEPENDS test_dyadic_multiply_keyswitch
     COMMAND bash ./micro_multlowlvl.sh DEPENDS test_multlowlvl
 )
 
 add_custom_target(run_test_multlowlvl
     COMMAND bash ./micro_multlowlvl.sh DEPENDS test_multlowlvl
 )
-# add_custom_target(run_test_keyswitch
-#     COMMAND ./micro_keyswitch.sh DEPENDS test_keyswitch
-# )
-# add_custom_target(run_test_fwd_ntt
-#     COMMAND ./micro_fwd_ntt.sh DEPENDS test_fwd_ntt
-# )
-# add_custom_target(run_test_inv_ntt
-#     COMMAND ./micro_inv_ntt.sh DEPENDS test_inv_ntt
-# )
-# add_custom_target(run_test_dyadic_multiply
-#     COMMAND ./micro_dyadic_multiply.sh DEPENDS test_dyadic_multiply
-# )
-# add_custom_target(run_test_dyadic_multiply_keyswitch
-#     COMMAND ./micro_dyadic_multiply_keyswitch.sh DEPENDS test_dyadic_multiply_keyswitch
-# )
+add_custom_target(run_test_keyswitch
+    COMMAND bash ./micro_keyswitch.sh DEPENDS test_keyswitch
+)
+add_custom_target(run_test_fwd_ntt
+    COMMAND bash ./micro_fwd_ntt.sh DEPENDS test_fwd_ntt
+)
+add_custom_target(run_test_inv_ntt
+    COMMAND bash ./micro_inv_ntt.sh DEPENDS test_inv_ntt
+)
+add_custom_target(run_test_dyadic_multiply
+    COMMAND bash ./micro_dyadic_multiply.sh DEPENDS test_dyadic_multiply
+)
+add_custom_target(run_test_dyadic_multiply_keyswitch
+    COMMAND bash ./micro_dyadic_multiply_keyswitch.sh DEPENDS test_dyadic_multiply_keyswitch
+)

@@ -82,6 +82,8 @@ target_include_directories(hexl-fpga INTERFACE "${CMAKE_INSTALL_PREFIX}/${CMAKE_
 
 target_link_libraries(hexl-fpga PUBLIC rt)
 target_link_libraries(hexl-fpga PUBLIC pthread)
+target_link_libraries(hexl-fpga PUBLIC gmp m hexl)
+target_link_libraries(hexl-fpga PUBLIC ntl)
 
 install(TARGETS hexl-fpga EXPORT hexl-fpgaTargets
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
