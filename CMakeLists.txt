@@ -22,7 +22,6 @@ message(STATUS "FPGA_USE_INTEL_HEXL: ${FPGA_USE_INTEL_HEXL}")
 option(FPGA_BUILD_INTEL_HEXL "Build INTEL HEXL" OFF)
 message(STATUS "FPGA_BUILD_INTEL_HEXL: ${FPGA_BUILD_INTEL_HEXL}")
 
-#set(CMAKE_CXX_COMPILER dpcpp)
 
 if (LINUX)
     include(GNUInstallDirs)
@@ -46,8 +45,8 @@ endif()
 
 add_subdirectory(host)
 add_subdirectory(device)
-include_directories(device/multlowlvl/include)
-include_directories(device/multlowlvl/src)
+# include_directories(device/multlowlvl/include)
+# include_directories(device/multlowlvl/src)
 
 
 if(ENABLE_DOCS)
@@ -79,31 +78,32 @@ write_basic_package_version_file(
     COMPATIBILITY AnyNewerVersion
 )
 
-# export(EXPORT hexl-fpgaTargets
-#     FILE "${CMAKE_CURRENT_BINARY_DIR}/hexl-fpga/hexl-fpgaTargets.cmake"
-#     NAMESPACE hexl-fpga::
-# )
-# configure_file(cmake/hexl-fpga/hexl-fpgaConfig.cmake
-#   "${CMAKE_CURRENT_BINARY_DIR}/hexl-fpga/hexl-fpgaConfig.cmake"
-# )
+export(EXPORT hexl-fpgaTargets
+    FILE "${CMAKE_CURRENT_BINARY_DIR}/hexl-fpga/hexl-fpgaTargets.cmake"
+    NAMESPACE hexl-fpga::
+)
+configure_file(cmake/hexl-fpga/hexl-fpgaConfig.cmake
+  "${CMAKE_CURRENT_BINARY_DIR}/hexl-fpga/hexl-fpgaConfig.cmake"
+)
 
-# set(ConfigPackageLocation ${CMAKE_INSTALL_LIBDIR}/cmake/hexl-fpga)
-# install (
-#     EXPORT hexl-fpgaTargets
-#     FILE hexl-fpgaTargets.cmake
-#     NAMESPACE hexl-fpga::
-#     DESTINATION ${ConfigPackageLocation}
-# )
+set(ConfigPackageLocation ${CMAKE_INSTALL_LIBDIR}/cmake/hexl-fpga)
+install (
+    EXPORT hexl-fpgaTargets
+    FILE hexl-fpgaTargets.cmake
+    NAMESPACE hexl-fpga::
+    DESTINATION ${ConfigPackageLocation}
+)
 
-# install(
-#   FILES
-#     cmake/hexl-fpga/hexl-fpgaConfig.cmake
-#     "${CMAKE_CURRENT_BINARY_DIR}/hexl-fpga/hexl-fpgaConfigVersion.cmake"
-#   DESTINATION
-#     ${ConfigPackageLocation}
-#   COMPONENT
-#     Devel
-# )
+install(
+  FILES
+    cmake/hexl-fpga/hexl-fpgaConfig.cmake
+    "${CMAKE_CURRENT_BINARY_DIR}/hexl-fpga/hexl-fpgaConfigVersion.cmake"
+  DESTINATION
+    ${ConfigPackageLocation}
+  COMPONENT
+    Devel
+)
+
 if(ENABLE_DOCS)
 install(DIRECTORY ${DOXYGEN_DOC_DIR}
         DESTINATION ${CMAKE_INSTALL_PREFIX}/doc)

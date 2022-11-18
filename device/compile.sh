@@ -26,8 +26,8 @@ compile() {
         ${others} \
         -o lib${kernel}.so \
         ${src_dir}/device/${kernel}.cpp \
-        ${src_dir}/device/multlowlvl/src/L1/multLowLvl.cpp \
-        ${src_dir}/device/multlowlvl/src/L1/tensorProduct.cpp
+        ${cmake_src_dir}/device/multlowlvl/src/L1/multLowLvl.cpp \
+        ${cmake_src_dir}/device/multlowlvl/src/L1/tensorProduct.cpp 
 
     rm -rf ${TMPDIR}
     export TMPDIR=

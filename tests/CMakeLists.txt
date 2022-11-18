@@ -33,8 +33,8 @@ function(test_function kernel)
 
     add_custom_command(
         TARGET test_${KERNEL} POST_BUILD
-        COMMAND rm -f lib${KERNEL}.so
-        COMMAND ln -s ${CMAKE_INSTALL_PREFIX}/fpga/lib${KERNEL}.so .
+        #COMMAND rm -f lib${KERNEL}.so
+        #COMMAND ln -s ${CMAKE_INSTALL_PREFIX}/fpga/lib${KERNEL}.so .
         VERBATIM
     )
 
