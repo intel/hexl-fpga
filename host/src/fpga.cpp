@@ -1018,7 +1018,6 @@ void Device::run() {
             processed_type = front->type_;
             switch (front->type_) {
             case kernel_t::DYADIC_MULTIPLY:
-                std::cout << "FPGA kernel dyadmultply.\n";
                 if ((credit_ > 0) && process_input(CREDIT - credit_)) {
                     credit_ -= 1;
                 }
@@ -1027,17 +1026,14 @@ void Device::run() {
                 }
                 break;
             case kernel_t::INTT:
-                std::cout << "FPGA kernel INTT.\n";
                 process_input(CREDIT);
                 process_output_INTT();
                 break;
             case kernel_t::NTT:
-                std::cout << "FPGA kernel NTT.\n";
                 process_input(CREDIT + 1);
                 process_output_NTT();
                 break;
             case kernel_t::KEYSWITCH:
-                std::cout << "FPGA kernel keyswitch.\n";
 #ifdef __DEBUG_KS_RUNTIME
                 uint64_t lat_start =
                     std::chrono::duration_cast<std::chrono::nanoseconds>(
@@ -1108,7 +1104,7 @@ void Device::run() {
 
 bool Device::process_input(int credit_id) {
 
-    std::cout << __func__ << " credit_id: " << credit_id << std::endl;
+    //std::cout << __func__ << " credit_id: " << credit_id << std::endl;
 
     std::vector<Object*> objs = buffer_.pop();
 
@@ -1123,7 +1119,7 @@ bool Device::process_input(int credit_id) {
     fpga_obj->fill_in_data(objs);  // poylmorphic call
     const auto& end_io = std::chrono::high_resolution_clock::now();
 
-    std::cout << __func__ << " enquque_input data.\n " << std::endl;
+    //std::cout << __func__ << " enquque_input data.\n " << std::endl;
     enqueue_input_data(fpga_obj);
 
     if (debug_ == 2) {

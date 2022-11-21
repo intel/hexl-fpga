@@ -53,12 +53,12 @@ test_function(dyadic_multiply_keyswitch)
 test_function(multlowlvl)
 
 add_custom_target(tests
+    COMMAND bash ./micro_multlowlvl.sh DEPENDS test_multlowlvl
     COMMAND bash ./micro_dyadic_multiply.sh DEPENDS test_dyadic_multiply
     COMMAND bash ./micro_fwd_ntt.sh DEPENDS test_fwd_ntt
     COMMAND bash ./micro_inv_ntt.sh DEPENDS test_inv_ntt
     COMMAND bash ./micro_keyswitch.sh DEPENDS test_keyswitch
     COMMAND bash ./micro_dyadic_multiply_keyswitch.sh DEPENDS test_dyadic_multiply_keyswitch
-    COMMAND bash ./micro_multlowlvl.sh DEPENDS test_multlowlvl
 )
 
 add_custom_target(run_test_multlowlvl

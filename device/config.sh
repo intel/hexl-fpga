@@ -4,12 +4,13 @@
 #!/usr/bin/env bash
 
 kernels=""
-# kernels+=" dyadic_multiply"
-# kernels+=" fwd_ntt"
-# kernels+=" inv_ntt"
-# kernels+=" keyswitch"
-# kernels+=" dyadic_multiply_keyswitch"
 kernels+=" multlowlvl"
+kernels+=" dyadic_multiply"
+kernels+=" fwd_ntt"
+kernels+=" inv_ntt"
+kernels+=" keyswitch"
+kernels+=" dyadic_multiply_keyswitch"
+
 
 config_dyadic_multiply=""
 config_dyadic_multiply+=" -Xsboard=intel_s10sx_pac:pac_s10_usm"

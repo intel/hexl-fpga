@@ -10,12 +10,18 @@ cmake_bin_dir=$3
 spath=$(dirname $0)
 . ${spath}/config.sh
 
+src_file_multlowlvl=""
+src_file_multlowlvl+=" ${cmake_src_dir}/device/multlowlvl/src/L1/multLowLvl.cpp"
+src_file_multlowlvl+=" ${cmake_src_dir}/device/multlowlvl/src/L1/tensorProduct.cpp"
+
 compile() {
     device=$1
     kernel=$2
     src_dir=$3
     bin_dir=$4
     others=${@:5}
+
+    extra_src=src_file_$kernel
 
     export TMPDIR=${bin_dir}/device/${kernel}
     mkdir -p ${TMPDIR}
@@ -26,8 +32,7 @@ compile() {
         ${others} \
         -o lib${kernel}.so \
         ${src_dir}/device/${kernel}.cpp \
-        ${cmake_src_dir}/device/multlowlvl/src/L1/multLowLvl.cpp \
-        ${cmake_src_dir}/device/multlowlvl/src/L1/tensorProduct.cpp 
+        ${!extra_src}
 
     rm -rf ${TMPDIR}
     export TMPDIR=
