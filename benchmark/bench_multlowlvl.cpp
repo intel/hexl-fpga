@@ -1,11 +1,27 @@
 // Copyright (C) 2020-2021 Intel Corporation
 // SPDX-License-Identifier: Apache-2.0
-
-#include <chrono>
-#include <fstream>
-#include <gtest/gtest.h>
+//
+#include <glob.h>
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
+#include <iostream>
+#include <fstream>
+
+#include <benchmark/benchmark.h>
+
 #include "hexl-fpga.h"
+
+static uint32_t get_iter() {
+    char* env = getenv("ITER");
+    uint32_t val = 40;
+    if (env) {
+        val = strtol(env, NULL, 10);
+    }
+    return val;
+}
+
+static uint32_t n_iter = get_iter();
 
 
 using json = nlohmann::json;
@@ -101,46 +117,59 @@ class TensorProductLoader {
   std::vector<uint64_t> expected_output3;
 };
 
-TEST(HELIBBGV, MultLowLvl) {
-  std::ifstream jsonfile("multLowLvl.json");
-  json js;
-  jsonfile >> js;
 
-  DataLoader data_loader1(js, "c0_0_ntt", "tensorProduct_result_part0");
-  DataLoader data_loader2(js, "c0_1_ntt", "tensorProduct_result_part0");
-  DataLoader data_loader3(js, "c1_0_ntt", "tensorProduct_result_part0");
-  DataLoader data_loader4(js, "c1_1_ntt", "tensorProduct_result_part0");
+class multlowlvl: public benchmark::Fixture {
+public:
+    void load_multlowlvl_data(std::string&);
+    void bench_multlowlvl();
 
-  TensorProductLoader tensor_product_loader(js);
+private:
+    std::vector<DataLoader> data_loader_vec;
+    std::vector<TensorProductLoader> tensor_product_loader_vec;
+    std::vector<std::vector<uint64_t>> output_vec;
+};
 
-  auto expected_output1 = tensor_product_loader.expected_output1;
-  auto expected_output2 = tensor_product_loader.expected_output2;
-  auto expected_output3 = tensor_product_loader.expected_output3;
 
-  std::vector<uint64_t> output1(expected_output1.size());
-  std::vector<uint64_t> output2(expected_output2.size());
-  std::vector<uint64_t> output3(expected_output3.size());
+void multlowlvl::load_multlowlvl_data(std::string& multlowlvl_json) {
+    std::ifstream jsonfile(multlowlvl_json.c_str());
+    json js;
+    jsonfile >> js;
+    data_loader_vec.emplace_back(DataLoader(js, "c0_0_ntt", "tensorProduct_result_part0"));
+    data_loader_vec.emplace_back(DataLoader(js, "c0_1_ntt", "tensorProduct_result_part0"));
+    data_loader_vec.emplace_back(DataLoader(js, "c1_0_ntt", "tensorProduct_result_part0"));
+    data_loader_vec.emplace_back(DataLoader(js, "c1_1_ntt", "tensorProduct_result_part0"));
 
-  std::cout << "Init" << std::endl;
-  intel::hexl::set_worksize_MultLowLvl(1);
-  std::cout << "plainText: " << data_loader1.t << std::endl;
-  intel::hexl::MultLowLvl(data_loader1.input.data(), data_loader2.input.data(),
-                             data_loader1.primes_index.size(), data_loader1.primes_index.data(),
-                             data_loader3.input.data(), data_loader4.input.data(), 
-                             data_loader3.primes_index.size(), data_loader3.primes_index.data(),
-                             data_loader1.t, 65536,
-                             output1.data(), output2.data(), output3.data(),
-                             tensor_product_loader.primes_index.size(), tensor_product_loader.primes_index.data(),
-                             data_loader1.all_primes.size(), data_loader1.all_primes.data());
-  intel::hexl::MultLowLvlCompleted();
+    tensor_product_loader_vec.emplace_back(TensorProductLoader(js));
 
-  for (int i = 0; i < expected_output1.size(); i++) {
-    ASSERT_EQ(output1[i], expected_output1[i]) << "output 1 at " << i;
-  }
-  for (int i = 0; i < expected_output2.size(); i++) {
-    ASSERT_EQ(output2[i], expected_output2[i]) << "output 2 at " << i;
-  }
-  for (int i = 0; i < expected_output3.size(); i++) {
-    ASSERT_EQ(output3[i], expected_output3[i]) << "output 3 at " << i;
-  }
+    auto expected_output1 = tensor_product_loader_vec[0].expected_output1;
+    auto expected_output2 = tensor_product_loader_vec[0].expected_output2;
+    auto expected_output3 = tensor_product_loader_vec[0].expected_output3;
+
+    output_vec.resize(3);
+    output_vec[0].resize(expected_output1.size());
+    output_vec[1].resize(expected_output2.size());
+    output_vec[2].resize(expected_output3.size());
+}
+
+
+void multlowlvl::bench_multlowlvl() {
+    intel::hexl::set_worksize_MultLowLvl(1);
+    intel::hexl::MultLowLvl(data_loader_vec[0].input.data(), data_loader_vec[1].input.data(),
+                                data_loader_vec[0].primes_index.size(), data_loader_vec[0].primes_index.data(),
+                                data_loader_vec[2].input.data(), data_loader_vec[3].input.data(), 
+                                data_loader_vec[2].primes_index.size(), data_loader_vec[2].primes_index.data(),
+                                data_loader_vec[0].t, 65536,
+                                output_vec[0].data(), output_vec[1].data(), output_vec[2].data(),
+                                tensor_product_loader_vec[0].primes_index.size(), tensor_product_loader_vec[0].primes_index.data(),
+                                data_loader_vec[0].all_primes.size(), data_loader_vec[0].all_primes.data());
+    intel::hexl::MultLowLvlCompleted();
+}
+
+BENCHMARK_F(multlowlvl, fpga_multlowlvl_65536)(benchmark::State& state) {
+    
+    std::string multlowlovl_input("multLowLvl.json");
+    load_multlowlvl_data(multlowlovl_input);
+    for (auto st :state) {
+        bench_multlowlvl();
+    }
 }

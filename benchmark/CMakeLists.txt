@@ -22,8 +22,8 @@ function(bench_function kernel)
 
     add_custom_command(
         TARGET bench_${KERNEL} POST_BUILD
-        COMMAND rm -f lib${KERNEL}.so
-        COMMAND ln -s ${CMAKE_INSTALL_PREFIX}/fpga/lib${KERNEL}.so .
+        # COMMAND rm -f lib${KERNEL}.so
+        # COMMAND ln -s ${CMAKE_INSTALL_PREFIX}/fpga/lib${KERNEL}.so .
         VERBATIM
     )
 
@@ -34,27 +34,33 @@ endfunction()
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/bitstream_dir.sh
      DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
+bench_function(multlowlvl)
 bench_function(keyswitch)
 bench_function(dyadic_multiply)
 bench_function(fwd_ntt)
 bench_function(inv_ntt)
 
 add_custom_target(bench
-    COMMAND ./micro_dyadic_multiply.sh DEPENDS bench_dyadic_multiply
-    COMMAND ./micro_fwd_ntt.sh DEPENDS bench_fwd_ntt
-    COMMAND ./micro_inv_ntt.sh DEPENDS bench_inv_ntt
-    COMMAND ./micro_keyswitch.sh DEPENDS bench_keyswitch
+    COMMAND bash ./micro_multlowlvl.sh DEPENDS bench_multlowlvl
+    COMMAND bash ./micro_dyadic_multiply.sh DEPENDS bench_dyadic_multiply
+    COMMAND bash ./micro_fwd_ntt.sh DEPENDS bench_fwd_ntt
+    COMMAND bash ./micro_inv_ntt.sh DEPENDS bench_inv_ntt
+    COMMAND bash ./micro_keyswitch.sh DEPENDS bench_keyswitch
+)
+
+add_custom_target(run_bench_multlowlvl
+    COMMAND bash ./micro_multlowlvl.sh DEPENDS bench_multlowlvl
 )
 
 add_custom_target(run_bench_ntt
-    COMMAND ./micro_fwd_ntt.sh DEPENDS bench_fwd_ntt
+    COMMAND bash ./micro_fwd_ntt.sh DEPENDS bench_fwd_ntt
 )
 add_custom_target(run_bench_intt
-    COMMAND ./micro_inv_ntt.sh DEPENDS bench_inv_ntt
+    COMMAND bash ./micro_inv_ntt.sh DEPENDS bench_inv_ntt
 )
 add_custom_target(run_bench_keyswitch
-    COMMAND ./micro_keyswitch.sh DEPENDS bench_keyswitch
+    COMMAND bash ./micro_keyswitch.sh DEPENDS bench_keyswitch
 )
 add_custom_target(run_bench_dyadicmult
-    COMMAND ./micro_dyadic_multiply.sh DEPENDS bench_dyadic_multiply
+    COMMAND bash ./micro_dyadic_multiply.sh DEPENDS bench_dyadic_multiply
 )
