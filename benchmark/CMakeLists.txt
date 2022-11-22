@@ -3,6 +3,8 @@
 
 cmake_minimum_required(VERSION 3.5.1)
 
+set(CMAKE_CXX_COMPILER dpcpp)
+
 function(bench_function kernel)
     set (KERNEL ${kernel})
     set (SRC
