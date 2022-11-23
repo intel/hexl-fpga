@@ -10,9 +10,6 @@ cmake_bin_dir=$3
 spath=$(dirname $0)
 . ${spath}/config.sh
 
-src_file_multlowlvl=""
-src_file_multlowlvl+=" ${cmake_src_dir}/device/multlowlvl/src/L1/multLowLvl.cpp"
-src_file_multlowlvl+=" ${cmake_src_dir}/device/multlowlvl/src/L1/tensorProduct.cpp"
 
 compile() {
     device=$1
@@ -20,8 +17,6 @@ compile() {
     src_dir=$3
     bin_dir=$4
     others=${@:5}
-
-    extra_src=src_file_$kernel
 
     export TMPDIR=${bin_dir}/device/${kernel}
     mkdir -p ${TMPDIR}
@@ -31,8 +26,7 @@ compile() {
         -Wno-ignored-attributes -Wno-return-type-c-linkage -Wno-unknown-pragmas \
         ${others} \
         -o lib${kernel}.so \
-        ${src_dir}/device/${kernel}.cpp \
-        ${!extra_src}
+        ${src_dir}/device/${kernel}.cpp
 
     rm -rf ${TMPDIR}
     export TMPDIR=
@@ -42,5 +36,5 @@ for kernel in ${kernels}
 do
     echo "Compiling bitstream for ${kernel}"
     configs="config_${kernel}"
-    compile ${target} ${kernel} ${cmake_src_dir} ${cmake_bin_dir} ${!configs} ${fpga_args}
+    compile ${target} ${kernel} ${cmake_src_dir} ${cmake_bin_dir}  ${!configs} ${fpga_args}
 done
