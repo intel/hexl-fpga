@@ -1,0 +1,23 @@
+project(hexl-fpga-helib)
+
+set(TARGET_NAME helib_bgv_l2)
+SET(SOURCE_FILE
+    utils.cpp
+    #bringtoset.cpp
+    #tensorproduct.cpp
+    #multlowlvl.cpp
+    #breakintodigits.cpp
+    #keyswitchdigits.cpp
+    reLinearize.cpp
+    )
+
+set(COMMON_COMPILE_FLAGS "-fPIC")
+set(COMMON_LINK_FLAGS "-fPIC -lpthread ")
+
+add_library(${TARGET_NAME} SHARED ${SOURCE_FILE})
+set_target_properties(${TARGET_NAME} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS}")
+set_target_properties(${TARGET_NAME} PROPERTIES LINK_FLAGS ${COMMON_LINK_FLAGS})
+
+add_library(${TARGET_NAME}_emu SHARED ${SOURCE_FILE})
+set_target_properties(${TARGET_NAME}_emu PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS} -DFPGA_EMULATOR")
+set_target_properties(${TARGET_NAME}_emu PROPERTIES LINK_FLAGS ${COMMON_LINK_FLAGS})
