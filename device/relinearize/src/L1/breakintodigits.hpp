@@ -78,14 +78,23 @@ sycl::event store(sycl::queue &q, sycl::buffer<uint64_t> &c, unsigned size,
                                                                      flag);
 }
 
+static break_into_digits_intt_t g_breakintodigits_intt;
+static breakIntoDigits_ntt_t g_breakintodigits_ntt;
+
 void intt(const std::vector<uint64_t> &primes, uint64_t coeff_count, int flag) {
-  static break_into_digits_intt_t intt;
-  launch_intt(intt, primes, coeff_count, flag);
+  launch_intt(g_breakintodigits_intt, primes, coeff_count, flag);
 }
 
 void ntt(const std::vector<uint64_t> &primes, uint64_t coeff_count, int flag) {
-  static breakIntoDigits_ntt_t ntt;
-  launch_ntt(ntt, primes, coeff_count, flag);
+  launch_ntt(g_breakintodigits_ntt, primes, coeff_count, flag);
+}
+
+break_into_digits_intt_t* get_breakintodigits_intt() {
+    return &g_breakintodigits_intt;
+}
+
+breakIntoDigits_ntt_t* get_breakintodigits_ntt() {
+    return &g_breakintodigits_ntt;
 }
 
 typedef struct breakintodisgits_ops{
@@ -110,8 +119,8 @@ breakintodisgits_ops_t& get_breakintodigits_ops() {
         .load = &load,
         .kernel = &kernel,
         .store = &store,
-        .get_intt = &get_intt,
-        .get_ntt = &get_ntt
+        .get_intt = &get_breakintodigits_intt,
+        .get_ntt = &get_breakintodigits_ntt
     };
     return breakintodigits_ops_obj;
 }
