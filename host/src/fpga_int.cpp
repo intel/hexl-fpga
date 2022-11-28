@@ -18,6 +18,7 @@
 #include "keyswitch_int.h"
 #include "ntt_int.h"
 #include "multlowlvl_int.h"
+#include "relinearize_int.h"
 
 #ifdef FPGA_USE_INTEL_HEXL
 #include "hexl/hexl.hpp"
@@ -673,6 +674,142 @@ void MultLowLvl_int(uint64_t* a0, uint64_t* a1, uint64_t a_primes_len, uint8_t* 
         break;
     }
 }
+
+
+static void fpga_ReLinearize(uint64_t* all_primes, size_t all_primes_len, 
+                uint64_t* keys1, uint64_t* keys2,
+                uint64_t* keys3, uint64_t* keys4, size_t keys_len,
+                uint64_t* c2, size_t c2_len,
+                uint64_t* pi, size_t pi_len,
+                unsigned* num_designed_digits_primes, size_t digits_primes_len,
+                size_t num_special_primes, uint8_t* primes_index, size_t primes_index_len,
+                uint64_t* output, size_t output_len) {
+    
+    bool fence = (fpga_buffer.size() == 0);
+
+    if (!fence) {
+        Object* obj = fpga_buffer.back();
+        FPGA_ASSERT(obj);
+        fence |= (obj->type_ != kernel_t::RELINEARIZE);
+        Object_ReLinearize* object_relinearize = dynamic_cast<Object_ReLinearize*>(obj);
+        fence |= (all_primes != object_relinearize->all_primes);
+        fence |= (all_primes_len != object_relinearize->all_primes_len);
+        fence |= (keys1 != object_relinearize->keys1);
+        fence |= (keys2 != object_relinearize->keys2);
+        fence |= (keys3 != object_relinearize->keys3);
+        fence |= (keys4 != object_relinearize->keys4);
+        fence |= (keys_len != object_relinearize->keys_len);
+        fence |= (c2 != object_relinearize->c2);
+        fence |= (c2_len != object_relinearize->c2_len);
+        fence |= (pi != object_relinearize->pi);
+        fence |= (pi_len != object_relinearize->pi_len);
+        fence |= (num_designed_digits_primes != object_relinearize->num_designed_digits_primes);
+        fence |= (digits_primes_len != object_relinearize->digits_primes_len);
+        fence |= (num_special_primes != object_relinearize->num_special_primes);
+        fence |= (primes_index != object_relinearize->primes_index);
+        fence |= (primes_index_len != object_relinearize->primes_index_len);
+        fence |= (output != object_relinearize->output);
+        fence |= (output_len != object_relinearize->output_len);
+    }
+
+    Object* obj = new Object_ReLinearize(all_primes, all_primes_len, 
+                                        keys1, keys2, keys3, keys4, keys_len,
+                                        c2, c2_len, pi, pi_len,
+                                        num_designed_digits_primes, digits_primes_len,
+                                        num_special_primes, primes_index, primes_index_len,
+                                        output, output_len, fence);
+    
+    fpga_buffer.push(obj);
+
+
+    outstanding_objects_ReLinearize.insert(obj);
+
+    if (fpga_buffer.get_worksize_ReLinearize() == 1) {
+        ReLinearizeCompleted_int();
+    }
+}
+
+static void cpu_ReLinearize(uint64_t* all_primes, size_t all_primes_len, 
+                uint64_t* keys1, uint64_t* keys2,
+                uint64_t* keys3, uint64_t* keys4, size_t keys_len,
+                uint64_t* c2, size_t c2_len,
+                uint64_t* pi, size_t pi_len,
+                unsigned* num_designed_digits_primes, size_t digits_primes_len,
+                size_t num_special_primes, uint8_t* primes_index, size_t primes_index_len,
+                uint64_t* output, size_t output_len) {
+    FPGA_ASSERT(g_choice == CPU);
+
+    // TODO, confirm/add CPU version.
+    std::cerr << "CPU VERSION not supported!" << std::endl;
+
+    exit(-1);
+}
+
+
+void set_worksize_ReLinearize_int(uint64_t n) {
+    fpga_buffer.set_worksize_ReLinearize(n);
+}
+
+bool ReLinearizeCompleted_int() {
+    bool all_done = false;
+    while (!all_done) {
+        bool done = true;
+        auto iter = outstanding_objects_ReLinearize.begin();
+        while (iter != outstanding_objects_ReLinearize.end()) {
+            Object* obj = *iter;
+            if (obj->ready_) {
+                delete obj;
+                obj = nullptr;
+                iter = outstanding_objects_ReLinearize.erase(iter);
+            }  else {
+                done = false;
+                iter++;
+            }
+        }
+        all_done = done;
+    }
+
+    outstanding_objects_ReLinearize.clear();
+    fpga_buffer.set_worksize_ReLinearize(1);
+
+    return all_done;
+}
+
+
+void ReLinearize_int(uint64_t* all_primes, size_t all_primes_len, 
+                uint64_t* keys1, uint64_t* keys2,
+                uint64_t* keys3, uint64_t* keys4, size_t keys_len,
+                uint64_t* c2, size_t c2_len,
+                uint64_t* pi, size_t pi_len,
+                unsigned* num_designed_digits_primes, size_t digits_primes_len,
+                size_t num_special_primes, uint8_t* primes_index, size_t primes_index_len,
+                uint64_t* output, size_t output_len) {
+    switch(g_choice) {
+    case: CPU:
+        cpu_ReLinearize(all_primes, all_primes_len, 
+                        keys1, keys2, keys3, keys4, keys_len,
+                        c2, c2_len, pi, pi_len,
+                        num_designed_digits_primes, digits_primes_len,
+                        num_special_primes, primes_index, primes_index_len,
+                        output, output_len);
+        break;
+    case EMU:
+    case FPGA:
+        fpga_ReLinearize(all_primes, all_primes_len, 
+                        keys1, keys2, keys3, keys4, keys_len,
+                        c2, c2_len, pi, pi_len,
+                        num_designed_digits_primes, digits_primes_len,
+                        num_special_primes, primes_index, primes_index_len,
+                        output, output_len);
+        break;
+    default:
+        std::cerr << "ERROR: Invalid RUN_CHOICE envvar. Set to a valid value {0, 1, 2}, \
+        where 0:CPU, 1:EMU, 2:FPGA."  << std::endl;
+        break;
+    }
+
+}
+
 
 
 

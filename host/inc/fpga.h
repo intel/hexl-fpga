@@ -101,7 +101,8 @@ enum class kernel_t {
     INTT,
     KEYSWITCH,
     DYADIC_MULTIPLY_KEYSWITCH,
-    MULTLOWLVL
+    MULTLOWLVL,
+    RELINEARIZE
 };
 
 /// @brief
@@ -272,6 +273,39 @@ public:
 };
 
 
+class Object_ReLinearize : public Object {
+public:
+    explicit Object_ReLinearize(uint64_t* all_primes, size_t all_primes_len, 
+                uint64_t* keys1, uint64_t* keys2,
+                uint64_t* keys3, uint64_t* keys4, size_t keys_len,
+                uint64_t* c2, size_t c2_len,
+                uint64_t* pi, size_t pi_len,
+                unsigned* num_designed_digits_primes, size_t digits_primes_len,
+                size_t num_special_primes, uint8_t* primes_index, size_t primes_index_len,
+                uint64_t* output, size_t output_len, bool fence = false);
+    
+    uint64_t* all_primes_;
+    size_t all_primes_len_;
+    uint64_t* keys1_;
+    uint64_t* keys2_;
+    uint64_t* keys3_;
+    uint64_t* keys4_;
+    size_t keys_len_;
+    uint64_t* c2_;
+    size_t c2_len_;
+    uint64_t* pi_;
+    size_t pi_len_;
+    unsigned* num_designed_digits_primes_;
+    size_t digits_primes_len_;
+    size_t num_special_primes_;
+    uint8_t* primes_index_;
+    size_t primes_index_len_;
+    uint64_t* output_;
+    size_t output_len_;
+
+};
+
+
 
 /// @brief
 /// class Buffer
@@ -310,13 +344,15 @@ class Buffer {
 public:
     Buffer(uint64_t capacity, uint64_t n_batch_dyadic_multiply,
            uint64_t n_batch_ntt, uint64_t n_batch_intt,
-           uint64_t n_batch_KeySwitch, uint64_t n_batch_MultLowLvl)
+           uint64_t n_batch_KeySwitch, uint64_t n_batch_MultLowLvl, 
+           uint64_t n_batch_ReLinearize)
         : capacity_(capacity),
           n_batch_dyadic_multiply_(n_batch_dyadic_multiply),
           n_batch_ntt_(n_batch_ntt),
           n_batch_intt_(n_batch_intt),
           n_batch_KeySwitch_(n_batch_KeySwitch),
           n_batch_MultLowLvl_(n_batch_MultLowLvl),
+          n_batch_ReLinearize_(n_batch_ReLinearize),
           total_worksize_DyadicMultiply_(1),
           num_DyadicMultiply_(0),
           total_worksize_NTT_(1),
@@ -326,7 +362,9 @@ public:
           total_worksize_KeySwitch_(1),
           num_KeySwitch_(0),
           total_worksize_MultLowLvl_(1),
-          num_MultLowLvl_(0) {}
+          num_MultLowLvl_(0),
+          total_worksize_ReLinearize_(1),
+          num_ReLinearize_ {}
 
     void push(Object* obj);
     Object* front() const;
@@ -345,6 +383,9 @@ public:
     }
     uint64_t get_worksize_MultLowLvl() const {
         return total_worksize_MultLowLvl_;
+    }
+    uint64_t get_worsize_ReLinearize() const {
+        return total_worksize_ReLinearize_;
     }
 
     void set_worksize_DyadicMultiply(uint64_t ws) {
@@ -367,6 +408,11 @@ public:
     void set_worksize_MultLowLvl(uint64_t ws) {
         total_worksize_MultLowLvl_ = ws;
         num_MultLowLvl_ = total_worksize_MultLowLvl_;
+    }
+
+    void set_worksize_ReLinearize(uint64_t ws) {
+        total_worksize_ReLinearize_ = ws;
+        num_ReLinearize_ = total_worksize_ReLinearize_;
     }
 
 private:
@@ -394,6 +440,11 @@ private:
                                                         : num_MultLowLvl_);
     }
 
+    uint64_t get_worksize_int_ReLinearize() const {
+        return ((num_ReLinearize_ > n_batch_ReLinearize_) ? n_batch_ReLinearize_
+                                                          : num_ReLinearize_);
+    }
+
     void update_DyadicMultiply_work_size(uint64_t ws) {
         num_DyadicMultiply_ -= ws;
     }
@@ -401,6 +452,8 @@ private:
     void update_INTT_work_size(uint64_t ws) { num_INTT_ -= ws; }
     void update_KeySwitch_work_size(uint64_t ws) { num_KeySwitch_ -= ws; }
     void update_MultLowLvl_work_size(uint64_t ws) { num_MultLowLvl_ -= ws;}
+    void update_ReLinearize_work_size(uint64_t ws) {num_ReLinearize_ -= ws;}
+
 
     std::mutex mu_;
     std::mutex mu_size_;
@@ -412,6 +465,7 @@ private:
     const uint64_t n_batch_intt_;
     const uint64_t n_batch_KeySwitch_;
     const uint64_t n_batch_MultLowLvl_;
+    const uint64_t n_batch_ReLinearize_;
 
     uint64_t total_worksize_DyadicMultiply_;
     uint64_t num_DyadicMultiply_;
@@ -425,9 +479,11 @@ private:
     uint64_t total_worksize_KeySwitch_;
     uint64_t num_KeySwitch_;
 
-
     uint64_t total_worksize_MultLowLvl_;
     uint64_t num_MultLowLvl_;
+
+    uint64_t total_worksize_ReLinearize_;
+    uint64_t num_ReLinearize_;
 
 };
 /// @brief
@@ -632,6 +688,24 @@ private:
     };
 };
 
+template <class t_type = uint256_t>
+struct KeySwitchMemKeys {
+    //
+    explicit KeySwitchMemKeys(sycl::buffer<t_type>* k1 = nullptr,
+                              sycl::buffer<t_type>* k2 = nullptr,
+                              sycl::buffer<t_type>* k3 = nullptr,
+                              t_type* host_k1 = nullptr,
+                              t_type* host_k2 = nullptr,
+                              t_type* host_k3 = nullptr);
+    ~KeySwitchMemKeys();
+    sycl::buffer<t_type>* k_switch_keys_1_;
+    sycl::buffer<t_type>* k_switch_keys_2_;
+    sycl::buffer<t_type>* k_switch_keys_3_;
+    t_type* host_k_switch_keys_1_;
+    t_type* host_k_switch_keys_2_;
+    t_type* host_k_switch_keys_3_;
+};
+
 
 class FPGAObject_MultLowLvl : public FPGAObject {
 public:
@@ -653,8 +727,6 @@ public:
     
     void fill_in_data(const std::vector<Object*>& objs) override;
     void fill_out_data(uint64_t* results) override;
-
-    void fill_out_data_new(uint64_t** output);
 
     // use buffer to store input data.
     sycl::buffer<uint64_t>* a0_buf_;
@@ -695,23 +767,47 @@ private:
 };
 
 
-template <class t_type = uint256_t>
-struct KeySwitchMemKeys {
-    //
-    explicit KeySwitchMemKeys(sycl::buffer<t_type>* k1 = nullptr,
-                              sycl::buffer<t_type>* k2 = nullptr,
-                              sycl::buffer<t_type>* k3 = nullptr,
-                              t_type* host_k1 = nullptr,
-                              t_type* host_k2 = nullptr,
-                              t_type* host_k3 = nullptr);
-    ~KeySwitchMemKeys();
-    sycl::buffer<t_type>* k_switch_keys_1_;
-    sycl::buffer<t_type>* k_switch_keys_2_;
-    sycl::buffer<t_type>* k_switch_keys_3_;
-    t_type* host_k_switch_keys_1_;
-    t_type* host_k_switch_keys_2_;
-    t_type* host_k_switch_keys_3_;
+class FPGAObject_ReLinearize : public FPGAObject {
+public:
+    explicit FPGAObject_ReLinearize(sycl::queue &p_q, 
+                                    uint64_t batch_size,
+                                    uint64_t all_primes_len,
+                                    uint64_t keys_len,
+                                    uint64_t c2_len,
+                                    uint64_t pi_len,
+                                    uint64_t digits_primes_len,
+                                    uint64_t primes_index_len,
+                                    uint64_t output_len);
+    ~FPGAObject_ReLinearize();
+
+    FPGAObject_ReLinearize(const FPGAObject_ReLinearize&) = delete;
+    FPGAObject_ReLinearize& operator=(const FPGAObject_ReLinearize&) = delete;
+
+    void fill_in_data(const std::vector<Object*>& objs) override;
+    void fill_out_data(uint64_t* results) override;
+
+    sycl::buffer<uint64_t>* c2_buf_;
+    uint64_t c2_len_;
+    uint64_t* pi_;
+    uint64_t pi_len_;
+    unsigned* num_designed_digits_primes_;
+    unsigned num_special_primes_;
+    uint8_t* primes_index_;
+    uint64_t* output_;
+    uint64_t output_len_;
+
+    uint64_t* all_primes_;
+    uint64_t all_primes_len_;
+    uint64_t* keys1_;
+    uint64_t* keys2_;
+    uint64_t* keys3_;
+    uint64_t* keys4_;
+    uint64_t keys_len_;
+
+
 };
+
+
 
 /// @brief
 /// enum DEV_TYPE
@@ -743,7 +839,8 @@ public:
            std::shared_future<bool> exit_signal, uint64_t coeff_size,
            uint32_t modulus_size, uint64_t batch_size_dyadic_multiply,
            uint64_t batch_size_ntt, uint64_t batch_size_intt,
-           uint64_t batch_size_KeySwitch, uint64_t batch_size_MultLowLvl, uint32_t debug);
+           uint64_t batch_size_KeySwitch, uint64_t batch_size_MultLowLvl, 
+           uint64_t batch_size_ReLinearize, uint32_t debug);
     ~Device();
     Device(const Device&) = delete;
     Device& operator=(const Device&) = delete;
@@ -761,6 +858,7 @@ private:
     bool process_output_INTT();
     bool process_output_KeySwitch();
     bool process_output_MultLowLvl();
+    bool process_output_ReLinearize();
 
     void enqueue_input_data(FPGAObject* fpga_obj);
     void enqueue_input_data_dyadic_multiply(
@@ -769,6 +867,7 @@ private:
     void enqueue_input_data_INTT(FPGAObject_INTT* fpga_obj);
     void enqueue_input_data_KeySwitch(FPGAObject_KeySwitch* fpga_obj);
     void enqueue_input_data_MultLowLvl(FPGAObject_MultLowLvl* fpga_obj);
+    void enqueue_input_data_ReLinearize(FPGAObject_ReLinearize* fpga_obj);
 
     int device_id() { return id_; }
 
@@ -813,6 +912,11 @@ private:
     void TensorProduct(FPGAObject_MultLowLvl* fpga_obj);
     void MultLowLvl_Store(FPGAObject_MultLowLvl* fpga_obj);
     
+
+    // ReLinearize functions
+    
+
+
     // dynamic loading functions.
     kernel_t get_kernel_type();
     std::string get_bitstream_name();
