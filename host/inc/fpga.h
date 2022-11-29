@@ -914,7 +914,39 @@ private:
     
 
     // ReLinearize functions
-    
+    // breakintodigit Init --> intt -> launch_intt.
+    template <class intt_t>
+    void launch_intt_config_tf(intt_t &intt, uint64_t degree, const std::vector<uint64_t> &primes, int flag);
+
+    template <class intt_t>
+    void launch_compute_inverse(intt_t &intt, uint64_t degree, const std::vector<uint64_t> &primes, int flag);
+
+    template <class intt_t> 
+    void launch_intt(intt_t &intt, uint64_t degree, const std::vector<uint64_t> &primes, int flag = 0xff);
+
+    // breakintodigit Init --> ntt -> launch_ntt.
+    template <class ntt_t>
+    void launch_ntt_config_tf(ntt_t &ntt, uint64_t degree, const std::vector<uint64_t> &primes, int flag);
+
+    template <class ntt_t>
+    void launch_compute_forward(ntt_t &ntt, uint64_t degree, const std::vector<uint64_t> &primes, int flag);
+
+    template <class ntt_t>
+    void launch_ntt(ntt_t &ntt, uint64_t degree, const std::vector<uint64_t> &primes, int flag = 0xff);
+
+    // ReLinearize calls breakintodigit->init and keyswitchdigit->init.
+    void ReLinearize_Init(FPGAObject_ReLinearize* fpga_obj);
+
+    sycl::event breakintodigits_ProcessInput(FPGAObject_ReLinearize* fpga_obj);
+
+    void breakintodigits_CopyOutput(FPGAObject_ReLinearize* fpga_obj);
+
+    void PreComputeParams(FPGAObject_ReLinearize* fpga_obj);
+
+
+    // relinearize keyswitch_digits
+    sycl::event keyswitchdigits_ProcessInput(FPGAObject_ReLinearize* fpga_obj);
+    void keyswitchdigits_CopyOutput(FPGAObject_ReLinearize* fpga_obj, int output_buf_index);
 
 
     // dynamic loading functions.
@@ -988,6 +1020,13 @@ private:
     sycl::buffer<uint64_t>* output1_buf_;
     sycl::buffer<uint64_t>* output2_buf_[2];
     sycl::buffer<uint64_t>* output3_buf_[2];
+
+
+    // ReLinearize section
+    sycl::queue relinearize_ntt_queue_;
+    
+
+
 
     static int device_id_;
     int id_;
