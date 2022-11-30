@@ -124,6 +124,35 @@ Object_MultLowLvl::Object_MultLowLvl(
     all_primes_(all_primes) {}
 
 
+Object_ReLinearize::Object_ReLinearize(uint64_t* all_primes, size_t all_primes_len, 
+                uint64_t* keys1, uint64_t* keys2,
+                uint64_t* keys3, uint64_t* keys4, size_t keys_len,
+                uint64_t* c2, size_t c2_len,
+                uint64_t* pi, size_t pi_len,
+                unsigned* num_designed_digits_primes, size_t digits_primes_len,
+                size_t num_special_primes, uint8_t* primes_index, size_t primes_index_len,
+                uint64_t* output, size_t output_len, bool fence = false)
+                : Object(kernel_t::RELINEARIZE, fence),
+                all_primes_(all_primes),
+                all_primes_len_(all_primes_len),
+                keys1_(keys1),
+                keys2_(keys2),
+                keys3_(keys3),
+                keys4_(keys4),
+                keys_len_(keys_len),
+                c2_(c2),
+                c2_len_(c2_len),
+                pi_(pi),
+                pi_len_(pi_len),
+                num_designed_digits_primes_(num_designed_digits_primes),
+                digits_primes_len_(digits_primes_len),
+                num_special_primes_(num_special_primes),
+                primes_index_(primes_index),
+                primes_index_len_(primes_index_len),
+                output_(output),
+                output_len_(output_len) {}
+
+
 Object* Buffer::front() const {
     Object* obj = buffer_.front();
     return obj;
@@ -353,6 +382,72 @@ FPGAObject_MultLowLvl::FPGAObject_MultLowLvl(sycl::queue& p_q,
     mem_output3_ = static_cast<uint64_t*>(std::malloc(batch_size * coeff_count_ * c_primes_len_ * sizeof(uint64_t)));
 }
 
+FPGAObject_ReLinearize::FPGAObject_ReLinearize(sycl::queue& p_q,
+                                               uint64_t batch_size,
+                                               uint64_t all_primes_len,
+                                               uint64_t keys_len,
+                                               uint64_t c2_len,
+                                               uint64_t pi_len,
+                                               uint64_t digits_primes_len,
+                                               uint64_t primes_index_len,
+                                               uint64_t output_len)
+    : FPGAObject(p_q, batch_size, kernel_t::RELINEARIZE),
+    all_primes_len_(all_primes_len),
+    keys_len_(keys_len),
+    c2_len_(c2_len),
+    pi_len_(pi_len),
+    digits_primes_len_(digits_primes_len),
+    primes_index_len_(primes_index_len),
+    output_len_(output_len) {
+    
+    c2_buf_ = new sycl::buffer<uint64_t>(batch_size * c2_len_);
+    pi_ = static_cast<uint64_t*>(std::malloc(batch_size * pi_len_ * sizeof(uint64_t)));
+    num_designed_digits_primes_ = static_cast<unsigned*>(std::malloc(batch_size * num_special_primes_ * sizeof(unsigned)));
+    primes_index_ = static_cast<uint8_t*>(std::malloc(batch_size * primes_index_len_ * sizeof(uint8_t)));
+    output_ = static_cast<uint64_t*>(std::malloc(batch_size * output_len_ * sizeof(uint64_t)));
+
+    all_primes_ = static_cast<uint64_t*>(std::malloc(batch_size * all_primes_len_ * sizeof(uint64_t)));
+    keys1_ = static_cast<uint64_t*>(std::malloc(batch_size * keys_len_ * sizeof(uint64_t)));
+    keys2_ = static_cast<uint64_t*>(std::malloc(batch_size * keys_len_ * sizeof(uint64_t)));
+    keys3_ = static_cast<uint64_t*>(std::malloc(batch_size * keys_len_ * sizeof(uint64_t)));
+    keys4_ = static_cast<uint64_t*>(std::malloc(batch_size * keys_len_ * sizeof(uint64_t)));
+}
+
+
+FPGAObject_ReLinearize::~FPGAObject_ReLinearize() {
+    if (keys4_) {
+        std::free(keys4_);
+    }
+    if (keys3_) {
+        std::free(keys4_);
+    }
+    if (keys2_) {
+        std::free(keys4_);
+    }
+    if (keys1_) {
+        std::free(keys4_);
+    }
+    if (all_primes_) {
+        std::free(all_primes_);
+    }
+    if (output_) {
+        std::free(output_);
+    }
+    if (primes_index_) {
+        std::frer(primes_index_);
+    }
+    if (num_designed_digits_primes_) {
+        std::free(num_designed_digits_primes_);
+    }
+    if (pi_) {
+        std::free(pi_);
+    }
+    if (c2_buf_) {
+        delete c2_buff_;
+    }
+}
+
+
 FPGAObject_MultLowLvl::~FPGAObject_MultLowLvl() {
     if (a_primes_index_) {
         std::free(a_primes_index_);
@@ -435,6 +530,51 @@ FPGAObject_INTT::~FPGAObject_INTT() {
     inv_n_in_svm_ = nullptr;
     free(inv_n_w_in_svm_, m_q);
     inv_n_w_in_svm_ = nullptr;
+}
+
+
+void FPGAObject_Relinearize::fill_in_data(const std::vector<Object*> &objs) {
+    std::cout << __func__ << " objs.size(): " << objs.size() << std::endl;
+
+    sycl::host_accessor c2_acc(*a2_buf_);
+    uint64_t batch = 0;
+    for (const auto &obj_in : objs) {
+        Object_ReLinearize* obj = dynamic_cast<Object_ReLinearize*>(obj_in);
+        FPGA_ASSERT(obj);
+        in_objs_.emplace_back(obj);
+
+        fence_ |= obj->fence_;
+        all_primes_len_ = obj->all_primes_len_;
+        keys_len_ = obj->keys_len_;
+        c2_len_ = obj->c2_len_;
+        pi_len_ = obj->pi_len_;
+        digits_primes_len_ = obj->digits_primes_len_;
+        num_special_primes_ = obj->num_special_primes_;
+        output_len_ = obj->output_len_;
+        primes_index_len_ = obj->primes_index_len_;
+
+
+        std::memcpy(c2_acc.get_pointer() + batch * c2_len_ * sizeof(uint64_t), obj->c2_, c2_len_ * sizeof(uint64_t));
+        std::memcpy(pi_ + batch * pi_len_ * sizeof(uint64_t), obj->pi_, pi_len_ * sizeof(uint64_t));
+        std::memcpy(num_designed_digits_primes_ + batch * digits_primes_len_ * sizeof(unsigned), obj->num_designed_digits_primes_,
+                    digits_primes_len_ * sizeof(unsigned));
+        std::memcpy(primes_index_ + batch * primes_index_len_ * sizeof(uint8_t), obj->primes_index_,
+                    primes_index_len_ * sizeof(uint8_t));
+        
+        std::memcpy(keys1_ + batch * keys_len_ * sizeof(uint64_t), obj->keys1_, 
+                    keys_len_ * sizeof(uint64_t));
+        std::memcpy(keys2_ + batch * keys_len_ * sizeof(uint64_t), obj->keys2_, 
+                    keys_len_ * sizeof(uint64_t));
+        std::memcpy(keys3_ + batch * keys_len_ * sizeof(uint64_t), obj->keys3_, 
+                    keys_len_ * sizeof(uint64_t));
+        std::memcpy(keys4_ + batch * keys_len_ * sizeof(uint64_t), obj->keys4_, 
+                    keys_len_ * sizeof(uint64_t));
+
+        batch++;
+    }
+
+    n_batch_ = batch;
+    tag_ = g_tag_++;
 }
 
 
@@ -611,6 +751,19 @@ void FPGAObject_INTT::fill_in_data(const std::vector<Object*>& objs) {
     tag_ = g_tag_++;
 }
 
+
+void FPGAObject_ReLinearize::fill_out_data(uint64_t* output) {
+    uint64_t batch = 0;
+    for (auto &obj : in_objs_) {
+        Object_ReLinearize* obj_ReLinearize = dynamic_cast<Object_ReLinearize*>(obj);
+        FPGA_ASSERT(obj_ReLinearize);
+        std::memcpy(obj_ReLinearize->output_, output + batch * output_len_ * sizeof(uint64_t), 
+                    output_len_ * sizeof(uint64_t));
+        batch++;
+        obj->ready_ = true;
+    }
+    FPGA_ASSERT(batch == n_batch_);
+}
 
 
 void FPGAObject_MultLowLvl::fill_out_data(uint64_t* output) {

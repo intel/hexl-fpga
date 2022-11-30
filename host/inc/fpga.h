@@ -94,6 +94,33 @@ enum MultLowLvl_Kernels {
     MULTLOWLVL_NUM_KERNELS
 };
 
+enum BreakIntoDigits_Queues {
+    BREAKINTODIGITS_LOAD = 0,
+    BREAKINTODIGITS_LOAD_DATA,
+    BREAKINTODIGITS_KERN,
+    BREAKINTODIGITS_STORE,
+    BREAKINTODIGITS_STORE_DATA,
+    BREAKINTODIGITS_QUEUE_NR
+};
+
+enum KeyswitchDigitss_Queues {
+    KEYSWITCHDIGITS_LOAD_DATA = 0,
+    KEYSWITCHDIGITS_KERN,
+    KEYSWITCHDIGITS_LOAD,
+    KEYSWITCHDIGITS_QUEUE_NR
+};
+
+enum RELINEARIZE_PARA{
+        MAX_PRIMES = 32,
+        MAX_BUFF_DEPTH = 4,
+        MAX_PACKED_PRECOMPUTED_PRIMES_SIZE = 2048,
+        SYNC_MODE = 0
+};
+
+enum ReLinearize_Kernels {
+
+};
+
 enum class kernel_t {
     NONE,
     DYADIC_MULTIPLY,
@@ -791,8 +818,10 @@ public:
     uint64_t* pi_;
     uint64_t pi_len_;
     unsigned* num_designed_digits_primes_;
+    uint64_t digits_primes_len_;
     unsigned num_special_primes_;
     uint8_t* primes_index_;
+    uint64_t primes_index_len_;
     uint64_t* output_;
     uint64_t output_len_;
 
@@ -803,7 +832,6 @@ public:
     uint64_t* keys3_;
     uint64_t* keys4_;
     uint64_t keys_len_;
-
 
 };
 
@@ -1022,11 +1050,30 @@ private:
     sycl::buffer<uint64_t>* output3_buf_[2];
 
 
-    // ReLinearize section
-    sycl::queue relinearize_ntt_queue_;
-    
+    // ReLinearize section --> breakintodigits.
+    sycl::queue* breakintodigits_queues_[BREAKINTODIGITS_QUEUE_NR];
+    sycl::buffer<uint64_t> *breakintodigits_input_buffer_[MAX_BUFF_DEPTH];
+    sycl::buffer<uint64_t> *breakintodigits_output_buffer_[MAX_BUFF_DEPTH];
+    sycl::buffer<ulong2> *breakinto_digits_packed_precomputed_params_buf_[MAX_BUFF_DEPTH];
+    sycl::events breakintodigits_store_events_[MAX_BUFF_DEPTH];
+    std::shared_ptr<std::vector<uint64_t>> all_primes_ptr_;
+    std::shared_ptr<std::vector<uint64_t>> breakintodigits_output_ptr_[MAX_BUFF_DEPTH];
+    size_t breakintodigits_output_size_[MAX_BUFF_DEPTH];
+    int breakintodigits_buf_depth_;
+    int breakintodigits_buf_index_;
 
 
+    // ReLinearize section --> keyswitchdigits.
+    sycl::queue* keyswitchdigits_queues_[KEYSWITCHDIGITS_QUEUE_NR];
+    sycl::buffer<uint64_t> *keyswitchdigits_input_buffer_[MAX_BUFF_DEPTH];
+    sycl::buffer<sycl::ulong2> *keyswitchdigits_keys_buffer_[MAX_BUFF_DEPTH];
+    sycl::buffer<uint64_t> *keyswitchdigit_output_buffer_[MAX_BUFF_DEPTH];
+    sycl::buffer<sycl::ulong4> *packed_precomputed_params_buf_[MAX_BUFF_DEPTH];
+    sycl::event keyswitchdigits_store_events_[MAX_BUFF_DEPTH];
+    std::shared_ptr<std::vector<uint64_t>> keyswitchdigits_output_ptr_[MAX_BUFF_DEPTH];
+    size_t keyswitchdigits_output_size_[MAX_BUFF_DEPTH];
+    int keyswitchdigits_buf_depth_;
+    int keyswitchdigits_buf_index_;
 
     static int device_id_;
     int id_;
