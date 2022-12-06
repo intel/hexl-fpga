@@ -57,5 +57,10 @@ void intt(const std::vector<uint64_t> &primes, uint64_t coeff_count,
 void ntt(const std::vector<uint64_t> &primes, uint64_t coeff_count,
          int flag = 0xff);
 
+
+typedef struct breakintodisgits_ops breakintodisgits_ops_t;
+
+
+
 }  // namespace BreakIntoDigits
 }  // namespace L1

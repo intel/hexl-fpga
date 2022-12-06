@@ -29,4 +29,8 @@ sycl::event keySwitchDigits(
     sycl::buffer<uint64_t> &c0, sycl::buffer<uint64_t> &c1, unsigned num_digits,
     unsigned num_primes, sycl::ulong4 digits_offset, sycl::event depend_event,
     unsigned flag);
+
+
+typedef struct keyswitchdigits_ops keyswitchdigits_ops_t;
+
 }  // namespace L1

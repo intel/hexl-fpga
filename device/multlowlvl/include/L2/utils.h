@@ -79,7 +79,17 @@ sycl::ulong2 mulmod_y_ext(uint64_t y, uint64_t p) {
 
 
 
+/**
+ * @brief a helper function to perform a copy from a buffer to another
+*/
 
+template <typename T>
+void queue_copy_buf2buf(sycl::queue &q, T& a_buf, T& b_buf) {
+  q.copy(a_buf.template get_access<sycl::access::mode::read>(),
+         b_buf.teamplet get_access<sycl::access::mode::discard_write>());
+
+  q.wait();
+}
 
 
 /**

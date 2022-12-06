@@ -9,10 +9,17 @@
 #include <string>
 #include "../../common/types.hpp"
 
+// for multlowlvl
 #include "../../device/multlowlvl/include/L1/multLowLvl.h"
 #include "../../device/multlowlvl/include/L1/tensorProduct.h"
 
+
+// for reLinearize
+#include "../../device/relinearize/include/L1/breakintodigits.h"
+#include "../../device/relinearize/include/L1/keyswitchdigits.h"
+
 using namespace L1::helib::bgv;
+using namespace L1;
 
 namespace intel {
 namespace hexl {
@@ -239,6 +246,17 @@ public:
 };
 
 
+class ReLinearizeDynamicIF : public DynamicIF {
+public:
+    explicit ReLinearizeDynamicIF(const std::string &lib);
+
+    // get all breakintodigits kernel APIs in an object.
+    breakintodigits_ops_t& (*breakintodigits_ops)();
+
+    // keyswitchdigits only has one method.
+    keyswitchdigits_ops_t& (*breakintodigits_ops)();
+
+};
 
 
 }  // namespace fpga

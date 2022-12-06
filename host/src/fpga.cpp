@@ -1221,6 +1221,11 @@ void Device::run() {
                 process_input(CREDIT + 4);
                 process_output_MultLowLvl();
                 break;
+            case kernel_t::RELINEARIZE:
+                std::cout << "FPGA kernel relinearize.\n";
+                process_input(CREDIT + 5);
+                process_output_ReLinearize();
+                break;
             default:
                 FPGA_ASSERT(0, "Invalid kernel!");
                 break;
@@ -1311,6 +1316,12 @@ bool Device::process_input(int credit_id) {
             kernel = "MULTLOWLVL";
         }
 
+        FPGAObject_ReLinearize* fpga_obj_ReLinearize = 
+            dynamic_cast<FPGAObject_ReLinearize*>(fpga_obj);
+        if (fpga_obj_ReLinearize) {
+            kernel = "RELINEARIZE";
+        }
+
         double unit = 1.0e+6;  // microseconds
         std::cout << kernel << " input I/O   time taken: " << std::fixed
                   << std::setprecision(8) << duration_io.count() * unit << " us"
@@ -1357,6 +1368,13 @@ void Device::enqueue_input_data(FPGAObject* fpga_obj) {
             dynamic_cast<FPGAObject_MultLowLvl*>(fpga_obj);
         if (fpga_obj_MultLowLvl) {
             enqueue_input_data_MultLowLvl(fpga_obj_MultLowLvl);
+        }
+    } break;
+    case kernel_t::RELINEARIZE: {
+        FPGAObject_ReLinearize* fpga_obj_ReLinearize = 
+            dynamic_cast<FPGAObject_ReLinearize*>(fpga_obj);
+        if (fpga_obj_ReLinearize) {
+            enqueue_input_data_ReLinearize(fpga_obj_ReLinearize);
         }
     } break;
     default:
@@ -2112,6 +2130,295 @@ uint64_t Device::precompute_modulus_r(uint64_t modulus) {
   return r;
 }
 
+
+/****************************ReLinearize functions in Device class**************************/
+
+void Device::PreComputeParams(std::vector<uint64_t> &pi,
+                          std::vector<uint64_t> &all_primes,
+                          std::vector<unsigned> num_designed_digits_primes,
+                          unsigned num_special_primes,
+                          std::vector<sycl::ulong2> &packed_precomputed_params,
+                          std::vector<unsigned> &num_digits_primes) {
+    
+    
+    std::vector<sycl::ulong4> pstar_inv;
+    std::vector<sycl::ulong2> pstar_qj;
+    std::vector<sycl::ulong> P_qj;
+
+    /* packed parameters */
+    // FORMAT:
+    // pi and pi recip - all normal primes and special primes
+    // pstar_inv and pstar_inv_recip - all normal primes
+    // P_qj - num_digit_primes (normal_primes/2) + special primes
+    long num_normal_primes = pi.size() - num_special_primes;
+
+    // compute the actual prime size of each digit
+    // the last digit size maybe smaller than designed digit size
+    int i = 0;
+    int num_left_primes = num_normal_primes;
+    while (num_left_primes > 0) {
+      num_digits_primes.push_back(
+          std::min(num_designed_digits_primes[i], (unsigned)num_left_primes));
+      num_left_primes -= num_designed_digits_primes[i];
+      i++;
+    }
+
+    // compute the num of small primes
+    long num_small_primes = 0;
+    for (size_t i = 0; i < all_primes.size(); i++) {
+      if (all_primes[i] == pi[0]) {
+        // all the primes before the normal primes are small primes
+        num_small_primes = i;
+        break;
+      }
+    }
+
+    // compute the offset of each digit
+    std::vector<int> digits_offset;
+    int lastDigitsOffset = num_small_primes;
+    long num_digits = num_digits_primes.size();
+    for (long i = 0; i < num_digits; i++) {
+      digits_offset.push_back(lastDigitsOffset);
+      lastDigitsOffset += num_digits_primes[i];
+    }
+
+    // compute the prod of each digit
+    std::vector<NTL::ZZ> P;
+    for (long i = 0; i < num_digits; i++) {
+      NTL::ZZ tmp{1};
+      for (int j = 0; j < num_digits_primes[i]; j++) {
+        tmp *= all_primes[digits_offset[i] + j];
+      }
+      P.push_back(tmp);
+    }
+
+    // compute digitsQHatInv
+    std::vector<NTL::ZZ> prodOfDesignedDigits;
+    std::vector<NTL::ZZ> digitsQHatInv;
+
+    for (long i = 0; i < num_digits; i++) {
+      NTL::ZZ tmp{1};
+      for (int j = 0; j < num_designed_digits_primes[i]; j++) {
+        tmp *= all_primes[digits_offset[i] + j];
+      }
+
+      prodOfDesignedDigits.push_back(tmp);
+    }
+
+    // compute QHatInv
+    for (long i = 0; i < num_digits; i++) {
+      NTL::ZZ qhat{1};
+      for (long j = 0; j < num_digits; j++) {
+        if (j != i) {
+          qhat *= prodOfDesignedDigits[j];
+        }
+      }
+      auto qhat_inv =
+          NTL::InvMod(qhat % prodOfDesignedDigits[i], prodOfDesignedDigits[i]);
+      digitsQHatInv.push_back(qhat_inv);
+    }
+
+    // gererate the qj primes of each digits
+    std::vector<uint64_t> digit_qj_primes[MAX_DIGITS];
+
+    for (long j = 0; j < num_digits; j++) {
+      for (long i = 0; i < pi.size(); i++) {
+        if (i < digits_offset[j] ||
+            i >= (digits_offset[j] + num_digits_primes[j]))
+          digit_qj_primes[j].push_back(pi[i]);
+      }
+    }
+
+    // pstar_inv has all the primes
+    for (long j = 0; j < num_digits; j++) {
+      for (long i = digits_offset[j];
+           i < digits_offset[j] + num_digits_primes[j]; i++) {
+        ulong p_star_inv_i = NTL::InvMod(NTL::rem(P[j] / pi[i], pi[i]), pi[i]);
+        auto tmp = mulmod_y_ext(p_star_inv_i, pi[i]);
+        auto tmp2 = mulmod_y_ext(NTL::InvMod(p_star_inv_i, pi[i]), pi[i]);
+
+        pstar_inv.push_back({tmp.s0(), tmp.s1(), tmp2.s0(), tmp2.s1()});
+      }
+    }
+
+    // std::cout << "pstar_inv.size() = " << pstar_inv.size() << std::endl;
+    assert(num_normal_primes == pstar_inv.size());
+
+    // compute pstar_qj
+    for (int i = 0; i < MAX_SPECIAL_PRIMES + MAX_NORMAL_PRIMES / 2; i++) {
+      for (long k = 0; k < num_digits; k++) {
+        for (int j = 0; j < MAX_NORMAL_PRIMES / 2; j++) {
+          // P* mod qj
+          auto tmp = i < digit_qj_primes[k].size() && j < num_digits_primes[k]
+                         ? NTL::rem(P[k] / all_primes[digits_offset[k] + j],
+                                    digit_qj_primes[k][i])
+                         : 0;
+          pstar_qj.push_back(mulmod_y_ext(tmp, digit_qj_primes[k][i]));
+        }
+      }
+    }
+
+    // comput P_qj
+    for (long j = 0; j < num_digits; j++)
+      for (int i = 0; i < pi.size(); i++) {
+        P_qj.push_back(i < digit_qj_primes[j].size()
+                           ? NTL::rem(P[j], digit_qj_primes[j][i])
+                           : 0);
+      }
+
+    // compute pi_recip
+    std::vector<ulong2> pi_with_recip;
+    for (int i = 0; i < pi.size(); i++) {
+      double pi_recip = (double)1 / pi[i];
+      pi_with_recip.push_back({pi[i], *(ulong *)&pi_recip});
+    }
+
+    // packing now
+    // pi and pi recip - all normal primes and special primes
+    for (size_t i = 0; i < pi.size(); i++) {
+      packed_precomuted_params.push_back(pi_with_recip[i]);
+    }
+
+    // pstar_inv and pstar_inv_recip - all normal primes
+    for (size_t i = 0; i < pstar_inv.size(); i++) {
+      auto tmp = pstar_inv[i];
+      packed_precomuted_params.push_back({tmp.s0(), tmp.s1()});
+    }
+
+    // pstar_inv_recip - all normal primes
+    for (size_t i = 0; i < pstar_inv.size(); i++) {
+      auto tmp = pstar_inv[i];
+      packed_precomuted_params.push_back({tmp.s2(), tmp.s3()});
+    }
+
+    // P_qj - pi.size() * 2
+    for (size_t i = 0; i < P_qj.size(); i++) {
+      packed_precomuted_params.push_back({P_qj[i], 0});
+    }
+
+    for (long j = 0; j < num_digits; j++) {
+      for (int i = 0; i < num_digits_primes[j]; i++) {
+        auto pi = all_primes[digits_offset[j] + i];
+        long qhat_inv_pi = NTL::rem(digitsQHatInv[j], pi);
+        packed_precomuted_params.push_back(mulmod_y_ext(qhat_inv_pi, pi));
+      }
+    }
+
+    for (long k = 0; k < num_digits; k++) {
+      for (int i = 0; i < MAX_SPECIAL_PRIMES + MAX_NORMAL_PRIMES; i++) {
+        for (int j = 0; j < MAX_DIGIT_SIZE; j++) {
+          if (i < digit_qj_primes[k].size() && j < num_digits_primes[k]) {
+            // P mod qj
+            auto tmp = NTL::rem(P[k] / all_primes[digits_offset[k] + j],
+                                digit_qj_primes[k][i]);
+            packed_precomuted_params.push_back(
+                mulmod_y_ext(tmp, digit_qj_primes[k][i]));
+          } else {
+            packed_precomuted_params.push_back({0, 0});
+          }
+        }
+      }
+    }
+
+}
+
+sycl::event Device::breakintodigits_ProcessInput(FPGAObject_ReLinearize* fpga_obj) {
+    breakintodigits_store_events_[keyswitchdigits_buf_index_].wait();
+
+    // *breakintodigits_queues_[BREAKINFODIGITS_LOAD].copy(fpga_obj->c2_buf_->template get_access<sycl::access::mode::read>(), 
+    //     breakintodigits_input_buffer_[breakintodigits_buf_index_]->template get_access<sycl::access::mode::discard_write>());
+    // *breakintodigits_queues_[BREAKINFODIGITS_LOAD].wait();
+
+     queue_copy_buf2buf(*breakintodigits_queues_[BREAKINFODIGITS_LOAD_DATA], 
+                        *fpga_obj->c2_buf_,
+                        *breakintodigits_input_buffer_[breakintodigits_buf_index_]);
+
+    ReLinearize_kernel_container_->breakintodigit_ops().load(*breakintodigits_queues_[BREAKINFODIGITS_LOAD],
+                                                             *breakintodigits_input_buffer_[breakintodigits_buf_index_],
+                                                             fpga_obj->c2_buf_->get_count());
+    std::vector<sycl::ulong2> packed_precomuted_params;
+    std::vector<unsigned> num_digits_primes;
+
+    // construct vectors
+    std::vector<uint64_t> pi(fpga_obj->pi_ fpga_obj->pi_ + fpga_obj->pi_len_);
+    std::vector<uint64_t> all_primes(fpga_obj->all_primes_, fpga_obj->all_primes_ + fpga_obj->all_primes_len_);
+    std::vector<unsigned> num_designed_digits_primes(fpga_obj->num_designed_digits_primes_,
+                                            fpga_obj->num_designed_digits_primes_ + fpga_obj->digits_primes_len_);
+    unsigned num_special_primes = fpga_obj->num_special_primes_;
+
+    PreComputeParams(pi, all_primes, num_designed_digits_primes, 
+                     num_special_primes, packed_precomuted_params, num_digits_primes);
+
+    queue_copy(*breakintodigits_queues_[BREAKINFODIGITS_LOAD_DATA], packed_precomuted_params, 
+        *breakinto_digits_packed_precomputed_params_buf_[breakintodigits_buf_index_]);
+    
+    // launch breakIntoDigits
+    unsigned num_digits = num_digits_primes.size();
+    unsigned num_digit1_primes = num_digits_primes[0];
+    unsigned num_digit2_primes = num_digits > 1 ? num_digits_primes[1] : 0;
+    unsigned num_digit3_primes = num_digits > 2 ? num_digits_primes[2] : 0;
+    unsigned num_digit4_primes = num_digits > 3 ? num_digits_primes[3] : 0;
+
+    // desinged means all normal primes
+    uint num_designed_normal_primes = 0;
+    for (int i = 0; i < num_designed_digits_primes.size(); i++) {
+      num_designed_normal_primes += num_designed_digits_primes[i];
+    }
+
+    // pi includes the special primes
+    auto num_output_primes = pi.size();
+    auto output_size = num_output_primes * COEFF_COUNT * num_digits;
+
+    ReLinearize_kernel_container_->breakintodigit_ops().kernel(*breakintodigits_queues_[BREAKINTODIGITS_KERN],
+        *breakinto_digits_packed_precomputed_params_buf_[breakintodigits_buf_index_],
+        num_digits, num_digit1_primes, num_digit2_primes, num_digit3_primes,
+        num_digit4_primes, num_special_primes, num_designed_normal_primes,
+        0b1111);
+    
+    breakintodigits_store_events_[breakintodigits_buf_index_] = ReLinearize_kernel_container_->breakintodigit_ops().store(
+        *breakintodigits_queues_[BREAKINTODIGITS_KERN],
+        *breakintodigits_output_buffer_[BREAKINTODIGITS_STORE],
+        output_size,
+        0b111,
+    );
+
+#if SYNC_MODE
+    breakintodigits_store_events_[breakintodigits_buf_index_].wait();
+#endif
+
+    return breakintodigits_store_events_[breakintodigits_buf_index_];
+
+}
+
+
+
+
+
+
+// TODO, modify this functions.
+void Device::enqueue_input_data_ReLinearize(FPGAObject_ReLinearize* fpga_obj) {
+    // launch ntt and intt.
+    ReLinearize_Init(fpga_obj);
+
+    // breakintodigit_processInput.
+    sycl::event e = breakintodigits_ProcessInput(fpga_obj);
+
+    // breakintodigits_CopyOutput.
+    breakintodigits_CopyOutput(fpga_obj);
+
+    // PreComputeParams.
+    PreComputeParams(fpga_obj);
+
+    // keyswitch_digits section functions.
+    keyswitchdigits_ProcessInput(fpga_obj);
+    Keyswitchdigits_CopyOutput(fpga_obj, keyswitchdigits_buf_index_);
+}
+
+
+
+
+
+/*******************************************************************************************/
 
 bool Device::process_output() {
     bool rsl = false;

@@ -969,7 +969,12 @@ private:
 
     void breakintodigits_CopyOutput(FPGAObject_ReLinearize* fpga_obj);
 
-    void PreComputeParams(FPGAObject_ReLinearize* fpga_obj);
+    void PreComputeParams(std::vector<uint64_t> &pi,
+                          std::vector<uint64_t> &all_primes,
+                          std::vector<unsigned> num_designed_digits_primes,
+                          unsigned num_special_primes,
+                          std::vector<sycl::ulong2> &packed_precomputed_params,
+                          std::vector<unsigned> &num_digits_primes);
 
 
     // relinearize keyswitch_digits
@@ -1007,6 +1012,7 @@ private:
     DyadicMultDynamicIF* dyadicmult_kernel_container_;
     KeySwitchDynamicIF* KeySwitch_kernel_container_;
     MultLowLvlDynamicIF* MultLowLvl_kernel_container_;
+    ReLinearizeDynamicIF* ReLinearize_kernel_container_;
 
     sycl::context context_;
     sycl::queue dyadic_multiply_input_queue_;

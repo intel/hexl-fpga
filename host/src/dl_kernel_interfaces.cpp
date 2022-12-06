@@ -165,6 +165,15 @@ MultLowLvlDynamicIF::MultLowLvlDynamicIF(const std::string& lib) : DynamicIF(lib
     ntt_ops_obj.push_back(&ntt2_method_ops());
 }
 
+ReLinearizeDynamicIF::ReLinearizeDynamicIF(const std::string& lib) DynamicIF(lib) {
+
+    breakintodigits_ops = (breakintodigits_ops_t& (*)())loadKernel("get_breakintodigits_ops_IF");
+
+    keyswitchdigits_ops = (keyswitchdigits_ops_t& (*)())loadKernel("get_keyswitchdigits_ops_IF");
+
+}
+
+
 
 }  // namespace fpga
 }  // namespace hexl
