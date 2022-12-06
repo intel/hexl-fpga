@@ -174,6 +174,82 @@ public:
     void (*launchAllAutoRunKernels)(sycl::queue&);
 };
 
+class MultiplyByDynamicIF : public DynamicIF {
+public:
+    explicit MultiplyByDynamicIF(std::string& lib);
+
+    // BringToSet
+    typedef void (*LaunchBringToSetINTT_func)(const std::vector<uint64_t>&,
+                                              uint64_t, int flag);
+    typedef void (*LaunchBringToSetNTT_func)(const std::vector<uint64_t>&,
+                                             uint64_t, int flag);
+    typedef sycl::event (*LoadBringToSet_func)(sycl::queue&,
+                                               sycl::buffer<uint64_t>&,
+                                               sycl::buffer<uint8_t>&, unsigned,
+                                               int);
+    typedef sycl::event (*BringToSet_func)(sycl::queue&, uint32_t,
+                                           sycl::buffer<sycl::ulong2>&,
+                                           uint32_t, uint32_t, uint, uint64_t);
+    typedef sycl::event (*StoreBringToSet_func)(sycl::queue&,
+                                                sycl::buffer<uint64_t>&,
+                                                unsigned, int);
+    LaunchBringToSetINTT_func LaunchBringToSetINTT;
+    LaunchBringToSetNTT_func LaunchBringToSetNTT;
+    LoadBringToSet_func LoadBringToSet;
+    BringToSet_func BringToSet;
+    StoreBringToSet_func StoreBringToSet;
+
+    // TensorProduct
+    typedef sycl::event (*TensorProduct_func)(
+        sycl::queue&, sycl::buffer<ulong>&, sycl::buffer<sycl::ulong>&,
+        sycl::buffer<sycl::ulong>&, sycl::buffer<sycl::ulong>&,
+        sycl::buffer<sycl::ulong>&, sycl::buffer<sycl::ulong>&,
+        sycl::buffer<sycl::ulong4>&, unsigned, int, int, int, int, sycl::event&,
+        int);
+    typedef sycl::event (*StoreTensorProduct_func)(sycl::queue&,
+                                                   sycl::buffer<uint64_t>&,
+                                                   sycl::buffer<uint64_t>&,
+                                                   sycl::buffer<uint64_t>&,
+                                                   unsigned, int);
+    TensorProduct_func TensorProduct;
+    StoreTensorProduct_func StoreTensorProduct;
+
+    // BreakIntoDigits
+    typedef sycl::event (*LoadBreakIntoDigits_func)(sycl::queue&,
+                                                     sycl::buffer<uint64_t>&,
+                                                     unsigned, int,
+                                                     sycl::event);
+    typedef sycl::event (*BreakIntoDigits_func)(sycl::queue&,
+                                                sycl::buffer<sycl::ulong2>&,
+                                                uint, uint, uint, uint, uint,
+                                                uint, uint, sycl::event, int);
+    typedef sycl::event (*StoreBreakIntoDigits_func)(sycl::queue&,
+                                                     sycl::buffer<uint64_t>&,
+                                                     unsigned, int);
+    typedef void (*LaunchBreakIntoDigitsINTT_func)(const std::vector<uint64_t>&,
+                                                   uint64_t, int);
+    typedef void (*LaunchBreakIntoDigitsNTT_func)(const std::vector<uint64_t>&,
+                                                  uint64_t, int);
+    LoadBreakIntoDigits_func LoadBreakIntoDigits;
+    BreakIntoDigits_func BreakIntoDigits;
+    StoreBreakIntoDigits_func StoreBreakIntoDigits;
+    LaunchBreakIntoDigitsINTT_func LaunchBreakIntoDigitsINTT;
+    LaunchBreakIntoDigitsNTT_func LaunchBreakIntoDigitsNTT;
+
+    // KeySwitchDigits
+    typedef sycl::event (*KeySwitchDigits_func)(
+        sycl::queue&, sycl::event, sycl::buffer<sycl::ulong4>&,
+        sycl::buffer<sycl::ulong2>&, sycl::buffer<uint64_t>&,
+        sycl::buffer<uint64_t>&, sycl::buffer<uint64_t>&,
+        sycl::buffer<uint64_t>&, unsigned, unsigned, unsigned, unsigned,
+        unsigned);
+    typedef sycl::event (*StoreKeySwitchDigits_func)(sycl::queue&,
+                                                     sycl::buffer<uint64_t>&,
+                                                     sycl::buffer<uint64_t>&,
+                                                     unsigned, unsigned);
+    KeySwitchDigits_func KeySwitchDigits;
+    StoreKeySwitchDigits_func StoreKeySwitchDigits;
+};
 }  // namespace fpga
 }  // namespace hexl
 }  // namespace intel

@@ -30,10 +30,12 @@ static std::mutex muNTT;
 static std::mutex muINTT;
 static std::mutex muDyadicMultiply;
 static std::mutex muKeySwitch;
+static std::mutex muMultiplyBy;
 static std::unordered_set<Object*> outstanding_objects_DyadicMultiply;
 static std::unordered_set<Object*> outstanding_objects_NTT;
 static std::unordered_set<Object*> outstanding_objects_INTT;
 static std::unordered_set<Object*> outstanding_objects_KeySwitch;
+static std::unordered_set<Object*> outstanding_objects_MultiplyBy;
 static DevicePool* pool;
 static std::promise<bool> exit_signal;
 
@@ -119,6 +121,7 @@ static uint64_t get_batch_size_KeySwitch() {
 }
 
 static uint64_t g_batch_size_KeySwitch = get_batch_size_KeySwitch();
+static uint64_t g_batch_size_MultiplyBy = 1;
 
 static uint32_t get_fpga_debug() {
     char* env = getenv("FPGA_DEBUG");
@@ -138,7 +141,7 @@ static uint32_t g_fpga_bufsize = get_fpga_bufsize();
 
 static Buffer fpga_buffer(g_fpga_bufsize, g_batch_size_dyadic_mult,
                           g_batch_size_ntt, g_batch_size_intt,
-                          g_batch_size_KeySwitch);
+                          g_batch_size_KeySwitch, g_batch_size_MultiplyBy);
 
 void attach_fpga_pooling() {
     g_choice = get_device();
@@ -149,10 +152,10 @@ void attach_fpga_pooling() {
               << std::endl;
     exit_signal = std::promise<bool>();
     auto f = exit_signal.get_future();
-    pool =
-        new DevicePool(g_choice, fpga_buffer, f, g_coeff_size, g_modulus_size,
-                       g_batch_size_dyadic_mult, g_batch_size_ntt,
-                       g_batch_size_intt, g_batch_size_KeySwitch, g_fpga_debug);
+    pool = new DevicePool(
+        g_choice, fpga_buffer, f, g_coeff_size, g_modulus_size,
+        g_batch_size_dyadic_mult, g_batch_size_ntt, g_batch_size_intt,
+        g_batch_size_KeySwitch, g_batch_size_MultiplyBy, g_fpga_debug);
 }
 
 void detach_fpga_pooling() {
@@ -536,6 +539,86 @@ void KeySwitch_int(uint64_t* result, const uint64_t* t_target_iter_ptr,
     }
 }
 
+bool MultiplyByCompleted_int() {
+    bool all_done = false;
+    while (!all_done) {
+        bool done = true;
+        auto iter = outstanding_objects_MultiplyBy.begin();
+        while (iter != outstanding_objects_MultiplyBy.end()) {
+            Object* obj = *iter;
+            if (obj->ready_) {
+                delete obj;
+                obj = nullptr;
+                iter = outstanding_objects_MultiplyBy.erase(iter);
+            } else {
+                done = false;
+                iter++;
+            }
+        }
+        all_done = done;
+    }
+    outstanding_objects_MultiplyBy.clear();
+
+    fpga_buffer.set_worksize_KeySwitch(1);
+
+    return all_done;
+}
+
+static void fpga_MutiplyBy(const MultiplyByContext& context,
+                           const std::vector<uint64_t>& operand1,
+                           const std::vector<uint8_t>& operand1_primes_index,
+                           const std::vector<uint64_t>& operand2,
+                           const std::vector<uint8_t>& operand2_primes_index,
+                           std::vector<uint64_t>& result,
+                           const std::vector<uint8_t>& result_primes_index) {
+    std::lock_guard<std::mutex> locker(muMultiplyBy);
+
+    bool fence = (fpga_buffer.size() == 0);
+
+    if (!fence) {
+        Object* obj = fpga_buffer.back();
+        FPGA_ASSERT(obj);
+        fence |= (obj->type_ != kernel_t::MULTIPLYBY);
+    }
+
+    Object* obj = new Object_MultiplyBy(
+        context, operand1, operand1_primes_index, operand2,
+        operand2_primes_index, result, result_primes_index, fence);
+
+    fpga_buffer.push(obj);
+
+    outstanding_objects_MultiplyBy.insert(obj);
+
+    if (fpga_buffer.get_worksize_KeySwitch() == 1) {
+        MultiplyByCompleted_int();
+    }
+}
+
+void MultiplyBy_int(const MultiplyByContext& context,
+                    const std::vector<uint64_t>& operand1,
+                    const std::vector<uint8_t>& operand1_primes_index,
+                    const std::vector<uint64_t>& operand2,
+                    const std::vector<uint8_t>& operand2_primes_index,
+                    std::vector<uint64_t>& result,
+                    const std::vector<uint8_t>& result_primes_index) {
+    switch (g_choice) {
+    case EMU:
+    case FPGA:
+        fpga_MutiplyBy(context, operand1, operand1_primes_index, operand2,
+                       operand2_primes_index, result, result_primes_index);
+        break;
+    default:
+        std::cerr << "ERROR: Invalid RUN_CHOICE envvar. Set to a valid "
+                     "value { 1, or 2}, where 1:EMU, 2:FPGA."
+                  << std::endl;
+        FPGA_ASSERT(0);
+        break;
+    }
+}
+
+void set_worksize_MultiplyBy_int(uint64_t n) {
+    fpga_buffer.set_worksize_MultiplyBy(n);
+}
 }  // namespace fpga
 }  // namespace hexl
 }  // namespace intel

@@ -89,6 +89,21 @@ Object_KeySwitch::Object_KeySwitch(
       k_switch_keys_(k_switch_keys),
       modswitch_factors_(modswitch_factors),
       twiddle_factors_(twiddle_factors) {}
+Object_MultiplyBy::Object_MultiplyBy(
+    const MultiplyByContext& context, const std::vector<uint64_t>& operand1,
+    const std::vector<uint8_t>& operand1_primes_index,
+    const std::vector<uint64_t>& operand2,
+    const std::vector<uint8_t>& operand2_primes_index,
+    std::vector<uint64_t>& result,
+    const std::vector<uint8_t>& result_primes_index, bool fence)
+    : Object(kernel_t::MULTIPLYBY, fence),
+      context_(context),
+      operand1_(operand1),
+      operand1_primes_index_(operand1_primes_index),
+      operand2_(operand2),
+      operand2_primes_index_(operand2_primes_index),
+      result_(result),
+      result_primes_index_(result_primes_index) {}
 Object* Buffer::front() const {
     Object* obj = buffer_.front();
     return obj;
@@ -113,6 +128,7 @@ std::vector<Object*> Buffer::pop() {
     Object_NTT* obj_ntt = nullptr;
     Object_INTT* obj_intt = nullptr;
     Object_KeySwitch* obj_KeySwitch = nullptr;
+    Object_MultiplyBy* obj_MultiplyBy = nullptr;
 
     if (buffer_.size() > 0) {
         Object* object = buffer_.front();
@@ -143,6 +159,12 @@ std::vector<Object*> Buffer::pop() {
                     work_size = get_worksize_int_KeySwitch();
                 }
                 break;
+            case kernel_t::MULTIPLYBY:
+                obj_MultiplyBy = dynamic_cast<Object_MultiplyBy*>(object);
+                if (obj_MultiplyBy) {
+                    work_size = get_worksize_int_MultiplyBy();
+                }
+                break;
             default:
                 FPGA_ASSERT(0, "Invalid kernel!")
                 break;
@@ -171,6 +193,8 @@ std::vector<Object*> Buffer::pop() {
         update_INTT_work_size(batch);
     } else if (obj_KeySwitch) {
         update_KeySwitch_work_size(batch);
+    } else if (obj_MultiplyBy) {
+        update_MultiplyBy_work_size(batch);
     }
 
     locker.unlock();
@@ -345,6 +369,23 @@ void FPGAObject_KeySwitch::fill_in_data(const std::vector<Object*>& objs) {
         modswitch_factors_ = const_cast<uint64_t*>(obj->modswitch_factors_);
         twiddle_factors_ = const_cast<uint64_t*>(obj->twiddle_factors_);
 
+        batch++;
+    }
+    n_batch_ = batch;
+
+    tag_ = g_tag_++;
+}
+
+void FPGAObject_MultiplyBy::fill_in_data(const std::vector<Object*>& objs) {
+    uint64_t batch = 0;
+    fence_ = false;
+    // multiplyby doesn't support batching
+    for (const auto& obj_in : objs) {
+        Object_MultiplyBy* obj = dynamic_cast<Object_MultiplyBy*>(obj_in);
+        FPGA_ASSERT(obj);
+        in_objs_.emplace_back(obj);
+
+        fence_ |= obj->fence_;
         batch++;
     }
     n_batch_ = batch;
@@ -582,7 +623,8 @@ Device::Device(sycl::device& p_device, Buffer& buffer,
                std::shared_future<bool> exit_signal, uint64_t coeff_size,
                uint32_t modulus_size, uint64_t batch_size_dyadic_multiply,
                uint64_t batch_size_ntt, uint64_t batch_size_intt,
-               uint64_t batch_size_KeySwitch, uint32_t debug)
+               uint64_t batch_size_KeySwitch, uint64_t batch_size_MultiplyBy,
+               uint32_t debug)
     : device_(p_device),
       buffer_(buffer),
       credit_(CREDIT),
@@ -594,6 +636,7 @@ Device::Device(sycl::device& p_device, Buffer& buffer,
       INTT_coeff_poly_svm_(nullptr),
       KeySwitch_mem_root_of_unity_powers_(nullptr),
       KeySwitch_load_once_(false),
+      MultiplyBy_load_once_(false),
       root_of_unity_powers_ptr_(nullptr),
       modulus_meta_{},
       invn_{},
@@ -686,6 +729,20 @@ Device::Device(sycl::device& p_device, Buffer& buffer,
         (*(KeySwitch_kernel_container_->launchAllAutoRunKernels))(
             keyswitch_queues_[KEYSWITCH_LOAD]);
     }
+
+    if (kernel_type_ == kernel_t::MULTIPLYBY) {
+#ifdef SYCL_ENABLE_PROFILING
+        auto cl_queue_properties =
+            sycl::property_list{sycl::property::queue::enable_profiling()};
+#else
+        auto cl_queue_properties = sycl::property_list{};
+#endif
+        for (int k = 0; k < MULTIPLYBY_NUM_KERNELS; ++k) {
+            // Create the command queue.
+            multiplyby_queues_[k] = sycl::queue(
+                context_, context_.get_devices()[0], cl_queue_properties);
+        }
+    }
     // DYADIC_MULTIPLY: [0, CREDIT)
     for (int i = 0; i < CREDIT; i++) {
         fpga_objects_.emplace_back(new FPGAObject_DyadicMultiply(
@@ -703,6 +760,11 @@ Device::Device(sycl::device& p_device, Buffer& buffer,
         fpga_objects_.emplace_back(new FPGAObject_KeySwitch(
             keyswitch_queues_[KEYSWITCH_LOAD], batch_size_KeySwitch));
     }
+    // MULTIPLYBY: CREDIT + 4 and CREDIT + 11
+    for (size_t i = 0; i < 8 /*latency is 4+2*/; i++) {
+        fpga_objects_.emplace_back(new FPGAObject_MultiplyBy(
+            multiplyby_queues_[MULTIPLYBY_LOAD], batch_size_MultiplyBy));
+    }
 }
 
 void Device::load_kernel_symbols() {
@@ -719,6 +781,8 @@ void Device::load_kernel_symbols() {
     } else if (kernel_type_ == kernel_t::DYADIC_MULTIPLY_KEYSWITCH) {
         dyadicmult_kernel_container_ = new DyadicMultDynamicIF(bitstream);
         KeySwitch_kernel_container_ = new KeySwitchDynamicIF(bitstream);
+    } else if (kernel_type_ == kernel_t::MULTIPLYBY) {
+        MultiplyBy_kernel_container_ = new MultiplyByDynamicIF(bitstream);
     }
 }
 
@@ -728,6 +792,7 @@ Device::~Device() {
     if (intt_kernel_container_) delete intt_kernel_container_;
     if (dyadicmult_kernel_container_) delete dyadicmult_kernel_container_;
     if (KeySwitch_kernel_container_) delete KeySwitch_kernel_container_;
+    if (MultiplyBy_kernel_container_) delete MultiplyBy_kernel_container_;
     for (auto& fpga_obj : fpga_objects_) {
         if (fpga_obj) {
             delete fpga_obj;
@@ -770,6 +835,8 @@ Device::~Device() {
             free(root_of_unity_powers_ptr_);
         }
     }
+
+    // TODO: free MultiplyBy
 }
 
 void Device::process_blocking_api() {
@@ -832,6 +899,10 @@ void Device::run() {
 #endif
                 KeySwitch_id_++;
                 break;
+            case kernel_t::MULTIPLYBY:
+                process_input(CREDIT + 4 + MultiplyBy_id_ % 8);
+                process_output_MultiplyBy();
+                MultiplyBy_id_++;
             default:
                 FPGA_ASSERT(0, "Invalid kernel!");
                 break;
@@ -948,6 +1019,13 @@ void Device::enqueue_input_data(FPGAObject* fpga_obj) {
             dynamic_cast<FPGAObject_KeySwitch*>(fpga_obj);
         if (fpga_obj_KeySwitch) {
             enqueue_input_data_KeySwitch(fpga_obj_KeySwitch);
+        }
+    } break;
+    case kernel_t::MULTIPLYBY: {
+        FPGAObject_MultiplyBy* fpga_obj_MultiplyBy =
+            dynamic_cast<FPGAObject_MultiplyBy*>(fpga_obj);
+        if (fpga_obj_MultiplyBy) {
+            enqueue_input_data_MultiplyBy(fpga_obj_MultiplyBy);
         }
     } break;
     default:
@@ -1318,6 +1396,23 @@ void Device::enqueue_input_data_KeySwitch(FPGAObject_KeySwitch* fpga_obj) {
     }
 }
 
+void Device::explicit_copy_to_fpga(sycl::queue& q,
+                                   const std::vector<uint64_t>& src,
+                                   sycl::buffer<uint64_t>& dst, size_t size) {
+    if (size == 0) size = src.size();
+    q.submit([&](sycl::handler& h) {
+        h.copy(src.data(),
+               dst.template get_access<sycl::access::mode::discard_write>(
+                   h, sycl::range(size)));
+    });
+    q.wait();
+}
+
+void Device::enqueue_input_data_MultiplyBy(FPGAObject_MultiplyBy* fpga_obj) {
+    auto object = dynamic_cast<Object_MultiplyBy*>(fpga_obj->in_objs_[0]);
+    const size_t coeff_count = object->context_.coeff_count;
+}
+
 bool Device::process_output() {
     bool rsl = false;
     rsl |= process_output_dyadic_multiply();
@@ -1606,6 +1701,11 @@ bool Device::process_output_KeySwitch() {
     return 0;
 }
 
+bool Device::process_output_MultiplyBy() {
+    // TODO: PROCESS OUTPUT HERE
+    return true;
+}
+
 void DevicePool::getDevices(int numDevicesToUse, int choice) {
     /**
      * @brief runtime selection of emulator or hardware
@@ -1648,7 +1748,8 @@ DevicePool::DevicePool(int choice, Buffer& buffer,
                        uint32_t modulus_size,
                        uint64_t batch_size_dyadic_multiply,
                        uint64_t batch_size_ntt, uint64_t batch_size_intt,
-                       uint64_t batch_size_KeySwitch, uint32_t debug) {
+                       uint64_t batch_size_KeySwitch,
+                       uint64_t batch_size_MultiplyBy, uint32_t debug) {
     cl_uint dev_count_user = 1;
 
     // Get number of devices user wants to use from environement var
@@ -1663,10 +1764,10 @@ DevicePool::DevicePool(int choice, Buffer& buffer,
     future_exit_ = exit_signal.share();
     devices_ = new Device*[device_count_];
     for (unsigned int i = 0; i < device_count_; i++) {
-        devices_[i] =
-            new Device(device_list_[i], buffer, future_exit_, coeff_size,
-                       modulus_size, batch_size_dyadic_multiply, batch_size_ntt,
-                       batch_size_intt, batch_size_KeySwitch, debug);
+        devices_[i] = new Device(
+            device_list_[i], buffer, future_exit_, coeff_size, modulus_size,
+            batch_size_dyadic_multiply, batch_size_ntt, batch_size_intt,
+            batch_size_KeySwitch, batch_size_MultiplyBy, debug);
         std::thread runner(&Device::run, devices_[i]);
         runners_.emplace_back(std::move(runner));
     }

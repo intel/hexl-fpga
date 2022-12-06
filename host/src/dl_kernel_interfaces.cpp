@@ -65,9 +65,9 @@ INTTDynamicIF::INTTDynamicIF(std::string& lib) : DynamicIF(lib) {
 
 DyadicMultDynamicIF::DyadicMultDynamicIF(std::string& lib) : DynamicIF(lib) {
     input_fifo_usm = (sycl::event(*)(
-        sycl::queue&, uint64_t * __restrict__, uint64_t * __restrict__,
-        uint64_t, moduli_info_t * __restrict__, uint64_t, int, uint64_t*,
-        uint64_t*, uint64_t)) loadKernel("input_fifo_usm");
+        sycl::queue&, uint64_t* __restrict__, uint64_t* __restrict__, uint64_t,
+        moduli_info_t* __restrict__, uint64_t, int, uint64_t*, uint64_t*,
+        uint64_t))loadKernel("input_fifo_usm");
 
     output_nb_fifo_usm = (sycl::event(*)(sycl::queue&, uint64_t*, int*,
                                          int*))loadKernel("output_nb_fifo_usm");
@@ -99,9 +99,9 @@ KeySwitchDynamicIF::KeySwitchDynamicIF(std::string& lib) : DynamicIF(lib) {
 DyadicMultKeySwitchDynamicIF::DyadicMultKeySwitchDynamicIF(std::string& lib)
     : DynamicIF(lib) {
     input_fifo_usm = (sycl::event(*)(
-        sycl::queue&, uint64_t * __restrict__, uint64_t * __restrict__,
-        uint64_t, moduli_info_t * __restrict__, uint64_t, int, uint64_t*,
-        uint64_t*, uint64_t)) loadKernel("input_fifo_usm");
+        sycl::queue&, uint64_t* __restrict__, uint64_t* __restrict__, uint64_t,
+        moduli_info_t* __restrict__, uint64_t, int, uint64_t*, uint64_t*,
+        uint64_t))loadKernel("input_fifo_usm");
 
     output_nb_fifo_usm = (sycl::event(*)(sycl::queue&, uint64_t*, int*,
                                          int*))loadKernel("output_nb_fifo_usm");
@@ -127,6 +127,38 @@ DyadicMultKeySwitchDynamicIF::DyadicMultKeySwitchDynamicIF(std::string& lib)
 
     launchAllAutoRunKernels =
         (void (*)(sycl::queue&))loadKernel("launchAllAutoRunKernels");
+}
+
+MultiplyByDynamicIF::MultiplyByDynamicIF(std::string& lib) : DynamicIF(lib) {
+    // BringToSet
+    LaunchBringToSetINTT =
+        (LaunchBringToSetINTT_func)loadKernel("LaunchBringToSetINTT");
+    LaunchBringToSetNTT =
+        (LaunchBringToSetNTT_func)loadKernel("LaunchBringToSetNTT");
+    LoadBringToSet = (LoadBringToSet_func)loadKernel("LoadBringToSet");
+    BringToSet = (BringToSet_func)loadKernel("BringToSet");
+    StoreBringToSet = (StoreBringToSet_func)loadKernel("StoreBringToSet");
+
+    // TensorProduct
+    TensorProduct = (TensorProduct_func)loadKernel("TensorProduct");
+    StoreTensorProduct =
+        (StoreTensorProduct_func)loadKernel("StoreTensorProduct");
+
+    // BreakIntoDigits
+    LoadBreakIntoDigits =
+        (LoadBreakIntoDigits_func)loadKernel("LoadBreakIntoDigits");
+    BreakIntoDigits = (BreakIntoDigits_func)loadKernel("BreakIntoDigits");
+    StoreBreakIntoDigits =
+        (StoreBreakIntoDigits_func)loadKernel("StoreBreakIntoDigits");
+    LaunchBreakIntoDigitsINTT =
+        (LaunchBreakIntoDigitsINTT_func)loadKernel("LaunchBreakIntoDigitsINTT");
+    LaunchBreakIntoDigitsNTT =
+        (LaunchBreakIntoDigitsNTT_func)loadKernel("LaunchBreakIntoDigitsNTT");
+
+    // KeySwitchDigits
+    KeySwitchDigits = (KeySwitchDigits_func)loadKernel("KeySwitchDigits");
+    StoreKeySwitchDigits =
+        (StoreKeySwitchDigits_func)loadKernel("StoreKeySwitchDigits");
 }
 
 }  // namespace fpga

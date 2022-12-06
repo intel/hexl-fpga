@@ -5,6 +5,7 @@
 #define __HEXL_FPGA_H__
 
 #include <cstdint>
+#include <vector>
 
 namespace intel {
 namespace hexl {
@@ -84,6 +85,46 @@ void KeySwitch(uint64_t* result, const uint64_t* t_target_iter_ptr, uint64_t n,
 /// Function KeySwitchCompleted
 /// Executed after KeySwitch to sync up the outstanding KeySwitch tasks
 bool KeySwitchCompleted();
+
+/// @brief MultiplyByContext
+typedef struct {
+    std::vector<uint64_t> all_primes;
+    std::vector<uint64_t> num_digits_primes;
+    std::vector<uint64_t> key_switch_keys;
+    uint64_t num_special_primes;
+    uint64_t coeff_count;
+    uint64_t plainText;
+} MultiplyByContext;
+
+/// @brief Perform output = operand1 * operand2
+/// @param context Context parameters for this multiplication
+/// @param operand1 ciphertext operand1
+/// @param operand1_primes_index Primes index of ciphertext operand1
+/// @param operand2 ciphertext operand2
+/// @param operand2_primes_index Primes index of ciphertext operand2
+/// @param result applications should allocate the result memory themselves
+/// @param result_primes_index the result's primes index after this
+/// multiplication
+void MultiplyBy(const MultiplyByContext& context,
+                const std::vector<uint64_t>& operand1,
+                const std::vector<uint8_t>& operand1_primes_index,
+                const std::vector<uint64_t>& operand2,
+                const std::vector<uint8_t>& operand2_primes_index,
+                std::vector<uint64_t>& result,
+                const std::vector<uint8_t>& result_primes_index);
+
+/// @brief
+/// Function set_worksize_MultiplyBy
+/// Reserves software resources for the MultiplyBy
+/// @param ws integer storing the worksize
+///
+void set_worksize_MultiplyBy(uint64_t ws);
+
+/// @brief
+///
+/// Function MultiplyByCompleted
+/// Executed after MultiplyBy to sync up the outstanding MultiplyBy tasks
+bool MultiplyByCompleted();
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //

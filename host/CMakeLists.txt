@@ -31,6 +31,7 @@ set(KERNELS_SRCS
     ${FPGA_SRC_ROOT_DIR}/host/src/intt.cpp
     ${FPGA_SRC_ROOT_DIR}/host/src/ntt.cpp
     ${FPGA_SRC_ROOT_DIR}/host/src/keyswitch.cpp
+    ${FPGA_SRC_ROOT_DIR}/host/src/multiplyby.cpp
     ${FPGA_SRC_ROOT_DIR}/host/src/twiddle-factors.cpp
     ${FPGA_SRC_ROOT_DIR}/host/src/number_theory_util.cpp
     ${FPGA_SRC_ROOT_DIR}/host/src/fpga_int.cpp

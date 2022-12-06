@@ -10,6 +10,7 @@
 #include "intt.h"
 #include "keyswitch.h"
 #include "ntt.h"
+#include "multiplyby.h"
 
 namespace intel {
 namespace hexl {
@@ -54,6 +55,24 @@ void set_worksize_KeySwitch(uint64_t ws) {
 
 bool KeySwitchCompleted() { return intel::hexl::fpga::KeySwitchCompleted(); }
 
+// MultiplyBy Section
+void MultiplyBy(const MultiplyByContext& context,
+                const std::vector<uint64_t>& operand1,
+                const std::vector<uint8_t>& operand1_primes_index,
+                const std::vector<uint64_t>& operand2,
+                const std::vector<uint8_t>& operand2_primes_index,
+                std::vector<uint64_t>& result,
+                const std::vector<uint8_t>& result_primes_index) {
+    intel::hexl::fpga::MultiplyBy(context, operand1, operand1_primes_index,
+                                  operand2, operand2_primes_index, result,
+                                  result_primes_index);
+}
+
+void set_worksize_MultiplyBy(uint64_t ws) {
+    intel::hexl::fpga::set_worksize_MultiplyBy(ws);
+}
+
+bool MultiplyByCompleted() { return intel::hexl::fpga::MultiplyByCompleted(); }
 ////////////////////////////////////////////////////////////////////////////////////////
 //
 // WARNING: The following NTT and INTT related APIs are deprecated since

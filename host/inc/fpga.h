@@ -18,6 +18,7 @@
 #include "../../common/types.hpp"
 #include "dl_kernel_interfaces.hpp"
 #include <CL/sycl/INTEL/ac_types/ac_int.hpp>
+#include "hexl-fpga.h"
 
 #define HOST_MEM_ALIGNMENT 64
 #define MEM_CHANNEL_K1 1
@@ -77,13 +78,39 @@ enum KeySwitch_Kernels {
     KEYSWITCH_NUM_KERNELS
 };
 
+enum MultiplyBy_Kernels {
+    // explicit load and store data
+    MULTIPLYBY_LOAD = 0,
+    MULTIPLYBY_STORE,
+    // BringToSet
+    BRINGTOSET_LOAD,
+    BRINGTOSET,
+    BRINGTOSET_STORE,
+    BRINGTOSET_INTT,
+    BRINGTOSET_NTT,
+    // TensorProduct
+    TENSORPRODUCT,
+    TENSORPRODUCT_STORE,
+    // BreakIntoDigits
+    BREAKINTODIGITS_LOAD,
+    BREAKINTODIGITS,
+    BREAKINTODIGITS_STORE,
+    BREAKINTODIGITS_INTT,
+    BREAKINTODIGITS_NTT,
+    // KeySwitchDigits
+    KEYSWITCHDIGITS,
+    KEYSWITCHDIGITS_STORE,
+    MULTIPLYBY_NUM_KERNELS
+};
+
 enum class kernel_t {
     NONE,
     DYADIC_MULTIPLY,
     NTT,
     INTT,
     KEYSWITCH,
-    DYADIC_MULTIPLY_KEYSWITCH
+    DYADIC_MULTIPLY_KEYSWITCH,
+    MULTIPLYBY
 };
 
 /// @brief
@@ -224,6 +251,26 @@ public:
     const uint64_t* twiddle_factors_;
 };
 
+/// @brief Object_KeySwitch
+class Object_MultiplyBy : public Object {
+public:
+    explicit Object_MultiplyBy(
+        const MultiplyByContext& context, const std::vector<uint64_t>& operand1,
+        const std::vector<uint8_t>& operand1_primes_index,
+        const std::vector<uint64_t>& operand2,
+        const std::vector<uint8_t>& operand2_primes_index,
+        std::vector<uint64_t>& result,
+        const std::vector<uint8_t>& result_primes_index, bool fence = false);
+
+    const MultiplyByContext& context_;
+    const std::vector<uint64_t>& operand1_;
+    const std::vector<uint8_t>& operand1_primes_index_;
+    const std::vector<uint64_t>& operand2_;
+    const std::vector<uint8_t>& operand2_primes_index_;
+    std::vector<uint64_t>& result_;
+    const std::vector<uint8_t>& result_primes_index_;
+};
+
 /// @brief
 /// class Buffer
 /// Structure containing information for the polynomial operations
@@ -261,12 +308,13 @@ class Buffer {
 public:
     Buffer(uint64_t capacity, uint64_t n_batch_dyadic_multiply,
            uint64_t n_batch_ntt, uint64_t n_batch_intt,
-           uint64_t n_batch_KeySwitch)
+           uint64_t n_batch_KeySwitch, uint64_t n_batch_MultiplyBy)
         : capacity_(capacity),
           n_batch_dyadic_multiply_(n_batch_dyadic_multiply),
           n_batch_ntt_(n_batch_ntt),
           n_batch_intt_(n_batch_intt),
           n_batch_KeySwitch_(n_batch_KeySwitch),
+          n_batch_MultiplyBy_(n_batch_MultiplyBy),
           total_worksize_DyadicMultiply_(1),
           num_DyadicMultiply_(0),
           total_worksize_NTT_(1),
@@ -308,6 +356,10 @@ public:
         total_worksize_KeySwitch_ = ws;
         num_KeySwitch_ = total_worksize_KeySwitch_;
     }
+    void set_worksize_MultiplyBy(uint64_t ws) {
+        total_worksize_MultiplyBy_ = ws;
+        num_MultiplyBy_ = total_worksize_MultiplyBy_;
+    }
 
 private:
     uint64_t get_worksize_int_DyadicMultiply() const {
@@ -329,12 +381,18 @@ private:
                                                       : num_KeySwitch_);
     }
 
+    uint64_t get_worksize_int_MultiplyBy() const {
+        return ((num_MultiplyBy_ > n_batch_MultiplyBy_) ? n_batch_MultiplyBy_
+                                                        : num_MultiplyBy_);
+    }
+
     void update_DyadicMultiply_work_size(uint64_t ws) {
         num_DyadicMultiply_ -= ws;
     }
     void update_NTT_work_size(uint64_t ws) { num_NTT_ -= ws; }
     void update_INTT_work_size(uint64_t ws) { num_INTT_ -= ws; }
     void update_KeySwitch_work_size(uint64_t ws) { num_KeySwitch_ -= ws; }
+    void update_MultiplyBy_work_size(uint64_t ws) { num_MultiplyBy_ -= ws; }
 
     std::mutex mu_;
     std::mutex mu_size_;
@@ -345,6 +403,7 @@ private:
     const uint64_t n_batch_ntt_;
     const uint64_t n_batch_intt_;
     const uint64_t n_batch_KeySwitch_;
+    const uint64_t n_batch_MultiplyBy_;
 
     uint64_t total_worksize_DyadicMultiply_;
     uint64_t num_DyadicMultiply_;
@@ -356,7 +415,9 @@ private:
     uint64_t num_INTT_;
 
     uint64_t total_worksize_KeySwitch_;
+    uint64_t total_worksize_MultiplyBy_;
     uint64_t num_KeySwitch_;
+    uint64_t num_MultiplyBy_;
 };
 /// @brief
 /// Parent class FPGAObject stores the blob of objects to be transfered to the
@@ -560,6 +621,43 @@ private:
     };
 };
 
+/// @brief TODO: add documents here
+class FPGAObject_MultiplyBy : public FPGAObject {
+public:
+    explicit FPGAObject_MultiplyBy(sycl::queue& p_q, uint64_t batch_size);
+
+    ~FPGAObject_MultiplyBy();
+
+    // delete copy and assignment operators ////////////////////////////////
+    FPGAObject_MultiplyBy(const FPGAObject_MultiplyBy&) = delete;
+    FPGAObject_MultiplyBy& operator=(const FPGAObject_MultiplyBy&) = delete;
+    ///////////////////////////////////////////////////////////////////////
+
+    void fill_in_data(const std::vector<Object*>& objs) override;
+    void fill_out_data(uint64_t* results) override;
+
+    // BringToSet
+    sycl::buffer<uint64_t>* buf_operand1_;
+    sycl::buffer<uint64_t>* buf_operand2_;
+    sycl::buffer<uint8_t>* buf_operand1_primes_index_;
+    sycl::buffer<uint8_t>* buf_operand2_primes_index_;
+    sycl::buffer<sycl::ulong2>* buf_operand1_params_;
+    sycl::buffer<sycl::ulong2>* buf_operand2_params_;
+    sycl::buffer<uint64_t>* bringtoset_output_buffer_;
+
+    // TensorProduct
+    sycl::buffer<uint64_t>* tensorproduct_buf_output_[2];
+    sycl::buffer<sycl::ulong4>* tensorproduct_buf_primes_;
+
+    // BreakIntoDigits
+    sycl::buffer<uint64_t>* breakintodigits_buf_output_;
+    sycl::buffer<sycl::ulong2>* breakintodigits_buf_params_;
+
+    // KeySwitchDigits
+    sycl::buffer<uint64_t>* keyswitchdigits_buf_output_;
+    sycl::buffer<sycl::ulong4>* keyswitchdigits_buf_params_;
+};
+
 template <class t_type = uint256_t>
 struct KeySwitchMemKeys {
     //
@@ -608,7 +706,8 @@ public:
            std::shared_future<bool> exit_signal, uint64_t coeff_size,
            uint32_t modulus_size, uint64_t batch_size_dyadic_multiply,
            uint64_t batch_size_ntt, uint64_t batch_size_intt,
-           uint64_t batch_size_KeySwitch, uint32_t debug);
+           uint64_t batch_size_KeySwitch, uint64_t batch_size_MultiplyBy,
+           uint32_t debug);
     ~Device();
     Device(const Device&) = delete;
     Device& operator=(const Device&) = delete;
@@ -625,6 +724,7 @@ private:
     bool process_output_NTT();
     bool process_output_INTT();
     bool process_output_KeySwitch();
+    bool process_output_MultiplyBy();
 
     void enqueue_input_data(FPGAObject* fpga_obj);
     void enqueue_input_data_dyadic_multiply(
@@ -632,6 +732,10 @@ private:
     void enqueue_input_data_NTT(FPGAObject_NTT* fpga_obj);
     void enqueue_input_data_INTT(FPGAObject_INTT* fpga_obj);
     void enqueue_input_data_KeySwitch(FPGAObject_KeySwitch* fpga_obj);
+    void enqueue_input_data_MultiplyBy(FPGAObject_MultiplyBy* fpga_obj);
+
+    void explicit_copy_to_fpga(sycl::queue& q, const std::vector<uint64_t>& src,
+                               sycl::buffer<uint64_t>& dst, size_t size);
 
     int device_id() { return id_; }
 
@@ -659,10 +763,12 @@ private:
     uint64_t* INTT_coeff_poly_svm_;
     sycl::buffer<uint64_t>* KeySwitch_mem_root_of_unity_powers_;
     bool KeySwitch_load_once_;
+    bool MultiplyBy_load_once_;
     uint64_t* root_of_unity_powers_ptr_;
     moduli_t modulus_meta_;
     invn_t invn_;
     uint64_t KeySwitch_id_;
+    uint64_t MultiplyBy_id_;
     std::unordered_map<uint64_t**, KeySwitchMemKeys<uint256_t>*>::iterator
         keys_map_iter_;
     uint32_t debug_;
@@ -670,6 +776,7 @@ private:
     INTTDynamicIF* intt_kernel_container_;
     DyadicMultDynamicIF* dyadicmult_kernel_container_;
     KeySwitchDynamicIF* KeySwitch_kernel_container_;
+    MultiplyByDynamicIF* MultiplyBy_kernel_container_;
 
     sycl::context context_;
     sycl::queue dyadic_multiply_input_queue_;
@@ -685,6 +792,7 @@ private:
 
     // KeySwitch section
     sycl::queue keyswitch_queues_[KEYSWITCH_NUM_KERNELS];
+    sycl::queue multiplyby_queues_[MULTIPLYBY_NUM_KERNELS];
     sycl::event KeySwitch_events_write_[2][1024];
     sycl::event KeySwitch_events_enqueue_[2][2];
     std::unordered_map<uint64_t**, KeySwitchMemKeys<uint256_t>*> keys_map_;
@@ -717,7 +825,7 @@ public:
                uint64_t coeff_size, uint32_t modulus_size,
                uint64_t batch_size_dyadic_multiply, uint64_t batch_size_ntt,
                uint64_t batch_size_intt, uint64_t batch_size_KeySwitch,
-               uint32_t debug);
+               uint64_t batch_size_MultiplyBy, uint32_t debug);
     ~DevicePool();
 
 private:
