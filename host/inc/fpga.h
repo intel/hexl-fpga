@@ -107,6 +107,7 @@ enum KeyswitchDigitss_Queues {
     KEYSWITCHDIGITS_LOAD_DATA = 0,
     KEYSWITCHDIGITS_KERN,
     KEYSWITCHDIGITS_LOAD,
+    KEYSWITCHDIGITS_STORE,
     KEYSWITCHDIGITS_QUEUE_NR
 };
 
@@ -976,11 +977,14 @@ private:
                           std::vector<sycl::ulong2> &packed_precomputed_params,
                           std::vector<unsigned> &num_digits_primes);
 
+    sycl::buffer<uint64_t> &BKdigits_GetLastOutputBuf();
+    int BKdigits_GetLastBufIndex();
 
     // relinearize keyswitch_digits
     sycl::event keyswitchdigits_ProcessInput(FPGAObject_ReLinearize* fpga_obj);
-    void keyswitchdigits_CopyOutput(FPGAObject_ReLinearize* fpga_obj, int output_buf_index);
-
+    void keyswitchdigits_ProcessOutput(int output_buf_index);
+    int KSdigits_GetNextBufIndex();
+    void KSdigits_ProcessLeftOutput();
 
     // dynamic loading functions.
     kernel_t get_kernel_type();
@@ -1060,7 +1064,7 @@ private:
     sycl::queue* breakintodigits_queues_[BREAKINTODIGITS_QUEUE_NR];
     sycl::buffer<uint64_t> *breakintodigits_input_buffer_[MAX_BUFF_DEPTH];
     sycl::buffer<uint64_t> *breakintodigits_output_buffer_[MAX_BUFF_DEPTH];
-    sycl::buffer<ulong2> *breakinto_digits_packed_precomputed_params_buf_[MAX_BUFF_DEPTH];
+    sycl::buffer<ulong2> *breakintodigits_packed_precomputed_params_buf_[MAX_BUFF_DEPTH];
     sycl::events breakintodigits_store_events_[MAX_BUFF_DEPTH];
     std::shared_ptr<std::vector<uint64_t>> all_primes_ptr_;
     std::shared_ptr<std::vector<uint64_t>> breakintodigits_output_ptr_[MAX_BUFF_DEPTH];
@@ -1074,9 +1078,9 @@ private:
     sycl::buffer<uint64_t> *keyswitchdigits_input_buffer_[MAX_BUFF_DEPTH];
     sycl::buffer<sycl::ulong2> *keyswitchdigits_keys_buffer_[MAX_BUFF_DEPTH];
     sycl::buffer<uint64_t> *keyswitchdigit_output_buffer_[MAX_BUFF_DEPTH];
-    sycl::buffer<sycl::ulong4> *packed_precomputed_params_buf_[MAX_BUFF_DEPTH];
+    sycl::buffer<sycl::ulong4> *keyswitchdigits_packed_precomputed_params_buf_[MAX_BUFF_DEPTH];
     sycl::event keyswitchdigits_store_events_[MAX_BUFF_DEPTH];
-    std::shared_ptr<std::vector<uint64_t>> keyswitchdigits_output_ptr_[MAX_BUFF_DEPTH];
+    void* keyswitchdigits_output_ptr_[MAX_BUFF_DEPTH];
     size_t keyswitchdigits_output_size_[MAX_BUFF_DEPTH];
     int keyswitchdigits_buf_depth_;
     int keyswitchdigits_buf_index_;

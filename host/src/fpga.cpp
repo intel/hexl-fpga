@@ -2390,9 +2390,105 @@ sycl::event Device::breakintodigits_ProcessInput(FPGAObject_ReLinearize* fpga_ob
 
 }
 
+int Device::BKdigits_GetLastBufIndex() {
+    return (breakintodigits_buf_depth_ + breakintodigits_buf_index_ - 1) % breakintodigits_buf_depth_;
+}
+
+sycl::buffer<uint64_t>& Device::BKdigits_GetLastOutputBuf() {
+    auto last_buf_index = BKdigits_GetLastBufIndex();
+    return *breakintodigits_output_buffer_[last_buf_index];
+}
 
 
+sycl::event Device::keyswitchdigits_ProcessInput(FPGAObject_ReLinearize* fpga_obj,
+                                                sycl::buffer<uint64_t> &digits,
+                                                sycl::ulong4 digits_offset,
+                                                sycl::event dpend_event) {
+    keyswitchdigits_store_events_[keyswitchdigits_buf_index_].wait();
 
+    // construct vectors.
+    std::vector<uint8_t> primes_index(fpga_obj->primes_index_, fpga_obj->primes_index_ + fpga_obj->primes_index_len_);
+
+
+    // compute the diff value to prepare for the next prime
+    // 0,0,0,1,1 -> 0,0,1,0,1
+    // the last one doesn't matter
+
+    auto num_primes = primes_index.size();
+    std::vector<sycl::ulong4> primes_keyswitch_digits;
+    std::vector<int> primes_index_offset(primes_index.size());
+    for (size_t i = 0; i < primes_index.size(); i++) {
+      primes_index_offset[i] = primes_index[i] - i;
+    }
+    for (size_t i = 0; i < primes_index.size() - 1; i++) {
+      primes_index_offset[i] =
+          primes_index_offset[i + 1] - primes_index_offset[i];
+    }
+
+    // pre-computing r and k for primes
+    for (size_t i = 0; i < primes_index.size(); i++) {
+      auto prime = all_primes_[primes_index[i]];
+      ulong4 tmp;
+      tmp.s0() = prime;
+      tmp.s1() = primes_index_offset[i];
+      tmp.s2() = precompute_modulus_r(prime);
+      tmp.s3() = precompute_modulus_k(prime);
+      primes_keyswitch_digits.push_back(tmp);
+    }
+
+    queue_copy(*keyswitchdigits_queues_[*KEYSWITCHDIGITS_LOAD_DATA], primes_keyswitch_digits,
+        *keyswitchdigits_packed_precomputed_params_buf_[keyswitchdigits_buf_index_]);
+    
+    int num_digits = 4;
+    keyswitchdigits_store_events_[keyswitchdigits_buf_index_] = 
+        ReLinearize_kernel_container_->keyswitchdigits_ops().KeySwitchDigits(
+            *keyswitchdigits_queues_[*KEYSWITCHDIGITS_LOAD_DATA],
+            *keyswitchdigits_packed_precomputed_params_buf_[keyswitchdigits_buf_index_],
+            *keyswitchdigits_keys_buffer_[0],
+            *keyswitchdigits_keys_buffer_[1],
+            *keyswitchdigits_keys_buffer_[2],
+            *keyswitchdigits_keys_buffer_[3],
+            digits, digits, digits, digits,
+            *keyswitchdigit_output_buffer_[keyswitchdigits_buf_index_],
+            *keyswitchdigit_output_buffer_[keyswitchdigits_buf_index_],
+            num_dgits, num_primes, digits_offset,
+            depend_event, 0xff);
+
+#if SYNC_MODE
+    keyswitchdigits_store_events_[keyswitchdigits_buf_index_].wait();
+#endif
+
+    return keyswitchdigits_store_events_[keyswitchdigits_buf_index_];
+
+}
+
+void Device::keyswitchdigits_ProcessOutput (int output_buf_index) {
+    if (!keyswitchdigits_output_ptr_[output_buf_index]) return;
+
+    keyswitchdigits_store_events_[output_buf_index].wait();
+
+    keyswitchdigits_queues_[KEYSWITCHDIGITS_STORE]->submit([&] (sycl::handler &h) {
+        h.depends_on(keyswitchdigits_store_events_[output_buf_index]);
+        h.copy(keyswitchdigit_output_buffer_[output_buf_index]->template get_access<sycl::access::mode::read>(
+            h, sycl::range<1>(keyswitchdigits_output_size_[output_buf_index])), 
+            keyswitchdigits_output_ptr_[output_buf_index]);
+    });
+
+    keyswitchdigits_queues_[KEYSWITCHDIGITS_STORE]->wait();
+    keyswitchdigits_output_ptr_[output_buf_index] = nullptr;
+}
+
+int Device::KSdigits_GetNextBufIndex() {
+    return (keyswitchdigits_buf_index_ + 1) % keyswitchdigits_buf_depth_;
+}
+
+
+void Device::KSdigits_ProcessLeftOutput() {
+    for (int i = 0; i < keyswitchdigits_buf_depth_;  i++) {
+        int current_index = (keyswitchdigits_buf_index_ + i) % keyswitchdigits_buf_depth_;
+        keyswitchdigits_ProcessOutput(current_index);
+    }
+}
 
 
 // TODO, modify this functions.
@@ -2402,6 +2498,7 @@ void Device::enqueue_input_data_ReLinearize(FPGAObject_ReLinearize* fpga_obj) {
 
     // breakintodigit_processInput.
     sycl::event e = breakintodigits_ProcessInput(fpga_obj);
+    breakintodigits_buf_index_ = (breakintodigits_buf_index_ + 1) % breakintodigits_buf_depth_;
 
     // breakintodigits_CopyOutput.
     breakintodigits_CopyOutput(fpga_obj);
@@ -2409,12 +2506,13 @@ void Device::enqueue_input_data_ReLinearize(FPGAObject_ReLinearize* fpga_obj) {
     // PreComputeParams.
     PreComputeParams(fpga_obj);
 
-    // keyswitch_digits section functions.
+    // TODO, add keyswitch_Enqueue, keyswitch_digits section functions.
+    keyswitchdigits_output_ptr_[keyswitchdigits_buf_index_] = fpga_obj->output_;
+    keyswitchdigits_output_size_[keyswitchdigits_buf_index_] = fpga_obj->output_len_;
+    keyswitchdigits_ProcessOutput(KSdigits_GetNextBufIndex());
     keyswitchdigits_ProcessInput(fpga_obj);
-    Keyswitchdigits_CopyOutput(fpga_obj, keyswitchdigits_buf_index_);
+
 }
-
-
 
 
 
