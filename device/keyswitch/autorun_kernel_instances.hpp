@@ -43,12 +43,12 @@ class dispatch_ntt2_twiddle_factor_kernelNameClass;
 inline void initDispatchTwiddleFactors(sycl::queue& q,
                                        sycl::buffer<uint64_t>* buff_twiddles,
                                        unsigned coeff_count,
-                                       bool load_twiddle_factors) {
+                                       unsigned num_moduli) {
     dispatch_twiddle_factors<dispatch_twiddle_factors_kernelNameClass<0>,
                              ch_intt1_decomp_size, ch_ntt2_decomp_size,
                              ch_twiddle_factor_rep, ch_intt1_twiddle_factor_rep,
                              ch_intt2_twiddle_factor_rep>(
-        q, buff_twiddles, coeff_count, load_twiddle_factors);
+        q, buff_twiddles, coeff_count, num_moduli);
 }
 
 inline void initTwiddleGenerator(sycl::queue& q) {

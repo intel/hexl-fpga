@@ -1089,6 +1089,7 @@ void Device::build_invn_meta(FPGAObject_KeySwitch* obj) {
 }
 
 void Device::KeySwitch_load_twiddles(FPGAObject_KeySwitch* obj) {
+    // optimization: cache twiddles globally on the host based on modulus chain
     size_t roots_size = obj->n_ * obj->key_modulus_size_ * 4 * sizeof(uint64_t);
     root_of_unity_powers_ptr_ =
         (uint64_t*)aligned_alloc(HOST_MEM_ALIGNMENT, roots_size);
@@ -1115,10 +1116,9 @@ void Device::KeySwitch_load_twiddles(FPGAObject_KeySwitch* obj) {
         {sycl::property::buffer::use_host_ptr{},
          sycl::property::buffer::mem_channel{MEM_CHANNEL_K2}});
     KeySwitch_mem_root_of_unity_powers_->set_write_back(false);
-    unsigned reload_twiddle_factors = 1;
     (*(KeySwitch_kernel_container_->launchConfigurableKernels))(
         keyswitch_queues_[KEYSWITCH_LOAD], KeySwitch_mem_root_of_unity_powers_,
-        obj->n_, reload_twiddle_factors);
+        obj->n_, obj->decomp_modulus_size_);
     KeySwitch_load_once_ = true;
 }
 template <typename t_type>
@@ -1248,11 +1248,7 @@ KeySwitchMemKeys<uint256_t>* Device::KeySwitch_load_keys(
 }
 
 void Device::enqueue_input_data_KeySwitch(FPGAObject_KeySwitch* fpga_obj) {
-    if (!KeySwitch_load_once_) {
-        // info: compute and store roots of unity in a table
-        // info: also create a sycl buffer
-        KeySwitch_load_twiddles(fpga_obj);
-    }
+    KeySwitch_load_twiddles(fpga_obj);
 
     if (fpga_obj->fence_) {
         build_modulus_meta(fpga_obj);

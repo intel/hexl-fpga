@@ -34,10 +34,8 @@ sycl::event store(sycl::queue& q, sycl::event* inDepsEv,
 
 void launchConfigurableKernels(sycl::queue& q,
                                sycl::buffer<uint64_t>* buff_twiddles,
-                               unsigned coeff_count,
-                               bool load_twiddle_factors) {
-    initDispatchTwiddleFactors(q, buff_twiddles, coeff_count,
-                               load_twiddle_factors);
+                               unsigned coeff_count, unsigned num_moduli) {
+    initDispatchTwiddleFactors(q, buff_twiddles, coeff_count, num_moduli);
 }
 void launchStoreSwitchKeys(sycl::queue& q,
                            sycl::buffer<uint256_t>& buff_k_switch_keys1,

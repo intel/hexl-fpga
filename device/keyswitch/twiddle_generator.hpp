@@ -16,7 +16,7 @@ template <class tt_kernelNameClass, class tt_ch_intt1_decomp_size,
           class tt_ch_intt2_twiddle_factor_rep>
 void dispatch_twiddle_factors(sycl::queue& q,
                               sycl::buffer<uint64_t>* buff_twiddles,
-                              unsigned coeff_count, bool load_twiddle_factors) {
+                              unsigned coeff_count, unsigned num_moduli) {
     auto qSubLambda = [&](sycl::handler& h) {
         sycl::accessor twiddle_factors_data(*buff_twiddles, h, sycl::read_only);
         auto kernelLambda = [=]()
@@ -80,16 +80,20 @@ void dispatch_twiddle_factors(sycl::queue& q,
                 }
             }
 
-            unsigned ntt1_index[MAX_KEY_MODULUS_SIZE] = {0, 0, 0, 0, 0, 0, 0};
+            short ntt1_index[MAX_KEY_MODULUS_SIZE] = {0, 0, 0, 0, 0, 0, 0};
             short ntt2_index = -1;
             unsigned ntt2_decomp_size;
             unsigned intt1_decomp_size;
 
             short intt1_index = -1;
-            unsigned intt2_index = 0;
+            short intt2_index = 0;
             bool success;
 
-            while (true) {
+            while ((ntt1_index[0] != -1) && (ntt1_index[1] != -1) &&
+                   (ntt1_index[2] != -1) && (ntt1_index[3] != -1) &&
+                   (ntt1_index[4] != -1) && (ntt1_index[5] != -1) &&
+                   (ntt1_index[6] != -1) && (ntt2_index != -2) &&
+                   (intt1_index != -2) && (intt2_index != -1)) {
                 if (ntt2_index == -1) {
                     bool valid_read;
                     ntt2_decomp_size = tt_ch_ntt2_decomp_size::read(valid_read);
@@ -106,7 +110,7 @@ void dispatch_twiddle_factors(sycl::queue& q,
                         intt1_index = 0;
                     }
                 }
-                {
+                if ((num_moduli >= 0) && (ntt1_index[0] != -1)) {
                     const int k = 0;
                     TwiddleFactor_t tf;
 #pragma unroll
@@ -117,10 +121,10 @@ void dispatch_twiddle_factors(sycl::queue& q,
                     using twPipe =
                         typename tt_ch_twiddle_factor_rep::template PipeAt<k>;
                     twPipe::write(tf, success);
-                    if (success) STEP(ntt1_index[k], coeff_count / VEC);
+                    if (success) STEP2(ntt1_index[k], coeff_count / VEC);
                 }
 
-                {
+                if ((num_moduli >= 1) && (ntt1_index[1] != -1)) {
                     const int k = 1;
                     TwiddleFactor_t tf;
 #pragma unroll
@@ -131,10 +135,10 @@ void dispatch_twiddle_factors(sycl::queue& q,
                     using twPipe2 =
                         typename tt_ch_twiddle_factor_rep::template PipeAt<k>;
                     twPipe2::write(tf, success);
-                    if (success) STEP(ntt1_index[k], coeff_count / VEC);
+                    if (success) STEP2(ntt1_index[k], coeff_count / VEC);
                 }
 
-                {
+                if ((num_moduli >= 2) && (ntt1_index[2] != -1)) {
                     const int k = 2;
                     TwiddleFactor_t tf;
 #pragma unroll
@@ -145,10 +149,10 @@ void dispatch_twiddle_factors(sycl::queue& q,
                     using twPipe3 =
                         typename tt_ch_twiddle_factor_rep::template PipeAt<k>;
                     twPipe3::write(tf, success);
-                    if (success) STEP(ntt1_index[k], coeff_count / VEC);
+                    if (success) STEP2(ntt1_index[k], coeff_count / VEC);
                 }
 
-                {
+                if ((num_moduli >= 3) && (ntt1_index[3] != -1)) {
                     const int k = 3;
                     TwiddleFactor_t tf;
 #pragma unroll
@@ -159,10 +163,10 @@ void dispatch_twiddle_factors(sycl::queue& q,
                     using twPipe4 =
                         typename tt_ch_twiddle_factor_rep::template PipeAt<k>;
                     twPipe4::write(tf, success);
-                    if (success) STEP(ntt1_index[k], coeff_count / VEC);
+                    if (success) STEP2(ntt1_index[k], coeff_count / VEC);
                 }
 
-                {
+                if ((num_moduli >= 4) && (ntt1_index[4] != -1)) {
                     const int k = 4;
                     TwiddleFactor_t tf;
 #pragma unroll
@@ -173,10 +177,10 @@ void dispatch_twiddle_factors(sycl::queue& q,
                     using twPipe5 =
                         typename tt_ch_twiddle_factor_rep::template PipeAt<k>;
                     twPipe5::write(tf, success);
-                    if (success) STEP(ntt1_index[k], coeff_count / VEC);
+                    if (success) STEP2(ntt1_index[k], coeff_count / VEC);
                 }
 
-                {
+                if ((num_moduli >= 5) && (ntt1_index[5] != -1)) {
                     const int k = 5;
                     TwiddleFactor_t tf;
 #pragma unroll
@@ -187,10 +191,10 @@ void dispatch_twiddle_factors(sycl::queue& q,
                     using twPipe6 =
                         typename tt_ch_twiddle_factor_rep::template PipeAt<k>;
                     twPipe6::write(tf, success);
-                    if (success) STEP(ntt1_index[k], coeff_count / VEC);
+                    if (success) STEP2(ntt1_index[k], coeff_count / VEC);
                 }
 
-                {
+                if ((num_moduli >= 6) && (ntt1_index[6] != -1)) {
                     const int k = 6;
                     TwiddleFactor_t tf;
 #pragma unroll
@@ -201,7 +205,7 @@ void dispatch_twiddle_factors(sycl::queue& q,
                     using twPipe7 =
                         typename tt_ch_twiddle_factor_rep::template PipeAt<k>;
                     twPipe7::write(tf, success);
-                    if (success) STEP(ntt1_index[k], coeff_count / VEC);
+                    if (success) STEP2(ntt1_index[k], coeff_count / VEC);
                 }
 
                 unsigned ntt2_decomp_index =
@@ -248,8 +252,7 @@ void dispatch_twiddle_factors(sycl::queue& q,
 #pragma unroll
                 for (int j = 0; j < VEC; j++) {
                     intt1_tf.data[j] =
-                        intt1_twiddle_factors[intt1_index == -1 ? 0
-                                                                : intt1_index]
+                        intt1_twiddle_factors[intt1_index < 0 ? 0 : intt1_index]
                                              [j];
                 }
                 if (intt1_index >= 0) {
@@ -264,8 +267,10 @@ void dispatch_twiddle_factors(sycl::queue& q,
                 for (int j = 0; j < VEC; j++) {
                     intt2_tf.data[j] = intt2_twiddle_factors[intt2_index][j];
                 }
-                tt_ch_intt2_twiddle_factor_rep::write(intt2_tf, success);
-                if (success) STEP(intt2_index, coeff_count / VEC);
+                if (intt2_index >= 0) {
+                    tt_ch_intt2_twiddle_factor_rep::write(intt2_tf, success);
+                    if (success) STEP2(intt2_index, coeff_count / VEC);
+                }
             }
         };
         h.single_task<tt_kernelNameClass>(kernelLambda);
