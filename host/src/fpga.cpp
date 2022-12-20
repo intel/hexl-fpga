@@ -1410,7 +1410,162 @@ void Device::explicit_copy_to_fpga(sycl::queue& q,
 
 void Device::enqueue_input_data_MultiplyBy(FPGAObject_MultiplyBy* fpga_obj) {
     auto object = dynamic_cast<Object_MultiplyBy*>(fpga_obj->in_objs_[0]);
-    const size_t coeff_count = object->context_.coeff_count;
+    const MultiplyByContext& context = object->context_;
+    const size_t coeff_count = context.coeff_count;
+    // launch ntt and intt once
+    if (!MultiplyBy_load_once_) {
+        // load ntt and intt for bringtoset and breakintodigits
+        (*(MultiplyBy_kernel_container_->LaunchBringToSetINTT))(
+            object->context_.all_primes, coeff_count, 0xff);
+        (*(MultiplyBy_kernel_container_->LaunchBringToSetNTT))(
+            object->context_.all_primes, coeff_count, 0xff);
+    }
+
+    // launch kernels
+    //  BringtToSet operand1
+    std::vector<sycl::ulong2> operand1_params;
+    std::vector<uint8_t> operand1_reordered_primes_index;
+    size_t P, Q, I;
+
+    // get the common primes index by reduing the special primes from the result
+    // primes index
+    const std::vector<uint8_t> common_primes_index(
+        object->result_primes_index_.begin(),
+        object->result_primes_index_.end() -
+            object->context_.num_special_primes);
+
+    PreComputeBringToSet(object->context_.all_primes,
+                         object->operand1_primes_index_, common_primes_index,
+                         operand1_reordered_primes_index, operand1_params, P, Q,
+                         I, object->context_.plainText);
+
+    explicit_copy_to_fpga(multiplyby_queues_[MULTIPLYBY_LOAD],
+                          object->operand1_, *fpga_obj->buf_operand1_);
+    explicit_copy_to_fpga(multiplyby_queues_[MULTIPLYBY_LOAD],
+                          operand1_reordered_primes_index,
+                          *fpga_obj->buf_operand1_primes_index_);
+
+    (*(MultiplyBy_kernel_container_->LoadBringToSet))(
+        multiplyby_queues_[BRINGTOSET_LOAD], *fpga_obj->buf_operand1_,
+        *fpga_obj->buf_operand1_primes_index_,
+        operand1_reordered_primes_index.size(), 0xff);
+
+    //  BringtToSet operand2
+    std::vector<sycl::ulong2> operand2_params;
+    std::vector<uint8_t> operand2_reordered_primes_index;
+
+    PreComputeBringToSet(object->context_.all_primes,
+                         object->operand2_primes_index_, common_primes_index,
+                         operand2_reordered_primes_index, operand2_params, P, Q,
+                         I, object->context_.plainText);
+
+    explicit_copy_to_fpga(multiplyby_queues_[MULTIPLYBY_LOAD],
+                          object->operand2_, *fpga_obj->buf_operand2_);
+    explicit_copy_to_fpga(multiplyby_queues_[MULTIPLYBY_LOAD],
+                          operand2_reordered_primes_index,
+                          *fpga_obj->buf_operand2_primes_index_);
+
+    (*(MultiplyBy_kernel_container_->LoadBringToSet))(
+        multiplyby_queues_[BRINGTOSET_LOAD], *fpga_obj->buf_operand2_,
+        *fpga_obj->buf_operand2_primes_index_,
+        operand2_reordered_primes_index.size(), 0xff);
+
+    //  StoreBringToSet
+    unsigned output_size =
+        common_primes_index.size() * 4 /* 2 ciphertext*/ * coeff_count;
+    (*(MultiplyBy_kernel_container_->StoreBringToSet))(
+        multiplyby_queues_[BRINGTOSET_STORE],
+        *fpga_obj->bringtoset_output_buffer_, output_size, 0xff);
+
+    // TensorProduct
+    std::vector<ulong4> tensor_product_params;
+    PreComputeTensorProduct(object->context_, common_primes_index,
+                            tensor_product_params);
+
+    explicit_copy_to_fpga(multiplyby_queues_[MULTIPLYBY_LOAD],
+                          tensor_product_params,
+                          *fpga_obj->tensorproduct_buf_primes_);
+
+    sycl::event NOT_USED_EVENT;
+    size_t offset = common_primes_index.size() * coeff_count;
+    (*(MultiplyBy_kernel_container_->TensorProduct))(
+        multiplyby_queues_[TENSORPRODUCT], *fpga_obj->tensorproduct_buf_input,
+        *fpga_obj->tensorproduct_buf_input, *fpga_obj->tensorproduct_buf_input,
+        *fpga_obj->tensorproduct_buf_input,
+        *fpga_obj->tensorproduct_buf_output_[0],
+        *fpga_obj->tensorproduct_buf_output_[1],
+        *fpga_obj->tensorproduct_buf_primes_, common_primes_index.size(), 0,
+        offset, offset * 2, offset * 3, NOT_USED_EVENT, 0xff);
+    (*(MultiplyBy_kernel_container_->StoreTensorProduct))(
+        multiplyby_queues_[TENSORPRODUCT_STORE],
+        *fpga_obj->tensorproduct_buf_output_[0],
+        *fpga_obj->tensorproduct_buf_output_[0],
+        *fpga_obj->tensorproduct_buf_output_[1], offset, 0xff);
+
+    // BreakIntoDigits
+    (*(MultiplyBy_kernel_container_->LoadBreakIntoDigits))(
+        multiplyby_queues_[BREAKINTODIGITS_LOAD],
+        *fpga_obj->breakintodigits_buf_input_, offset, 0xff, NOT_USED_EVENT);
+    std::vector<sycl::ulong2> break_into_digits_params;
+    std::vector<unsigned> num_cur_digits_primes;
+
+    PreComputeBreakIntoDigits(context, common_primes_index,
+                              num_cur_digits_primes, break_into_digits_params);
+    explicit_copy_to_fpga(multiplyby_queues_[MULTIPLYBY_LOAD],
+                          break_into_digits_params,
+                          *fpga_obj->breakintodigits_buf_params_);
+
+    // launch breakIntoDigits
+    unsigned num_digits = num_cur_digits_primes.size();
+    unsigned num_digit1_primes = num_cur_digits_primes[0];
+    unsigned num_digit2_primes = num_digits > 1 ? num_cur_digits_primes[1] : 0;
+    unsigned num_digit3_primes = num_digits > 2 ? num_cur_digits_primes[2] : 0;
+    unsigned num_digit4_primes = num_digits > 3 ? num_cur_digits_primes[3] : 0;
+
+    // desinged means all normal primes
+    uint num_designed_normal_primes = 0;
+    for (int i = 0; i < context.num_digits_primes.size(); i++) {
+        num_designed_normal_primes += context.num_digits_primes[i];
+    }
+
+    // pi includes the special primes
+    auto num_output_primes = object->result_primes_index_.size();
+    auto output_size = num_output_primes * coeff_count * num_digits;
+
+    (*(MultiplyBy_kernel_container_->BreakIntoDigits))(
+        multiplyby_queues_[BREAKINTODIGITS],
+        *fpga_obj->breakintodigits_buf_params_, num_digits, num_digit1_primes,
+        num_digit2_primes, num_digit3_primes, num_digit4_primes,
+        num_special_primes, num_designed_normal_primes, NOT_USED_EVENT, 0xffff);
+    (*(MultiplyBy_kernel_container_->StoreBreakIntoDigits))(
+        multiplyby_queues_[BREAKINTODIGITS_STORE],
+        *fpga_obj->breakintodigits_buf_output_, output_size, 0xffff);
+
+    // KeySwitchDigits
+    std::vector<ulong4> KeySwitchDigits_params;
+    PreComputeKeySwitchDigits(context, object->result_primes_index_,
+                              KeySwitchDigits_params);
+    explicit_copy_to_fpga(multiplyby_queues_[MULTIPLYBY_LOAD],
+                          KeySwitchDigits_params,
+                          *fpga_obj->keyswitchdigits_buf_params_);
+
+    auto num_primes = object->result_primes_index_.size();
+    auto num_all_primes = context.all_primes.size();
+    auto num_normal_primes = num_primes - context.num_special_primes_;
+
+    (*(MultiplyBy_kernel_container_->KeySwitchDigits))(
+        multiplyby_queues_[KEYSWITCHDIGITS], NOT_USED_EVENT,
+        *fpga_obj->keyswitchdigits_buf_params_, *keys_buffer_,
+        *fpga_obj->keyswitchdigits_buf_input_,
+        *fpga_obj->keyswitchdigits_buf_input_ /* not used actually*/,
+        *fpga_obj->keyswitchdigits_buf_output_ /* also not used */,
+        *fpga_obj->keyswitchdigits_buf_output_ /* also not used */, num_digits,
+        num_primes, num_normal_primes, num_all_primes, 0xffff);
+
+    (*(MultiplyBy_kernel_container_->StoreKeySwitchDigits))(
+        multiplyby_queues_[KEYSWITCHDIGITS_STORE],
+        *fpga_obj->keyswitchdigits_buf_output_,
+        *fpga_obj->keyswitchdigits_buf_output_, num_primes * coeff_count, 0xff);
 }
 
 bool Device::process_output() {

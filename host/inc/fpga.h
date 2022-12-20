@@ -646,14 +646,17 @@ public:
     sycl::buffer<uint64_t>* bringtoset_output_buffer_;
 
     // TensorProduct
+    sycl::buffer<uint64_t>* tensorproduct_buf_input;
     sycl::buffer<uint64_t>* tensorproduct_buf_output_[2];
     sycl::buffer<sycl::ulong4>* tensorproduct_buf_primes_;
 
     // BreakIntoDigits
+    sycl::buffer<uint64_t>* breakintodigits_buf_input_;
     sycl::buffer<uint64_t>* breakintodigits_buf_output_;
     sycl::buffer<sycl::ulong2>* breakintodigits_buf_params_;
 
     // KeySwitchDigits
+    sycl::buffer<uint64_t>* keyswitchdigits_buf_input_;
     sycl::buffer<uint64_t>* keyswitchdigits_buf_output_;
     sycl::buffer<sycl::ulong4>* keyswitchdigits_buf_params_;
 };
